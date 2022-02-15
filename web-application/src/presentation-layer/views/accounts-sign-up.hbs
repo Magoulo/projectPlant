@@ -3,8 +3,36 @@
 	<p>Create a new account using the form below.</p>
 </div>
 
-<form action="">
-	
-	TODO
-	
+<form action="/auth/create" method="POST">
+  <div class="form-group bg-grey ml-2">
+    <div>
+      <label class="form-label text-left">Username</label>
+      <input class="form-input col-4" type="text" name="username" placeholder="Username">
+    </div>
+    <div>
+      <label class="form-label text-left">Password</label>
+      <input class="form-input col-4" type="text" name="password" placeholder="Password">
+    </div>
+    <div>
+      <label class="form-label text-left">First name</label>
+      <input class="form-input col-4" type="text" name="firstname" placeholder="First name">
+    </div>
+    <div>
+      <label class="form-label text-left">Last name</label>
+      <input class="form-input col-4" type="text" name="lastname" placeholder="Last name">
+    </div>
+    <div>
+      <label class="form-label text-left">Email</label>
+      <input class="form-input col-4" type="text" name="email" placeholder="Email">
+    </div>
+    <div>
+      <label class="form-label text-left">Phonenumber</label>
+      <input class="form-input col-4" type="text" name="phonenumber" placeholder="Phonenumber">
+    </div>
+    <div>
+      <label class="form-label text-left">City</label>
+      <input class="form-input col-4" type="text" name="city" placeholder="City">
+    </div>
+    <input class="float-left btn my-2" type="submit" value="Create">
+  </div>
 </form>
