@@ -7,14 +7,14 @@ const db = require('./db')
 */
 exports.getAllAccounts = function(callback){
 	
-	const query = `SELECT * FROM accounts ORDER BY username`
+	const query = `SELECT * FROM UserAccounts ORDER BY username`
 	const values = []
 	
-	db.query(query, values, function(error, accounts){
+	db.query(query, values, function(error, UserAccounts){
 		if(error){
 			callback(['databaseError'], null)
 		}else{
-			callback([], accounts)
+			callback([], UserAccounts)
 		}
 	})
 	
@@ -27,14 +27,14 @@ exports.getAllAccounts = function(callback){
 */
 exports.getAccountByUsername = function(username, callback){
 	
-	const query = `SELECT * FROM accounts WHERE username = ? LIMIT 1`
+	const query = `SELECT * FROM UserAccounts WHERE username = ? LIMIT 1`
 	const values = [username]
 	
-	db.query(query, values, function(error, accounts){
+	db.query(query, values, function(error, UserAccounts){
 		if(error){
 			callback(['databaseError'], null)
 		}else{
-			callback([], accounts[0])
+			callback([], UserAccounts[0])
 		}
 	})
 	
