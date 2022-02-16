@@ -34,10 +34,35 @@ exports.getAccountByUsername = function(username, callback){
 		if(error){
 			callback(['databaseError'], null)
 		}else{
+			console.log("-------------------------------inside query in account-repository-------------------------------")
+			console.log("UserAccounts: ",UserAccounts)
+			console.log("UserAccounts[0]: ",UserAccounts[0])
+			console.log("UserAccounts.length: ", UserAccounts.length)
+			console.log("------------------------------------------------------------------------------------------------")
 			callback([], UserAccounts[0])
 		}
 	})
 	
+}
+
+exports.getUserByID = function(userID,callback){
+	const query = "SELECT * FROM Users WHERE userID = ? LIMIT 1"
+	const values = [userID]
+	console.log("-------------------------------inside getUserByID in account-repository-------------------------------")
+	console.log("userID: ", userID)
+
+	db.query(query, values, function(error, Users){
+		if(error){
+			callback(['databaseError in usertable'], null)
+		}else{
+			
+			console.log("Users: ",Users)
+			console.log("Users[0]: ",Users[0])
+			console.log("Users.length: ", Users.length)
+			console.log("------------------------------------------------------------------------------------------------")
+			callback([], Users[0])
+		}
+	})
 }
 
 /*
@@ -48,7 +73,7 @@ exports.getAccountByUsername = function(username, callback){
 */
 exports.createAccount = function(account, callback){
 	
-	const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
+	const query = `INSERT INTO UserAccounts (username, passwordHash) VALUES (?, ?)`
 	const values = [account.username, account.password]
 	
 	db.query(query, values, function(error, results){
