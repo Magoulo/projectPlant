@@ -17,7 +17,7 @@ router.get("/contact", function(request, response){
 router.get("/accountCreate", function(request, response){
 	response.render("accountCreate.hbs")
 })
-
+/*
 router.get("/ad", function(request, response){
 	response.render("ad.hbs")
 })
@@ -40,7 +40,7 @@ router.get("/adUpdate", function(request, response){
 
 router.get("/myAds", function(request, response){
 	response.render("myAds.hbs")
-})
+})*/
 
 router.get("/myBids", function(request, response){
 	response.render("myBids.hbs")
