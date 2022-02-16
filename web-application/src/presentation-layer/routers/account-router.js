@@ -29,16 +29,31 @@ router.get('/:username', function (request, response) {
 		console.log("--------------inside getAccountByUsername in account-router---------------------------")
 		console.log("account: ", account)
 
-
 		accountManager.getUserByID(account.userAccountID, function (errors, user) {
 			console.log("user:", user)
-			console.log("--------------------------------------------------------------------------------------")
-			const model = {
-				errors: errors,
-				account: account,
-				user: user
-			}
-			response.render("accounts-show-one.hbs", model)
+
+			accountManager.getAdByUserID(user.userID, function (errors, ad) {
+				console.log("ad:", ad)
+
+				accountManager.getImageBundleByAdID(ad.adID, function(errors,imageBundle){
+					console.log("imageBundle:", imageBundle)
+
+					accountManager.getBidByAdID(ad.adID, function(errors, bid){
+						console.log("bid: ", bid)
+						console.log("--------------------------------------------------------------------------------------")
+					const model = {
+					errors: errors,
+					account: account,
+					user: user,
+					ad: ad,
+					imageBundle: imageBundle,
+					bid: bid
+				}
+				response.render("accounts-show-one.hbs", model)
+					})
+					
+				})		    			
+			})
 		})
 	})
 
