@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 //---------ska vara kvar här------------------------------------
-
+/*
 router.get("/", function(request, response){
 	response.render("start.hbs")
 })
@@ -19,7 +19,7 @@ router.get("/about", function(request, response){
 router.get("/contact", function(request, response){
 	response.render("contact.hbs")
 })
-
+*/
 //---------------------------------------------------------------
 
 
