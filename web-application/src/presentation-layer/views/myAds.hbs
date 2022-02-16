@@ -13,7 +13,7 @@
 	{{#if Ad.length}}
    <ul>
 			{{#each Ad}}
-         
+
 			<dt>Title:</dt>
 			<dd>{{title}}</dd>
 
@@ -28,6 +28,8 @@
 
 			<dt>isClosed:</dt>
 			<dd>{{isClosed}}</dd>
+
+         <li><a href="/ads/{{adID}}">Bids</a></li>
          <p>----------------------------------------------------------------------------------</p>
 
 			{{/each}}
@@ -66,7 +68,7 @@
 			<dd>{{imageBundle.secondImagePath}}</dd>-->
 
 <!-- --------Bidtable rows------->
-	<!--		<dt>BidUserID:</dt>
+	   	<dt>BidUserID:</dt>
 			<dd>{{bid.userID}}</dd>
 
 			<dt>BidAdID:</dt>
@@ -79,7 +81,7 @@
 			<dd>{{bid.imagePath}}</dd>
 
 			<dt>BidMessage:</dt>
-			<dd>{{bid.message}}</dd> -->
+			<dd>{{bid.message}}</dd>
 
 		
 
