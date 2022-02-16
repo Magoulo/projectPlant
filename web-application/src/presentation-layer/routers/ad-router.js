@@ -21,13 +21,13 @@ router.get('/:adID', function (request, response) {
         console.log("--------------inside getAdByadID in ad-router---------------------------")
         console.log("ad: ", ad)
 
-        adManager.getBidByAdID(adID, function (errors, bid) {
-            console.log("bid: ", bid)
+        adManager.getAllBidsByAdID(adID, function (errors, bids) {
+            console.log("bids!: ", bids)
             console.log("--------------------------------------------------------------------------------------")
             const model = {
                 errors: errors,
                 ad: ad,
-                bid: bid
+                bids: bids
             }
             response.render("myAdBids.hbs", model)
         })

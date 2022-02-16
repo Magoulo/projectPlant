@@ -11,13 +11,11 @@
 {{else}}
 	
 	{{#if ad}}
-   <ul>
-			
-
+        <ul>		
 			<dt>Title:</dt>
 			<dd>{{ad.title}}</dd>
 
-         <dt>UserID:</dt>
+            <dt>UserID:</dt>
 			<dd>{{ad.userID}}</dd>
 
 			<dt>LatinName:</dt>
@@ -27,64 +25,29 @@
 			<dd>{{ad.description}}</dd>
 
 			<dt>isClosed:</dt>
+           
 			<dd>{{ad.isClosed}}</dd>
-
+        </ul>
          <!-- --------Bidtable rows------->
-	   	<dt>BidUserID:</dt>
-			<dd>{{bid.userID}}</dd>
+
+    {{#each bids}}
+        <ul>
+	   	    <dt>BidUserID:</dt>
+			<dd>{{userID}}</dd>
 
 			<dt>BidAdID:</dt>
-			<dd>{{bid.adID}}</dd>
+			<dd>{{adID}}</dd>
 
 			<dt>BidDate:</dt>
-			<dd>{{bid.date}}</dd>
+			<dd>{{date}}</dd>
 
 			<dt>BidImagePath:</dt>
-			<dd>{{bid.imagePath}}</dd>
+			<dd>{{imagePath}}</dd>
 
 			<dt>BidMessage:</dt>
-			<dd>{{bid.message}}</dd>
-
-			
-		</ul>
-		
-<!-- --------Usertable rows------->
-	<!--		<dt>Firstname:</dt>
-			<dd>{{user.firstName}}</dd>
-
-			<dt>Lastname:</dt>
-			<dd>{{user.lastName}}</dd>
-
-			<dt>email:</dt>
-			<dd>{{user.email}}</dd>
-
-			<dt>Phonenumber:</dt>
-			<dd>{{user.phoneNumber}}</dd>
-
-			<dt>City:</dt>
-			<dd>{{user.city}}</dd> -->
-
-<!-- --------ADtable rows------->
-			
-
-<!-- --------ImageBundletable rows------->
-	<!--		<dt>adID:</dt>
-			<dd>{{imageBundle.adID}}</dd>
-
-			<dt>CoverImagePath:</dt>
-			<dd>{{imageBundle.coverImagePath}}</dd>
-			
-			<dt>FirstImagePath:</dt>
-			<dd>{{imageBundle.firstImagePath}}</dd>
-
-			<dt>SecondImagePath:</dt>
-			<dd>{{imageBundle.secondImagePath}}</dd>-->
-
-
-
-		
-
-			
+			<dd>{{message}}</dd>
+        </ul>
+      	{{/each}}
 		
 	{{else}}
 		<p>No, that ad doesn't exist here.</p>

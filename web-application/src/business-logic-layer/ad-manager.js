@@ -7,6 +7,9 @@ exports.getAllAds = function (callback) {
 exports.getAdByAdID = function (adID,callback) {
 	adRepository.getAdByAdID(adID,callback)
 }
+exports.getAllBidsByAdID = function (adID, callback) {
+	adRepository.getAllBidsByAdID(adID, callback)
+}
 
 exports.getBidByAdID = function (adID, callback) {
 	adRepository.getBidByAdID(adID, callback)
