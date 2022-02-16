@@ -1,5 +1,98 @@
+<div class="content">
 <h1>My Ads</h1>
 
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if Ad.length}}
+   <ul>
+			{{#each Ad}}
+
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+         <dt>UserID:</dt>
+			<dd>{{userID}}</dd>
+
+			<dt>LatinName:</dt>
+			<dd>{{latinName}}</dd>
+
+			<dt>description:</dt>
+			<dd>{{description}}</dd>
+
+			<dt>isClosed:</dt>
+			<dd>{{isClosed}}</dd>
+
+         <li><a href="/ads/{{adID}}">Bids</a></li>
+         <p>----------------------------------------------------------------------------------</p>
+
+			{{/each}}
+		</ul>
+		<dl>
+<!-- --------Usertable rows------->
+	<!--		<dt>Firstname:</dt>
+			<dd>{{user.firstName}}</dd>
+
+			<dt>Lastname:</dt>
+			<dd>{{user.lastName}}</dd>
+
+			<dt>email:</dt>
+			<dd>{{user.email}}</dd>
+
+			<dt>Phonenumber:</dt>
+			<dd>{{user.phoneNumber}}</dd>
+
+			<dt>City:</dt>
+			<dd>{{user.city}}</dd> -->
+
+<!-- --------ADtable rows------->
+			
+
+<!-- --------ImageBundletable rows------->
+	<!--		<dt>adID:</dt>
+			<dd>{{imageBundle.adID}}</dd>
+
+			<dt>CoverImagePath:</dt>
+			<dd>{{imageBundle.coverImagePath}}</dd>
+			
+			<dt>FirstImagePath:</dt>
+			<dd>{{imageBundle.firstImagePath}}</dd>
+
+			<dt>SecondImagePath:</dt>
+			<dd>{{imageBundle.secondImagePath}}</dd>-->
+
+<!-- --------Bidtable rows------->
+	   	<dt>BidUserID:</dt>
+			<dd>{{bid.userID}}</dd>
+
+			<dt>BidAdID:</dt>
+			<dd>{{bid.adID}}</dd>
+
+			<dt>BidDate:</dt>
+			<dd>{{bid.date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{bid.imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{bid.message}}</dd>
+
+		
+
+			
+		</dl>
+	{{else}}
+		<p>No, that account doesn't exist.</p>
+	{{/if}}
+	
+{{/if}}
+</div>
 <!-- Lägg till
 1.Tabs mellan olika contents
 
