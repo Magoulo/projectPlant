@@ -3,8 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get("/", function(request, response){
-	console.log("length is: ",'$2a$13$qMvfkKBY.ixh6d48lRN7M.qbkJD1PZWdGzRo2h1eZwYYBzw3F0zJG'.length)
-	response.render("home.hbs")
+	response.render("start.hbs")
 })
 
 router.get("/about", function(request, response){
