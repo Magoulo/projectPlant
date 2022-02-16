@@ -71,8 +71,14 @@ INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUE
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("2","Cashtree", "Pachira aquatica","Moneytree that keeps droppin bills", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("2","This is coverImagePath", "this is firstImagePath", "this is secondImagePath");
 
+INSERT INTO UserAccount (username, passwordHash) VALUES ("slugger", "123abc");
+INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("3","Slugs","Slugsen","SS@com","555-0222","JKPG");
+INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","Lilly", "blablaLatin","Lilly that keeps droppin bills", "0");
+INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("3","This is coverImagePath", "this is firstImagePath", "this is secondImagePath");
+
 INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("2", "1", "2022-02-16", "This is the imagePath to bid", "Hi I would like to buy your monstera");
 INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree");
+INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me");
 
  /*       sqLite
 ------------------------------------------------------------------------------------------------------
