@@ -8,10 +8,10 @@
 		{{/each}}
 	</ul>
 {{else}}
-	
-	{{#if accounts.length}}
+
+	{{#if UserAccounts.length}}
 		<ul>
-			{{#each accounts}}
+			{{#each UserAccounts}}
 				<li><a href="/accounts/{{username}}">{{username}}</a></li>
 			{{/each}}
 		</ul>

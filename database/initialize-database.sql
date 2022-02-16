@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS UserAccounts (
   userAccountID INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(45) NOT NULL,
   passwordHash VARCHAR(60) NOT NULL,
-  PRIMARY KEY (userAccountID))
+  PRIMARY KEY (userAccountID));
   
 
 CREATE TABLE IF NOT EXISTS Users (
@@ -21,7 +21,10 @@ CREATE TABLE IF NOT EXISTS Users (
   email VARCHAR(45) NULL,
   phoneNumber VARCHAR(45) NULL,
   city VARCHAR(45) NULL,
-
+   PRIMARY KEY (userID),
+  FOREIGN KEY (userAcccountID)
+    REFERENCES UserAccounts (userAccountID));
+/*
   PRIMARY KEY (userID),
   CONSTRAINT userAccountID
     FOREIGN KEY (userAcccountID)
@@ -56,15 +59,15 @@ CREATE TABLE IF NOT EXISTS Images (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-
+*/
 -- Create a dummy account for testing.
-INSERT INTO userAccounts (username, passwordHash) VALUES ("Alice", "abc123");
-INSERT INTO Users (userAcccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","alice","bah","ab@com","555-123","GBG")
+INSERT INTO UserAccounts (username, passwordHash) VALUES ("mooooo", "abc123");
+INSERT INTO Users (userAcccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","alice","bah","ab@com","555-123","GBG");
 
 
-/*
 
-        sqLite
+
+ /*       sqLite
 ------------------------------------------------------------------------------------------------------
 CREATE TABLE "UserAccounts" (
 	"userAccountID"	INTEGER,
