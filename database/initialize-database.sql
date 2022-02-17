@@ -63,17 +63,17 @@ CREATE TABLE IF NOT EXISTS Bid (
 
 -- Dummy data for testing.
 INSERT INTO UserAccount (username, passwordHash) VALUES ("mooooo", "abc123");
-INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","Sabin","mooo","Smo@com","555-123","GBG");
+INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","Sabin","mooo","Sabimooon@com","555-123","GBG");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","well maintained Monstera", "Monstera deliciosa","well maintained with roots in mullis", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("1","https://blombudsportalen.se/wp-content/uploads/2021/04/Monstera-deliciosa-variegata.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR43qDr4ntXQXIUHKuvLkMB_VE6Jcuvn9zcPTTK2hMjjQ3bnuNp30yAHyiCHAE2t_hl0uo&usqp=CAU", "https://www.blomsterlandet.se/optimized/c-ProductDetailsSingle-Default-Sm2x/2293e09b/globalassets/catalog-images/7/43540/4c1dbcc6ea7fcfde28bafcd105ec647a.jpg");
 
 INSERT INTO UserAccount (username, passwordHash) VALUES ("ritasass", "123abc");
-INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("2","Rita","Muggeldottir","RM@com","555-00","Stchaan");
+INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("2","Rita","Muggeldottir","RitaMuggeldottir@com","555-00","Stchaan");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("2","Cashtree", "Pachira aquatica","Moneytree that keeps droppin bills", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("2","https://www.mydomaine.com/thmb/PunwYf9El_Nyens5QMJ4d4moXOw=/1414x2121/filters:fill(auto,1)/GettyImages-1060620362-2940035374b843f3af034d0512dd2b54.jpg", "https://www.gardeningknowhow.com/wp-content/uploads/2015/04/money-tree.jpg", "https://www.gardeningknowhow.com/wp-content/uploads/2013/04/money-tree.jpg");
 
 INSERT INTO UserAccount (username, passwordHash) VALUES ("slugger", "123abc");
-INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("3","Slugs","Slugsen","SS@com","555-0222","JKPG");
+INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("3","Slugs","Slugsen","SluggiSlug@com","555-0222","JKPG");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","Lilly", "blablaLatin","Lilly that keeps droppin bills", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("3","https://i.pinimg.com/564x/aa/18/4e/aa184e45a9873944816d9ce825fb5a9a.jpg", "https://sunnyside-gardens.com/wp-content/uploads/2012/11/liliumstargazer.jpg", "https://www.americanmeadows.com/media/catalog/product/l/i/lilium-orientalis-oriental-lily-pink-stargazer-garden_2.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=560&width=560&canvas=560:560");
 
