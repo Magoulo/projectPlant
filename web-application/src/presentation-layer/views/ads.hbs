@@ -1,8 +1,5 @@
 <div class="content">
 <h1>Ads</h1>
-    <img src="https://www.kindpng.com/picc/m/148-1485879_plant-banner-png-transparent-png.png" style="width:1700px">
-
-
 {{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
@@ -13,7 +10,7 @@
 {{else}}
 	
 	{{#if Ad.length}}
-    <p>[ This right here is a searchbar ]</p>
+    <p>[ This right here is a searchbar ] <button>Filter</button></p>
    <ul>
 			{{#each Ad}}
 
@@ -28,48 +25,6 @@
 
 			{{/each}}
 		</ul>
-		<dl>
-<!-- --------Usertable rows------->
-	<!--		<dt>Firstname:</dt>
-			<dd>{{user.firstName}}</dd>
-
-			<dt>Lastname:</dt>
-			<dd>{{user.lastName}}</dd>
-
-			<dt>email:</dt>
-			<dd>{{user.email}}</dd>
-
-			<dt>Phonenumber:</dt>
-			<dd>{{user.phoneNumber}}</dd>
-
-			<dt>City:</dt>
-			<dd>{{user.city}}</dd> -->
-
-<!-- --------ADtable rows------->
-			
-
-
-
-<!-- --------Bidtable rows------->
-	   <!--	<dt>BidUserID:</dt>
-			<dd>{{bid.userID}}</dd>
-
-			<dt>BidAdID:</dt>
-			<dd>{{bid.adID}}</dd>
-
-			<dt>BidDate:</dt>
-			<dd>{{bid.date}}</dd>
-
-			<dt>BidImagePath:</dt>
-			<dd>{{bid.imagePath}}</dd>
-
-			<dt>BidMessage:</dt>
-			<dd>{{bid.message}}</dd>-->
-
-		
-
-			
-		</dl>
 	{{else}}
 		<p>No, that account doesn't exist.</p>
 	{{/if}}

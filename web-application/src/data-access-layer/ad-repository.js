@@ -133,3 +133,23 @@ exports.getImageBundleByAdID = function(adID, callback){
 		}
 	})
 }
+
+exports.getUserByUserID = function(userID, callback){
+	const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
+	const values = [userID]
+	console.log("-------------------------------inside getUserByUserID in ad-repository-------------------------------")
+	console.log("userID: ", userID)
+
+	db.query(query, values, function(error, User){
+		if(error){
+			callback(['databaseError in User table'], null)
+		}else{
+			
+			console.log("User: ",User)
+			console.log("User[0]: ",User[0])
+			console.log("User.length: ", User.length)
+			console.log("------------------------------------------------------------------------------------------------")
+			callback([], User[0])
+		}
+	})
+}

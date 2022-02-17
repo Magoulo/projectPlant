@@ -1,3 +1,4 @@
+<div class="content"></div>
 <h1>Start</h1>
 
 <!-- Lägg till:
@@ -5,3 +6,37 @@
 2. En search bar
 2. Fint flöde med olika featured ads
 -->
+    <img src="https://www.kindpng.com/picc/m/148-1485879_plant-banner-png-transparent-png.png" style="width:1700px">
+
+
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if Ad.length}}
+    <p>[ This right here is a searchbar ]</p>
+   <ul>
+			{{#each Ad}}
+
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+            <li><a href="/ads/{{adID}}"><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></a></li>
+			
+
+
+         <p>----------------------------------------------------------------------------------</p>
+
+			{{/each}}
+		</ul>
+	{{else}}
+		<p>No, that account doesn't exist.</p>
+	{{/if}}
+	
+{{/if}}
+</div>
