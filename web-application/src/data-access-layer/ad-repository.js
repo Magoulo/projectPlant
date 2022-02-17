@@ -14,7 +14,21 @@ exports.getAllAds = function(callback){
 			callback([], Ad)
 		}
 	})
+}
+
+exports.getAllAdsByUserID = function(userID,callback){
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.userID = ? ORDER BY Ad.adID`
+	const values = [userID]
 	
+	db.query(query, values, function(error, Ad){
+		console.log("Ad in getAllAdsByUserID Ads: ", Ad)
+		console.log("error in getAllAdsByUserID Ads: ", error)
+		if(error){
+			callback(['databaseError in getAllAdsByUserID'], null)
+		}else{
+			callback([], Ad)
+		}
+	})
 }
 
 exports.getAdByAdID = function(adID,callback){

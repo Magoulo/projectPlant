@@ -4,6 +4,10 @@ exports.getAllAds = function (callback) {
 	adRepository.getAllAds(callback)
 }
 
+exports.getAllAdsByUserID = function(userID,callback){
+	adRepository.getAllAdsByUserID(userID,callback)
+}
+
 exports.getAdByAdID = function (adID,callback) {
 	adRepository.getAdByAdID(adID,callback)
 }

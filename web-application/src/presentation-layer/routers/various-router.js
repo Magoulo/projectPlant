@@ -47,9 +47,6 @@ router.get("/adUpdate", function(request, response){
 	response.render("adUpdate.hbs")
 })
 
-router.get("/myAds", function(request, response){
-	response.render("myAds.hbs")
-})
 
 router.get("/myBids", function(request, response){
 	response.render("myBids.hbs")

@@ -6,17 +6,29 @@ router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
         console.log("Ad: ", Ad)
 
-      ////     console.log("imageBundle: ", imageBundle)
+      //  adManager.getImageBundleByAdID(Ad.adID, function (errors,imageBundle){
+     //       console.log("imageBundle: ", imageBundle)
             const model = {
             errors: errors,
             Ad: Ad,
           //  imageBundle: imageBundle
         }
         response.render("ads.hbs", model)
-     //   })  
+    //    })  
     })
 })
+router.get("/myAds", function (request, response) {
+    console.log("inne i myAds")
 
+    adManager.getAllAdsByUserID(1, function (errors, ad) {//userID, function (errors, ad) {
+        console.log("ad: ", ad)
+            const model = {
+                errors: errors,
+                ad: ad,
+            }
+       response.render("myAds.hbs", model)
+    })  
+})
 router.get('/:adID', function (request, response) {
 
     const adID = request.params.adID
@@ -39,10 +51,7 @@ router.get('/:adID', function (request, response) {
 })
 
 
-router.get("/myAds", function (request, response) {
-    console.log("inne i myAds")
-    response.render("myAds.hbs")
-})
+
 
 router.get("/ad", function (request, response) {
     response.render("ad.hbs")
