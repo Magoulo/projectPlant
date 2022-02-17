@@ -1,4 +1,86 @@
+<div class="content">
 <h1>Ads</h1>
+
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if Ad.length}}
+   <ul>
+			{{#each Ad}}
+
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+        
+
+<!-- --------ImageBundletable rows------->
+			<dt>adID:</dt>
+			<dd>{{adID}}</dd>
+
+			<dt>CoverImagePath:</dt>
+            <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+			
+
+			 <li><a href="/ads/{{adID}}">Info</a></li>
+
+         <p>----------------------------------------------------------------------------------</p>
+
+			{{/each}}
+		</ul>
+		<dl>
+<!-- --------Usertable rows------->
+	<!--		<dt>Firstname:</dt>
+			<dd>{{user.firstName}}</dd>
+
+			<dt>Lastname:</dt>
+			<dd>{{user.lastName}}</dd>
+
+			<dt>email:</dt>
+			<dd>{{user.email}}</dd>
+
+			<dt>Phonenumber:</dt>
+			<dd>{{user.phoneNumber}}</dd>
+
+			<dt>City:</dt>
+			<dd>{{user.city}}</dd> -->
+
+<!-- --------ADtable rows------->
+			
+
+
+
+<!-- --------Bidtable rows------->
+	   <!--	<dt>BidUserID:</dt>
+			<dd>{{bid.userID}}</dd>
+
+			<dt>BidAdID:</dt>
+			<dd>{{bid.adID}}</dd>
+
+			<dt>BidDate:</dt>
+			<dd>{{bid.date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{bid.imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{bid.message}}</dd>-->
+
+		
+
+			
+		</dl>
+	{{else}}
+		<p>No, that account doesn't exist.</p>
+	{{/if}}
+	
+{{/if}}
+</div>
 
 <!-- Lägg till
 1. Search bar längst upp

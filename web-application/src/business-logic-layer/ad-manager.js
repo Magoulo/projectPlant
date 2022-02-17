@@ -14,3 +14,7 @@ exports.getAllBidsByAdID = function (adID, callback) {
 exports.getBidByAdID = function (adID, callback) {
 	adRepository.getBidByAdID(adID, callback)
 }
+
+exports.getImageBundleByAdID = function (adID, callback){
+	adRepository.getImageBundleByAdID(adID,callback)
+}

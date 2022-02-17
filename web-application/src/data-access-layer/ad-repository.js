@@ -2,12 +2,14 @@ const db = require('./db')
 
 exports.getAllAds = function(callback){
 	
-	const query = `SELECT * FROM Ad ORDER BY adID`
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID ORDER BY Ad.adID`
 	const values = []
 	
 	db.query(query, values, function(error, Ad){
+		console.log("Ad in getAll Ads: ", Ad)
+		console.log("error in getAll Ads: ", error)
 		if(error){
-			callback(['databaseError'], null)
+			callback(['databaseError in getAllAds'], null)
 		}else{
 			callback([], Ad)
 		}
@@ -73,6 +75,26 @@ exports.getBidByAdID = function(adID, callback){
 			console.log("Bid.length: ", Bid.length)
 			console.log("------------------------------------------------------------------------------------------------")
 			callback([], Bid[0])
+		}
+	})
+}
+
+exports.getImageBundleByAdID = function(adID, callback){
+	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
+	const values = [adID]
+	console.log("-------------------------------inside getImageBundleByAdID in ad-repository-------------------------------")
+	console.log("adID: ", adID)
+
+	db.query(query, values, function(error, ImageBundle){
+		if(error){
+			callback(['databaseError in Bid table'], null)
+		}else{
+			
+			console.log("ImageBundle: ",ImageBundle)
+			console.log("ImageBundle[0]: ",ImageBundle[0])
+			console.log("ImageBundle.length: ", ImageBundle.length)
+			console.log("------------------------------------------------------------------------------------------------")
+			callback([], ImageBundle[0])
 		}
 	})
 }

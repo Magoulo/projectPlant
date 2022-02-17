@@ -5,11 +5,15 @@ const router = express.Router()
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
         console.log("Ad: ", Ad)
-        const model = {
+
+      ////     console.log("imageBundle: ", imageBundle)
+            const model = {
             errors: errors,
-            Ad: Ad
+            Ad: Ad,
+          //  imageBundle: imageBundle
         }
-        response.render("myAds.hbs", model)
+        response.render("ads.hbs", model)
+     //   })  
     })
 })
 
@@ -31,7 +35,6 @@ router.get('/:adID', function (request, response) {
             }
             response.render("myAdBids.hbs", model)
         })
-
     })
 })
 
