@@ -41,10 +41,35 @@ router.get('/myAds/:userID', function (request, response) {
     const userID = request.params.userID
 
     adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
+        var adAccepted =  []
+        var adPending = []
+        var adDeclined = []
+        for(index in ad){
+            console.log("status!!!!!!!!!!!!!-----------------------------------------: ",ad[index].status)
+            if(ad[index].status == "Accepted"){
+                console.log("Accepted!!!!---------------------------: ")
+                adAccepted.push(ad[index])
+            }
+            if(ad[index].status == "Pending"){
+                console.log("Pending!!!!---------------------------: ")
+                adPending.push(ad[index])
+            }
+            if(ad[index].status == "Declined"){
+                console.log("Declined!!!!---------------------------: ")
+                adDeclined.push(ad[index])
+            }
+        }
+        console.log("-----------------------------------------------------------------------------")
+        console.log("adAccepted: ",adAccepted)
+        console.log("adPending: ",adPending)
+        console.log("adDeclined: ", adDeclined)
+        console.log("-----------------------------------------------------------------------------")
         console.log("addddddddd: ", ad)
         const model = {
             errors: errors,
-            ad: ad,
+            adAccepted,
+            adPending,
+            adDeclined
             
         }
         response.render("myAdBids.hbs", model)

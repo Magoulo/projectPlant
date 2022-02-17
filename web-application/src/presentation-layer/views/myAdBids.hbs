@@ -10,9 +10,79 @@
 	</ul>
 {{else}}
 	
-	{{#if ad}}
-	{{#each ad}}
-	
+	{{#if adAccepted}}
+	{{#each adAccepted}}
+	<h2>Accepted</h2>
+	<p>-------------------------------------------------------------------------------------------------------</p>
+        <ul>		
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+
+		  <p>------------------------------------------------------------------------------------------------</p>
+
+			<dt>BidDate:</dt>
+			<dd>{{date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{message}}</dd>
+
+			<dt>BidStatus:</dt>
+			<dd>{{status}}</dd>
+
+			<dt>User Firstnmame:</dt>
+			<dd>{{firstName}}</dd>
+
+			<dt>User Lastnmame:</dt>
+			<dd>{{lastName}}</dd>
+
+			<dt>User Email:</dt>
+			<dd>{{email}}</dd>
+        </ul>
+          <p>-------------------------------------------------------------------------------------------------------</p>
+      
+	{{/each}}
+	{{#each adPending}}
+	<h2>Pending</h2>
+	<p>-------------------------------------------------------------------------------------------------------</p>
+        <ul>		
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+       
+<p>-------------------------------------------------------------------------------------------------------</p>
+			<dt>BidDate:</dt>
+			<dd>{{date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{message}}</dd>
+
+			<dt>BidStatus:</dt>
+			<dd>{{status}}</dd>
+
+			<dt>User Firstnmame:</dt>
+			<dd>{{firstName}}</dd>
+
+			<dt>User Lastnmame:</dt>
+			<dd>{{lastName}}</dd>
+
+			<dt>User Email:</dt>
+			<dd>{{email}}</dd>
+        </ul>
+         <p>-------------------------------------------------------------------------------------------------------</p>
+      
+	{{/each}}
+	{{#each adDeclined}}
+	<h2>Declined</h2>
+	<p>-------------------------------------------------------------------------------------------------------</p>
         <ul>		
 			<dt>Title:</dt>
 			<dd>{{title}}</dd>
