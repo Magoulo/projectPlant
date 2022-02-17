@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS Bid (
 
 
 
--- Create a dummy accounts for testing.
+-- Dummy data for testing.
 INSERT INTO UserAccount (username, passwordHash) VALUES ("mooooo", "abc123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","Sabin","mooo","Smo@com","555-123","GBG");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","well maintained Monstera", "Monstera deliciosa","well maintained with roots in mullis", "0");
@@ -80,116 +80,7 @@ INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("2", "1", "2022-
 INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree");
 INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me");
 
- /*       sqLite
-------------------------------------------------------------------------------------------------------
-CREATE TABLE "UserAccounts" (
-	"userAccountID"	INTEGER,
-	"username"	TEXT,
-	"passwordHash"	TEXT,
-	PRIMARY KEY("userAccountID" AUTOINCREMENT)
-);
-
-CREATE TABLE "Users" (
-	"userID"	INTEGER,
-	"userAccountID"	INTEGER,
-	"firstName"	TEXT,
-	"lastName"	TEXT,
-	"email"	TEXT,
-	"phoneNumber"	TEXT,
-	"city"	TEXT,
-	FOREIGN KEY("userAccountID") REFERENCES "UserAccounts",
-	PRIMARY KEY("userID" AUTOINCREMENT)
-);
-
-CREATE TABLE "Ads" (
-	"adID"	INTEGER,
-	"UserID"	INTEGER,
-	"title"	TEXT,
-	"latinName"	TEXT,
-	"description"	TEXT,
-	"isClosed"	INTEGER,
-	PRIMARY KEY("adID"),
-	FOREIGN KEY("UserID") REFERENCES "Users"
-);
-
-CREATE TABLE "Images" (
-	"imageID"	INTEGER,
-	"adID"	INTEGER,
-	"coverImagePath"	TEXT,
-	"fisrtImagePath"	TEXT,
-	"secondImagePath"	TEXT,
-	PRIMARY KEY("imageID"),
-	FOREIGN KEY("adID") REFERENCES "Ads"
-);
-
-        mySQL
------------------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS UserAccounts (
-  userAccountID INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(45) NOT NULL,
-  passwordHash VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`userAccountID`))
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
-  `userID` INT NOT NULL AUTO_INCREMENT,
-  `userAcccountID` INT NOT NULL,
-  `firstName` VARCHAR(45) NULL,
-  `lastName` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  `phoneNumber` VARCHAR(45) NULL,
-  `city` VARCHAR(45) NULL,
-  PRIMARY KEY (`userID`),
-  INDEX `userAccountID_idx` (`userAcccountID` ASC) VISIBLE,
-  CONSTRAINT `userAccountID`
-    FOREIGN KEY (`userAcccountID`)
-    REFERENCES `mydb`.`UserAccounts` (`userAccountID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Ads` (
-  `adID` INT NOT NULL AUTO_INCREMENT,
-  `UserID` INT NOT NULL,
-  `title` VARCHAR(45) NULL,
-  `latinName` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
-  `isClosed` TINYINT(0) NOT NULL,
-  INDEX `UserID_idx` (`UserID` ASC) VISIBLE,
-  CONSTRAINT `UserID`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `mydb`.`Users` (`userID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Ads` (
-  `adID` INT NOT NULL AUTO_INCREMENT,
-  `UserID` INT NOT NULL,
-  `title` VARCHAR(45) NULL,
-  `latinName` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
-  `isClosed` TINYINT(0) NOT NULL,
-  INDEX `UserID_idx` (`UserID` ASC) VISIBLE,
-  PRIMARY KEY (`adID`),
-  CONSTRAINT `UserID`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `mydb`.`Users` (`userID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
-CREATE TABLE IF NOT EXISTS `mydb`.`Images` (
-  `imageID` INT NOT NULL AUTO_INCREMENT,
-  `adID` INT NULL,
-  `coverImagePath` VARCHAR(45) NULL,
-  `firstImagePath` VARCHAR(45) NULL,
-  `secondImagePath` VARCHAR(45) NULL,
-  INDEX `adID_idx` (`adID` ASC) VISIBLE,
-  CONSTRAINT `adID`
-    FOREIGN KEY (`adID`)
-    REFERENCES `mydb`.`Ads` (`adID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-
-*/
+INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","Monstera", "Monstera deliciosa","Another Monstera", "0");
+INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("4","https://www.mydomaine.com/thmb/PunwYf9El_Nyens5QMJ4d4moXOw=/1414x2121/filters:fill(auto,1)/GettyImages-1060620362-2940035374b843f3af034d0512dd2b54.jpg", "https://www.gardeningknowhow.com/wp-content/uploads/2015/04/money-tree.jpg", "https://www.gardeningknowhow.com/wp-content/uploads/2013/04/money-tree.jpg");
+INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","flower", "blablaLatin","Lilly that keeps droppin flowers", "0");
+INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("5","https://i.pinimg.com/564x/aa/18/4e/aa184e45a9873944816d9ce825fb5a9a.jpg", "https://sunnyside-gardens.com/wp-content/uploads/2012/11/liliumstargazer.jpg", "https://www.americanmeadows.com/media/catalog/product/l/i/lilium-orientalis-oriental-lily-pink-stargazer-garden_2.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=560&width=560&canvas=560:560");
