@@ -1,6 +1,6 @@
 <div class="content">
 <h1>My Ads</h1>
-
+ 
 {{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
@@ -10,11 +10,11 @@
 	</ul>
 {{else}}
 	
-	{{#if ad.length}}
+	{{#if ad}}
    <ul>
-	    
+	  <a href="/ads/myAds/1">Ad offers</a> <!-- number will be replaced with sessionID {{sessionID}} -->
 			{{#each ad}}
-         <a href="/ads/myAds/{{userID}}">Ad offers</a>
+         
 			<dt>Title:</dt>
 			<dd>{{title}}</dd>
 
@@ -38,7 +38,7 @@
          <p>----------------------------------------------------------------------------------</p>
 
 			{{/each}}
-
+ 
 		</ul>
 		<dl>
 <!-- --------Usertable rows------->
