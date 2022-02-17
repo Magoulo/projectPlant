@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS Bid (
   date DATE,
   imagePath VARCHAR(45),
   message TEXT,
+  status VARCHAR(15),
   FOREIGN KEY (userID)
     REFERENCES User (userID),
   FOREIGN KEY (adID)
@@ -82,8 +83,8 @@ INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) 
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","flower", "blablaLatin","Lilly that keeps droppin flowers", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("5","https://i.pinimg.com/564x/aa/18/4e/aa184e45a9873944816d9ce825fb5a9a.jpg", "https://sunnyside-gardens.com/wp-content/uploads/2012/11/liliumstargazer.jpg", "https://www.americanmeadows.com/media/catalog/product/l/i/lilium-orientalis-oriental-lily-pink-stargazer-garden_2.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=560&width=560&canvas=560:560");
 
-INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("2", "1", "2022-02-16", "This is the imagePath to bid", "Hi I would like to buy your monstera");
-INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree");
-INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me");
-INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("1", "4", "2022-02-11", "This is the imagePath to bid", "I wanna trade that for this");
-INSERT INTO Bid(userID, adID, date, imagePath, message) VALUES ("1", "3", "2022-02-27", "This is the imagePath to bid", "Sling som lillies my way");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "1", "2022-02-16", "This is the imagePath to bid", "Hi I would like to buy your monstera","Accepted");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "4", "2022-02-11", "This is the imagePath to bid", "I wanna trade that for this","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "3", "2022-02-27", "This is the imagePath to bid", "Sling som lillies my way","Pending");

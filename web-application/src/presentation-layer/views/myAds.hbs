@@ -1,6 +1,6 @@
 <div class="content">
 <h1>My Ads</h1>
-
+ 
 {{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
@@ -10,10 +10,11 @@
 	</ul>
 {{else}}
 	
-	{{#if ad.length}}
+	{{#if ad}}
    <ul>
+	  <a href="/ads/myAds/1">Ad offers</a> <!-- number will be replaced with sessionID {{sessionID}} -->
 			{{#each ad}}
-
+         
 			<dt>Title:</dt>
 			<dd>{{title}}</dd>
 
@@ -26,17 +27,15 @@
 			<dt>description:</dt>
 			<dd>{{description}}</dd>
 
-			<dt>isClosed:</dt>
-			<dd>{{isClosed}}</dd>
+			<li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
+			    <img src="{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
+			    <img src="{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
 
-			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			  <img src="{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			   <img src="{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
-
-         <li><a href="/ads/{{adID}}">Bids</a></li>
+   <!--      <li><a href="/ads/myAds/{{adID}}">Bids</a></li> -->
          <p>----------------------------------------------------------------------------------</p>
 
 			{{/each}}
+ 
 		</ul>
 		<dl>
 <!-- --------Usertable rows------->

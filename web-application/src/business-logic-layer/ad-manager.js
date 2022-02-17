@@ -30,3 +30,6 @@ exports.getAllBidsByUserID = function(userID,callback){
 exports.getUserByUserID = function(userID, callback){
 	adRepository.getUserByUserID(userID, callback)
 }
+exports.getAllAdsBidsUsersByUserID = function(userID, callback){
+	adRepository.getAllAdsBidsUsersByUserID(userID,callback)
+}

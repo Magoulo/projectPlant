@@ -10,40 +10,18 @@
 	</ul>
 {{else}}
 	
-	{{#if ad}}
+	{{#if adAccepted}}
+	<h2>Accepted</h2>
+	{{#each adAccepted}}
+	
+	<p>-------------------------------------------------------------------------------------------------------</p>
         <ul>		
 			<dt>Title:</dt>
-			<dd>{{ad.title}}</dd>
+			<dd>{{title}}</dd>
 
-            <dt>UserID:</dt>
-			<dd>{{ad.userID}}</dd>
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
 
-			<dt>LatinName:</dt>
-			<dd>{{ad.latinName}}</dd>
-
-			<dt>description:</dt>
-			<dd>{{ad.description}}</dd>
-
-			<dt>isClosed:</dt>
-           
-			<dd>{{ad.isClosed}}</dd>
-
-			 <li><img src="{{ad.coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			 <img src="{{ad.firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			   <img src="{{ad.secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
-        </ul>
-
-         <!-- --------Bidtable rows------->
-
-        <h2>Bids</h2>
 		  <p>------------------------------------------------------------------------------------------------</p>
-    {{#each bids}}
-        <ul>
-	   	    <dt>BidUserID:</dt>
-			<dd>{{userID}}</dd>
-
-			<dt>BidAdID:</dt>
-			<dd>{{adID}}</dd>
 
 			<dt>BidDate:</dt>
 			<dd>{{date}}</dd>
@@ -53,10 +31,99 @@
 
 			<dt>BidMessage:</dt>
 			<dd>{{message}}</dd>
+
+			<dt>BidStatus:</dt>
+			<dd>{{status}}</dd>
+
+			<dt>User Firstnmame:</dt>
+			<dd>{{firstName}}</dd>
+
+			<dt>User Lastnmame:</dt>
+			<dd>{{lastName}}</dd>
+
+			<dt>User Email:</dt>
+			<dd>{{email}}</dd>
+        </ul>
+          <p>-------------------------------------------------------------------------------------------------------</p>
+      
+	{{/each}}
+	<h2>Pending</h2>
+	{{#each adPending}}
+	
+	<p>-------------------------------------------------------------------------------------------------------</p>
+        <ul>		
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+       
+<p>-------------------------------------------------------------------------------------------------------</p>
+			<dt>BidDate:</dt>
+			<dd>{{date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{message}}</dd>
+
+			<dt>BidStatus:</dt>
+			<dd>{{status}}</dd>
+
+			<dt>User Firstnmame:</dt>
+			<dd>{{firstName}}</dd>
+
+			<dt>User Lastnmame:</dt>
+			<dd>{{lastName}}</dd>
+
+			<dt>User Email:</dt>
+			<dd>{{email}}</dd>
+        </ul>
+         <p>-------------------------------------------------------------------------------------------------------</p>
+      
+	{{/each}}
+	<h2>Declined</h2>
+	{{#each adDeclined}}
+	
+	<p>-------------------------------------------------------------------------------------------------------</p>
+        <ul>		
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+        </ul>
+
+         <!-- --------Bidtable rows------->
+
+        <h2>Bid</h2>
+		  <p>------------------------------------------------------------------------------------------------</p>
+    
+        <ul>
+
+			<dt>BidDate:</dt>
+			<dd>{{date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{message}}</dd>
+
+			<dt>BidStatus:</dt>
+			<dd>{{status}}</dd>
+
+			<dt>User Firstnmame:</dt>
+			<dd>{{firstName}}</dd>
+
+			<dt>User Lastnmame:</dt>
+			<dd>{{lastName}}</dd>
+
+			<dt>User Email:</dt>
+			<dd>{{email}}</dd>
         </ul>
           <p>----------------------------------------------------------------------------------------------</p>
-      	{{/each}}
-		
+      
+	{{/each}}
 	{{else}}
 		<p>No, that ad doesn't exist here.</p>
 	{{/if}}
