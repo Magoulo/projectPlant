@@ -1,45 +1,193 @@
-
 <!-- Lägg till
-1. Title (och latin name under)längst upp till vänster
-2. Bilder under title (cover image som först)
-3. Description till höger
-4. En "like" button för annonsen (Vart IDk?)
+1. Lägg till alla nödvändiga forms
+2. En "like" button för annonsen (Vart IDk?)
+3. bilder kan vara olika storlekar fixa det
 -->
 
-<div class="content">
-<h1>Ad</h1>
-
 {{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
-	<ul>
-		{{#each errors}}
-			<li>{{this}}</li>
-		{{/each}}
-	</ul>
+<p>Oh no, something went wrong:</p>
+<ul>
+	{{#each errors}}
+	<li>{{this}}</li>
+	{{/each}}
+</ul>
 {{else}}
-	
-	{{#if ad}}
-        <ul>		
-			<dt>Title:</dt>
-			<dd>{{ad.title}}</dd>
 
-			<dt>LatinName:</dt>
-			<dd>{{ad.latinName}}</dd>
+{{#if ad}}
 
-			<dt>description:</dt>
-			<dd>{{ad.description}}</dd>
+<div class="container p-0 m-0" style="max-width: 100%;">
 
-			 <li><img src="{{ad.coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			 <img src="{{ad.firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			<img src="{{ad.secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
-        </ul>
-        <button>Make a bid</button>
-        <button>Mail owner {{user.email}}</button>
-        
-		
-	{{else}}
-		<p>No, that ad doesn't exist here.</p>
-	{{/if}}
-	
+	<div class="row">
+
+		<div class="col-6 text-center">
+			<h3>{{ad.title}}</h3>
+			<h5>{{ad.latinName}}</h5>
+		</div>
+
+		<div class="col-auto"></div>
+	</div>
+
+	<div class="col-12">
+
+		<!-- bidModal -->
+		<div class="modal fade" id="bidModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Place a bid</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+						<form action="/placeBid" method="POST">
+
+							<!-- Lägg till alla nödvändiga forms-->
+							<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+							<div class="mb-0">
+								<label class="form-label"></label>
+								<input class="form-control" type="text" name="" placeholder="username*">
+							</div>
+
+							<div class="mb-0">
+								<label class="form-label"></label>
+								<input class="form-control" type="password" name="" placeholder="password*">
+							</div>
+
+						</form>
+					</div>
+
+
+					<div class="modal-footer">
+						<button type="submit" value="Place Bid" class="btn btn-light">Confirm</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- /bidModal -->
+
+
+		<!-- mailModal -->
+		<div class="modal fade" id="mailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Contact Seller {{user.email}}</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+						<form action="/placeBid" method="POST">
+
+							<!-- Lägg till alla nödvändiga forms-->
+							<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+							<div class="mb-0">
+								<label class="form-label"></label>
+								<input class="form-control" type="text" name="" placeholder="username*">
+							</div>
+
+							<div class="mb-0">
+								<label class="form-label"></label>
+								<input class="form-control" type="password" name="" placeholder="password*">
+							</div>
+
+						</form>
+					</div>
+
+
+					<div class="modal-footer">
+						<button type="submit" value="Place Bid" class="btn btn-light">Send message</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- /mailModal -->
+
+	</div>
+
+
+<!-- ImageBundle slides -->
+	<div class="row">
+		<div class="col-6">
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+						class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+						aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+						aria-label="Slide 3"></button>
+				</div>
+
+				<div class="carousel-inner">   <!-- bilder kan vara olika storlekar fixa det -->
+					<div class="carousel-item active">
+						<img src="{{ad.coverImagePath}}" class="d-block w-100" alt="{{imageBundleID}}">
+					</div>
+					<div class="carousel-item">
+						<img src="{{ad.firstImagePath}}" class="d-block w-100" alt="{{imageBundleID}}">
+					</div>
+					<div class="carousel-item">
+						<img src="{{ad.secondImagePath}}" class="d-block w-100" alt="{{imageBundleID}}">
+					</div>
+				</div>
+
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+
+			</div>
+		</div>
+
+		<div class="col-6">
+			<p>{{ad.description}}</p>
+		</div>
+
+	</div>
+	<!-- /ImageBundle slides -->
+
+	<!-- Button trigger modals -->
+	<div class="row justify-content-end">
+
+		<div class="col-2">
+			<div class="d-grid gap-2">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bidModal">
+					Place a bid
+				</button>
+			</div>
+		</div>
+
+		<div class="col-2">
+			<div class="d-grid gap-2">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mailModal">
+					Contact seller
+				</button>
+			</div>
+		</div>
+
+	</div>
+	<!---->
+</div>
+
+
+{{else}}
+<div class="col-12 text-center">
+	<p>No, that ad doesn't exist here.</p>
+</div>
+{{/if}}
+
 {{/if}}
 </div>
