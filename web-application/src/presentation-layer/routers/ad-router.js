@@ -17,6 +17,18 @@ router.get("/", function (request, response) {
     //    })  
     })
 })
+router.get("/myBids", function(request, response){
+    console.log("inne i myBids")
+
+    adManager.getAllBidsByUserID(1, function (errors, bid) {//userID, function (errors, bid) {
+            const model = {
+                errors: errors,
+                bid: bid,
+            }
+      response.render("myBids.hbs",model)
+    })  	
+})
+
 router.get("/myAds", function (request, response) {
     console.log("inne i myAds")
 

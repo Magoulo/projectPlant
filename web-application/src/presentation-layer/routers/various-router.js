@@ -48,10 +48,6 @@ router.get("/adUpdate", function(request, response){
 })
 
 
-router.get("/myBids", function(request, response){
-	response.render("myBids.hbs")
-})
-
 router.get("/myFavorites", function(request, response){
 	response.render("myFavorites.hbs")
 })

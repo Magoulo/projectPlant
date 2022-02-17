@@ -1,7 +1,66 @@
-<h1>My Bids</h1>
+
 
 <!-- Lägg till
 1. Lista med "Winning Bids" som man kan öppna och se mer info (länk till ad, sin bid)
 2. Lista med "Pending Bids" som man kan öppna och se mer info (länk till ad, sin bid)
 3. lägg till en knapp som man kan avbryta sin bid med
 -->
+
+<div class="content">
+<h1>My Bids</h1>
+
+{{#if errors.length}}
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+			<li>{{this}}</li>
+		{{/each}}
+	</ul>
+{{else}}
+	
+	{{#if bid}}
+	{{#each bid}}
+        <ul>		
+			<dt>Title:</dt>
+			<dd>{{title}}</dd>
+
+			<dt>LatinName:</dt>
+			<dd>{{latinName}}</dd>
+
+			<dt>description:</dt>
+			<dd>{{description}}</dd>
+
+			<dt>isClosed:</dt>
+           
+			<dd>{{isClosed}}</dd>
+
+			 <li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
+			 <img src="{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
+			   <img src="{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+        </ul>
+
+         <!-- --------Bidtable rows------->
+
+        <h2>Bids</h2>
+		  <p>------------------------------------------------------------------------------------------------</p>
+    
+        <ul>
+
+			<dt>BidDate:</dt>
+			<dd>{{date}}</dd>
+
+			<dt>BidImagePath:</dt>
+			<dd>{{imagePath}}</dd>
+
+			<dt>BidMessage:</dt>
+			<dd>{{message}}</dd>
+        </ul>
+          <p>----------------------------------------------------------------------------------------------</p>
+      	{{/each}}
+		
+	{{else}}
+		<p>No, that bid doesn't exist here.</p>
+	{{/if}}
+	
+{{/if}}
+</div>

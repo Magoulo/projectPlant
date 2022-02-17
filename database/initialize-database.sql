@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS ImageBundle (
     FOREIGN KEY (adID)
     REFERENCES Ad (adID));
 
+/* LÄ*gg till PK och col Status */
 CREATE TABLE IF NOT EXISTS Bid (
   userID INT NOT NULL,
   adID INT NOT NULL,

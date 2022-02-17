@@ -93,6 +93,27 @@ exports.getBidByAdID = function(adID, callback){
 	})
 }
 
+exports.getAllBidsByUserID = function(userID, callback){
+	const query = "SELECT Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Ad.title, Ad.latinName, Ad.description, ImageBundle.coverImagePath, ImageBundle.firstImagePath, ImageBundle.secondImagePath FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ?"
+	const values = [userID]
+	console.log("-------------------------------inside getAllBidsByUserID in ad-repository-------------------------------")
+	console.log("userID: ", userID)
+
+	db.query(query, values, function(error, Bid){
+		if(error){
+			callback(['databaseError in Bid table'], null)
+		}else{
+			
+			console.log("Bid: ",Bid)
+			console.log("Bid[0]: ",Bid[0])
+            console.log("Bid[1]: ",Bid[1])
+			console.log("Bid.length: ", Bid.length)
+			console.log("------------------------------------------------------------------------------------------------")
+			callback([], Bid)
+		}
+	})
+}
+
 exports.getImageBundleByAdID = function(adID, callback){
 	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
 	const values = [adID]
