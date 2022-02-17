@@ -1,11 +1,18 @@
 const express = require('express')
-
+const adManager = require('../../business-logic-layer/ad-manager')
 const router = express.Router()
 
 //---------ska vara kvar här------------------------------------
 
 router.get("/", function(request, response){
-	response.render("start.hbs")
+	adManager.getAllAds(function (errors, Ad) {
+        console.log("Ad: ", Ad)
+            const model = {
+            errors: errors,
+            Ad: Ad,
+        }
+        response.render("start.hbs", model) 
+    })
 })
 
 
