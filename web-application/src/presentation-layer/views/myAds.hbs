@@ -12,8 +12,9 @@
 	
 	{{#if ad.length}}
    <ul>
+	    
 			{{#each ad}}
-
+         <a href="/ads/myAds/{{userID}}">Ad offers</a>
 			<dt>Title:</dt>
 			<dd>{{title}}</dd>
 
@@ -33,10 +34,11 @@
 			  <img src="{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
 			   <img src="{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
 
-         <li><a href="/ads/{{adID}}">Bids</a></li>
+   <!--      <li><a href="/ads/myAds/{{adID}}">Bids</a></li> -->
          <p>----------------------------------------------------------------------------------</p>
 
 			{{/each}}
+
 		</ul>
 		<dl>
 <!-- --------Usertable rows------->

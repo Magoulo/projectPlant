@@ -153,3 +153,18 @@ exports.getUserByUserID = function(userID, callback){
 		}
 	})
 }
+
+exports.getAllAdsBidsUsersByUserID = function(userID,callback){
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID JOIN Bid ON Ad.adID = Bid.adID JOIN User ON Bid.userID = User.userID WHERE Ad.userID = ? ORDER BY Ad.userID`
+	const values = [userID]
+	
+	db.query(query, values, function(error, Ad){
+		console.log("Ad in getAllAdsByUserID Ads: ", Ad)
+		console.log("error in getAllAdsByUserID Ads: ", error)
+		if(error){
+			callback(['databaseError in getAllAdsByUserID'], null)
+		}else{
+			callback([], Ad)
+		}
+	})
+}

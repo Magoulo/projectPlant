@@ -5,16 +5,11 @@ const router = express.Router()
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
         console.log("Ad: ", Ad)
-
-      //  adManager.getImageBundleByAdID(Ad.adID, function (errors,imageBundle){
-     //       console.log("imageBundle: ", imageBundle)
             const model = {
             errors: errors,
             Ad: Ad,
-          //  imageBundle: imageBundle
         }
-        response.render("ads.hbs", model)
-    //    })  
+        response.render("ads.hbs", model) 
     })
 })
 router.get("/myBids", function(request, response){
@@ -41,6 +36,21 @@ router.get("/myAds", function (request, response) {
        response.render("myAds.hbs", model)
     })  
 })
+router.get('/myAds/:userID', function (request, response) {
+
+    const userID = request.params.userID
+
+    adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
+        console.log("addddddddd: ", ad)
+        const model = {
+            errors: errors,
+            ad: ad,
+            
+        }
+        response.render("myAdBids.hbs", model)
+    })
+})
+
 router.get('/:adID', function (request, response) {
 
     const adID = request.params.adID
