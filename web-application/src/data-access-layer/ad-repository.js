@@ -18,7 +18,7 @@ exports.getAllAds = function(callback){
 }
 
 exports.getAdByAdID = function(adID,callback){
-	const query = "SELECT * FROM Ad WHERE adID = ? LIMIT 1"
+	const query = "SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.adID = ? LIMIT 1"
 	const values = [adID]
 	console.log("-------------------------------inside getAdByAdID in account-repository-------------------------------")
 	console.log("adID: ", adID)
