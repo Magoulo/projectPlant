@@ -7,6 +7,11 @@ router.get("/sign-up", function (request, response) {
 	response.render("accounts-sign-up.hbs")
 })
 
+router.get("/create", function (request, response) { /* sabbes */
+	response.render("accountCreate.hbs")
+})
+
+
 router.get("/sign-in", function (request, response) {
 	response.render("accounts-sign-in.hbs")
 })

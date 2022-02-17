@@ -15,8 +15,6 @@ router.get("/", function(request, response){
     })
 })
 
-
-
 router.get("/about", function(request, response){
 	response.render("about.hbs")
 })

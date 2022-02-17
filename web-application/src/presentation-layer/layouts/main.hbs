@@ -13,7 +13,7 @@
 
 <body>
 
-	<div class="m-5" style="background-color: blanchedalmond;">
+	<div class="mt-5 ms-3 me-3" style="background-color: blanchedalmond;">
 		<div class="row">
 
 			<div class="col-4 align-self-center text-start">
@@ -59,31 +59,64 @@
 			<div class="col-4 align-self-center text-end">
 
 				<!-- "Account Menu" when not logged in 
-				<button type="button" class="btn btn-link btn-lg text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-					aria-controls="offcanvasRight">
+				<button type="button" class="btn btn-link btn-lg text-dark" data-bs-toggle="offcanvas"
+					data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 					<i class="bi bi-person"></i>
 				</button>
 
 				<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
 					aria-labelledby="offcanvasRightLabel">
+
 					<div class="offcanvas-header">
-						<h5 id="offcanvasRightLabel">Sign In</h5>
+						<p id="offcanvasRightLabel">Sign In</p>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
 							aria-label="Close"></button>
 					</div>
-					<div class="offcanvas-body text-end">
-						<ol>
-							<li><a href="/accounts/sign-up">Sign up</a></li>
-							<li><a href="/accounts/sign-in">Sign in</a></li>
-						</ol>
+
+					<div class="offcanvas-body text-start">
+						<ul class="list-group list-group-flush">
+
+							<li class="list-group-item">
+								<div class="col">
+									<form action="/auth/login" method="POST">
+										<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+										<div class="mb-0">
+											<label class="form-label"></label>
+											<input class="form-control" type="text" name="" placeholder="username*">
+										</div>
+
+										<div class="mb-0">
+											<label class="form-label"></label>
+											<input class="form-control" type="password" name="" placeholder="password*">
+										</div>
+
+										<div class="d-grid gap-2 mt-3 mb-5">
+											<button type="submit" value="Sign in" class="btn btn-light">Sign in</button>
+										</div>
+
+									</form>
+								</div>
+							</li>
+
+							<li class="list-group-item">
+								<div class="d-grid gap-2 mt-5">
+									<a class="btn btn-secondary btn-lg" role="button" aria-disabled="true"
+										href="/accounts/create">Create an account</a>
+									<p>I'd like to be a plant ye</p>
+								</div>
+							</li>
+
+						</ul>
 					</div>
-				</div>
--->
+
+				</div>-->
+
 
 
 				<!-- "Account Menu" when logged in -->
-				<button type="button" class="btn btn-link btn-lg text-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-					aria-controls="offcanvasRight">
+				<button type="button" class="btn btn-link btn-lg text-dark" data-bs-toggle="offcanvas"
+					data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 					<i class="bi bi-person-check"></i>
 				</button>
 
@@ -110,6 +143,22 @@
 	</div>
 
 
+
+
+	<main>
+		<div class="ms-3 me-3" style="background-color:gainsboro;">
+			{{{body}}}
+		</div>
+	</main>
+
+
+
+
+
+
+
+
+
 	<div class="db tester" style="margin-left:200px">
 		<ol>
 			<li><a href="/accounts/">accounts-list-all</a></li>
@@ -118,10 +167,6 @@
 			<li><a href="/accounts/sign-up">accounts-sign-up</a></li>
 		</ol>
 	</div>
-
-
-	<main>{{{body}}}</main>
-
 
 	<footer>
 		<p>Copyright © The Pigus 2021</p>
