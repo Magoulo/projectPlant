@@ -37,11 +37,10 @@ router.get("/myAds", function (request, response) {
     })  
 })
 router.get('/myAds/:userID', function (request, response) {
-
     const userID = request.params.userID
 
     adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
-        var adAccepted =  []
+        var adAccepted = []
         var adPending = []
         var adDeclined = []
         for(index in ad){
@@ -60,17 +59,16 @@ router.get('/myAds/:userID', function (request, response) {
             }
         }
         console.log("-----------------------------------------------------------------------------")
+        console.log("ad: ", ad)
         console.log("adAccepted: ",adAccepted)
         console.log("adPending: ",adPending)
         console.log("adDeclined: ", adDeclined)
         console.log("-----------------------------------------------------------------------------")
-        console.log("addddddddd: ", ad)
         const model = {
             errors: errors,
             adAccepted,
             adPending,
-            adDeclined
-            
+            adDeclined          
         }
         response.render("myAdBids.hbs", model)
     })

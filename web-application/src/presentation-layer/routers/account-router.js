@@ -16,6 +16,44 @@ router.get("/sign-in", function (request, response) {
 	response.render("accounts-sign-in.hbs")
 })
 
+router.post("/sign-in", function (request, response) {
+	const username = request.body.username
+	const password = request.body.password
+
+	accountManager.getAccountByUsername(username, function (errors, UserAccounts){
+
+		if(errors.length == 0){	
+			console.log("username: ", username)
+			console.log("UserAccount.Username")
+			if(username == UserAccounts.username && password == UserAccounts.passwordHash){//bcrypt.compareSync(PW, User_accounts.Password))
+				console.log("Username and Password are correct!")
+					//sessionID = UserAccounts.userAccountID
+			/*		request.session.isLoggedIn = true
+					request.session.UserID = User_accounts.Account_id
+					request.session.CatownerID = User_accounts.Cat_owner_id
+					request.session.UserIsLoggedIn = true	 */
+					response.redirect('/')
+			} else {
+				console.log("Wrong Username or Password")
+				errors.push("Wrong Username or Password")
+				const model = {
+					errors,
+					UserAccounts
+				}
+				response.render('start.hbs', model)
+			}
+		} else {
+			console.log("Internal server error")
+			errors.push("Internal server error")
+				const model = {
+					errors,
+				//	csrfToken: request.csrfToken()
+				}
+				response.render('start.hbs', model)
+		}
+	})
+})
+
 router.get("/", function (request, response) {
 	accountManager.getAllAccounts(function (errors, UserAccounts) {
 		const model = {

@@ -48,12 +48,14 @@ CREATE TABLE IF NOT EXISTS ImageBundle (
 
 /* LÄ*gg till PK och col Status */
 CREATE TABLE IF NOT EXISTS Bid (
+  BidID INT NOT NULL AUTO_INCREMENT,
   userID INT NOT NULL,
   adID INT NOT NULL,
   date DATE,
   imagePath VARCHAR(45),
   message TEXT,
   status VARCHAR(15),
+  PRIMARY KEY (BidID),
   FOREIGN KEY (userID)
     REFERENCES User (userID),
   FOREIGN KEY (adID)
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Bid (
 
 
 -- Dummy data for testing.
-INSERT INTO UserAccount (username, passwordHash) VALUES ("mooooo", "abc123");
+INSERT INTO UserAccount (username, passwordHash) VALUES ("moo", "abc123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","Sabin","mooo","Sabimooon@com","555-123","GBG");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","well maintained Monstera", "Monstera deliciosa","well maintained with roots in mullis", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("1","https://blombudsportalen.se/wp-content/uploads/2021/04/Monstera-deliciosa-variegata.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR43qDr4ntXQXIUHKuvLkMB_VE6Jcuvn9zcPTTK2hMjjQ3bnuNp30yAHyiCHAE2t_hl0uo&usqp=CAU", "https://www.blomsterlandet.se/optimized/c-ProductDetailsSingle-Default-Sm2x/2293e09b/globalassets/catalog-images/7/43540/4c1dbcc6ea7fcfde28bafcd105ec647a.jpg");
