@@ -48,12 +48,14 @@ CREATE TABLE IF NOT EXISTS ImageBundle (
 
 /* LÄ*gg till PK och col Status */
 CREATE TABLE IF NOT EXISTS Bid (
+  BidID INT NOT NULL AUTO_INCREMENT,
   userID INT NOT NULL,
   adID INT NOT NULL,
   date DATE,
   imagePath VARCHAR(45),
   message TEXT,
   status VARCHAR(15),
+  PRIMARY KEY (BidID),
   FOREIGN KEY (userID)
     REFERENCES User (userID),
   FOREIGN KEY (adID)
