@@ -1,39 +1,66 @@
-<div class="content">
-<h1>Ads</h1>
-{{#if errors.length}}
+<!-- Lägg till
+1. Filter options, öppnade med pop up eller offcanvas?
+-->
+
+
+<div class="container p-0 m-0" style="max-width: 100%;">
+
+	<!-- Manipulate ads shown -->
+	<div class="row justify-content-center m-5">
+		<div class="col-auto"></div>
+
+		<div class="col-7">
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+				<input type="text" class="form-control" placeholder="Username" aria-label="Username"
+					aria-describedby="basic-addon1">
+			</div>
+		</div>
+
+		<div class="col-2">
+			<button type="button" class="btn btn-light"><i class="bi bi-filter-left"></i> Filter</button>
+		</div>
+
+		<div class="col-auto"></div>
+	</div>
+
+
+<!-- All ads -->
+	{{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
 		{{#each errors}}
-			<li>{{this}}</li>
+		<li>{{this}}</li>
 		{{/each}}
 	</ul>
-{{else}}
-	
-	{{#if Ad.length}}
-    <p>[ This right here is a searchbar ] <button>Filter</button></p>
-   <ul>
-			{{#each Ad}}
 
-			<dt>Title:</dt>
-			<dd>{{title}}</dd>
-
-            <li><a href="/ads/{{adID}}"><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></a></li>
-			
-
-
-         <p>----------------------------------------------------------------------------------</p>
-
-			{{/each}}
-		</ul>
 	{{else}}
-		<p>No, that account doesn't exist.</p>
-	{{/if}}
-	
-{{/if}}
-</div>
+	{{#if Ad.length}}
 
-<!-- Lägg till
-1. Search bar längst upp
-2. Filter knapp längst upp bredvid searchbar
-3. Fint flöde med ads 
--->
+	<div class="row justify-content-between align-items-center">
+		{{#each Ad}}
+
+		<div class="col-3 text-center">
+
+
+			<h3><a href="/ads/{{adID}}">{{title}}</a></h3>
+
+
+			<a href="/ads/{{adID}}">
+				<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage">
+			</a>
+
+		</div>
+
+		{{/each}}
+	</div>
+
+
+	{{else}}
+	<div class="col-12 text-center">
+		<p>No, that account doesn't exist.</p>
+	</div>
+	{{/if}}
+	{{/if}}
+
+</div>

@@ -1,42 +1,70 @@
-<div class="content"></div>
-<h1>Start</h1>
-
 <!-- Lägg till:
-1. En fin bild (bakrund) längst upp med ngn text kanske. 
-2. En search bar
-2. Fint flöde med olika featured ads
+1. limit för featured ads, pagination?
+
 -->
-    <img src="https://www.kindpng.com/picc/m/148-1485879_plant-banner-png-transparent-png.png" style="width:1700px">
+<div class="container p-0 m-0" style="max-width: 100%;">
+
+	<!-- bakrund -->
+	<div class="col-12 text-center">
+		<img class="img-fluid" src="https://www.kindpng.com/picc/m/148-1485879_plant-banner-png-transparent-png.png"
+			style="width:1700px">
+	</div>
+
+	<!-- searchbar -->
+	<div class="row justify-content-center m-5">
+		<div class="col-auto"></div>
+
+		<div class="col-7">
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+				<input type="text" class="form-control" placeholder="Username" aria-label="Username"
+					aria-describedby="basic-addon1">
+			</div>
+		</div>
+
+		<div class="col-auto"></div>
+	</div>
 
 
-{{#if errors.length}}
+
+	<!-- featured ads, lägg till olika  -->
+	{{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
 		{{#each errors}}
-			<li>{{this}}</li>
+		<li>{{this}}</li>
 		{{/each}}
 	</ul>
-{{else}}
-	
-	{{#if Ad.length}}
-    <p>[ This right here is a searchbar ]</p>
-   <ul>
-			{{#each Ad}}
 
-			<dt>Title:</dt>
-			<dd>{{title}}</dd>
-
-            <li><a href="/ads/{{adID}}"><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></a></li>
-			
-
-
-         <p>----------------------------------------------------------------------------------</p>
-
-			{{/each}}
-		</ul>
 	{{else}}
+	{{#if Ad.length}}
+
+	<div class="row justify-content-between align-items-center">
+		{{#each Ad}}
+
+		<div class="col-3 text-center">
+
+
+			<h3><a href="/ads/{{adID}}">{{title}}</a></h3>
+
+
+			<a href="/ads/{{adID}}">
+				<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage">
+			</a>
+
+		</div>
+
+		{{/each}}
+	</div>
+
+
+	{{else}}
+	<div class="col-12 text-center">
 		<p>No, that account doesn't exist.</p>
+	</div>
 	{{/if}}
-	
-{{/if}}
+	{{/if}}
+
+
+
 </div>
