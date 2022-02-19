@@ -1,8 +1,70 @@
-<h1>Contact</h1>
-
 <!-- Lägg till
-1. Rubrik
-2. Vänslig beskrivning
-3. Form för att skicka mail till google (Kolla upp vilka inputs behövs)
-4. En "send" knapp
+1. Fixa contact form
 -->
+
+<div class="container">
+
+    <div class="col-12 text-center">
+        <h1>Contact</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto"></div>
+
+        <div class="col-8 text-center">
+
+            <p>
+                Här besvarar vi alla dina frågor och kommentarer om vår organisation och våra tjänster.
+            </p>
+
+            <!-- contactModal -->
+            <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name@example.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Send</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-auto"></div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-auto"></div>
+        <div class="col-2 text-center">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#contactModal">
+                contact form
+            </button>
+
+        </div>
+        <div class="col-auto"></div>
+    </div>
+
+</div>
