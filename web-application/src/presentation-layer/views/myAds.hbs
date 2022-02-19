@@ -1,101 +1,254 @@
-<div class="content">
-<h1>My Ads</h1>
- 
-{{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
-	<ul>
-		{{#each errors}}
-			<li>{{this}}</li>
-		{{/each}}
-	</ul>
-{{else}}
-	
-	{{#if ad}}
-   <ul>
-	  <a href="/ads/myAds/1">Ad offers</a> <!-- number will be replaced with sessionID {{sessionID}} -->
-			{{#each ad}}
-         
-			<dt>Title:</dt>
-			<dd>{{title}}</dd>
+<head>
+	<style>
+		section {
+			background-color: lightcoral;
+			border-radius: 15px;
+			padding: 15px;
+			margin: 5px;
+		}
 
-         <dt>UserID:</dt>
-			<dd>{{userID}}</dd>
+		section h1 {
+			margin-top: 0;
+		}
 
-			<dt>LatinName:</dt>
-			<dd>{{latinName}}</dd>
+		.hidden {
+			display: none;
+		}
+	</style>
+	<script>
+		// Write your JavaScript code here.
 
-			<dt>description:</dt>
-			<dd>{{description}}</dd>
+		document.addEventListener("DOMContentLoaded", function (event) {
 
-			<li><img src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			    <img src="{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			    <img src="{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
+			const div = document.querySelector("div")
+			const sections = document.querySelectorAll("section")
 
-   <!--      <li><a href="/ads/myAds/{{adID}}">Bids</a></li> -->
-         <p>----------------------------------------------------------------------------------</p>
+			for (i = 0; i < sections.length; i += 1) { // hide all forms
+				sections[i].classList.add("hidden")
+			}
 
-			{{/each}}
- 
-		</ul>
-		<dl>
-<!-- --------Usertable rows------->
-	<!--		<dt>Firstname:</dt>
-			<dd>{{user.firstName}}</dd>
+			//create select & options
+			select = document.getElementById("myAdsSelection")
 
-			<dt>Lastname:</dt>
-			<dd>{{user.lastName}}</dd>
 
-			<dt>email:</dt>
-			<dd>{{user.email}}</dd>
 
-			<dt>Phonenumber:</dt>
-			<dd>{{user.phoneNumber}}</dd>
+			select.addEventListener("click", function () {
 
-			<dt>City:</dt>
-			<dd>{{user.city}}</dd> -->
+				for (i = 0; i < sections.length; i += 1) { // hide all forms
+					sections[i].classList.add("hidden")
+				}
 
-<!-- --------ADtable rows------->
-			
+				option = select.options[select.selectedIndex].innerText
 
-<!-- --------ImageBundletable rows------->
-	<!--		<dt>adID:</dt>
-			<dd>{{imageBundle.adID}}</dd>
+				createAccount = sections[0]
+				signIn = sections[1]
+				subscribe = sections[2]
 
-			<dt>CoverImagePath:</dt>
-			<dd>{{imageBundle.coverImagePath}}</dd>
-			
-			<dt>FirstImagePath:</dt>
-			<dd>{{imageBundle.firstImagePath}}</dd>
+				if (option == "manage ads") {
+					createAccount.classList.toggle("hidden")
+				}
 
-			<dt>SecondImagePath:</dt>
-			<dd>{{imageBundle.secondImagePath}}</dd>-->
+				if (option == "my ad offers") {
+					signIn.classList.toggle("hidden")
+				}
 
-<!-- --------Bidtable rows------->
-	   <!--	<dt>BidUserID:</dt>
-			<dd>{{bid.userID}}</dd>
+				if (option == "closed ads") {
+					subscribe.classList.toggle("hidden")
+				}
+			})
+		})
 
-			<dt>BidAdID:</dt>
-			<dd>{{bid.adID}}</dd>
+	</script>
+</head>
 
-			<dt>BidDate:</dt>
-			<dd>{{bid.date}}</dd>
 
-			<dt>BidImagePath:</dt>
-			<dd>{{bid.imagePath}}</dd>
 
-			<dt>BidMessage:</dt>
-			<dd>{{bid.message}}</dd>-->
+<div class="container p-0 m-0" style="max-width: 100%;">
 
-		
+	<div class="row justify-content-center">
+		<div class="col-auto"></div>
+		<div class="col-3">
 
-			
-		</dl>
-	{{else}}
-		<p>No, your ads doesn't exist.</p>
-	{{/if}}
-	
-{{/if}}
+			<select id="myAdsSelection" class="form-select mb-3">
+				<option selected>Choose</option>
+				<option>manage ads</option>
+				<option>my ad offers</option>
+				<option>closed ads</option>
+			</select>
+
+		</div>
+		<div class="col-auto"></div>
+	</div>
+
+
+
+
+
+
+
+	<div class="row">
+		<div class="col-12" id="sections">
+
+
+			<section id="manageAds">
+
+				<div class="row justify-content-center">
+					<div class="col-auto"></div>
+					<div class="col-3 text-center d-grid gap-2">
+
+						<button type="button" class="btn btn-light">Light</button>
+
+					</div>
+					<div class="col-auto"></div>
+				</div>
+
+
+
+				<div class="col-12">
+
+					<div class="row justify-content-start">
+						<div class="col-auto"></div>
+						<div class="col-3 text-center d-grid gap-2">
+
+							<h1>My Ads</h1>
+
+						</div>
+						<div class="col-auto"></div>
+					</div>
+
+
+					{{#if errors.length}}
+					<p class="text-center">Oh no, something went wrong:</p>
+
+					<ul>
+						{{#each errors}}
+						<li>{{this}}</li>
+						{{/each}}
+					</ul>
+
+					{{else}}
+					{{#if ad}}
+
+					<div class="row justify-content-start align-items-center">
+						{{#each ad}}
+
+						<!-- number will be replaced with sessionID {{sessionID}} 
+							<a href="/ads/myAds/1">Ad offers</a>-->
+
+
+						<div class="col-3 text-center">
+
+							<div class="col-12">
+								<h3>{{title}}</h3>
+
+							</div>
+
+							<div class="col-12">
+								<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}"
+									class="flowerImage" style="width: 300px; height: 300px">
+							</div>
+
+							<div class="col-12">
+								<button type="button" class="btn btn-light">Light</button>
+								<button type="button" class="btn btn-light">Light</button>
+							</div>
+
+						</div>
+
+						{{/each}}
+					</div>
+
+					{{else}}
+					<div class="col-12 text-center">
+						<p>No, your ads doesn't exist.</p>
+					</div>
+					{{/if}}
+					{{/if}}
+
+				</div>
+
+			</section>
+
+
+
+
+
+			<section id="myAdOffers">
+
+				<div class="row justify-content-start">
+					<div class="col-auto"></div>
+					<div class="col-3 text-center d-grid gap-2">
+
+						<h1>My ad offers</h1>
+
+					</div>
+					<div class="col-auto"></div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</section>
+
+
+
+
+
+
+			<section>
+			</section>
+
+		</div>
+
+
+
+
+
+
+	</div>
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Lägg till
 1.Tabs mellan olika contents
 
