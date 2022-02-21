@@ -21,8 +21,6 @@ exports.getAllAdsByUserID = function(userID,callback){
 	const values = [userID]
 	
 	db.query(query, values, function(error, Ad){
-		console.log("Ad in getAllAdsByUserID Ads: ", Ad)
-		console.log("error in getAllAdsByUserID Ads: ", error)
 		if(error){
 			callback(['databaseError in getAllAdsByUserID'], null)
 		}else{
@@ -42,11 +40,6 @@ exports.getAdByAdID = function(adID,callback){
 		if(error){
 			callback(['databaseError in Ads table'], null)
 		}else{
-			
-			console.log("Ad: ",Ad)
-			console.log("Ad[0]: ",Ad[0])
-			console.log("Ad.length: ", Ad.length)
-			console.log("-----------22-------------------------------------------------------------------------------------")
 			callback([], Ad[0])
 		}
 	})
@@ -55,19 +48,11 @@ exports.getAdByAdID = function(adID,callback){
 exports.getAllBidsByAdID = function(adID, callback){
 	const query = "SELECT * FROM Bid WHERE adID = ?"
 	const values = [adID]
-	console.log("-------------------------------inside getAllBidsByAdID in ad-repository-------------------------------")
-	console.log("adID: ", adID)
 
 	db.query(query, values, function(error, Bid){
 		if(error){
 			callback(['databaseError in Bid table'], null)
 		}else{
-			
-			console.log("Bid: ",Bid)
-			console.log("Bid[0]: ",Bid[0])
-            console.log("Bid[1]: ",Bid[1])
-			console.log("Bid.length: ", Bid.length)
-			console.log("------------------------------------------------------------------------------------------------")
 			callback([], Bid)
 		}
 	})
@@ -83,11 +68,6 @@ exports.getBidByAdID = function(adID, callback){
 		if(error){
 			callback(['databaseError in Bid table'], null)
 		}else{
-			
-			console.log("Bid: ",Bid)
-			console.log("Bid[0]: ",Bid[0])
-			console.log("Bid.length: ", Bid.length)
-			console.log("------------------------------------------------------------------------------------------------")
 			callback([], Bid[0])
 		}
 	})
@@ -96,19 +76,11 @@ exports.getBidByAdID = function(adID, callback){
 exports.getAllBidsByUserID = function(userID, callback){
 	const query = "SELECT Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Ad.title, Ad.latinName, Ad.description, ImageBundle.coverImagePath, ImageBundle.firstImagePath, ImageBundle.secondImagePath FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ?"
 	const values = [userID]
-	console.log("-------------------------------inside getAllBidsByUserID in ad-repository-------------------------------")
-	console.log("userID: ", userID)
 
 	db.query(query, values, function(error, Bid){
 		if(error){
 			callback(['databaseError in Bid table'], null)
 		}else{
-			
-			console.log("Bid: ",Bid)
-			console.log("Bid[0]: ",Bid[0])
-            console.log("Bid[1]: ",Bid[1])
-			console.log("Bid.length: ", Bid.length)
-			console.log("------------------------------------------------------------------------------------------------")
 			callback([], Bid)
 		}
 	})
@@ -117,18 +89,11 @@ exports.getAllBidsByUserID = function(userID, callback){
 exports.getImageBundleByAdID = function(adID, callback){
 	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
 	const values = [adID]
-	console.log("-------------------------------inside getImageBundleByAdID in ad-repository-------------------------------")
-	console.log("adID: ", adID)
 
 	db.query(query, values, function(error, ImageBundle){
 		if(error){
 			callback(['databaseError in Bid table'], null)
 		}else{
-			
-			console.log("ImageBundle: ",ImageBundle)
-			console.log("ImageBundle[0]: ",ImageBundle[0])
-			console.log("ImageBundle.length: ", ImageBundle.length)
-			console.log("------------------------------------------------------------------------------------------------")
 			callback([], ImageBundle[0])
 		}
 	})
@@ -137,18 +102,11 @@ exports.getImageBundleByAdID = function(adID, callback){
 exports.getUserByUserID = function(userID, callback){
 	const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
 	const values = [userID]
-	console.log("-------------------------------inside getUserByUserID in ad-repository-------------------------------")
-	console.log("userID: ", userID)
 
 	db.query(query, values, function(error, User){
 		if(error){
 			callback(['databaseError in User table'], null)
 		}else{
-			
-			console.log("User: ",User)
-			console.log("User[0]: ",User[0])
-			console.log("User.length: ", User.length)
-			console.log("------------------------------------------------------------------------------------------------")
 			callback([], User[0])
 		}
 	})
@@ -159,8 +117,6 @@ exports.getAllAdsBidsUsersByUserID = function(userID,callback){
 	const values = [userID]
 	
 	db.query(query, values, function(error, Ad){
-		console.log("Ad in getAllAdsByUserID Ads: ", Ad)
-		console.log("error in getAllAdsByUserID Ads: ", error)
 		if(error){
 			callback(['databaseError in getAllAdsByUserID'], null)
 		}else{

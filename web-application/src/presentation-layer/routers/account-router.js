@@ -23,15 +23,13 @@ router.post("/sign-in", function (request, response) {
 	accountManager.getAccountByUsername(username, function (errors, UserAccounts){
 
 		if(errors.length == 0){	
-			console.log("username: ", username)
-			console.log("UserAccount.Username")
 			if(username == UserAccounts.username && password == UserAccounts.passwordHash){//bcrypt.compareSync(PW, User_accounts.Password))
 				console.log("Username and Password are correct!")
 					//sessionID = UserAccounts.userAccountID
 					request.session.isLoggedIn = true
 					request.session.UserID = UserAccounts.userAccountID
 					const blabla = request.session.isLoggedIn
-					console.log("blablablablalbalbla: ", blabla)
+					console.log("sessionUserID: ", request.session.UserID)
 				/*	request.session.CatownerID = User_accounts.Cat_owner_id
 					request.session.UserIsLoggedIn = true	 */
 				
@@ -76,21 +74,14 @@ router.get('/:username', function (request, response) {
 	const username = request.params.username
 
 	accountManager.getAccountByUsername(username, function (errors, account) {
-		console.log("--------------inside getAccountByUsername in account-router---------------------------")
-		console.log("account: ", account)
 
 		accountManager.getUserByID(account.userAccountID, function (errors, user) {
-			console.log("user:", user)
 
 			accountManager.getAdByUserID(user.userID, function (errors, ad) {
-				console.log("ad:", ad)
 
 				accountManager.getImageBundleByAdID(ad.adID, function(errors,imageBundle){
-					console.log("imageBundle:", imageBundle)
 
 					accountManager.getBidByAdID(ad.adID, function(errors, bid){
-						console.log("bid: ", bid)
-						console.log("--------------------------------------------------------------------------------------")
 					const model = {
 					errors: errors,
 					account: account,
