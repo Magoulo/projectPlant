@@ -4,7 +4,6 @@ const router = express.Router()
 
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
-        console.log("Ad: ", Ad)
             const model = {
             errors: errors,
             Ad: Ad,
@@ -26,12 +25,14 @@ router.get("/myBids", function(request, response){
 
 router.get("/myAds", function (request, response) {
     console.log("inne i myAds")
+console.log("request.session.userID: ", request.session.UserID)
 
-    adManager.getAllAdsByUserID(1, function (errors, ad) {//userID, function (errors, ad) {
+    adManager.getAllAdsByUserID(request.session.UserID, function (errors, ad) {//userID, function (errors, ad) {
         console.log("ad: ", ad)
             const model = {
                 errors: errors,
                 ad: ad,
+                session: request.session
             }
        response.render("myAds.hbs", model)
     })  
@@ -79,8 +80,6 @@ router.get('/:adID', function (request, response) {
     const adID = request.params.adID
 
     adManager.getAdByAdID(adID, function (errors, ad) {
-        console.log("--------------inside getAdByadID in ad-router---------------------------")
-        console.log("ad: ", ad)
 
         adManager.getUserByUserID(ad.userID, function(errors,user){
             console.log("user: ", user)

@@ -6,8 +6,6 @@ exports.getAllAds = function(callback){
 	const values = []
 	
 	db.query(query, values, function(error, Ad){
-		console.log("Ad in getAll Ads: ", Ad)
-		console.log("error in getAll Ads: ", error)
 		if(error){
 			callback(['databaseError in getAllAds'], null)
 		}else{
@@ -32,11 +30,8 @@ exports.getAllAdsByUserID = function(userID,callback){
 exports.getAdByAdID = function(adID,callback){
 	const query = "SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.adID = ? LIMIT 1"
 	const values = [adID]
-	console.log("-------------------------------inside getAdByAdID in account-repository-------------------------------")
-	console.log("adID: ", adID)
 
 	db.query(query, values, function(error, Ad){
-        console.log("Ad: ", Ad)
 		if(error){
 			callback(['databaseError in Ads table'], null)
 		}else{
@@ -61,8 +56,6 @@ exports.getAllBidsByAdID = function(adID, callback){
 exports.getBidByAdID = function(adID, callback){
 	const query = "SELECT * FROM Bid WHERE adID = ? LIMIT 1"
 	const values = [adID]
-	console.log("-------------------------------inside getBidByAdID in ad-repository-------------------------------")
-	console.log("adID: ", adID)
 
 	db.query(query, values, function(error, Bid){
 		if(error){

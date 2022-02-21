@@ -6,7 +6,6 @@ const router = express.Router()
 
 router.get("/", function(request, response){
 	adManager.getAllAds(function (errors, Ad) {
-        console.log("Ad: ", Ad)
             const model = {
             errors: errors,
             Ad: Ad,
