@@ -16,11 +16,17 @@ router.get("/", function(request, response){
 })
 
 router.get("/about", function(request, response){
-	response.render("about.hbs")
+	const model = {
+		session: request.session
+	}
+	response.render("about.hbs", model)
 })
 
 router.get("/contact", function(request, response){
-	response.render("contact.hbs")
+	const model = {
+		session: request.session
+	}
+	response.render("contact.hbs", model)
 })
 
 //---------------------------------------------------------------

@@ -7,6 +7,7 @@ router.get("/", function (request, response) {
             const model = {
             errors: errors,
             Ad: Ad,
+            session: request.session
         }
         response.render("ads.hbs", model) 
     })
@@ -81,7 +82,8 @@ router.get('/:adID', function (request, response) {
             const model = {
                 errors: errors,
                 ad: ad,
-                user: user
+                user: user,
+                session: request.session
             }
             response.render("ad.hbs", model)
         })        
