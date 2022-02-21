@@ -6,7 +6,6 @@ const db = require('./db')
 	Success value: The fetched accounts in an array.
 */
 exports.getAllAccounts = function(callback){
-	
 	const query = `SELECT * FROM UserAccount ORDER BY username`
 	const values = []
 	
@@ -26,7 +25,6 @@ exports.getAllAccounts = function(callback){
 	Success value: The fetched account, or null if no account has that username.
 */
 exports.getAccountByUsername = function(username, callback){
-	
 	const query = `SELECT * FROM UserAccount WHERE username = ? LIMIT 1`
 	const values = [username]
 	

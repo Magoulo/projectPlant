@@ -8,7 +8,6 @@ let RedisStore = require("connect-redis")(session)
 
 // redis@v4
 const redis = require("redis")
-console.log("redis: ",redis)
 let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379'})
 redisClient.connect().catch(console.error)
 
