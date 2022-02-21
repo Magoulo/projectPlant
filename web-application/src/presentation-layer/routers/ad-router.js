@@ -13,18 +13,17 @@ router.get("/", function (request, response) {
 })
 router.get("/myBids", function(request, response){
 
-    adManager.getAllBidsByUserID(1, function (errors, bid) {//userID, function (errors, bid) {
+    adManager.getAllBidsByUserID(request.session.UserID, function (errors, bid) {//userID, function (errors, bid) {
             const model = {
                 errors: errors,
                 bid: bid,
+                session: request.session
             }
       response.render("myBids.hbs",model)
     })  	
 })
 
 router.get("/myAds", function (request, response) {
-    console.log("inne i myAds")
-console.log("request.session.userID: ", request.session.UserID)
 
     adManager.getAllAdsByUserID(request.session.UserID, function (errors, ad) {//userID, function (errors, ad) {
             const model = {
