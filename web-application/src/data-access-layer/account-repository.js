@@ -55,19 +55,7 @@ exports.getUserByID = function(userAccountID,callback){
 	})
 }
 
-// -------------------- GET ADD -----------------------------------
-exports.getAdByUserID = function(userID,callback){
-	const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
-	const values = [userID]
 
-	db.query(query, values, function(error, Ad){
-		if(error){
-			callback(['databaseError in Ads table'], null)
-		}else{
-			callback([], Ad[0])
-		}
-	})
-}
 
 // -------------------- GET IMAGE BUNDLE -----------------------------------
 exports.getImageBundleByAdID = function(adID,callback){

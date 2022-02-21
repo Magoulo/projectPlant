@@ -1,5 +1,6 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/account-manager')
+const adManager = require('../../business-logic-layer/ad-manager')
 
 const router = express.Router()
 
@@ -77,7 +78,7 @@ router.get('/:username', function (request, response) {
 
 		accountManager.getUserByID(account.userAccountID, function (errors, user) {
 
-			accountManager.getAdByUserID(user.userID, function (errors, ad) {
+			adManager.getAdByUserID(user.userID, function (errors, ad) {
 
 				accountManager.getImageBundleByAdID(ad.adID, function(errors,imageBundle){
 
