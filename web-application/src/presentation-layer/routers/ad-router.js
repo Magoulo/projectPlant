@@ -94,7 +94,10 @@ router.get('/:adID', function (request, response) {
 
 
 router.get("/ad", function (request, response) {
-    response.render("ad.hbs")
+    const model = {
+		session: request.session
+	}
+	response.render("ad.hbs", model)
 })
 
 router.get("/adCreate", function (request, response) {

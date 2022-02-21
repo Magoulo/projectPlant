@@ -92,6 +92,8 @@ exports.getImageBundleByAdID = function(adID, callback){
 	})
 }
 
+
+//----------------------- GET USER -------------------------------------------------------------------
 exports.getUserByUserID = function(userID, callback){
 	const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
 	const values = [userID]
