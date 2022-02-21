@@ -41,6 +41,21 @@ exports.getAdByAdID = function(adID,callback){
 	})
 }
 
+// ---------------- Image Bundle ---------------------------------------
+
+exports.getImageBundleByAdID = function(adID, callback){
+	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
+	const values = [adID]
+
+	db.query(query, values, function(error, ImageBundle){
+		if(error){
+			callback(['databaseError in Bid table'], null)
+		}else{
+			callback([], ImageBundle[0])
+		}
+	})
+}
+
 // ---------------- GET BID -----------------------------------------------
 
 exports.getAllBidsByAdID = function(adID, callback){
@@ -82,20 +97,6 @@ exports.getAllBidsByUserID = function(userID, callback){
 	})
 }
 
-exports.getImageBundleByAdID = function(adID, callback){
-	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
-	const values = [adID]
-
-	db.query(query, values, function(error, ImageBundle){
-		if(error){
-			callback(['databaseError in Bid table'], null)
-		}else{
-			callback([], ImageBundle[0])
-		}
-	})
-}
-
-
 //----------------------- GET USER -------------------------------------------------------------------
 exports.getUserByUserID = function(userID, callback){
 	const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
@@ -110,6 +111,7 @@ exports.getUserByUserID = function(userID, callback){
 	})
 }
 
+//------------------- Get All ---------------------------
 exports.getAllAdsBidsUsersByUserID = function(userID,callback){
 	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID JOIN Bid ON Ad.adID = Bid.adID JOIN User ON Bid.userID = User.userID WHERE Ad.userID = ? ORDER BY Ad.userID`
 	const values = [userID]
