@@ -5,6 +5,8 @@ const db = require('./db')
 	Possible errors: databaseError
 	Success value: The fetched accounts in an array.
 */
+
+// -------------------- GET ACCOUNTS -----------------------------------
 exports.getAllAccounts = function(callback){
 	const query = `SELECT * FROM UserAccount ORDER BY username`
 	const values = []
@@ -38,6 +40,8 @@ exports.getAccountByUsername = function(username, callback){
 	
 }
 
+// -------------------- GET USER -----------------------------------
+
 exports.getUserByID = function(userAccountID,callback){
 	const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
 	const values = [userAccountID]
@@ -51,6 +55,7 @@ exports.getUserByID = function(userAccountID,callback){
 	})
 }
 
+// -------------------- GET ADD -----------------------------------
 exports.getAdByUserID = function(userID,callback){
 	const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
 	const values = [userID]
@@ -64,6 +69,7 @@ exports.getAdByUserID = function(userID,callback){
 	})
 }
 
+// -------------------- GET IMAGE BUNDLE -----------------------------------
 exports.getImageBundleByAdID = function(adID,callback){
 	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
 	const values = [adID]
@@ -78,6 +84,7 @@ exports.getImageBundleByAdID = function(adID,callback){
 	})
 }
 
+// -------------------- GET BID -----------------------------------
 exports.getBidByAdID = function(adID, callback){
 	const query = "SELECT * FROM Bid WHERE adID = ? LIMIT 1"
 	const values = [adID]
