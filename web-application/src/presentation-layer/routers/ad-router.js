@@ -27,7 +27,6 @@ router.get("/myAds", function (request, response) {
 console.log("request.session.userID: ", request.session.UserID)
 
     adManager.getAllAdsByUserID(request.session.UserID, function (errors, ad) {//userID, function (errors, ad) {
-        console.log("ad: ", ad)
             const model = {
                 errors: errors,
                 ad: ad,
