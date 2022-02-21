@@ -1,5 +1,6 @@
 const db = require('./db')
 
+// ------------------ GET AD -------------------------------------------------
 exports.getAllAds = function(callback){
 	
 	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID ORDER BY Ad.adID`
@@ -39,6 +40,8 @@ exports.getAdByAdID = function(adID,callback){
 		}
 	})
 }
+
+// ---------------- GET BID -----------------------------------------------
 
 exports.getAllBidsByAdID = function(adID, callback){
 	const query = "SELECT * FROM Bid WHERE adID = ?"
