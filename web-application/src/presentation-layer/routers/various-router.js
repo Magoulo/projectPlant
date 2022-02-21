@@ -10,6 +10,7 @@ router.get("/", function(request, response){
             const model = {
             errors: errors,
             Ad: Ad,
+			session: request.session
         }
         response.render("start.hbs", model) 
     })

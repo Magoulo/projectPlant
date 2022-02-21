@@ -28,10 +28,13 @@ router.post("/sign-in", function (request, response) {
 			if(username == UserAccounts.username && password == UserAccounts.passwordHash){//bcrypt.compareSync(PW, User_accounts.Password))
 				console.log("Username and Password are correct!")
 					//sessionID = UserAccounts.userAccountID
-			/*		request.session.isLoggedIn = true
-					request.session.UserID = User_accounts.Account_id
-					request.session.CatownerID = User_accounts.Cat_owner_id
+					request.session.isLoggedIn = true
+					request.session.UserID = UserAccounts.userAccountID
+					const blabla = request.session.isLoggedIn
+					console.log("blablablablalbalbla: ", blabla)
+				/*	request.session.CatownerID = User_accounts.Cat_owner_id
 					request.session.UserIsLoggedIn = true	 */
+				
 					response.redirect('/')
 			} else {
 				console.log("Wrong Username or Password")
@@ -52,6 +55,10 @@ router.post("/sign-in", function (request, response) {
 				response.render('start.hbs', model)
 		}
 	})
+})
+router.post('/sign-out', function (request, response) {
+	request.session.destroy();
+	response.redirect('/')
 })
 
 router.get("/", function (request, response) {
