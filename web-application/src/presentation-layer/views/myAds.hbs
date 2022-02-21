@@ -1,265 +1,157 @@
-<head>
-	<style>
-		section {
-			background-color: lightcoral;
-			border-radius: 15px;
-			padding: 15px;
-			margin: 5px;
-		}
-
-		section h1 {
-			margin-top: 0;
-		}
-
-		.hidden {
-			display: none;
-		}
-	</style>
-	<script>
-		// Write your JavaScript code here.
-
-		document.addEventListener("DOMContentLoaded", function (event) {
-
-			const div = document.querySelector("div")
-			const sections = document.querySelectorAll("section")
-
-			for (i = 0; i < sections.length; i += 1) { // hide all forms
-				sections[i].classList.add("hidden")
-			}
-
-			//create select & options
-			select = document.getElementById("myAdsSelection")
-
-
-
-			select.addEventListener("click", function () {
-
-				for (i = 0; i < sections.length; i += 1) { // hide all forms
-					sections[i].classList.add("hidden")
-				}
-
-				option = select.options[select.selectedIndex].innerText
-
-				createAccount = sections[0]
-				signIn = sections[1]
-				subscribe = sections[2]
-
-				if (option == "manage ads") {
-					createAccount.classList.toggle("hidden")
-				}
-
-				if (option == "my ad offers") {
-					signIn.classList.toggle("hidden")
-				}
-
-				if (option == "closed ads") {
-					subscribe.classList.toggle("hidden")
-				}
-			})
-		})
-
-	</script>
-</head>
-
-
-
+<!-- My Ads -->
 <div class="container p-0 m-0" style="max-width: 100%;">
 
-	<div class="row justify-content-center">
-		<div class="col-auto"></div>
-		<div class="col-3">
+	<!-- tab navigation -->
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-			<select id="myAdsSelection" class="form-select mb-3">
-				<option selected>Choose</option>
-				<option>manage ads</option>
-				<option>my ad offers</option>
-				<option>closed ads</option>
-			</select>
+			<button class="nav-link active" id="nav-manage-ads-tab" data-bs-toggle="tab"
+				data-bs-target="#nav-manage-ads" type="button" role="tab" aria-controls="nav-manage-ads"
+				aria-selected="true">
+				Manage My Ads
+			</button>
+
+			<button class="nav-link" id="nav-ad-offers-tab" data-bs-toggle="tab" data-bs-target="#nav-ad-offers"
+				type="button" role="tab" aria-controls="nav-ad-offers" aria-selected="false">
+				My Ad Offers
+			</button>
+
+			<button class="nav-link" id="nav-closed-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-closed-ads"
+				type="button" role="tab" aria-controls="nav-closed-ads" aria-selected="false">
+				My Closed Ads
+			</button>
 
 		</div>
-		<div class="col-auto"></div>
-	</div>
+	</nav>
 
 
+	<!-- navigation content -->
+	<div class="tab-content" id="nav-tabContent">
 
 
+		<!-- Manage ads -->
+		<div class="tab-pane fade show active" id="nav-manage-ads" role="tabpanel" aria-labelledby="nav-manage-ads-tab">
+
+			<div class="row justify-content-start">
+				<h1>Manage My Ads</h1>
+			</div>
+
+			<div class="row justify-content-center">
+				<div class="col-auto"></div>
+				<div class="col-3 text-center d-grid gap-2">
+
+					<button type="button" class="btn btn-light">Create Ad</button>
+
+				</div>
+				<div class="col-auto"></div>
+			</div>
 
 
+			{{#if errors.length}}
+			<p class="text-center">Oh no, something went wrong:</p>
 
-	<div class="row">
-		<div class="col-12" id="sections">
+			<ul>
+				{{#each errors}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
 
+			{{else}}
+			{{#if ad}}
 
-			<section id="manageAds">
+			<div class="row justify-content-start align-items-center">
+				{{#each ad}}
 
-				<div class="row justify-content-center">
-					<div class="col-auto"></div>
-					<div class="col-3 text-center d-grid gap-2">
+				<!-- number will be replaced with sessionID {{sessionID}} 
+							<a href="/ads/myAds/1">Ad offers</a>-->
 
-						<button type="button" class="btn btn-light">Light</button>
+				<div class="col-3 text-center">
 
+					<div class="col-12">
+						<h3>{{title}}</h3>
 					</div>
-					<div class="col-auto"></div>
+
+					<div class="col-12">
+						<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
+							style="width: 300px; height: 300px">
+					</div>
+
+					<div class="col-12 mt-2 mb-2">
+						<div class="row justify-content-between">
+
+							<div class="col-5 d-grid gap-2 ms-3">
+								<a class="btn btn-light" href="/adUpdate">Update</a>
+							</div>
+
+							<div class="col-5 d-grid gap-2 me-3">
+								<a class="btn btn-light" href="/adDelete">Delete</a>
+							</div>
+
+						</div>
+					</div>
+
 				</div>
 
+				{{/each}}
+			</div>
+
+			{{else}}
+			<div class="col-12 text-center">
+				<p>No, your ads doesn't exist.</p>
+			</div>
+			{{/if}}
+			{{/if}}
+		</div>
 
 
+
+		<!-- My Offers -->
+		<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
+			<div class="row">
 				<div class="col-12">
 
 					<div class="row justify-content-start">
-						<div class="col-auto"></div>
-						<div class="col-3 text-center d-grid gap-2">
-
-							<h1>My Ads</h1>
-
-						</div>
-						<div class="col-auto"></div>
+						<h1>My ad offers</h1>
 					</div>
 
+					<div class="col-12">
+						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+							data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							Button with data-bs-target
+						</button>
 
-					{{#if errors.length}}
-					<p class="text-center">Oh no, something went wrong:</p>
+						<div class="collapse" id="collapseExample">
+							<div class="card card-body">
 
-					<ul>
-						{{#each errors}}
-						<li>{{this}}</li>
-						{{/each}}
-					</ul>
-
-					{{else}}
-					{{#if ad}}
-
-					<div class="row justify-content-start align-items-center">
-						{{#each ad}}
-
-						<!-- number will be replaced with sessionID {{sessionID}} 
-							<a href="/ads/myAds/1">Ad offers</a>-->
-
-
-						<div class="col-3 text-center">
-
-							<div class="col-12">
-								<h3>{{title}}</h3>
+								<p>aaaaaaaaa</p>
+								<!--Lägg till offer -->
 							</div>
-
-							<div class="col-12">
-								<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}"
-									class="flowerImage" style="width: 300px; height: 300px">
-							</div>
-
-							<div class="col-12 mt-2 mb-2">
-								<div class="row justify-content-between">
-
-									<div class="col-5 d-grid gap-2 ms-3">
-										<a class="btn btn-light" href="/adUpdate">Update</a>
-									</div>
-
-									<div class="col-5 d-grid gap-2 me-3">
-										<a class="btn btn-light" href="/adDelete">Delete</a>
-									</div>
-
-								</div>
-							</div>
-
-						</div>
-
-						{{/each}}
-					</div>
-
-					{{else}}
-					<div class="col-12 text-center">
-						<p>No, your ads doesn't exist.</p>
-					</div>
-					{{/if}}
-					{{/if}}
-
-				</div>
-
-			</section>
-
-
-
-
-
-			<section id="myAdOffers">
-
-				<div class="row justify-content-start">
-					<h1>My ad offers</h1>
-				</div>
-
-
-
-
-				<div class="col-12">
-
-
-					<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-						data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-						Button with data-bs-target
-					</button>
-
-
-
-
-					<div class="collapse" id="collapseExample">
-						<div class="card card-body">
-
-							<p>aaaaaaaaa</p> <!--Lägg till offer -->
 						</div>
 					</div>
 
-
-
-
-
 				</div>
+				<div class="col-auto"></div>
+			</div>
+		</div>
+
+
+		<!-- My Offers -->
+		<div class="tab-pane fade" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
+			<div class="row justify-content-start">
+				<h1>My Closed Ads</h1>
+			</div>
 
 
 
 
 
 		</div>
-		<div class="col-auto"></div>
 	</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	</section>
-
-
-
-
-
-
-	<section>
-	</section>
-
 </div>
 
 
-
-
-
-
-</div>
-
-
-</div>
 
 
 
