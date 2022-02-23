@@ -1,7 +1,6 @@
-<div class="content"></div>
-<h1>Personal Data</h1>
+<div class="container">
 
-<!-- Lägg till
+    <!-- Lägg till
 1. Inputs med all personal data ifylld
 2. Man ska kunna ändra inputen för att uppdatera det
 3. En knapp som uppdaterar inputen
@@ -13,52 +12,56 @@ data som ska hämtas från db:
 2.  ?
 -->
 
-{{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
-	<ul>
-		{{#each errors}}
-			<li>{{this}}</li>
-		{{/each}}
-	</ul>
-{{else}}
-	
-	{{#if User}}
+    {{#if errors.length}}
+    <p>Oh no, something went wrong:</p>
+    <ul>
+        {{#each errors}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
 
-	<h2>My data</h2>
-    
-        <div class="float-left">
-            <form action="/personalData/{{User.userID}}/update" method="POST">
-	        <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
-	        <div >
-		        <p> Name:</p> 
-		        <input type="text" name="firstname" value="{{User.firstName}}">
-	        </div>
-	        <div>
-	            <p>Lasttname:</p> 
-	            <textarea name="lastname">{{User.lastName}}</textarea>
-	        </div>
-	        <div>
-	            <p>Email:</p>
-	            <textarea name="email">{{User.email}}</textarea>
-            </div>
+    {{#if User}}
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+            <h1 class="display-3">Personal Data</h1>
             <div>
-	            <p>PhoneNumber:</p>
-	            <textarea name="email">{{User.phoneNumber}}</textarea>
-            </div>
-            <div>
-	            <p>City:</p>
-	            <textarea name="email">{{User.city}}</textarea>
+                <form class="form-inline justify-content-center" action="/personalData/{{User.userID}}/update"
+                    method="POST">
+                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="firstname" value="{{User.firstName}}">
+                        <label class="form-label">Firstname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="lastname" value="{{User.lastName}}">
+                        <label class="form-label">Lastname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="email" name="email" value="{{User.email}}">
+                        <label class="form-label">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="phonenumber" value="{{User.phoneNumber}}">
+                        <label class="form-label">Phonenumber</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="city" value="{{User.city}}">
+                        <label class="form-label">City</label>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
 
-            <div>
-		        <input type="submit" value="Update">
-	        </div>
-            </form>
         </div>
+    </div>
 
-	{{else}}
-		<p>No, that user doesn't exist here.</p>
-	{{/if}}
-	
-{{/if}}
+    {{else}}
+    <p>No, that user doesn't exist here.</p>
+    {{/if}}
+
+    {{/if}}
 </div>

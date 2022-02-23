@@ -28,7 +28,7 @@ router.post("/sign-in", function (request, response) {
 				console.log("Username and Password are correct!")
 					//sessionID = UserAccounts.userAccountID
 					request.session.isLoggedIn = true
-					request.session.UserID = UserAccounts.userAccountID
+					request.session.userID = UserAccounts.userAccountID
 					const blabla = request.session.isLoggedIn
 					console.log("sessionUserID: ", request.session.UserID)
 				/*	request.session.CatownerID = User_accounts.Cat_owner_id
