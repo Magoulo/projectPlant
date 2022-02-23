@@ -35,7 +35,7 @@ router.get("/myFavorites", function(request, response){
 })
 
 router.get("/personalData", function(request, response){
-accountManager.getUserByID(request.session.UserID, function(errors,User){
+accountManager.getUserByID(request.session.userID, function(errors,User){
 	const model = {
 		errors: errors,
 		User: User,
