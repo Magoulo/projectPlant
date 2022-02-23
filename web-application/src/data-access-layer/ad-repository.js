@@ -28,6 +28,19 @@ exports.getAllAdsByUserID = function(userID,callback){
 	})
 }
 
+exports.getAdByUserID = function(userID,callback){
+	const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
+	const values = [userID]
+
+	db.query(query, values, function(error, Ad){
+		if(error){
+			callback(['databaseError in Ads table'], null)
+		}else{
+			callback([], Ad[0])
+		}
+	})
+}
+
 exports.getAdByAdID = function(adID,callback){
 	const query = "SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.adID = ? LIMIT 1"
 	const values = [adID]

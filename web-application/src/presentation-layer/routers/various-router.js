@@ -1,5 +1,6 @@
 const express = require('express')
 const adManager = require('../../business-logic-layer/ad-manager')
+const accountManager = require('../../business-logic-layer/account-manager')
 const router = express.Router()
 
 //---------ska vara kvar här------------------------------------
@@ -34,7 +35,15 @@ router.get("/myFavorites", function(request, response){
 })
 
 router.get("/personalData", function(request, response){
-	response.render("personalData.hbs")
+accountManager.getUserByID(request.session.UserID, function(errors,User){
+	const model = {
+		errors: errors,
+		User: User,
+		session: request.session
+	}
+	response.render("personalData.hbs", model)
+})
+	
 })
 
 
