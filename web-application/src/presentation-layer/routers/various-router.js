@@ -47,7 +47,7 @@ router.get("/myFavoriteAds", function (request, response) {
 	response.render("myFavoriteAds.hbs", model)
 })
 
-router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
+/*router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
     const userID = request.params.userID
 	const firstName = request.body.firstname
     const lastName = request.body.lastname
@@ -93,7 +93,7 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
         }
         response.render('personalData.hbs', model)
     }
-})	
+})	*/
 
 
 

@@ -71,17 +71,15 @@ exports.getImageBundleByAdID = function (adID, callback) {
 	})
 }
 
+//Update Ad
+exports.updateAdByAdID = function(adID, title, latinName, description, callback){
+	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE userID = ?"
+	const values = [title, latinName, description, adID ]
 
-
-// ------------------ UPDATE AD -------------------------------------------------------------------------
-// ------------------ DELETE AD -------------------------------------------------------------------------
-
-
-
-
-
-
-
+	db.query(query, values, function(error){
+	callback(error)
+	})
+}
 
 
 //------------------- Get All --------------------------- vart??

@@ -29,3 +29,12 @@ exports.getUserByUserID = function (userID, callback) {
 		}
 	})
 }
+
+exports.updateUserByUserID = function( userID, firstName, lastName, email, phoneNumber, city, callback){
+	const query = "UPDATE User SET firstName = ?, lastName = ?, email = ? , phoneNumber = ?, city = ? WHERE userID = ?"
+	const values = [firstName, lastName, email, phoneNumber, city, userID ]
+
+	db.query(query, values, function(error){
+	callback(error)
+	})
+}

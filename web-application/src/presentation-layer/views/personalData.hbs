@@ -13,7 +13,7 @@
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Personal Data</h1>
             <div>
-                <form class="form-inline justify-content-center" action="/personalData/{{User.userID}}/update"
+                <form class="form-inline justify-content-center" action="/user/personalData/{{User.userID}}/update"
                     method="POST">
                     <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
                     <div class="form-floating mb-3">
@@ -44,7 +44,7 @@
 
         </div>
     </div>
-    
+
     {{else}}
     <p>No, that user doesn't exist here.</p>
     {{/if}}
