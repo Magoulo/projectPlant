@@ -6,3 +6,59 @@
 3. Update knapp som uppadterar ad
 
 -->
+<div class="container">
+
+    {{#if errors.length}}
+    <p>Oh no, something went wrong:</p>
+    <ul>
+        {{#each errors}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+
+    {{#if Ad}}
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+            <h1 class="display-3">Ad Data</h1>
+            <div>
+                <form class="form-inline justify-content-center" action="/adUpdate/{{Ad.adID}}/update" <!-- where to? -->
+                    method="POST">
+                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="firstname" value="{{Ad.title}}">
+                        <label class="form-label">Title</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="lastname" value="{{Ad.latinName}}">
+                        <label class="form-label">Latin name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="email" name="email" value="{{Ad.description}}">
+                        <label class="form-label">Description</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="phonenumber" value="{{Ad.isClosed}}">
+                        <label class="form-label">isClosed</label>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    {{else}}
+    <p>No, that user doesn't exist here.</p>
+    {{/if}}
+
+    {{/if}}
+</div>
+
+ title VARCHAR(45) NULL,
+  latinName VARCHAR(45) NULL,
+  description VARCHAR(45) NULL,
+  isClosed 
