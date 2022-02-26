@@ -140,6 +140,15 @@ router.get('/myAds/:userID', function (request, response) {
         response.render("myAdBids.hbs", model)
     })
 })
+router.get("/adCreate", function (request, response) {
+    const model = {
+        session: request.session
+    }
+    response.render("adCreate.hbs", model)
+})
+router.post("/adCreate", function (request, response) {
+    response.render("adCreate.hbs")
+})
 
 router.get('/:adID', function (request, response) {
     const adID = request.params.adID
@@ -165,9 +174,6 @@ router.get("/ad", function (request, response) {
     response.render("ad.hbs", model)
 })
 
-router.get("/adCreate", function (request, response) {
-    response.render("adCreate.hbs")
-})
 
 
 

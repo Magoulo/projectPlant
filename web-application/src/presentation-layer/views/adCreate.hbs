@@ -6,3 +6,35 @@
 3. Create Ad knapp som skapar ad
 
 -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+            <h1 class="display-3">Create Ad</h1>
+            <div>
+                <form class="form-inline justify-content-center" action="/ads/adCreate"
+                    method="POST">
+                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="title">
+                        <label class="form-label">Title</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="latinname" >
+                        <label class="form-label">Latin name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="description">
+                        <label class="form-label">Description</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="hidden" name="isClosed" value="0">
+                    </div>
+                    <div class="mb-3">
+                        <input class="btn btn-primary" type="submit" value="Update">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
