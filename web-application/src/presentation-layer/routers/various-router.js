@@ -53,13 +53,6 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
     const phoneNumber = request.body.phonenumber
 	const city = request.body.city
 
-	console.log("userID", userID)
-	console.log("phone", phoneNumber)
-	console.log("firstName", firstName)
-	console.log("lastName", lastName)
-	console.log("email", email)
-	console.log("city", city)
-
      const errors = []//validators.getDonValidationErrors(Name, Description)
     if (errors.length == 0) {
         accountManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
@@ -74,6 +67,7 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
 					email,
 					phoneNumber,
 					city,
+					session: request.session
                  //   csrfToken: request.csrfToken()
                 }
                 response.render('personalData.hbs', model)
@@ -92,6 +86,7 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
 			email,
 			phoneNumber,
 			city,
+			session: request.session
          //   csrfToken: request.csrfToken()
         }
         response.render('personalData.hbs', model)

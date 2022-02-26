@@ -23,4 +23,9 @@ exports.getUserByUserID = function(userID, callback){
 //vart?? 
 exports.getAllAdsBidsUsersByUserID = function(userID, callback){
 	adRepository.getAllAdsBidsUsersByUserID(userID,callback)
+} 
+
+//-------------------------------Update Ad -------------------------------
+exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
+	adRepository.updateAdByAdID(adID, title, latinName, description, callback)
 }

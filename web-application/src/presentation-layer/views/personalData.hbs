@@ -1,17 +1,4 @@
 <div class="container">
-
-    <!-- Lägg till
-1. Inputs med all personal data ifylld
-2. Man ska kunna ändra inputen för att uppdatera det
-3. En knapp som uppdaterar inputen
-
---------------------------------------------------
-
-data som ska hämtas från db:
-1. User
-2.  ?
--->
-
     {{#if errors.length}}
     <p>Oh no, something went wrong:</p>
     <ul>
@@ -22,7 +9,6 @@ data som ska hämtas från db:
     {{else}}
 
     {{#if User}}
-
     <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Personal Data</h1>
@@ -58,7 +44,7 @@ data som ska hämtas från db:
 
         </div>
     </div>
-
+    
     {{else}}
     <p>No, that user doesn't exist here.</p>
     {{/if}}

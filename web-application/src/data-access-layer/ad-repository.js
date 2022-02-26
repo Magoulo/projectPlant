@@ -54,6 +54,16 @@ exports.getAdByAdID = function(adID,callback){
 	})
 }
 
+//Update Ad
+exports.updateAdByAdID = function(adID, title, latinName, description, callback){
+	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE userID = ?"
+	const values = [title, latinName, description, adID ]
+
+	db.query(query, values, function(error){
+	callback(error)
+	})
+}
+
 // ---------------- Image Bundle ---------------------------------------
 
 exports.getImageBundleByAdID = function(adID, callback){

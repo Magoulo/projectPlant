@@ -1,4 +1,4 @@
-<h1>Update Ad</h1>
+
 
 <!-- Lägg till
 1. Fields för att skapa en ad
@@ -21,30 +21,30 @@
 
     <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
-            <h1 class="display-3">Ad Data</h1>
+            <h1 class="display-3">Update Data</h1>
             <div>
-                <form class="form-inline justify-content-center" action="/adUpdate/{{ad.adID}}/update"
+                <form class="form-inline justify-content-center" action="/ads/adUpdate/{{ad.adID}}/update"
                     method="POST">
                     <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="firstname" value="{{ad.title}}">
+                        <input class="form-control" type="text" name="title" value="{{ad.title}}">
                         <label class="form-label">Title</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="lastname" value="{{ad.latinName}}">
+                        <input class="form-control" type="text" name="latinname" value="{{ad.latinName}}">
                         <label class="form-label">Latin name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" value="{{ad.description}}">
+                        <input class="form-control" type="text" name="description" value="{{ad.description}}">
                         <label class="form-label">Description</label>
                     </div>
                     <div>
                   
-                       <img class="img-thumbnail" src="{{ad.coverImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+                       <img class="img-thumbnail" src="{{ad.coverImagePath}}" alt="{{ad.imageBundleID}}" name="coverimagepath" class="flowerImage"
 							style="width: 300px; height: 300px">  
-                        <img class="img-thumbnail" src="{{ad.firstImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+                        <img class="img-thumbnail" src="{{ad.firstImagePath}}" alt="{{ad.imageBundleID}}" name="firstimagepath" class="flowerImage"
 							style="width: 300px; height: 300px">
-                        <img class="img-thumbnail" src="{{ad.secondImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+                        <img class="img-thumbnail" src="{{ad.secondImagePath}}" alt="{{ad.imageBundleID}}" name="secondimagepath" class="flowerImage"
 							style="width: 300px; height: 300px">
                   
                     </div>
