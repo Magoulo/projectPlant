@@ -14,7 +14,7 @@ router.get("/", function (request, response) {
 })
 router.get("/myBids", function(request, response){
 
-    adManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {//userID, function (errors, bid) {
+    adManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {
             const model = {
                 errors: errors,
                 bid: bid,
@@ -26,7 +26,7 @@ router.get("/myBids", function(request, response){
 
 router.get("/myAds", function (request, response) {
 
-    adManager.getAllAdsByUserID(request.session.userID, function (errors, ad) {//userID, function (errors, ad) {
+    adManager.getAllAdsByUserID(request.session.userID, function (errors, ad) {
             const model = {
                 errors: errors,
                 ad: ad,
@@ -39,7 +39,7 @@ router.get("/myAds", function (request, response) {
 router.get("/adUpdate/:adID", function (request, response) {
     const adID = request.params.adID
 
-    adManager.getAdByAdID(adID, function (errors,ad) {//userID, function (errors, bid) {
+    adManager.getAdByAdID(adID, function (errors,ad) {
         const model = {
             errors: errors,
             ad:ad,
@@ -47,6 +47,19 @@ router.get("/adUpdate/:adID", function (request, response) {
         }
   response.render("adUpdate.hbs",model)
 })  	
+})
+
+router.get("/adDelete/:adID", function (request, response) {
+    const adID = request.params.adID
+
+    adManager.getAdByAdID(adID, function (errors,ad) {
+        const model = {
+            errors: errors,
+            ad:ad,
+            session: request.session
+        }
+  response.render("adDelete.hbs",model)
+})  
 })
 
 router.get('/myAds/:userID', function (request, response) {
@@ -115,9 +128,7 @@ router.get("/adCreate", function (request, response) {
     response.render("adCreate.hbs")
 })
 
-router.get("/adDelete", function (request, response) {
-    response.render("adDelete.hbs")
-})
+
 
 router.get("/ads", function (request, response) {
     response.render("ads.hbs")

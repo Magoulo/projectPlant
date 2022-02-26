@@ -1,6 +1,41 @@
-<h1>Delete Ad</h1>
 
 <!-- Lägg till
 1. Kontrolltext 
 2. Yes och No knapp
 -->
+
+<div class="container">
+
+    {{#if errors.length}}
+    <p>Oh no, something went wrong:</p>
+    <ul>
+        {{#each errors}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+
+    {{#if ad}}
+
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+            <h1 class="display-3">Delete ad</h1>
+            <div>
+                <p>Are you sure you want to delete the ad <b>"{{ad.title}}"</b>?  </p>
+            </div>
+            <div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary m-2">Yes</button>
+                         <button type="submit" class="btn btn-primary m-2">No</button>
+                    </div>         
+            </div>
+
+        </div>
+    </div>
+
+    {{else}}
+    <p>No, that user doesn't exist here.</p>
+    {{/if}}
+
+    {{/if}}
+</div>
