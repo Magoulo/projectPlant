@@ -35,6 +35,20 @@ router.get("/myAds", function (request, response) {
        response.render("myAds.hbs", model)
     })  
 })
+
+router.get("/adUpdate/:adID", function (request, response) {
+    const adID = request.params.adID
+
+    adManager.getAdByAdID(adID, function (errors,ad) {//userID, function (errors, bid) {
+        const model = {
+            errors: errors,
+            ad:ad,
+            session: request.session
+        }
+  response.render("adUpdate.hbs",model)
+})  	
+})
+
 router.get('/myAds/:userID', function (request, response) {
     const userID = request.params.userID
 
@@ -109,9 +123,7 @@ router.get("/ads", function (request, response) {
     response.render("ads.hbs")
 })
 
-router.get("/adUpdate", function (request, response) {
-    response.render("adUpdate.hbs")
-})
+
 
 
 module.exports = router

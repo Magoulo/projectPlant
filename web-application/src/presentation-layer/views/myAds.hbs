@@ -1,6 +1,8 @@
 <!-- My Ads -->
 <div class="container p-0 m-0" style="max-width: 100%;">
 
+
+
 	<!-- tab navigation -->
 	<nav>
 		<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -59,11 +61,8 @@
 			{{else}}
 			{{#if ad}}
 
-			<div class="row justify-content-start align-items-center">
-				{{#each ad}}
 
-				<!-- number will be replaced with sessionID {{sessionID}} 
-							<a href="/ads/myAds/1">Ad offers</a>-->
+			{{#each ad}}
 
 				<div class="col-3 text-center">
 
@@ -80,7 +79,7 @@
 						<div class="row justify-content-between">
 
 							<div class="col-5 d-grid gap-2 ms-3">
-								<a class="btn btn-light" href="/ads/adUpdate">Update</a>
+								<a class="btn btn-light" href="/ads/adUpdate/{{adID}}">Update</a>
 							</div>
 
 							<div class="col-5 d-grid gap-2 me-3">
@@ -90,10 +89,8 @@
 						</div>
 					</div>
 
-				</div>
+			{{/each}}
 
-				{{/each}}
-			</div>
 
 			{{else}}
 			<div class="col-12 text-center">
@@ -125,6 +122,79 @@
 
 								<p>aaaaaaaaa</p>
 								<!--Lägg till offer -->
+
+
+
+								{{#if errors.length}}
+								<p class="text-center">Oh no, something went wrong:</p>
+
+								<ul>
+									{{#each errors}}
+									<li>{{this}}</li>
+									{{/each}}
+								</ul>
+
+								{{else}}
+								{{#if ad}}
+
+								<div class="row justify-content-start align-items-center">
+									{{#each ad}}
+
+									<!-- number will be replaced with sessionID {{sessionID}} 
+							<a href="/ads/myAds/1">Ad offers</a>-->
+
+									<div class="col-3 text-center">
+
+										<div class="col-12">
+											<h3>{{title}}</h3>
+										</div>
+
+										<div class="col-12">
+											<img class="img-thumbnail" src="{{coverImagePath}}" alt="{{imageBundleID}}"
+												class="flowerImage" style="width: 300px; height: 300px">
+										</div>
+
+										<div class="col-12 mt-2 mb-2">
+											<div class="row justify-content-between">
+
+												<div class="col-5 d-grid gap-2 ms-3">
+													<a class="btn btn-light" href="/adUpdate">Update</a>
+												</div>
+
+												<div class="col-5 d-grid gap-2 me-3">
+													<a class="btn btn-light" href="/adDelete">Delete</a>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+
+									{{/each}}
+								</div>
+
+								{{else}}
+								<div class="col-12 text-center">
+									<p>No, your ads doesn't exist.</p>
+								</div>
+								{{/if}}
+								{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							</div>
 						</div>
 					</div>
@@ -133,6 +203,19 @@
 				<div class="col-auto"></div>
 			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		<!-- My Offers -->

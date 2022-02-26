@@ -17,30 +17,36 @@
     </ul>
     {{else}}
 
-    {{#if Ad}}
+    {{#if ad}}
 
     <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Ad Data</h1>
             <div>
-                <form class="form-inline justify-content-center" action="/adUpdate/{{Ad.adID}}/update" <!-- where to? -->
+                <form class="form-inline justify-content-center" action="/adUpdate/{{ad.adID}}/update"
                     method="POST">
                     <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="firstname" value="{{Ad.title}}">
+                        <input class="form-control" type="text" name="firstname" value="{{ad.title}}">
                         <label class="form-label">Title</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="lastname" value="{{Ad.latinName}}">
+                        <input class="form-control" type="text" name="lastname" value="{{ad.latinName}}">
                         <label class="form-label">Latin name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" value="{{Ad.description}}">
+                        <input class="form-control" type="email" name="email" value="{{ad.description}}">
                         <label class="form-label">Description</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="phonenumber" value="{{Ad.isClosed}}">
-                        <label class="form-label">isClosed</label>
+                    <div>
+                  
+                       <img class="img-thumbnail" src="{{ad.coverImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+							style="width: 300px; height: 300px">  
+                        <img class="img-thumbnail" src="{{ad.firstImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+							style="width: 300px; height: 300px">
+                        <img class="img-thumbnail" src="{{ad.secondImagePath}}" alt="{{ad.imageBundleID}}" class="flowerImage"
+							style="width: 300px; height: 300px">
+                  
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -57,8 +63,3 @@
 
     {{/if}}
 </div>
-
- title VARCHAR(45) NULL,
-  latinName VARCHAR(45) NULL,
-  description VARCHAR(45) NULL,
-  isClosed 
