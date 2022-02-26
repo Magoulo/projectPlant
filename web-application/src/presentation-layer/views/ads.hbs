@@ -11,9 +11,14 @@
 
 		<div class="col-7">
 			<div class="input-group mb-3">
+
 				<span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-				<input type="text" class="form-control" placeholder="Username" aria-label="Username"
-					aria-describedby="basic-addon1">
+
+				<form action="/ads/search" method="POST">
+					<input type="text" class="form-control" placeholder="search ads" aria-label="Username"
+						aria-describedby="basic-addon1" name="searchInput">
+				</form>
+
 			</div>
 		</div>
 
@@ -25,7 +30,7 @@
 	</div>
 
 
-<!-- All ads -->
+	<!-- All ads -->
 	{{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>

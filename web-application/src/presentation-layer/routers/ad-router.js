@@ -3,11 +3,26 @@ const adManager = require('../../business-logic-layer/ad-manager')
 const userManager = require('../../business-logic-layer/user-manager')
 const router = express.Router()
 
+
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
         const model = {
             errors: errors,
             Ad: Ad,
+            session: request.session
+        }
+        response.render("ads.hbs", model)
+    })
+})
+
+router.post("/search", function(request, response){
+    const searchInput = request.body.searchInput
+    
+    adManager.getAllAdsByTitle(searchInput, function(errors, Ad){
+        const model = {
+            errors: errors,
+            searchInput: searchInput,
+            Ad: Ad, 
             session: request.session
         }
         response.render("ads.hbs", model)
@@ -179,6 +194,10 @@ router.get("/ad", function (request, response) {
 router.get("/ads", function (request, response) {
     response.render("ads.hbs")
 })
+
+
+
+
 
 
 

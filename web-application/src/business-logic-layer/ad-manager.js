@@ -21,6 +21,16 @@ exports.getImageBundleByAdID = function (adID, callback) {
 	adRepository.getImageBundleByAdID(adID, callback)
 }
 
+exports.getAllAdsByTitle = function(title, callback){
+	adRepository.getAllAdsByTitle(title, callback)
+
+}
+
+
+
+
+
+
 //-------------------------------Update Ad -------------------------------
 exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
 	adRepository.updateAdByAdID(adID, title, latinName, description, callback)
