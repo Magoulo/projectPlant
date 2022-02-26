@@ -26,6 +26,57 @@ router.get("/myAds", function (request, response) {
     })
 })
 
+router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
+    const adID = request.params.adID
+	const title = request.body.title
+    const latinName = request.body.latinname
+    const description = request.body.description
+   /* const coverImagePath = request.body.coverimagepath
+    const firstImagePath = request.body.firstimagepath
+    const secondImagePath = request.body.secondimagepath*/
+
+    console.log("adID", adID)
+    console.log("title", title)
+    console.log("latinName", latinName)
+    console.log("description", description)
+    /*console.log("coverImagePath", coverImagePath)
+    console.log("firstImagePath", firstImagePath)
+    console.log("secondImagePath", secondImagePath)*/
+
+    const errors = []//validators.getDonValidationErrors(Name, Description)
+    if (errors.length == 0) {
+        adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
+			console.log("error:", error)
+            if (error) {
+                errors.push("Internal server error")
+                model = {
+                    errors,
+					adID,
+                    title,
+                    latinName,
+                    description,
+                 //   csrfToken: request.csrfToken()
+                }
+                response.render('adUpdate.hbs', model)
+            }
+            else {
+                response.redirect('/ads/adUpdate/' + adID)
+            }
+        })
+    }
+    else { 
+        const model = {
+			errors,
+			adID,
+            title,
+            latinName,
+            description,
+         //   csrfToken: request.csrfToken()
+        }
+        response.render('adUpdate.hbs', model)
+    }
+})	
+
 router.get("/adUpdate/:adID", function (request, response) {
     const adID = request.params.adID
 
