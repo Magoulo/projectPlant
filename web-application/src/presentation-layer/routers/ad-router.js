@@ -12,17 +12,6 @@ router.get("/", function (request, response) {
         response.render("ads.hbs", model) 
     })
 })
-router.get("/myBids", function(request, response){
-
-    adManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {
-            const model = {
-                errors: errors,
-                bid: bid,
-                session: request.session
-            }
-      response.render("myBids.hbs",model)
-    })  	
-})
 
 router.get("/myAds", function (request, response) {
 

@@ -14,6 +14,7 @@ redisClient.connect().catch(console.error)
 const variousRouter = require('./routers/various-router')
 const accountRouter = require('./routers/account-router' )
 const adRouter = require('./routers/ad-router')
+const bidRouter = require('./routers/bid-router')
 
 const app = express()
 
@@ -53,6 +54,7 @@ app.use(function (req, res, next) {
 app.use('/', variousRouter)
 app.use('/accounts', accountRouter)
 app.use('/ads', adRouter)
+app.use('/bids', bidRouter)
 
 // Start listening for incoming HTTP requests!
 app.listen(8080, function(){
