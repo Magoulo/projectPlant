@@ -1,6 +1,5 @@
 const express = require('express')
 const accountManager = require('../../business-logic-layer/account-manager')
-const adManager = require('../../business-logic-layer/ad-manager')
 
 const router = express.Router()
 
@@ -8,7 +7,7 @@ router.get("/sign-up", function (request, response) {
 	response.render("accounts-sign-up.hbs")
 })
 
-router.get("/create", function (request, response) { /* sabbes */
+router.get("/create", function (request, response) {
 	response.render("accountCreate.hbs")
 })
 
@@ -51,10 +50,16 @@ router.post("/sign-in", function (request, response) {
 		}
 	})
 })
+
 router.post('/sign-out', function (request, response) {
 	request.session.destroy();
 	response.redirect('/')
 })
+
+
+
+
+// TEST---------------------------------------------------------------------------------------------------------------
 
 router.get("/", function (request, response) {
 	accountManager.getAllAccounts(function (errors, UserAccounts) {
@@ -66,6 +71,8 @@ router.get("/", function (request, response) {
 	})
 })
 
+
+/* 
 router.get('/:username', function (request, response) {
 
 	const username = request.params.username
@@ -95,6 +102,6 @@ router.get('/:username', function (request, response) {
 		})
 	})
 
-})
+}) */
 
 module.exports = router

@@ -1,97 +1,98 @@
 const db = require('./db')
 
-// ------------------ GET AD -------------------------------------------------
-exports.getAllAds = function(callback){
-	
+// ------------------ GET AD/S -------------------------------------------------------------------------
+exports.getAllAds = function (callback) {
+
 	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID ORDER BY Ad.adID`
 	const values = []
-	
-	db.query(query, values, function(error, Ad){
-		if(error){
+
+	db.query(query, values, function (error, Ad) {
+		if (error) {
 			callback(['databaseError in getAllAds'], null)
-		}else{
+		} else {
 			callback([], Ad)
 		}
 	})
 }
 
-exports.getAllAdsByUserID = function(userID,callback){
-	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.userID = ? ORDER BY Ad.adID`
-	const values = [userID]
-	
-	db.query(query, values, function(error, Ad){
-		if(error){
-			callback(['databaseError in getAllAdsByUserID'], null)
-		}else{
-			callback([], Ad)
-		}
-	})
-}
+exports.getAdByAdID = function (adID, callback) {
 
-exports.getAdByUserID = function(userID,callback){
-	const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
-	const values = [userID]
-
-	db.query(query, values, function(error, Ad){
-		if(error){
-			callback(['databaseError in Ads table'], null)
-		}else{
-			callback([], Ad[0])
-		}
-	})
-}
-
-exports.getAdByAdID = function(adID,callback){
 	const query = "SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.adID = ? LIMIT 1"
 	const values = [adID]
 
-	db.query(query, values, function(error, Ad){
-		if(error){
+	db.query(query, values, function (error, Ad) {
+		if (error) {
 			callback(['databaseError in Ads table'], null)
-		}else{
+		} else {
 			callback([], Ad[0])
 		}
 	})
 }
 
-// ---------------- Image Bundle ---------------------------------------
+exports.getAllAdsByUserID = function (userID, callback) {
 
-exports.getImageBundleByAdID = function(adID, callback){
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.userID = ? ORDER BY Ad.adID`
+	const values = [userID]
+
+	db.query(query, values, function (error, Ad) {
+		if (error) {
+			callback(['databaseError in getAllAdsByUserID'], null)
+		} else {
+			callback([], Ad)
+		}
+	})
+}
+
+exports.getAdByUserID = function (userID, callback) {
+
+	const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
+	const values = [userID]
+
+	db.query(query, values, function (error, Ad) {
+		if (error) {
+			callback(['databaseError in Ads table'], null)
+		} else {
+			callback([], Ad[0])
+		}
+	})
+}
+
+// Ad's Image Bundle
+exports.getImageBundleByAdID = function (adID, callback) {
 	const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
 	const values = [adID]
 
-	db.query(query, values, function(error, ImageBundle){
-		if(error){
+	db.query(query, values, function (error, ImageBundle) {
+		if (error) {
 			callback(['databaseError in Bid table'], null)
-		}else{
+		} else {
 			callback([], ImageBundle[0])
 		}
 	})
 }
 
-//----------------------- GET USER -------------------------------------------------------------------
-exports.getUserByUserID = function(userID, callback){
-	const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
-	const values = [userID]
 
-	db.query(query, values, function(error, User){
-		if(error){
-			callback(['databaseError in User table'], null)
-		}else{
-			callback([], User[0])
-		}
-	})
-}
 
-//------------------- Get All ---------------------------
-exports.getAllAdsBidsUsersByUserID = function(userID,callback){
+// ------------------ UPDATE AD -------------------------------------------------------------------------
+// ------------------ DELETE AD -------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+//------------------- Get All --------------------------- vart??
+exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID JOIN Bid ON Ad.adID = Bid.adID JOIN User ON Bid.userID = User.userID WHERE Ad.userID = ? ORDER BY Ad.userID`
 	const values = [userID]
-	
-	db.query(query, values, function(error, Ad){
-		if(error){
+
+	db.query(query, values, function (error, Ad) {
+		if (error) {
 			callback(['databaseError in getAllAdsByUserID'], null)
-		}else{
+		} else {
 			callback([], Ad)
 		}
 	})

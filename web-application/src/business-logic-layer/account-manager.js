@@ -1,8 +1,13 @@
 const accountRepository = require('../data-access-layer/account-repository')
 const accountValidator = require('./account-validator')
 
+
 exports.getAllAccounts = function (callback) {
 	accountRepository.getAllAccounts(callback)
+}
+
+exports.getAccountByUsername = function (username, callback) {
+	accountRepository.getAccountByUsername(username, callback)
 }
 
 exports.createAccount = function (account, callback) {
@@ -16,28 +21,4 @@ exports.createAccount = function (account, callback) {
 	}
 
 	accountRepository.createAccount(account, callback)
-}
-
-exports.getAccountByUsername = function (username, callback) {
-	accountRepository.getAccountByUsername(username, callback)
-}
-
-//------------------ GET USER -----------------------------------------
-exports.getUserByID = function (userAccountID, callback) {
-	accountRepository.getUserByID(userAccountID, callback)
-}
-
-//------------------ GET AD -----------------------------------------
-exports.getAdByUserID = function (userID, callback) {
-	accountRepository.getAdByUserID(userID, callback)
-}
-
-//------------------ GET IMAGEBUNDLE -----------------------------------------
-exports.getImageBundleByAdID = function (adID, callback) {
-	accountRepository.getImageBundleByAdID(adID, callback)
-}
-
-//------------------ GET BID -----------------------------------------
-exports.getBidByAdID = function (adID, callback) {
-	accountRepository.getBidByAdID(adID, callback)
 }

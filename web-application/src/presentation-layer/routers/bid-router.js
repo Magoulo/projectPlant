@@ -10,6 +10,7 @@ router.get("/myBids", function(request, response){
                 bid: bid,
                 session: request.session
             }
+            
       response.render("myBids.hbs",model)
     })  	
 })

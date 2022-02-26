@@ -15,6 +15,7 @@ const variousRouter = require('./routers/various-router')
 const accountRouter = require('./routers/account-router' )
 const adRouter = require('./routers/ad-router')
 const bidRouter = require('./routers/bid-router')
+const userRouter = require('./routers/user-router')
 
 const app = express()
 
@@ -55,6 +56,7 @@ app.use('/', variousRouter)
 app.use('/accounts', accountRouter)
 app.use('/ads', adRouter)
 app.use('/bids', bidRouter)
+app.use('/user', userRouter)
 
 // Start listening for incoming HTTP requests!
 app.listen(8080, function(){
