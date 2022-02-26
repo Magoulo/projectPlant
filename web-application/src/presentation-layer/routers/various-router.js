@@ -35,16 +35,67 @@ router.get("/myFavorites", function(request, response){
 })
 
 router.get("/personalData", function(request, response){
-accountManager.getUserByID(request.session.userID, function(errors,User){
-	const model = {
-		errors: errors,
-		User: User,
-		session: request.session
-	}
+	accountManager.getUserByID(request.session.userID, function(errors,User){
+		const model = {
+			errors: errors,
+			User: User,
+			session: request.session
+		}
 	response.render("personalData.hbs", model)
-})
-	
+	})
 })
 
+router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
+    const userID = request.params.userID
+	const firstName = request.body.firstname
+    const lastName = request.body.lastname
+    const email = request.body.email
+    const phoneNumber = request.body.phonenumber
+	const city = request.body.city
+
+	console.log("userID", userID)
+	console.log("phone", phoneNumber)
+	console.log("firstName", firstName)
+	console.log("lastName", lastName)
+	console.log("email", email)
+	console.log("city", city)
+
+     const errors = []//validators.getDonValidationErrors(Name, Description)
+    if (errors.length == 0) {
+        accountManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
+			console.log("error:", error)
+            if (error) {
+                errors.push("Internal server error")
+                model = {
+                    errors,
+					userID,
+					firstName,
+					lastName,
+					email,
+					phoneNumber,
+					city,
+                 //   csrfToken: request.csrfToken()
+                }
+                response.render('personalData.hbs', model)
+            }
+            else {
+                response.redirect('/personalData')
+            }
+        })
+    }
+    else { 
+        const model = {
+			errors,
+			userID,
+			firstName,
+			lastName,
+			email,
+			phoneNumber,
+			city,
+         //   csrfToken: request.csrfToken()
+        }
+        response.render('personalData.hbs', model)
+    }
+})	
 
 module.exports = router

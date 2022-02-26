@@ -26,7 +26,9 @@ exports.getAccountByUsername = function (username, callback) {
 exports.getUserByID = function (userAccountID, callback) {
 	accountRepository.getUserByID(userAccountID, callback)
 }
-
+exports.updateUserByUserID = function (userID, firstName, lastName, email, phoneNumber, city, callback) {
+	accountRepository.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, callback)
+}
 //------------------ GET AD -----------------------------------------
 exports.getAdByUserID = function (userID, callback) {
 	accountRepository.getAdByUserID(userID, callback)
