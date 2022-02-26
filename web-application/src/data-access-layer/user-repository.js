@@ -38,3 +38,17 @@ exports.updateUserByUserID = function( userID, firstName, lastName, email, phone
 	callback(error)
 	})
 }
+
+exports.createUser = function(User,callback){
+	const query = `INSERT INTO User (userAccountID, firstName, lastName, email, phoneNumber, city) VALUES (?, ?, ?, ?, ?, ?)`
+	const values = [User.userAccountID, User.firstName, User.lastName, User.email, User.phoneNumber, User.city]
+
+	db.query(query, values, function (error, results) {
+		if (error) {
+			// TODO: Look for usernameUnique violation.
+			callback(['databaseError in createUser'], null)
+		} else {
+			callback([], results.insertId)
+		}
+	})
+}

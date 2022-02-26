@@ -46,7 +46,6 @@ router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtec
     const errors = []//validators.getDonValidationErrors(Name, Description)
     if (errors.length == 0) {
         adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
-			console.log("error:", error)
             if (error) {
                 errors.push("Internal server error")
                 model = {

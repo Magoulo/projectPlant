@@ -1,7 +1,53 @@
-<h1>Create Account</h1>
+<div class="content">
+    {{#each errors}}
+        <li>{{this}}</li>
+    {{/each}}
 
+  <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+            <h1 class="display-3">Create Account</h1>
+            <div>
+                <form class="form-inline justify-content-center" action="/accounts/create"
+                    method="POST">
+                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="username">
+                        <label class="form-label">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="password">
+                        <label class="form-label">Password</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="repeatpassword">
+                        <label class="form-label">Repeat Password</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="firstname">
+                        <label class="form-label">Firstname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="lastname">
+                        <label class="form-label">Lastname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="email" name="email">
+                        <label class="form-label">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="phonenumber">
+                        <label class="form-label">Phonenumber</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" name="city">
+                        <label class="form-label">City</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="btn btn-primary" type="submit" value="Create">
+                    </div>
+                </form>
+            </div>
 
-<!-- Lägg till
-1. All fields som behövs till att skapa en account
-2. Create account knapp
--->
+        </div>
+    </div>
+</div>

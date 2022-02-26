@@ -12,3 +12,8 @@ exports.getUserByUserID = function (userID, callback) {
 exports.updateUserByUserID = function (userID, firstName, lastName, email, phoneNumber, city, callback) {
 	userRepository.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, callback)
 }
+
+exports.createUser = function(User, callback){
+	userRepository.createUser(User,callback)
+}
+
