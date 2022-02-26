@@ -72,12 +72,12 @@ exports.getImageBundleByAdID = function (adID, callback) {
 }
 
 //Update Ad
-exports.updateAdByAdID = function(adID, title, latinName, description, callback){
+exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
 	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE userID = ?"
-	const values = [title, latinName, description, adID ]
+	const values = [title, latinName, description, adID]
 
-	db.query(query, values, function(error){
-	callback(error)
+	db.query(query, values, function (error) {
+		callback(error)
 	})
 }
 
@@ -90,6 +90,19 @@ exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 	db.query(query, values, function (error, Ad) {
 		if (error) {
 			callback(['databaseError in getAllAdsByUserID'], null)
+		} else {
+			callback([], Ad)
+		}
+	})
+}
+
+
+exports.getAllAdsByTitle = function (searchInput, callback) {
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%'`
+
+	db.query(query, function (error, Ad) {
+		if (error) {
+			callback(['databaseError in getAllAdsByTitle'], null)
 		} else {
 			callback([], Ad)
 		}
