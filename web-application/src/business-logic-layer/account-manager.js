@@ -12,13 +12,18 @@ exports.getAccountByUsername = function (username, callback) {
 
 exports.createAccount = function (account, callback) {
 
+
 	// Validate the account.
-	const errors = accountValidator.getErrorsNewAccount(account)
+/*	const errors = accountValidator.getErrorsNewAccount(account)
 
 	if (0 < errors.length) {
 		callback(errors, null)
 		return
-	}
+	}*/
 
 	accountRepository.createAccount(account, callback)
+}
+
+exports.deleteAccountByUserAccountID = function(userAccountID,callback){
+	accountRepository.deleteAccountByUserAccountID(userAccountID,callback)
 }

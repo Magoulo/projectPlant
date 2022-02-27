@@ -52,14 +52,15 @@ exports.getAccountByUsername = function (username, callback) {
 exports.createAccount = function (account, callback) {
 
 	const query = `INSERT INTO UserAccount (username, passwordHash) VALUES (?, ?)`
-	const values = [account.username, account.password]
+	const values = [account.username, account.passwordHash]
 
-	db.query(query, values, function (error, results) {
+	db.query(query, values, function (error, userAccountID) {
 		if (error) {
 			// TODO: Look for usernameUnique violation.
 			callback(['databaseError'], null)
 		} else {
-			callback([], results.insertId)
+				console.log("this.lastID", userAccountID.insertId)
+			callback(error, userAccountID.insertId)
 		}
 	})
 
@@ -70,3 +71,19 @@ exports.createAccount = function (account, callback) {
 
 // -------------------- DELETE ACCOUNT -------------------------------------------
 // admin only?
+
+exports.deleteAccountByUserAccountID = function(userAccountID,callback){
+	const query = 'DELETE FROM UserAccount WHERE userAccountID = ?'
+	const values = [userAccountID]
+
+	db.query(query, values, function (error) {
+		if (error) {
+			console.log("inne i error")
+			// TODO: Look for usernameUnique violation.
+			callback(['databaseError when try to delte user'], null)
+		} else {
+			console.log("inne i else")
+			callback([])
+		}
+	})
+}
