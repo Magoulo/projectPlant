@@ -128,8 +128,8 @@ exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 }
 
 
-exports.getAllAdsByTitle = function (searchInput, callback) {
-	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%'`
+exports.getAllAdsByTitleOrLatinName = function (searchInput, callback) {
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%' OR latinName LIKE '%${searchInput}%'`
 
 	db.query(query, function (error, Ad) {
 		if (error) {
