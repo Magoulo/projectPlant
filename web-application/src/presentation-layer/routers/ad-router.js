@@ -18,7 +18,7 @@ router.get("/", function (request, response) {
 router.post("/search", function(request, response){
     const searchInput = request.body.searchInput
     
-    adManager.getAllAdsByTitle(searchInput, function(errors, Ad){
+    adManager.getAllAdsByTitleOrLatinName(searchInput, function(errors, Ad){
         const model = {
             errors: errors,
             searchInput: searchInput,
