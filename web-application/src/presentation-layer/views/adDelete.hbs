@@ -24,12 +24,16 @@
                 <p>Are you sure you want to delete the ad <b>"{{ad.title}}"</b>?  </p>
             </div>
             <div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary m-2">Yes</button>
-                         <button type="submit" class="btn btn-primary m-2">No</button>
-                    </div>         
+                <div class="mb-3">
+                    <form action="/ads/adDelete/{{ad.adID}}/delete" method="POST">
+                       <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+	                    <div>
+	                       <input type="submit" value="Yes">
+                        </div>
+                    </form>
+                    <a href="/ads/myAds"> <button type="submit" class="btn btn-primary m-2">No</button></a>
+                </div>         
             </div>
-
         </div>
     </div>
 

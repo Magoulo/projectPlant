@@ -13,7 +13,7 @@ exports.updateUserByUserID = function (userID, firstName, lastName, email, phone
 	userRepository.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, callback)
 }
 
-exports.createUser = function(User, callback){
-	userRepository.createUser(User,callback)
+exports.createUser = function(user, callback){
+	userRepository.createUser(user,callback)
 }
 

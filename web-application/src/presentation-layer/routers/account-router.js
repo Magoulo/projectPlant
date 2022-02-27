@@ -36,6 +36,7 @@ router.post("/create", function (request, response) {
 	if (password === repeatedPassword) {
 		accountManager.createAccount(account, function (error, userAccountID) {
 			console.log("passed this point")
+			
 			if (error) {
 				console.log("error in createAccount")
 				errors.push("Internal server error")
@@ -54,16 +55,21 @@ router.post("/create", function (request, response) {
 			else {
 				console.log("Account created")
 				console.log("userAccountID: ", userAccountID)
+
 				const user = {userAccountID: userAccountID, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city:city}
+
 				userManager.createUser(user, function (error, results) {
 					console.log("results", results)
 					console.log("error: ", error)
+
 					if (error.length !== 0) {
 						errors.push("Internal server error")
+
 						accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
 							if (error) {
 								console.log("Couldn't delete the account")
 								errors.push("Couldn't delete the account")
+
 								model = {
 									errors,
 									userName,
@@ -99,6 +105,7 @@ router.post("/create", function (request, response) {
 		})
 	} else {
 		errors.push("Repeat the same password")
+
 		model = {
 			errors,
 			userName,

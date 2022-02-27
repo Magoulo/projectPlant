@@ -27,13 +27,20 @@ exports.getAllAdsByTitle = function(title, callback){
 }
 
 
+//-------------------------------Create Ad -------------------------------
+exports.createAd = function(ad, callback){
+	adRepository.createAd(ad,callback)
+}
 
 
-
-
-//-------------------------------Update Ad -------------------------------
+//----------------------------- Update Ad -------------------------------
 exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
 	adRepository.updateAdByAdID(adID, title, latinName, description, callback)
+}
+
+//----------------------------- Delete Ad -------------------------------
+exports.deleteAd = function(adID, callback){
+	adRepository.deleteAd(adID, callback)
 }
 
 //vart?? 

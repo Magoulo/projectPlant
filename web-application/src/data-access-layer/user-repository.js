@@ -39,9 +39,9 @@ exports.updateUserByUserID = function( userID, firstName, lastName, email, phone
 	})
 }
 
-exports.createUser = function(User,callback){
+exports.createUser = function(user,callback){
 	const query = `INSERT INTO User (userAccountID, firstName, lastName, email, phoneNumber, city) VALUES (?, ?, ?, ?, ?, ?)`
-	const values = [User.userAccountID, User.firstName, User.lastName, User.email, User.phoneNumber, User.city]
+	const values = [user.userAccountID, user.firstName, user.lastName, user.email, user.phoneNumber, user.city]
 
 	db.query(query, values, function (error, results) {
 		if (error) {

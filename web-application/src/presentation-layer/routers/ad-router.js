@@ -117,6 +117,23 @@ router.get("/adDelete/:adID", function (request, response) {
     })
 })
 
+router.post("/adDelete/:adID/delete", function (request, response) {
+    const adID = request.params.adID
+
+    adManager.deleteAd(adID, function (errors) {
+        if(error){
+           const model = {
+            errors: errors,
+            session: request.session
+        }
+        response.render("myAds.hbs", model) 
+        } else {
+            redirect("/ads/myAds")
+        }
+        
+    })
+})
+
 router.get('/myAds/:userID', function (request, response) {
     const userID = request.params.userID
 
@@ -161,7 +178,39 @@ router.get("/adCreate", function (request, response) {
     response.render("adCreate.hbs", model)
 })
 router.post("/adCreate", function (request, response) {
-    response.render("adCreate.hbs")
+   
+   /* const userID = request.session.userID
+    const title = request.body.title
+    const latinName = request.body.latinname
+    const description = request.body.description
+    const isClosed = 0*/
+
+    const ad =  {userID:request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0}
+console.log("ad: ", ad)
+
+adManager.getAllAds(function(error,ads){
+    if(error){
+console.log("error")
+    } else {
+console.log("ads: ", ads)
+    }
+})
+    adManager.createAd(ad, function(error,adID){
+        if(error){
+            model = {
+                error,
+                session: request.session
+            }
+            response.render("myAds.hbs", model)
+        } else {
+            console.log("New ad created with the adID: ",adID)
+            model = {
+                session: request.session
+            }
+            response.render("myAds.hbs", model)
+        }
+    })
+
 })
 
 router.get('/:adID', function (request, response) {

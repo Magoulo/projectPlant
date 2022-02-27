@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS ImageBundle (
   secondImagePath TEXT NULL,
   PRIMARY KEY (imageBundleID),
     FOREIGN KEY (adID)
-    REFERENCES Ad (adID));
+    REFERENCES Ad (adID)
+    ON DELETE CASCADE);
 
 /* LÄ*gg till PK och col Status */
 CREATE TABLE IF NOT EXISTS Bid (

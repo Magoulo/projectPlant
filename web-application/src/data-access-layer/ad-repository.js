@@ -71,6 +71,23 @@ exports.getImageBundleByAdID = function (adID, callback) {
 	})
 }
 
+//Create Ad
+exports.createAd = function(ad, callback){
+	const query = "INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES (?,?,?,?,?)"
+	const values = [3, ad.title, ad.latinName, ad.description, ad.isClosed]
+	console.log("ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed: ", ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed)
+
+	db.query(query, values, function(error, adID){
+		if(error){
+			console.log("DB error: ", error)
+			callback(['databaseError'], null)
+		} else {
+				console.log("this.lastID", adID.insertId)
+			callback(error, adID.insertId)
+		}
+	})
+}
+
 //Update Ad
 exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
 	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE userID = ?"
@@ -81,6 +98,20 @@ exports.updateAdByAdID = function (adID, title, latinName, description, callback
 	})
 }
 
+//Delte Ad
+exports.deleteAd = function(adID, callback){
+	const query = "DELETE FROM Ad WHERE adID = ?"
+	const values = [adID]
+
+	db.query(query, values, function(error){
+		if(error){
+			console.log("error: ", error)
+			 callback(["Database error"], null)
+		} else {
+			callback([])
+		}
+	})
+}
 
 //------------------- Get All --------------------------- vart??
 exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
