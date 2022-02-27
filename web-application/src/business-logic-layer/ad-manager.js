@@ -26,12 +26,14 @@ exports.getAllAdsByTitleOrLatinName = function(title, callback){
 
 }
 
-
 //-------------------------------Create Ad -------------------------------
 exports.createAd = function(ad, callback){
 	adRepository.createAd(ad,callback)
 }
-
+// Create imageBundle
+exports.createImageBundle = function(imageBundle, callback){
+	adRepository.createImageBundle(imageBundle, callback)
+}
 
 //----------------------------- Update Ad -------------------------------
 exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
