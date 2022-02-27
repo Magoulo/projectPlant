@@ -73,14 +73,16 @@ exports.createAccount = function (account, callback) {
 // admin only?
 
 exports.deleteAccountByUserAccountID = function(userAccountID,callback){
-	const query = 'DELETE FROM User WHERE userAccountID = ?'
+	const query = 'DELETE FROM UserAccount WHERE userAccountID = ?'
 	const values = [userAccountID]
 
 	db.query(query, values, function (error) {
 		if (error) {
+			console.log("inne i error")
 			// TODO: Look for usernameUnique violation.
 			callback(['databaseError when try to delte user'], null)
 		} else {
+			console.log("inne i else")
 			callback([])
 		}
 	})

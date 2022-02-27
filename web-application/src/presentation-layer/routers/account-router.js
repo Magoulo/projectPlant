@@ -99,7 +99,6 @@ router.post("/create", function (request, response) {
 		})
 	} else {
 		errors.push("Repeat the same password")
-
 		model = {
 			errors,
 			userName,
@@ -111,6 +110,43 @@ router.post("/create", function (request, response) {
 		}
 		response.render("accountCreate.hbs", model)
 	}
+
+	// ------------------------------ Create Account Test ---------------------------------------------------
+
+	/*accountManager.getAllAccounts(function(error,userAccount){
+		if(error.length !== 0){
+			console.log("error in getAllAccounts")
+		} else {
+			console.log(userAccount)
+		}
+	})
+	*/
+
+    /*accountManager.createAccount(account, function (error, userAccountID) {
+		if(error){
+		console.log("error in createAccount")	
+		} else {
+			console.log("Account created with userAccountID: ", userAccountID)
+
+			accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
+				if (error.length !== 0) {
+					console.log("Couldn't delete the account")
+					console.log("error: ", error)
+				} else {
+				console.log("Account deleted")
+                //Get all accounts to verify?
+				accountManager.getAllAccounts(function(error,userAccount){
+					if(error.length !== 0){
+                	    console.log("error in getAllAccounts")
+					} else {
+						console.log(userAccount)
+					}
+				})
+				}
+			})
+		}
+	})*/
+
 })
 
 
@@ -159,8 +195,6 @@ router.post('/sign-out', function (request, response) {
 })
 
 
-
-
 // TEST---------------------------------------------------------------------------------------------------------------
 
 router.get("/", function (request, response) {
@@ -172,38 +206,5 @@ router.get("/", function (request, response) {
 		response.render("accounts-list-all.hbs", model)
 	})
 })
-
-
-/* 
-router.get('/:username', function (request, response) {
-
-	const username = request.params.username
-
-	accountManager.getAccountByUsername(username, function (errors, account) {
-
-		accountManager.getUserByID(account.userAccountID, function (errors, user) {
-
-			adManager.getAdByUserID(user.userID, function (errors, ad) {
-
-				accountManager.getImageBundleByAdID(ad.adID, function(errors,imageBundle){
-
-					accountManager.getBidByAdID(ad.adID, function(errors, bid){
-					const model = {
-					errors: errors,
-					account: account,
-					user: user,
-					ad: ad,
-					imageBundle: imageBundle,
-					bid: bid
-				}
-				response.render("accounts-show-one.hbs", model)
-					})
-					
-				})		    			
-			})
-		})
-	})
-
-}) */
 
 module.exports = router
