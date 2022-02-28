@@ -2,7 +2,7 @@ const express = require('express')
 const adManager = require('../../business-logic-layer/ad-manager')
 const userManager = require('../../business-logic-layer/user-manager')
 const router = express.Router()
-
+const path = require('path')
 
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
@@ -74,6 +74,8 @@ router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtec
                 response.render('adUpdate.hbs', model)
             }
             else {
+
+                //Update ImageBundle
                 response.redirect('/ads/adUpdate/' + adID)
             }
         })
@@ -121,16 +123,16 @@ router.post("/adDelete/:adID/delete", function (request, response) {
     const adID = request.params.adID
 
     adManager.deleteAd(adID, function (errors) {
-        if(error){
+        if(errors.length !== 0){
            const model = {
             errors: errors,
             session: request.session
-        }
-        response.render("myAds.hbs", model) 
+            }
+            response.render("myAds.hbs", model) 
         } else {
-            redirect("/ads/myAds")
-        }
-        
+            console.log("Ad was delete succesfully")
+            response.redirect("/ads/myAds")
+        }     
     })
 })
 
@@ -171,30 +173,46 @@ router.get('/myAds/:userID', function (request, response) {
         response.render("myAdBids.hbs", model)
     })
 })
+
 router.get("/adCreate", function (request, response) {
     const model = {
         session: request.session
     }
     response.render("adCreate.hbs", model)
 })
+
 router.post("/adCreate", function (request, response) {
    
-   /* const userID = request.session.userID
-    const title = request.body.title
-    const latinName = request.body.latinname
-    const description = request.body.description
-    const isClosed = 0*/
-
     const ad =  {userID:request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0}
-console.log("ad: ", ad)
+    const errors = []
 
-adManager.getAllAds(function(error,ads){
-    if(error){
-console.log("error")
-    } else {
-console.log("ads: ", ads)
-    }
-})
+    const coverImagePath = "https://www.thespruce.com/thmb/_6OfTexQcyd-3aW8Z1O2y78sc-Q=/2048x1545/filters:fill(auto,1)/snake-plant-care-overview-1902772-04-d3990a1d0e1d4202a824e929abb12fc1-349b52d646f04f31962707a703b94298.jpeg"
+    const firstImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3sNBXTUiieX57OSxUWNAgdWNSwmz6xKWWkD9rzknwLh95ogckDEdJ_EqLYR-0VEkHfiE&usqp=CAU"
+    const secondImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMLD3FCy2W6ETP4Jb1JdBGrrJ3ttuxmNenJQ&usqp=CAU"
+
+    const coverImageFile = request.files.coverImageFile
+    const firstImageFile = request.files.firstImageFile
+    const secondImageFile = request.files.secondImageFile
+
+    const images = [coverImageFile,firstImageFile,secondImageFile]
+    console.log("images: ", images)
+
+    for(var i = 0; i <images.length; i++){
+        const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
+        console.log("uploadpath: ", uploadPath)
+	    images[i].mv(uploadPath, function (error) {
+            console.log("images: ", images)
+
+		    if (error) {
+		    	console.log("Error in uploading pathway")
+		    	errors.push("couldn't upload picture")
+		    	response.render('adCreate.hbs', errors)
+		    } else {
+				console.log("file uploaded successfully")
+		    }
+        })
+	}		
+/*
     adManager.createAd(ad, function(error,adID){
         if(error){
             model = {
@@ -204,13 +222,19 @@ console.log("ads: ", ads)
             response.render("myAds.hbs", model)
         } else {
             console.log("New ad created with the adID: ",adID)
-            model = {
-                session: request.session
-            }
-            response.render("myAds.hbs", model)
-        }
-    })
+            const imageBundle = {adID: adID, coverImagePath: coverImagePath, firstImagePath: firstImagePath, secondImagePath: secondImagePath}
 
+            adManager.createImageBundle(imageBundle, function(error, ibID){
+                if(error){
+                    console.log("error in create Imagebundle")
+                } else {
+                    console.log("new imageBundle created with the iD: ", ibID)
+                   
+                    response.redirect("/ads/myAds") 
+                }
+            })     
+        }
+    })*/
 })
 
 router.get('/:adID', function (request, response) {
@@ -237,18 +261,9 @@ router.get("/ad", function (request, response) {
     response.render("ad.hbs", model)
 })
 
-
-
-
 router.get("/ads", function (request, response) {
     response.render("ads.hbs")
 })
-
-
-
-
-
-
 
 
 module.exports = router

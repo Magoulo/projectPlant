@@ -71,10 +71,26 @@ exports.getImageBundleByAdID = function (adID, callback) {
 	})
 }
 
+//Create ImageBundle
+exports.createImageBundle = function(imageBundle, callback){
+	const query = "INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES (?,?,?,?)"
+	const values = [imageBundle.adID, imageBundle.coverImagePath, imageBundle.firstImagePath, imageBundle.secondImagePath]
+
+	db.query(query, values, function(error, ibID){
+		if(error){
+			console.log("DB error: ", error)
+			callback(['databaseError'], null)
+		} else {
+				console.log("this.lastID", ibID.insertId)
+			callback(error, ibID.insertId)
+		}
+	})
+}
+
 //Create Ad
 exports.createAd = function(ad, callback){
 	const query = "INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES (?,?,?,?,?)"
-	const values = [3, ad.title, ad.latinName, ad.description, ad.isClosed]
+	const values = [ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed]
 	console.log("ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed: ", ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed)
 
 	db.query(query, values, function(error, adID){
@@ -90,7 +106,7 @@ exports.createAd = function(ad, callback){
 
 //Update Ad
 exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
-	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE userID = ?"
+	const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE adID = ?"
 	const values = [title, latinName, description, adID]
 
 	db.query(query, values, function (error) {
