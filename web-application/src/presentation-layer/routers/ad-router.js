@@ -186,9 +186,9 @@ router.post("/adCreate", function (request, response) {
     const ad =  {userID:request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0}
     const errors = []
 
-    const coverImagePath = "https://www.thespruce.com/thmb/_6OfTexQcyd-3aW8Z1O2y78sc-Q=/2048x1545/filters:fill(auto,1)/snake-plant-care-overview-1902772-04-d3990a1d0e1d4202a824e929abb12fc1-349b52d646f04f31962707a703b94298.jpeg"
+    /*const coverImagePath = "https://www.thespruce.com/thmb/_6OfTexQcyd-3aW8Z1O2y78sc-Q=/2048x1545/filters:fill(auto,1)/snake-plant-care-overview-1902772-04-d3990a1d0e1d4202a824e929abb12fc1-349b52d646f04f31962707a703b94298.jpeg"
     const firstImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3sNBXTUiieX57OSxUWNAgdWNSwmz6xKWWkD9rzknwLh95ogckDEdJ_EqLYR-0VEkHfiE&usqp=CAU"
-    const secondImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMLD3FCy2W6ETP4Jb1JdBGrrJ3ttuxmNenJQ&usqp=CAU"
+    const secondImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMLD3FCy2W6ETP4Jb1JdBGrrJ3ttuxmNenJQ&usqp=CAU"*/
 
     const coverImageFile = request.files.coverImageFile
     const firstImageFile = request.files.firstImageFile
@@ -199,10 +199,8 @@ router.post("/adCreate", function (request, response) {
 
     for(var i = 0; i <images.length; i++){
         const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
-        console.log("uploadpath: ", uploadPath)
-	    images[i].mv(uploadPath, function (error) {
-            console.log("images: ", images)
 
+	    images[i].mv(uploadPath, function (error) {
 		    if (error) {
 		    	console.log("Error in uploading pathway")
 		    	errors.push("couldn't upload picture")
@@ -212,7 +210,7 @@ router.post("/adCreate", function (request, response) {
 		    }
         })
 	}		
-/*
+
     adManager.createAd(ad, function(error,adID){
         if(error){
             model = {
@@ -222,19 +220,18 @@ router.post("/adCreate", function (request, response) {
             response.render("myAds.hbs", model)
         } else {
             console.log("New ad created with the adID: ",adID)
-            const imageBundle = {adID: adID, coverImagePath: coverImagePath, firstImagePath: firstImagePath, secondImagePath: secondImagePath}
+            const imageBundle = {adID: adID, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name}
 
             adManager.createImageBundle(imageBundle, function(error, ibID){
                 if(error){
                     console.log("error in create Imagebundle")
                 } else {
                     console.log("new imageBundle created with the iD: ", ibID)
-                   
                     response.redirect("/ads/myAds") 
                 }
             })     
         }
-    })*/
+    })
 })
 
 router.get('/:adID', function (request, response) {
