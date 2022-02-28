@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload')
 
 const session = require('express-session')
 let RedisStore = require("connect-redis")(session)
@@ -37,6 +38,8 @@ app.use(bodyParser.urlencoded({
 	extended: false
 }))
 
+app.use(fileUpload())
+
 app.use(
 	session({
 	  store: new RedisStore({ client: redisClient }),
@@ -57,6 +60,10 @@ app.use('/accounts', accountRouter)
 app.use('/ads', adRouter)
 app.use('/bids', bidRouter)
 app.use('/user', userRouter)
+
+app.get('/upload', function (request, response) {
+	response.render('uploadpic.hbs')
+})
 
 // Start listening for incoming HTTP requests!
 app.listen(8080, function(){
