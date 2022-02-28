@@ -2,7 +2,7 @@ const express = require('express')
 const adManager = require('../../business-logic-layer/ad-manager')
 const userManager = require('../../business-logic-layer/user-manager')
 const router = express.Router()
-
+const path = require('path')
 
 router.get("/", function (request, response) {
     adManager.getAllAds(function (errors, Ad) {
@@ -197,34 +197,21 @@ router.post("/adCreate", function (request, response) {
     const images = [coverImageFile,firstImageFile,secondImageFile]
     console.log("images: ", images)
 
-    const uploadPath = "public/images/" + coverImageFile.name  
-
-    console.log("uploadpath: ", uploadPath)
-    coverImageFile.mv(uploadPath, function (error) {
-        if (error) {
-            console.log("Error in uploading pathway")
-            errors.push("couldn't upload picture")
-            response.render('adCreate.hbs', errors)
-        } else {
-            console.log("file" + coverImageFile.name + "uploaded successfully")
-        }
-    })
-/*
     for(var i = 0; i <images.length; i++){
-	    const uploadPath = "web-application\src\presentation-layer\public\images"
-	    //const Image_path = images[i].name  for inserting data in table
+        const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
+        console.log("uploadpath: ", uploadPath)
 	    images[i].mv(uploadPath, function (error) {
-            console.log("images: ", images[i])
+            console.log("images: ", images)
 
 		    if (error) {
 		    	console.log("Error in uploading pathway")
 		    	errors.push("couldn't upload picture")
 		    	response.render('adCreate.hbs', errors)
 		    } else {
-				console.log("file", images[i], "uploaded successfully")
+				console.log("file uploaded successfully")
 		    }
         })
-	}	*/	
+	}		
 /*
     adManager.createAd(ad, function(error,adID){
         if(error){
