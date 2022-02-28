@@ -17,6 +17,7 @@
     "redis": "^4.0.3",
     "connect-redis": "^6.1.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7", 
+    "nodemailer":"^6.7.2"
   }
 }

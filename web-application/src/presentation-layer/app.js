@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
+const nodemailer = require('nodemailer')
 const fileUpload = require('express-fileupload')
 
 const session = require('express-session')
