@@ -23,20 +23,26 @@ router.get("/", function (request, response) {
 
 router.get("/about", function (request, response) {
 
-	const model = {
-		session: request.session
-	}
-
-	response.render("about.hbs", model)
+	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+		const model = {
+			errors: errors,
+			User: User,
+			session: request.session
+		}
+		response.render("about.hbs", model)
+	})
 })
 
 router.get("/contact", function (request, response) {
 
-	const model = {
-		session: request.session
-	}
-
-	response.render("contact.hbs", model)
+	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+		const model = {
+			errors: errors,
+			User: User,
+			session: request.session
+		}
+		response.render("contact.hbs", model)
+	})
 })
 
 router.get("/myFavoriteAds", function (request, response) {
@@ -57,9 +63,6 @@ router.post("/mail", function (request, response) {
 
 		let transporter = nodemailer.createTransport({
 			service: "gmail",
-			//host: "smtp-relay.gmail.com",
-			//port: 587,
-			//secure: false, // true for 465, false for other ports
 			auth: {
 				user: "testplantproject@gmail.com",
 				pass: "plantProject123",

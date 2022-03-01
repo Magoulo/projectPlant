@@ -12,3 +12,7 @@ exports.getBidByAdID = function (adID, callback) {
 exports.getAllBidsByUserID = function (userID, callback) {
 	bidRepository.getAllBidsByUserID(userID, callback)
 }
+
+exports.createBid = function (Ad, callback) {
+	bidRepository.createBid(Ad, callback)
+}
