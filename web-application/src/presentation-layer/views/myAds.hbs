@@ -174,7 +174,6 @@
 							<div class="card card-body">
 
 								<!--Lägg till offer -->
-
 								{{#if errors.length}}
 								<p class="text-center">Oh no, something went wrong:</p>
 
@@ -185,8 +184,10 @@
 								</ul>
 								{{else}}
 								{{#if adPending}}
-								<div class="row justify-content-start align-items-center">			
-									{{#each adPending}}
+								<div class="row justify-content-start align-items-center">		
+												
+									{{#each ad}}
+
 										<div class="col-3 text-center">
 											<div class="col-12">
 												<h3>{{title}}</h3>
@@ -195,11 +196,21 @@
 												<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
 													class="flowerImage" style="width: 300px; height: 300px">
 											</div>
-											<div class="col-12">
-												<h3>{{firstName}} {{lastName}}</h3>
-											</div>
-											<div class="col-12">
-												<p>{{message}}</p>
+											<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+												data-bs-target="#showOffers" aria-expanded="false" aria-controls="collapseExample">
+												Show Offers
+											</button>
+											<div class="collapse" id="showOffers">
+												<div class="card card-body">
+														{{#each adPending}}
+													<div class="col-12">
+														<h3>{{firstName}} {{lastName}}</h3>
+													</div>
+													<div class="col-12">
+														<p>{{message}}</p>
+													</div>
+													{{/each}}
+												</div>
 											</div>
 										</div>
 									{{/each}}

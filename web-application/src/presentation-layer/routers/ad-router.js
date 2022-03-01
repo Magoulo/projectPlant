@@ -67,28 +67,24 @@ router.get("/myAds", function (request, response) {
         var adPending = []
         var adDeclined = []
         for (index in adOffers) {
-            //    console.log("status!!!!!!!!!!!!!-----------------------------------------: ",ad[index].status)
             if (adOffers[index].status == "Accepted") {
-                //      console.log("Accepted!!!!---------------------------: ")
                 adAccepted.push(adOffers[index])
             }
             if (adOffers[index].status == "Pending") {
-                //      console.log("Pending!!!!---------------------------: ")
                 adPending.push(adOffers[index])
             }
             if (adOffers[index].status == "Declined") {
-                //    console.log("Declined!!!!---------------------------: ")
                 adDeclined.push(adOffers[index])
             }
         }
+ 
         model.adAccepted = adAccepted
         model.adPending = adPending
         model.adDeclined = adDeclined
 
         console.log("model: ", model)
         response.render("myAds.hbs", model)  
-        }
-        
+        }     
     })
 })
 

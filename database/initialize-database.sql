@@ -85,7 +85,8 @@ INSERT INTO UserAccount (username, passwordHash) VALUES ("slugger", "123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("3","Slugs","Slugsen","SluggiSlug@com","555-0222","JKPG");
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","Stargazer lily", "Lilium orientalis 'Stargazer'","Flowers for both outdoors and indoors!", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("4","aa184e45a9873944816d9ce825fb5a9a.jpg", "liliumstargazer.jpg", "lilium-orientalis-oriental-lily-pink-stargazer-garden_2.jpg");
-
+INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("3","Friendly cacti", "Echinopsis pachanoi'","Good for toothpicks", "0");
+INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("5","trichocereus_pachanoi.jpg", "trichocereus-pachanoi-echinopsis-pachanoi-mini.jpg", "sanpedro2.jpg");
 
 INSERT INTO UserAccount (username, passwordHash) VALUES ("qwe", "123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("4","qwe","qwe","qweg@com","555-0222","qwecity");
@@ -99,8 +100,10 @@ INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) 
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Hi I would like to buy your Lillies","Accepted");
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Jag har saab bror","Declined");
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "kommer ta dom","Declined");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "those look supreme! trade agaisnt monstera? ","Accepted");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("4", "4", "2022-02-16", "This is the imagePath to bid", "those look supreme! trade agaisnt monstera? ","Pending");
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Interesting Lillies","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "5", "2022-02-16", "This is the imagePath to bid", "Ooooh want some for appetizers ","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "5", "2022-02-16", "This is the imagePath to bid", "I want cactus","Pending");
 
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree","Pending");
 INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me","Pending");
