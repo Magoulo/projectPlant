@@ -30,14 +30,65 @@ router.post("/search", function(request, response){
 })
 
 router.get("/myAds", function (request, response) {
-
-    adManager.getAllAdsByUserID(request.session.userID, function (errors, ad) {
-        const model = {
+    const userID = request.session.userID
+    var model = {}
+    var myAdOffersModel = {}
+    var myClosedAdsModel = {}
+    console.log("före db funktionerna")
+    adManager.getAllAdsByUserID(userID, function (errors, ad) {
+        if(errors.length !== 0){
+            console.log("här?")
+             const model = {
             errors: errors,
             ad: ad,
             session: request.session
         }
-        response.render("myAds.hbs", model)
+        response.render("myAds.hbs", model) 
+        } else {
+            console.log("Lugna puckar i else i getAllAds")
+            model = {
+                ad: ad,
+                session: request.session
+            }
+            console.log("heina?")
+        }
+    })
+
+    adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
+        if(errors.length !== 0){
+            const model = {
+                errors: errors,
+                adOffers: adOffers,
+                session: request.session
+            }
+            response.render("myAds.hbs", model) 
+        } else {
+        var adAccepted = []
+        var adPending = []
+        var adDeclined = []
+        for (index in adOffers) {
+            //    console.log("status!!!!!!!!!!!!!-----------------------------------------: ",ad[index].status)
+            if (adOffers[index].status == "Accepted") {
+                //      console.log("Accepted!!!!---------------------------: ")
+                adAccepted.push(adOffers[index])
+            }
+            if (adOffers[index].status == "Pending") {
+                //      console.log("Pending!!!!---------------------------: ")
+                adPending.push(adOffers[index])
+            }
+            if (adOffers[index].status == "Declined") {
+                //    console.log("Declined!!!!---------------------------: ")
+                adDeclined.push(adOffers[index])
+            }
+        }
+        model.adAccepted = adAccepted
+        model.adPending = adPending
+        model.adDeclined = adDeclined
+
+        console.log("model: ", model)
+        response.render("myAds.hbs", model)  
+        }
+        
     })
 })
 
