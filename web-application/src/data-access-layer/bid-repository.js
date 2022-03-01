@@ -41,6 +41,33 @@ exports.getAllBidsByUserID = function (userID, callback) {
 	})
 }
 
+// ---------------- CREATE BID -----------------------------------------------
+exports.createBid = function (Ad, callback) {
+
+	const year = new Date()
+	year.getFullYear()
+	const month = new Date()
+	month.getMonth()
+	const day = new Date()
+	day.getDate()  //'%${searchInput}%'
+
+	const date = "2022-02-16" //db.query("SELECT STR_TO_DATE('21,5,2013','%d,%m,%Y');")
+	const imagePath = "variegata-1.jpg"
+
+	const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,\"pending\");`
+	const values = [Ad.userID, Ad.adID, date, imagePath, Ad.message]
+
+	db.query(query, values, function (error, adID) {
+		if (error) {
+			console.log("DB error: ", error)
+			callback(['databaseError'], null)
+		} else {
+			console.log("this.lastID", adID.insertId)
+			callback(error, adID.insertId)
+		}
+	})
+}
+
 
 // ---------------- UPDATE BID -----------------------------------------------
 
