@@ -32,12 +32,9 @@ router.post("/search", function(request, response){
 router.get("/myAds", function (request, response) {
     const userID = request.session.userID
     var model = {}
-    var myAdOffersModel = {}
-    var myClosedAdsModel = {}
-    console.log("före db funktionerna")
+ 
     adManager.getAllAdsByUserID(userID, function (errors, ad) {
         if(errors.length !== 0){
-            console.log("här?")
              const model = {
             errors: errors,
             ad: ad,
@@ -45,12 +42,10 @@ router.get("/myAds", function (request, response) {
         }
         response.render("myAds.hbs", model) 
         } else {
-            console.log("Lugna puckar i else i getAllAds")
             model = {
                 ad: ad,
                 session: request.session
             }
-            console.log("heina?")
         }
     })
 
@@ -71,6 +66,7 @@ router.get("/myAds", function (request, response) {
                 adAccepted.push(adOffers[index])
             }
             if (adOffers[index].status == "Pending") {
+                //Mappa ihop resultaten beroende på ett gemensamt adID?
                 adPending.push(adOffers[index])
             }
             if (adOffers[index].status == "Declined") {
@@ -230,7 +226,7 @@ router.get("/adCreate", function (request, response) {
 
 router.post("/adCreate", function (request, response) {
    
-    const ad =  {userID:request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0}
+    const ad =  {userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0}
     const errors = []
 
     /*const coverImagePath = "https://www.thespruce.com/thmb/_6OfTexQcyd-3aW8Z1O2y78sc-Q=/2048x1545/filters:fill(auto,1)/snake-plant-care-overview-1902772-04-d3990a1d0e1d4202a824e929abb12fc1-349b52d646f04f31962707a703b94298.jpeg"
