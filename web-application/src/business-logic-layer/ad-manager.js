@@ -49,3 +49,7 @@ exports.deleteAd = function(adID, callback){
 exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 	adRepository.getAllAdsBidsUsersByUserID(userID, callback)
 }
+
+exports.getAllBidsAndUserByAdID = function(adID,callback){
+	adRepository.getAllBidsAndUserByAdID(adID, callback)
+}
