@@ -184,10 +184,10 @@
 								</ul>
 								{{else}}
 								{{#if ad}}
-								<div class="row justify-content-start align-items-center">		
+										
 												
 									{{#each ad}}
-
+									<div class="row justify-content-start align-items-center">
 										<div class="col-3 text-center">
 											<div class="col-12">
 												<h3>{{title}}</h3>
@@ -196,28 +196,38 @@
 												<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
 													class="flowerImage" style="width: 300px; height: 300px">
 											</div>
-											<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-												data-bs-target="#showOffers" aria-expanded="false" aria-controls="collapseExample">
+											
+											
+										</div>
+										<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+												data-bs-target="#id{{adID}}ad" aria-expanded="false" aria-controls="collapseExample">
 												Show Offers
-											</button>
-											<div class="collapse" id="showOffers">
-												<div class="card card-body">
-													{{#each this.bids}}
-												
-
-													<div class="col-12">
+										</button>
+										<hr>
+										<div class="collapse" id="id{{adID}}ad">
+											<div class="card card-body">
+												{{#each this.bids}}
+												<div class="row">
+													<div class="col-8">
 														<h3>{{firstName}} {{lastName}}</h3>
-													</div>
-													<div class="col-12">
 														<p>{{message}}</p>
-													</div>		
-													{{/each}}
-
+													</div>
+													<div class="col-4">
+												
+														 <img class="img-thumbnail" src="/images/{{imagePath}}" alt="imageToID{{adID}}"
+														class="flowerImage" style="width: 300px; height: 300px">
+														<button class="btn btn-primary">Decline</button>
+														<button class="btn btn-primary">Accept</button>
+													</div>	
 												</div>
+												<hr>
+												{{/each}}
+
 											</div>
 										</div>
+									</div>
 									{{/each}}
-								</div>
+								
 
 								{{else}}
 								<div class="col-12 text-center">
