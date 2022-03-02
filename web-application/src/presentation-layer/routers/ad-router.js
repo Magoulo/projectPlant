@@ -38,55 +38,63 @@ router.post("/search", function (request, response) {
 router.get("/myAds", function (request, response) {
     const userID = request.session.userID
     var model = {}
- 
+    var allAds = []
+    var allBids = []
+
     adManager.getAllAdsByUserID(userID, function (errors, ad) {
-        if(errors.length !== 0){
-             const model = {
-            errors: errors,
-            ad: ad,
-            session: request.session
-        }
-        response.render("myAds.hbs", model) 
+        if (errors.length !== 0) {
+            const model = {
+                errors: errors,
+                ad: ad,
+                session: request.session
+            }
+            response.render("myAds.hbs", model)
         } else {
+            allAds = ad
             model = {
                 ad: ad,
                 session: request.session
             }
         }
     })
-
     adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
-        if(errors.length !== 0){
+        if (errors.length !== 0) {
             const model = {
                 errors: errors,
                 adOffers: adOffers,
                 session: request.session
             }
-            response.render("myAds.hbs", model) 
+            response.render("myAds.hbs", model)
         } else {
-        var adAccepted = []
-        var adPending = []
-        var adDeclined = []
-        for (index in adOffers) {
-            if (adOffers[index].status == "Accepted") {
-                adAccepted.push(adOffers[index])
-            }
-            if (adOffers[index].status == "Pending") {
-                //Mappa ihop resultaten beroende på ett gemensamt adID?
-                adPending.push(adOffers[index])
-            }
-            if (adOffers[index].status == "Declined") {
-                adDeclined.push(adOffers[index])
-            }
-        }
- 
-        model.adAccepted = adAccepted
-        model.adPending = adPending
-        model.adDeclined = adDeclined
+            allBids = adOffers
+            console.log("allBids: ", allBids)
 
-        console.log("model: ", model)
-        response.render("myAds.hbs", model)  
-        }     
+
+            for (const ad of allAds) {
+                ad.bids = []
+                for (const bid of allBids) {
+                    if (bid.adID == ad.adID && bid.status == "Pending" ) {
+                        ad.bids.push(bid)
+                    }
+                }
+                console.log("ad: ", ad)
+            }
+
+            var adAccepted = []
+            var adDeclined = []
+            for (index in adOffers) {
+                if (adOffers[index].status == "Accepted") {
+                    adAccepted.push(adOffers[index])
+                }
+                if (adOffers[index].status == "Declined") {
+                    adDeclined.push(adOffers[index])
+                }
+            }
+            model.adAccepted = adAccepted
+            model.adDeclined = adDeclined
+
+            response.render("myAds.hbs", model)
+        }
     })
 })
 

@@ -143,6 +143,18 @@ exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 	})
 }
 
+exports.getAllBidsAndUserByAdID = function(adID,callback){
+	const query = "SELECT * FROM Bid JOIN User ON Bid.userID = User.userID WHERE Bid.adID = ?"
+	const values = [adID]
+
+	db.query(query, values, function (error, adOffers) {
+		if (error) {
+			callback(['databaseError in getAllAdsByUserID'], null)
+		} else {
+			callback([], adOffers)
+		}
+	})
+}
 
 exports.getAllAdsByTitleOrLatinName = function (searchInput, callback) {
 	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%' OR latinName LIKE '%${searchInput}%'`
