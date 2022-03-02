@@ -50,20 +50,21 @@ exports.createBid = function (Ad, callback) {
 	month.getMonth()
 	const day = new Date()
 	day.getDate()  //'%${searchInput}%'
+	const status = "pending"
 
-	console.log(`${year}-${month}-${day}`);
+	//console.log(`${year}-${month}-${day}`);
 	const date = "2022-02-16" //`${year}-${month}-${day}`
 
-	const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,\"pending\");`
-	const values = [Ad.userID, Ad.adID, date, Ad.imagePath, Ad.message]
+	const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,?);`
+	const values = [Ad.userID, Ad.adID, date, Ad.imagePath, Ad.message, status]
 
-	db.query(query, values, function (error, adID) {
+	db.query(query, values, function (error, Bid) {
 		if (error) {
 			console.log("DB error: ", error)
 			callback(['databaseError'], null)
 		} else {
-			console.log("this.lastID", adID.insertId)
-			callback(error, adID.insertId)
+			console.log("-----------------------------------------------------", Bid.bidID)
+			callback(error)
 		}
 	})
 }

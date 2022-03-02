@@ -1,62 +1,83 @@
-
-
 <!-- Lägg till
 1. Lista med "Winning Bids" som man kan öppna och se mer info (länk till ad, sin bid)
 2. Lista med "Pending Bids" som man kan öppna och se mer info (länk till ad, sin bid)
 3. lägg till en knapp som man kan avbryta sin bid med
 -->
 
-<div class="content">
-<h1>My Bids</h1>
+<div class="container p-0 m-0" style="max-width: 100%;">
 
-{{#if errors.length}}
+
+	{{#if errors.length}}
 	<p>Oh no, something went wrong:</p>
 	<ul>
 		{{#each errors}}
-			<li>{{this}}</li>
+		<li>{{this}}</li>
 		{{/each}}
 	</ul>
-{{else}}
-	
+	{{else}}
+
 	{{#if bid}}
 	{{#each bid}}
-        <ul>		
-			<dt>Title:</dt>
-			<dd>{{title}}</dd>
 
-			<dt>LatinName:</dt>
-			<dd>{{latinName}}</dd>
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
 
-			<dt>description:</dt>
-			<dd>{{description}}</dd>
+				<div class="col-2 text-center">
+					<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
+						style="width: 200px; height: 200px">
+				</div>
 
-			<dt>isClosed:</dt>
-           
-			<dd>{{isClosed}}</dd>
+				<div class="col-8 text-start align-self-center">
+					<h1>{{title}}</h1>
+					<h3>{{latinName}}</h3>
+					<p>Bid placed {{date}}</p>
+				</div>
 
-			
+				<div class="col-2 text-center align-self-end">
+					<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+						data-bs-target="#bid{{bidID}}Info" aria-expanded="false" aria-controls="collapseExample">
+						my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
+					</button>
+				</div>
 
-			<li><img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			    <img src="/images/{{firstImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px">
-			    <img src="/images/{{secondImagePath}}" alt="{{imageBundleID}}" class="flowerImage" style="width: 300px; height: 300px"></li>
-        </ul>
- 
-        <ul>
-			<dt>BidDate:</dt>
-			<dd>{{date}}</dd>
+			</div>
+		</div>
+	</div>
 
-			<dt>BidImagePath:</dt>
-			<img src="/images/{{imagePath}}" class="flowerImage" style="width: 300px; height: 300px">
 
-			<dt>BidMessage:</dt>
-			<dd>{{message}}</dd>
-        </ul>
-          <p>----------------------------------------------------------------------------------------------</p>
-      	{{/each}}
-		
+	<div class="collapse" id="bid{{bidID}}Info">
+		<div class="card card-body">
+
+			<div class="row">
+				<div class="col-8 text-start">
+					<p>{{message}}</p>
+					<p>aaa{{bid.bidID}}aaa</p>
+				</div>
+
+				<div class="col-4 text-center">
+					<div class="col-12">
+						<img src="/images/{{imagePath}}" class="flowerImage" style="width: 400px; height: 400px">
+					</div>
+
+					<div class="col-12">
+						<button type="submit" class="btn btn-primary" type="button">
+							Delete
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	{{/each}}
+
 	{{else}}
-		<p>No, that bid doesn't exist here.</p>
+	<p>No, that bid doesn't exist here.</p>
 	{{/if}}
-	
-{{/if}}
+
+	{{/if}}
+
+
 </div>

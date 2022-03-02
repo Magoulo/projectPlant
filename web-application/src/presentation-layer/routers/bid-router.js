@@ -41,8 +41,6 @@ router.post("/placeBid", function (request, response) {
             }
         })
 
-
-
     } else {
         const imagePath = request.files.bidImagePath
         const errors = []
@@ -73,8 +71,6 @@ router.post("/placeBid", function (request, response) {
             }
         })
     }
-
-
 })
 
 module.exports = router
