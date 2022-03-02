@@ -6,6 +6,7 @@ const path = require('path')
 router.get("/myBids", function (request, response) {
 
     bidManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {//userID, function (errors, bid) {
+        console.log("-----------------------------------",bid);
         const model = {
             errors: errors,
             bid: bid,
@@ -40,8 +41,6 @@ router.post("/placeBid", function (request, response) {
             }
         })
 
-
-
     } else {
         const imagePath = request.files.bidImagePath
         const errors = []
@@ -72,8 +71,6 @@ router.post("/placeBid", function (request, response) {
             }
         })
     }
-
-
 })
 
 module.exports = router
