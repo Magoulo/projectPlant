@@ -38,12 +38,9 @@ router.post("/search", function (request, response) {
 router.get("/myAds", function (request, response) {
     const userID = request.session.userID
     var model = {}
-    var myAdOffersModel = {}
-    var myClosedAdsModel = {}
-    console.log("före db funktionerna")
+ 
     adManager.getAllAdsByUserID(userID, function (errors, ad) {
         if(errors.length !== 0){
-            console.log("här?")
              const model = {
             errors: errors,
             ad: ad,
@@ -51,12 +48,10 @@ router.get("/myAds", function (request, response) {
         }
         response.render("myAds.hbs", model) 
         } else {
-            console.log("Lugna puckar i else i getAllAds")
             model = {
                 ad: ad,
                 session: request.session
             }
-            console.log("heina?")
         }
     })
 
@@ -77,6 +72,7 @@ router.get("/myAds", function (request, response) {
                 adAccepted.push(adOffers[index])
             }
             if (adOffers[index].status == "Pending") {
+                //Mappa ihop resultaten beroende på ett gemensamt adID?
                 adPending.push(adOffers[index])
             }
             if (adOffers[index].status == "Declined") {
