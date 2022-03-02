@@ -53,7 +53,6 @@ exports.createBid = function (Ad, callback) {
 
 	console.log(`${year}-${month}-${day}`);
 	const date = "2022-02-16" //`${year}-${month}-${day}`
-	//const imagePath = "variegata-1.jpg"
 
 	const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,\"pending\");`
 	const values = [Ad.userID, Ad.adID, date, Ad.imagePath, Ad.message]

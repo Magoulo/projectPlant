@@ -55,6 +55,7 @@ router.get("/myAds", function (request, response) {
                 ad: ad,
                 session: request.session
             }
+            console.log("heina?")
         }
     })
     adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {

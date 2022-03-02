@@ -19,38 +19,61 @@ router.get("/myBids", function (request, response) {
 router.post("/placeBid", function (request, response) {
 
     const adID = request.body.adID
-    const imagePath = request.files.bidImagePath
     const message = request.body.message
 
-    console.log(request.files.bidImagePath);
+    if (request.files == null) {
 
-    const errors = []
-    const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+        const imagePath = "no-image.png"
+        const errors = []
+        const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
 
-    const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
-    imagePath.mv(uploadPath, function (error) {
-        if (error) {
-            console.log("Error in uploading pathway")
-            errors.push("couldn't upload picture")
-            response.render('adCreate.hbs', errors)
-        } else {
-            console.log("file uploaded successfully")
-        }
-    })
+        bidManager.createBid(Ad, function (error) {
 
-    bidManager.createBid(Ad, function (error) {
-
-        if (error) {
-            const model = {
-                errors: errors,
-                session: request.session
+            if (error) {
+                const model = {
+                    errors: errors,
+                    session: request.session
+                }
+                response.render(model)
+            } else {
+                response.redirect("/ads/" + adID)
             }
+        })
 
-            response.render(model)
-        } else {
-            response.redirect("/ads/" + adID)
-        }
-    })
+
+
+    } else {
+        const imagePath = request.files.bidImagePath
+        const errors = []
+        const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+
+        const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
+        imagePath.mv(uploadPath, function (error) {
+            if (error) {
+                console.log("Error in uploading pathway")
+                errors.push("couldn't upload picture")
+                response.render('adCreate.hbs', errors)
+            } else {
+                console.log("file uploaded successfully")
+            }
+        })
+
+        bidManager.createBid(Ad, function (error) {
+
+            if (error) {
+                const model = {
+                    errors: errors,
+                    session: request.session
+                }
+
+                response.render(model)
+            } else {
+                response.redirect("/ads/" + adID)
+            }
+        })
+    }
+
+
 })
 
 module.exports = router
