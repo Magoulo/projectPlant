@@ -43,7 +43,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 
-					<form action="/bids/placeBid" method="POST">
+					<form action="/bids/placeBid" method="POST" encType="multipart/form-data">
 						<div class="modal-body">
 
 							<input type="hidden" name="adID" value="{{ad.adID}}">
@@ -54,6 +54,11 @@
 								<label class="form-label"></label>
 								<textarea class="form-control" rows="3" name="message"
 									placeholder="message to seller"></textarea>
+							</div>
+
+							<div class="mb-0">
+								<label class="form-label">Upload image</label>
+								<input type="file" name="bidImagePath">
 							</div>
 
 						</div>

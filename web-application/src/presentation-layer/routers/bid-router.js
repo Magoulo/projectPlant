@@ -1,6 +1,7 @@
 const express = require('express')
 const bidManager = require('../../business-logic-layer/bid-manager')
 const router = express.Router()
+const path = require('path')
 
 router.get("/myBids", function (request, response) {
 
@@ -16,14 +17,26 @@ router.get("/myBids", function (request, response) {
 })
 
 router.post("/placeBid", function (request, response) {
-    //Ad.userID, Ad.adID, date, imagePath, message
-    const errors = []
-    const message = request.body.message
+
     const adID = request.body.adID
+    const imagePath = request.files.bidImagePath
+    const message = request.body.message
 
-    const Ad = { userID: request.session.userID, adID: adID, message: message }
+    console.log(request.files.bidImagePath);
 
-    console.log(message);
+    const errors = []
+    const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+
+    const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
+    imagePath.mv(uploadPath, function (error) {
+        if (error) {
+            console.log("Error in uploading pathway")
+            errors.push("couldn't upload picture")
+            response.render('adCreate.hbs', errors)
+        } else {
+            console.log("file uploaded successfully")
+        }
+    })
 
     bidManager.createBid(Ad, function (error) {
 
@@ -32,16 +45,9 @@ router.post("/placeBid", function (request, response) {
                 errors: errors,
                 session: request.session
             }
+
             response.render(model)
         } else {
-            console.log("ja det gick");
-
-            const model = {
-                errors: errors,
-                Ad: Ad,
-                msg: "done yalllllllllllllllllllllllllllllllllllllllll",
-                session: request.session
-            }
             response.redirect("/ads/" + adID)
         }
     })
