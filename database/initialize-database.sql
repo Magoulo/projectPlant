@@ -92,15 +92,15 @@ INSERT INTO UserAccount (username, passwordHash) VALUES ("qwe", "123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("4","qwe","qwe","qweg@com","555-0222","qwecity");
 
 
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Hi I would like to buy your Lillies","Accepted");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Jag har saab bror","Declined");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "kommer ta dom","Declined");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("4", "4", "2022-02-16", "This is the imagePath to bid", "those look supreme! trade agaisnt monstera? ","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "This is the imagePath to bid", "Interesting Lillies","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "5", "2022-02-16", "This is the imagePath to bid", "Ooooh want some for appetizers ","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "5", "2022-02-16", "This is the imagePath to bid", "I want cactus","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Hi I would like to buy your Lillies","Accepted");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Jag har saab bror","Declined");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "kommer ta dom","Declined");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("4", "4", "2022-02-16", "no-image.png", "those look supreme! trade agaisnt monstera? ","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Interesting Lillies","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "5", "2022-02-16", "no-image.png", "Ooooh want some for appetizers ","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "5", "2022-02-16", "no-image.png", "I want cactus","Pending");
 
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "2", "2022-02-22", "This is the imagePath to bid", "Hi I would like to buy your Moneytree","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("3", "1", "2022-02-22", "This is the imagePath to bid", "I am takeing the monstera with me","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "3", "2022-02-11", "This is the imagePath to bid", "I wanna trade that for this","Pending");
-INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "4", "2022-02-27", "This is the imagePath to bid", "Sling som lillies my way","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "2", "2022-02-22", "no-image.png", "Hi I would like to buy your Moneytree","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("3", "1", "2022-02-22", "no-image.png", "I am takeing the monstera with me","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "3", "2022-02-11", "no-image.png", "I wanna trade that for this","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "4", "2022-02-27", "no-image.png", "Sling som lillies my way","Pending");
