@@ -6,7 +6,7 @@ const path = require('path')
 router.get("/myBids", function (request, response) {
 
     bidManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {//userID, function (errors, bid) {
-        console.log("-----------------------------------",bid);
+        console.log("bids: ", bid)
         const model = {
             errors: errors,
             bid: bid,

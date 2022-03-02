@@ -41,8 +41,8 @@
 			<div class="row justify-content-center">
 				<div class="col-auto"></div>
 				<div class="col-3 text-center d-grid gap-2">
-                <a href="/ads/adCreate"><button type="button" class="btn btn-light">Create Ad</button></a>
-					
+					<a href="/ads/adCreate"><button type="button" class="btn btn-light">Create Ad</button></a>
+
 
 				</div>
 				<div class="col-auto"></div>
@@ -61,8 +61,8 @@
 			{{else}}
 			{{#if ad}}
 
-		<div class="row justify-content-start align-items-center">
-			{{#each ad}}
+			<div class="row justify-content-start align-items-center">
+				{{#each ad}}
 
 				<div class="col-3 text-center">
 
@@ -71,8 +71,8 @@
 					</div>
 
 					<div class="col-12">
-						<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
-							style="width: 300px; height: 300px">
+						<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
+							class="flowerImage" style="width: 300px; height: 300px">
 					</div>
 
 					<div class="col-12 mt-2 mb-2">
@@ -90,8 +90,8 @@
 					</div>
 				</div>
 
-			{{/each}}
-		</div>
+				{{/each}}
+			</div>
 
 			{{else}}
 			<div class="col-12 text-center">
@@ -133,23 +133,24 @@
 								</ul>
 								{{else}}
 								{{#if adAccepted}}
-								<div class="row justify-content-start align-items-center">			
+								<div class="row justify-content-start align-items-center">
 									{{#each adAccepted}}
-										<div class="col-3 text-center">
-											<div class="col-12">
-												<h3>{{title}}</h3>
-											</div>
-											<div class="col-12">
-												<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
-													class="flowerImage" style="width: 300px; height: 300px">
-											</div>
-											<div class="col-12">
-												<h3>{{firstName}} {{lastName}}</h3>
-											</div>
-											<div class="col-12">
-												<p>{{message}}</p>
-											</div>
+									<div class="col-3 text-center">
+										<div class="col-12">
+											<h3>{{title}}</h3>
 										</div>
+										<div class="col-12">
+											<img class="img-thumbnail" src="/images/{{coverImagePath}}"
+												alt="{{imageBundleID}}" class="flowerImage"
+												style="width: 300px; height: 300px">
+										</div>
+										<div class="col-12">
+											<h3>{{firstName}} {{lastName}}</h3>
+										</div>
+										<div class="col-12">
+											<p>{{message}}</p>
+										</div>
+									</div>
 									{{/each}}
 								</div>
 
@@ -184,41 +185,61 @@
 								</ul>
 								{{else}}
 								{{#if ad}}
-								<div class="row justify-content-start align-items-center">		
-												
-									{{#each ad}}
 
-										<div class="col-3 text-center">
-											<div class="col-12">
-												<h3>{{title}}</h3>
+								{{#each ad}}
+
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+
+											<div class="col-2 text-center">
+												<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
+													class="flowerImage" style="width: 200px; height: 200px">
 											</div>
-											<div class="col-12">
-												<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
-													class="flowerImage" style="width: 300px; height: 300px">
+
+											<div class="col-8 text-start align-self-center">
+												<h1>{{title}}</h1>
 											</div>
-											<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-												data-bs-target="#showOffers" aria-expanded="false" aria-controls="collapseExample">
-												Show Offers
-											</button>
-											<div class="collapse" id="showOffers">
-												<div class="card card-body">
-													{{#each this.bids}}
-												
 
-													<div class="col-12">
-														<h3>{{firstName}} {{lastName}}</h3>
-													</div>
-													<div class="col-12">
-														<p>{{message}}</p>
-													</div>		
-													{{/each}}
+											<div class="col-2 text-center align-self-end">
+												<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+													data-bs-target="#id{{adID}}ad" aria-expanded="false"
+													aria-controls="collapseExample">
+													Show offers <i class="bi bi-caret-down"></i>
+													<!-- byt icon när collaps är öppen-->
+												</button>
+											</div>
 
+										</div>
+									</div>
+								</div>
+
+								<hr>
+								<div class="collapse" id="id{{adID}}ad">
+									<div class="card card-body">
+										{{#each this.bids}}
+										<div class="row">
+											<div class="col-8 text start">
+												<h3>{{firstName}} {{lastName}}</h3>
+												<p>{{message}}</p>
+											</div>
+											<div class="col-4 text-center">
+												<div class="col-12">
+													<img class="flowerImage" src="/images/{{imagePath}}"
+														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+												</div>
+												<div class="col-12 align-items-end">
+													<button class="btn btn-primary m-1">Decline</button>
+													<button class="btn btn-primary m-1">Accept</button>
 												</div>
 											</div>
 										</div>
-									{{/each}}
+										<hr>
+										{{/each}}
+									</div>
 								</div>
 
+								{{/each}}
 								{{else}}
 								<div class="col-12 text-center">
 									<p>No, your ads doesn't exist.</p>
@@ -251,23 +272,24 @@
 								</ul>
 								{{else}}
 								{{#if adDeclined}}
-								<div class="row justify-content-start align-items-center">			
+								<div class="row justify-content-start align-items-center">
 									{{#each adDeclined}}
-										<div class="col-3 text-center">
-											<div class="col-12">
-												<h3>{{title}}</h3>
-											</div>
-											<div class="col-12">
-												<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
-													class="flowerImage" style="width: 300px; height: 300px">
-											</div>
-											<div class="col-12">
-												<h3>{{firstName}} {{lastName}}</h3>
-											</div>
-											<div class="col-12">
-												<p>{{message}}</p>
-											</div>
+									<div class="col-3 text-center">
+										<div class="col-12">
+											<h3>{{title}}</h3>
 										</div>
+										<div class="col-12">
+											<img class="img-thumbnail" src="/images/{{coverImagePath}}"
+												alt="{{imageBundleID}}" class="flowerImage"
+												style="width: 300px; height: 300px">
+										</div>
+										<div class="col-12">
+											<h3>{{firstName}} {{lastName}}</h3>
+										</div>
+										<div class="col-12">
+											<p>{{message}}</p>
+										</div>
+									</div>
 									{{/each}}
 								</div>
 
@@ -280,30 +302,10 @@
 							</div>
 						</div>
 					</div>
-
-					
-
-
-
-
-
 				</div>
 				<div class="col-auto"></div>
 			</div>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		<!-- My Offers -->
@@ -311,15 +313,9 @@
 			<div class="row justify-content-start">
 				<h1>My Closed Ads</h1>
 			</div>
-
-
-
-
-
 		</div>
+		
 	</div>
-
-
 </div>
 
 
