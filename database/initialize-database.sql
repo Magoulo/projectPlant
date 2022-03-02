@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS Bid (
   bidID INT NOT NULL AUTO_INCREMENT,
   userID INT NOT NULL,
   adID INT NOT NULL,
-  date DATE,
+  date DATETIME,
   imagePath VARCHAR(45),
   message TEXT,
   status VARCHAR(15),
