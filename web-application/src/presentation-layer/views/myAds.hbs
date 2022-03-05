@@ -41,7 +41,7 @@
 			<div class="row justify-content-center">
 				<div class="col-auto"></div>
 				<div class="col-3 text-center d-grid gap-2">
-					<a href="/ads/adCreate"><button type="button" class="btn btn-light">Create Ad</button></a>
+					<a href="/ads/adCreate"><button type="button" class="btn btn-primary">Create Ad</button></a>
 
 
 				</div>
@@ -80,15 +80,12 @@
 					</div>
 
 					<div class="col-12 mt-2 mb-2">
-						<div class="row justify-content-between">
-
-							<div class="col-5 d-grid gap-2 ms-3">
-								<a class="btn btn-light" href="/ads/adUpdate/{{adID}}">Update</a>
-							</div>
-
-							<div class="col-5 d-grid gap-2 me-3">
-								<a class="btn btn-light" href="/ads/adDelete/{{adID}}">Delete</a>
-							</div>
+						<div class="row">
+							<div class="col-12">
+								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{adID}}">Update</a>
+						
+								<a class="btn btn-primary m-1" href="/ads/adDelete/{{adID}}">Delete</a>
+						</div>
 
 						</div>
 					</div>
@@ -105,9 +102,6 @@
 			{{/if}}
 		</div>
 
-
-
-		<!-- My Offers -->
 		<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
 			<div class="row">
 				<div class="col-12">
