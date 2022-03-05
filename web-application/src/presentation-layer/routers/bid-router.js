@@ -1,4 +1,5 @@
 const express = require('express')
+const adManager = require('../../business-logic-layer/ad-manager')
 const bidManager = require('../../business-logic-layer/bid-manager')
 const router = express.Router()
 const path = require('path')
@@ -49,7 +50,7 @@ router.post("/updateBid/:bidID/:status", function (request, response) {
     const bid = { status: request.params.status, bidID: request.params.bidID }
     console.log("bid: ", bid)
 
-   if (request.params.status == "Accepted") {
+    if (request.params.status == "Accepted") {
 
         bidManager.setAllBidsToDeclined(adID, function (error) {
             if (error) {
@@ -59,6 +60,19 @@ router.post("/updateBid/:bidID/:status", function (request, response) {
                     layout: 'account.hbs'
                 }
                 response.render("myAds.hbs", model)
+            } else {
+                console.log("All bids set to declined")
+                adManager.closeAd(adID, function (error) {
+                if (error) {
+                    const model = {
+                        error: error,
+                        session: request.session
+                    }
+                    response.render("myAds.hbs", model)
+                } else {
+                    console.log("Ad closed successfully")
+                }
+                })
             }
         })
     }
@@ -72,11 +86,9 @@ router.post("/updateBid/:bidID/:status", function (request, response) {
             }
             response.render("myAds.hbs", model)
         } else {
-            response.redirect("/ads/myAds")
-
+          response.redirect("/ads/myAds")
         }
     })
-    
 })
 
 router.post("/placeBid", function (request, response) {

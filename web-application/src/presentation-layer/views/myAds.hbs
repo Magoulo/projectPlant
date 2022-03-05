@@ -41,7 +41,7 @@
 			<div class="row justify-content-center">
 				<div class="col-auto"></div>
 				<div class="col-3 text-center d-grid gap-2">
-					<a href="/ads/adCreate"><button type="button" class="btn btn-light">Create Ad</button></a>
+					<a href="/ads/adCreate"><button type="button" class="btn btn-primary">Create Ad</button></a>
 
 
 				</div>
@@ -67,7 +67,11 @@
 				<div class="col-3 text-center">
 
 					<div class="col-12">
-						<h3>{{title}}</h3>
+						<h3>{{title}}
+							{{#if isClosed}}
+							(Closed)
+							{{/if}}
+							</h3>
 					</div>
 
 					<div class="col-12">
@@ -76,15 +80,12 @@
 					</div>
 
 					<div class="col-12 mt-2 mb-2">
-						<div class="row justify-content-between">
-
-							<div class="col-5 d-grid gap-2 ms-3">
-								<a class="btn btn-light" href="/ads/adUpdate/{{adID}}">Update</a>
-							</div>
-
-							<div class="col-5 d-grid gap-2 me-3">
-								<a class="btn btn-light" href="/ads/adDelete/{{adID}}">Delete</a>
-							</div>
+						<div class="row">
+							<div class="col-12">
+								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{adID}}">Update</a>
+						
+								<a class="btn btn-primary m-1" href="/ads/adDelete/{{adID}}">Delete</a>
+						</div>
 
 						</div>
 					</div>
@@ -101,16 +102,11 @@
 			{{/if}}
 		</div>
 
-
-
-		<!-- My Offers -->
 		<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
 			<div class="row">
 				<div class="col-12">
 
-					<div class="row justify-content-start">
-						<h1>My ad offers</h1>
-					</div>
+		
 
 <!----------- Accepted Offers ------------------------------------------------------------------------------->
 				<!--	<div class="col-12">
@@ -185,9 +181,12 @@
 								</ul>
 								{{else}}
 								{{#if ad}}
+								
 
 								{{#each ad}}
-
+								{{#unless isClosed}}
+								
+								
 								<div class="card">
 									<div class="card-body">
 										<div class="row">
@@ -310,7 +309,11 @@
 										<div class="row">
 											<div class="col-8 text start">
 												<h3>{{firstName}} {{lastName}}</h3>
-												<p>{{message}}</p>
+												<p>Placed: {{date}}</p>
+
+												<hr>
+
+												<p>{{message}}</p>	
 											</div>
 											<div class="col-4 text-center">
 												<div class="col-12">
@@ -335,6 +338,7 @@
 									</div>
 								</div>
 
+								{{/unless}}
 								{{/each}}
 								{{else}}
 								<div class="col-12 text-center">
@@ -405,7 +409,6 @@
 		
 		<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
 			<div class="row justify-content-start">
-				<h1>My Closed Ads</h1>
 				{{#if adAccepted}}
 				{{#each adAccepted}}
 				<div>

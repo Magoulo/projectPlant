@@ -1,4 +1,3 @@
-
 <!-- Lägg till
 1. Kontrolltext 
 2. Yes och No knapp
@@ -21,18 +20,21 @@
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Delete ad</h1>
             <div>
-                <p>Are you sure you want to delete the ad <b>"{{ad.title}}"</b>?  </p>
+                <p>Are you sure you want to delete the ad <b>"{{ad.title}}"</b>? </p>
             </div>
             <div>
-                <div class="mb-3">
-                    <form action="/ads/adDelete/{{ad.adID}}/delete" method="POST">
-                       <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-	                    <div>
-	                       <input type="submit" value="Yes">
+                <div class="mb-3 col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="/ads/adDelete/{{ad.adID}}/delete" method="POST">
+                                <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+                                <input class="btn btn-primary" type="submit" value="Yes">
+                                
+                            </form>    
+                                       <a href="/ads/myAds"> <button type="submit" class="btn btn-primary m-2">No</button></a>    
                         </div>
-                    </form>
-                    <a href="/ads/myAds"> <button type="submit" class="btn btn-primary m-2">No</button></a>
-                </div>         
+                    </div>
+                </div>
             </div>
         </div>
     </div>

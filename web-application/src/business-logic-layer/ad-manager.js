@@ -53,3 +53,8 @@ exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
 exports.getAllBidsAndUserByAdID = function(adID,callback){
 	adRepository.getAllBidsAndUserByAdID(adID, callback)
 }
+
+// Closeing Ad
+exports.closeAd = function(adID, callback){
+	adRepository.closeAd(adID,callback)
+}
