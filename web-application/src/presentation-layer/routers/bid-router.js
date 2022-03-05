@@ -43,6 +43,38 @@ router.get("/myBids", function (request, response) {
         response.render("myBids.hbs", model)
     })
 })
+router.post("/updateBid/:bidID/:status", function (request, response) {
+    const adID = request.body.adID
+    const bid = { status: request.params.status, bidID: request.params.bidID }
+    console.log("bid: ", bid)
+
+   if (request.params.status == "Accepted") {
+
+        bidManager.setAllBidsToDeclined(adID, function (error) {
+            if (error) {
+                const model = {
+                    error: error,
+                    session: request.session
+                }
+                response.render("myAds.hbs", model)
+            }
+        })
+    }
+
+    bidManager.updateBidByBidID(bid, function (error) {
+        if (error) {
+            const model = {
+                error: error,
+                session: request.session
+            }
+            response.render("myAds.hbs", model)
+        } else {
+            response.redirect("/ads/myAds")
+
+        }
+    })
+    
+})
 
 router.post("/placeBid", function (request, response) {
 
@@ -62,7 +94,7 @@ router.post("/placeBid", function (request, response) {
                     errors: errors,
                     session: request.session
                 }
-                response.render(model)
+                response.render("ad.hbs", model)
             } else {
                 response.redirect("/ads/" + adID)
             }

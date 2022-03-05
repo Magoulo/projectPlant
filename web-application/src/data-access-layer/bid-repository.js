@@ -68,8 +68,8 @@ exports.createBid = function (Bid, callback) {
 exports.deleteBid = function (bidID, callback) {
 
 	const query = `DELETE FROM Bid WHERE Bid.bidID = ?`
-	const values = [bidID]
-
+	const values = [bidID]	
+	
 	db.query(query, values, function (error) {
 		if (error) {
 			callback(['databaseError'], null)
@@ -78,3 +78,34 @@ exports.deleteBid = function (bidID, callback) {
 		}
 	})
 }
+
+
+exports.updateBidByBidID = function (bid, callback) {
+	const query = "UPDATE Bid SET status = ? WHERE BidID = ?"
+	const values = [bid.status, bid.bidID]
+
+	db.query(query, values, function (error) {
+		if (error) {
+			callback(['databaseError'], null)
+		} else {
+			console.log("sucessfully update")
+			callback(error)
+		}
+	})
+}
+
+exports.setAllBidsToDeclined = function(adID, callback){
+	const status = "Declined"
+	const query = "UPDATE Bid SET status = ? WHERE adID = ?"
+	const values = [status, adID]
+
+	db.query(query, values, function (error) {
+		if (error) {
+			callback(['databaseError'], null)
+		} else {
+			console.log("sucessfully updated all other ads to declined")
+			callback(error)
+		}
+	})
+}
+// ---------------- DELETE BID -----------------------------------------------
