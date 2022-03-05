@@ -63,4 +63,17 @@ exports.createBid = function (Ad, callback) {
 
 // ---------------- UPDATE BID -----------------------------------------------
 
+exports.updateBidByBidID = function (bid, callback) {
+	const query = "UPDATE Bid SET status = ? WHERE BidID = ?"
+	const values = [bid.status, bid.bidID]
+
+	db.query(query, values, function (error) {
+		if (error) {
+			callback(['databaseError'], null)
+		} else {
+			console.log("sucessfully update")
+			callback(error)
+		}
+	})
+}
 // ---------------- DELETE BID -----------------------------------------------

@@ -6,7 +6,6 @@ const path = require('path')
 router.get("/myBids", function (request, response) {
 
     bidManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {//userID, function (errors, bid) {
-        console.log("bids: ", bid)
         const model = {
             errors: errors,
             bid: bid,
@@ -16,7 +15,24 @@ router.get("/myBids", function (request, response) {
         response.render("myBids.hbs", model)
     })
 })
+router.post("/updateBid/:bidID/:status", function (request, response) {
 
+    const bid = { status: request.params.status, bidID: request.params.bidID }
+    console.log("bid: ", bid)
+    bidManager.updateBidByBidID(bid, function (error) {
+        if (error) {
+            const model = {
+                error: error,
+                session: request.session
+            }
+            response.render("myAds.hbs",model)
+        } else {
+            response.redirect("/ads/myAds")
+
+        }
+    })
+
+})
 router.post("/placeBid", function (request, response) {
 
     const adID = request.body.adID
@@ -35,7 +51,7 @@ router.post("/placeBid", function (request, response) {
                     errors: errors,
                     session: request.session
                 }
-                response.render(model)
+                response.render("ad.hbs",model)
             } else {
                 response.redirect("/ads/" + adID)
             }

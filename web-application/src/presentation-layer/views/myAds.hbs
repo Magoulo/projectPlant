@@ -215,9 +215,97 @@
 								</div>
 
 								<hr>
+
 								<div class="collapse" id="id{{adID}}ad">
 									<div class="card card-body">
 										{{#each this.bids}}
+
+										<!-- Accept Bid Modal -->
+										<div class="modal fade" id="acceptBidID{{bidID}}Modal" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel">Accept bid for "{{title}}?"</h3>
+														<button type="button" class="btn-close" data-bs-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+
+													<form action="/bids/updateBid/{{bidID}}/Accepted" method="POST"
+														encType="multipart/form-data">
+														<div class="modal-body">
+
+															<input type="hidden" name="adID" value="{{ad.adID}}">
+
+															<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+															<div class="mb-0">
+															<h3>{{firstName}} {{lastName}}</h3>
+															<p>{{message}}</p>
+															</div>
+
+															<div class="mb-0">
+																<img class="flowerImage" src="/images/{{imagePath}}"
+																	alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+															</div>
+
+														</div>
+
+														<div class="modal-footer">
+															<button type="submit" class="btn btn-primary">confirm</button>
+														</div>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+										<!-- Decline Bid Modal -->
+										<div class="modal fade" id="declineBidID{{bidID}}Modal" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+
+													<div class="modal-header">
+														<h1 class="modal-title" id="exampleModalLabel">Decline bid for "{{title}}?"</h1>
+														<button type="button" class="btn-close" data-bs-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+
+													<form action="/bids/updateBid/{{bidID}}/Declined" method="POST"
+														encType="multipart/form-data">
+														<div class="modal-body">
+
+															<input type="hidden" name="adID" value="{{ad.adID}}">
+
+															<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+															<div class="mb-0">
+															<h3>{{firstName}} {{lastName}}</h3>
+															<p>{{message}}</p>
+															</div>
+
+															<div class="mb-0">
+																<img class="flowerImage" src="/images/{{imagePath}}"
+																	alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+															</div>
+
+														</div>
+
+														<div class="modal-footer">
+															<button type="submit" class="btn btn-primary">confirm</button>
+														</div>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+
+
+
+
 										<div class="row">
 											<div class="col-8 text start">
 												<h3>{{firstName}} {{lastName}}</h3>
@@ -228,13 +316,20 @@
 													<img class="flowerImage" src="/images/{{imagePath}}"
 														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
 												</div>
+
+												<!-- Modal Buttons -->
 												<div class="col-12 align-items-end">
-													<button class="btn btn-primary m-1">Decline</button>
-													<button class="btn btn-primary m-1">Accept</button>
+													<button class="btn btn-primary m-1" data-bs-toggle="modal"
+															data-bs-target="#declineBidID{{bidID}}Modal">Decline</button>
+													<button class="btn btn-primary m-1" data-bs-toggle="modal"
+															data-bs-target="#acceptBidID{{bidID}}Modal">Accept</button>
 												</div>
+
 											</div>
 										</div>
+
 										<hr>
+
 										{{/each}}
 									</div>
 								</div>
@@ -314,7 +409,7 @@
 				<h1>My Closed Ads</h1>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 

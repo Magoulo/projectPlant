@@ -55,7 +55,6 @@ router.get("/myAds", function (request, response) {
                 ad: ad,
                 session: request.session
             }
-            console.log("heina?")
         }
     })
     adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
@@ -68,8 +67,6 @@ router.get("/myAds", function (request, response) {
             response.render("myAds.hbs", model)
         } else {
             allBids = adOffers
-            console.log("allBids: ", allBids)
-
 
             for (const ad of allAds) {
                 ad.bids = []
@@ -78,7 +75,6 @@ router.get("/myAds", function (request, response) {
                         ad.bids.push(bid)
                     }
                 }
-                console.log("ad: ", ad)
             }
 
             var adAccepted = []
@@ -93,6 +89,7 @@ router.get("/myAds", function (request, response) {
             }
             model.adAccepted = adAccepted
             model.adDeclined = adDeclined
+            console.log("adAccepted: ", adAccepted)
 
             response.render("myAds.hbs", model)
         }
