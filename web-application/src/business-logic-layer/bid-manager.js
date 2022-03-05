@@ -19,6 +19,8 @@ exports.createBid = function (Bid, callback) {
 
 exports.deleteBid = function (bidID, callback) {
 	bidRepository.deleteBid(bidID, callback)
+}
+
 exports.updateBidByBidID = function (bid, callback){
 	bidRepository.updateBidByBidID(bid, callback)
 }
