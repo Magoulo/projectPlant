@@ -76,4 +76,19 @@ exports.updateBidByBidID = function (bid, callback) {
 		}
 	})
 }
+
+exports.setAllBidsToDeclined = function(adID, callback){
+	const status = "Declined"
+	const query = "UPDATE Bid SET status = ? WHERE adID = ?"
+	const values = [status, adID]
+
+	db.query(query, values, function (error) {
+		if (error) {
+			callback(['databaseError'], null)
+		} else {
+			console.log("sucessfully updated all other ads to declined")
+			callback(error)
+		}
+	})
+}
 // ---------------- DELETE BID -----------------------------------------------

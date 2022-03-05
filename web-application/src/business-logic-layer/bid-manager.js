@@ -20,3 +20,7 @@ exports.createBid = function (Bid, callback) {
 exports.updateBidByBidID = function (bid, callback){
 	bidRepository.updateBidByBidID(bid, callback)
 }
+
+exports.setAllBidsToDeclined = function(adID, callback){
+	bidRepository.setAllBidsToDeclined(adID, callback)
+}
