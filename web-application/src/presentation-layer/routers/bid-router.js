@@ -38,7 +38,8 @@ router.get("/myBids", function (request, response) {
             session: request.session,
             bidAccepted: bidAccepted,
             bidPending: bidPending,
-            bidDeclined: bidDeclined
+            bidDeclined: bidDeclined,
+            layout: 'account.hbs'
         }
         response.render("myBids.hbs", model)
     })
@@ -54,7 +55,8 @@ router.post("/updateBid/:bidID/:status", function (request, response) {
             if (error) {
                 const model = {
                     error: error,
-                    session: request.session
+                    session: request.session,
+                    layout: 'account.hbs'
                 }
                 response.render("myAds.hbs", model)
             }
@@ -65,7 +67,8 @@ router.post("/updateBid/:bidID/:status", function (request, response) {
         if (error) {
             const model = {
                 error: error,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
             response.render("myAds.hbs", model)
         } else {

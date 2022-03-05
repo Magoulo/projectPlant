@@ -46,14 +46,16 @@ router.get("/myAds", function (request, response) {
             const model = {
                 errors: errors,
                 ad: ad,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
             response.render("myAds.hbs", model)
         } else {
             allAds = ad
             model = {
                 ad: ad,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
         }
     })
@@ -62,7 +64,8 @@ router.get("/myAds", function (request, response) {
             const model = {
                 errors: errors,
                 adOffers: adOffers,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
             response.render("myAds.hbs", model)
         } else {
@@ -124,6 +127,7 @@ router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtec
                     title,
                     latinName,
                     description,
+                    layout: 'account.hbs'
                     //   csrfToken: request.csrfToken()
                 }
                 response.render('adUpdate.hbs', model)
@@ -142,6 +146,7 @@ router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtec
             title,
             latinName,
             description,
+            layout: 'account.hbs'
             //   csrfToken: request.csrfToken()
         }
         response.render('adUpdate.hbs', model)
@@ -155,7 +160,8 @@ router.get("/adUpdate/:adID", function (request, response) {
         const model = {
             errors: errors,
             ad: ad,
-            session: request.session
+            session: request.session,
+            layout: 'account.hbs'
         }
         response.render("adUpdate.hbs", model)
     })
@@ -168,7 +174,8 @@ router.get("/adDelete/:adID", function (request, response) {
         const model = {
             errors: errors,
             ad: ad,
-            session: request.session
+            session: request.session,
+            layout: 'account.hbs'
         }
         response.render("adDelete.hbs", model)
     })
@@ -181,7 +188,8 @@ router.post("/adDelete/:adID/delete", function (request, response) {
         if (errors.length !== 0) {
             const model = {
                 errors: errors,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
             response.render("myAds.hbs", model)
         } else {
@@ -223,7 +231,8 @@ router.get('/myAds/:userID', function (request, response) {
             errors: errors,
             adAccepted,
             adPending,
-            adDeclined
+            adDeclined,
+            layout: 'account.hbs'
         }
         response.render("myAdBids.hbs", model)
     })
@@ -231,7 +240,8 @@ router.get('/myAds/:userID', function (request, response) {
 
 router.get("/adCreate", function (request, response) {
     const model = {
-        session: request.session
+        session: request.session,
+        layout: 'account.hbs'
     }
     response.render("adCreate.hbs", model)
 })
@@ -270,7 +280,8 @@ router.post("/adCreate", function (request, response) {
         if (error) {
             model = {
                 error,
-                session: request.session
+                session: request.session,
+                layout: 'account.hbs'
             }
             response.render("myAds.hbs", model)
         } else {

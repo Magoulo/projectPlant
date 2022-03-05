@@ -9,7 +9,8 @@ router.get("/personalData", function (request, response) {
         const model = {
             errors: errors,
             User: User,
-            session: request.session
+            session: request.session,
+            layout: 'account.hbs'
         }
 
         response.render("personalData.hbs", model)
@@ -38,7 +39,8 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
 					email,
 					phoneNumber,
 					city,
-					session: request.session
+					session: request.session,
+                    layout: 'account.hbs'
                  //   csrfToken: request.csrfToken()
                 }
                 response.render('personalData.hbs', model)
@@ -57,7 +59,8 @@ router.post('/personalData/:userID/update', function (request, response) {//csrf
 			email,
 			phoneNumber,
 			city,
-			session: request.session
+			session: request.session,
+            layout: 'account.hbs'
          //   csrfToken: request.csrfToken()
         }
         response.render('personalData.hbs', model)

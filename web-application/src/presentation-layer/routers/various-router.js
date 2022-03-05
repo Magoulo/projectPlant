@@ -4,6 +4,10 @@ const userManager = require('../../business-logic-layer/user-manager')
 const router = express.Router()
 const nodemailer = require('nodemailer')
 
+const path = require('path')
+const app = express()
+const expressHandlebars = require('express-handlebars')
+
 
 router.get("/", function (request, response) {
 
@@ -23,17 +27,24 @@ router.get("/", function (request, response) {
 
 router.get("/about", function (request, response) {
 
+	app.engine('hbs', expressHandlebars({
+		extname: 'hbs',
+		defaultLayout: 'meh',
+		layoutsDir: path.join(__dirname, 'layouts')
+	}))
+
 	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 		const model = {
 			errors: errors,
 			User: User,
-			session: request.session
+			session: request.session,
 		}
-		response.render("about.hbs", model)
+		response.render("about.hbs", model,)
 	})
 })
 
 router.get("/contact", function (request, response) {
+
 
 	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 		const model = {
@@ -48,7 +59,8 @@ router.get("/contact", function (request, response) {
 router.get("/myFavoriteAds", function (request, response) {
 
 	const model = {
-		session: request.session
+		session: request.session,
+		layout: 'account.hbs'
 	}
 
 	response.render("myFavoriteAds.hbs", model)
