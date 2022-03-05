@@ -44,7 +44,7 @@ exports.getAllBidsByUserID = function (userID, callback) {
 // ---------------- CREATE BID -----------------------------------------------
 exports.createBid = function (Ad, callback) {
 
-	const status = "pending"
+	const status = "Pending"
 	const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
 	const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,?);`
 	const values = [Ad.userID, Ad.adID, date, Ad.imagePath, Ad.message, status]
