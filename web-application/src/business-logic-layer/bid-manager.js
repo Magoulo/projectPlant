@@ -16,3 +16,7 @@ exports.getAllBidsByUserID = function (userID, callback) {
 exports.createBid = function (Bid, callback) {
 	bidRepository.createBid(Bid, callback)
 }
+
+exports.deleteBid = function (bidID, callback) {
+	bidRepository.deleteBid(bidID, callback)
+}

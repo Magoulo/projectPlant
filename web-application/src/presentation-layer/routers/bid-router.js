@@ -5,14 +5,41 @@ const path = require('path')
 
 router.get("/myBids", function (request, response) {
 
-    bidManager.getAllBidsByUserID(request.session.userID, function (errors, bid) {//userID, function (errors, bid) {
-        console.log("bids: ", bid)
+    var bidAccepted = []
+    var bidPending = []
+    var bidDeclined = []
+
+    bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
+
+        for (index in Bid) {
+
+            if (Bid[index].status == "Accepted") {
+                bidAccepted.push(Bid[index])
+            }
+
+            if (Bid[index].status == "Pending") {
+                bidPending.push(Bid[index])
+            }
+
+            if (Bid[index].status == "Declined") {
+                bidDeclined.push(Bid[index])
+            }
+        }
+        console.log(bidAccepted);
+        console.log(bidPending);
+        console.log(bidDeclined);
+
+        console.log(Bid);
+
+
+
         const model = {
             errors: errors,
-            bid: bid,
-            session: request.session
+            session: request.session,
+            bidAccepted: bidAccepted,
+            bidPending: bidPending,
+            bidDeclined: bidDeclined
         }
-
         response.render("myBids.hbs", model)
     })
 })
@@ -71,6 +98,22 @@ router.post("/placeBid", function (request, response) {
             }
         })
     }
+})
+
+router.post("/:bidID/delete", function (request, response) {
+
+    const bidID = request.params.bidID
+
+    bidManager.deleteBid(bidID, function (error) {
+        if (error) {
+            response.redirect("/bids/myBids")
+
+        } else {
+            response.redirect("/bids/myBids")
+        }
+    })
+
+
 })
 
 module.exports = router
