@@ -67,7 +67,11 @@
 				<div class="col-3 text-center">
 
 					<div class="col-12">
-						<h3>{{title}}</h3>
+						<h3>{{title}}
+							{{#if isClosed}}
+							(Closed)
+							{{/if}}
+							</h3>
 					</div>
 
 					<div class="col-12">
@@ -108,9 +112,7 @@
 			<div class="row">
 				<div class="col-12">
 
-					<div class="row justify-content-start">
-						<h1>My ad offers</h1>
-					</div>
+		
 
 <!----------- Accepted Offers ------------------------------------------------------------------------------->
 				<!--	<div class="col-12">
@@ -185,9 +187,12 @@
 								</ul>
 								{{else}}
 								{{#if ad}}
+								
 
 								{{#each ad}}
-
+								{{#unless isClosed}}
+								
+								
 								<div class="card">
 									<div class="card-body">
 										<div class="row">
@@ -335,6 +340,7 @@
 									</div>
 								</div>
 
+								{{/unless}}
 								{{/each}}
 								{{else}}
 								<div class="col-12 text-center">
@@ -405,7 +411,6 @@
 		
 		<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
 			<div class="row justify-content-start">
-				<h1>My Closed Ads</h1>
 				{{#if adAccepted}}
 				{{#each adAccepted}}
 				<div>

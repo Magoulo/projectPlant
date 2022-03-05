@@ -2,9 +2,9 @@ const db = require('./db')
 
 // ------------------ GET AD/S -------------------------------------------------------------------------
 exports.getAllAds = function (callback) {
-
-	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID ORDER BY Ad.adID`
-	const values = []
+const isClosed = 0
+	const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE isClosed = ? ORDER BY Ad.adID`
+	const values = [isClosed]
 
 	db.query(query, values, function (error, Ad) {
 		if (error) {
@@ -126,6 +126,18 @@ exports.deleteAd = function(adID, callback){
 		} else {
 			callback([])
 		}
+	})
+}
+
+//Close Ad
+exports.closeAd = function(adID, callback){
+
+	const isClosed = 1
+	const query = "UPDATE Ad SET isClosed = ? WHERE adID = ?"
+	const values = [isClosed, adID]
+
+	db.query(query, values, function (error) {
+		callback(error)
 	})
 }
 

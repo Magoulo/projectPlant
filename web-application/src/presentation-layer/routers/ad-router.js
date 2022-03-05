@@ -71,10 +71,11 @@ router.get("/myAds", function (request, response) {
             for (const ad of allAds) {
                 ad.bids = []
                 for (const bid of allBids) {
-                    if (bid.adID == ad.adID && bid.status == "Pending" ) {
+                    if (bid.adID == ad.adID && bid.status == "Pending" && ad.isClosed == 0 ) {
                         ad.bids.push(bid)
                     }
                 }
+                console.log("ad of allAdsBidsUser that are == Pending : ", ad)
             }
 
             var adAccepted = []
@@ -89,7 +90,6 @@ router.get("/myAds", function (request, response) {
             }
             model.adAccepted = adAccepted
             model.adDeclined = adDeclined
-            console.log("adAccepted: ", adAccepted)
 
             response.render("myAds.hbs", model)
         }
