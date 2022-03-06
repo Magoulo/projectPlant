@@ -87,8 +87,6 @@ module.exports = function ({ adManager, userManager }) {
                             ad.bids.push(bid)
                         }
                     }
-
-                    console.log("ad of allAdsBidsUser that are == Pending : ", ad)
                 }
 
                 var adAccepted = []
