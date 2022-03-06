@@ -1,327 +1,334 @@
 const express = require('express')
-const adManager = require('../../business-logic-layer/ad-manager')
-const userManager = require('../../business-logic-layer/user-manager')
-const router = express.Router()
 const path = require('path')
 
-router.get("/", function (request, response) {
+module.exports = function ({ adManager, userManager }) {
+    const router = express.Router()
 
-    adManager.getAllAds(function (errors, Ad) {
+    router.get("/", function (request, response) {
 
-        userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+        adManager.getAllAds(function (errors, Ad) {
+            userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+
+                const model = {
+                    errors: errors,
+                    Ad: Ad,
+                    User: User,
+                    session: request.session
+                }
+
+                response.render("ads.hbs", model)
+            })
+        })
+    })
+
+    router.post("/search", function (request, response) {
+        const searchInput = request.body.searchInput
+
+        adManager.getAllAdsByTitleOrLatinName(searchInput, function (errors, Ad) {
 
             const model = {
                 errors: errors,
+                searchInput: searchInput,
                 Ad: Ad,
-                User: User,
                 session: request.session
             }
+
             response.render("ads.hbs", model)
         })
     })
-})
 
-router.post("/search", function (request, response) {
-    const searchInput = request.body.searchInput
+    router.get("/myAds", function (request, response) {
 
-    adManager.getAllAdsByTitleOrLatinName(searchInput, function (errors, Ad) {
-        const model = {
-            errors: errors,
-            searchInput: searchInput,
-            Ad: Ad,
-            session: request.session
-        }
-        response.render("ads.hbs", model)
-    })
-})
+        const userID = request.session.userID
+        var model = {}
+        var allAds = []
+        var allBids = []
 
-router.get("/myAds", function (request, response) {
-    const userID = request.session.userID
-    var model = {}
-    var allAds = []
-    var allBids = []
+        adManager.getAllAdsByUserID(userID, function (errors, ad) {
+            if (errors.length !== 0) {
+                const model = {
+                    errors: errors,
+                    ad: ad,
+                    session: request.session,
+                    layout: 'account.hbs'
+                }
 
-    adManager.getAllAdsByUserID(userID, function (errors, ad) {
-        if (errors.length !== 0) {
-            const model = {
-                errors: errors,
-                ad: ad,
-                session: request.session,
-                layout: 'account.hbs'
+                response.render("myAds.hbs", model)
+            } else {
+                allAds = ad
+
+                model = {
+                    ad: ad,
+                    session: request.session,
+                    layout: 'account.hbs'
+                }
             }
-            response.render("myAds.hbs", model)
-        } else {
-            allAds = ad
-            model = {
-                ad: ad,
-                session: request.session,
-                layout: 'account.hbs'
-            }
-        }
-    })
-    adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
-        if (errors.length !== 0) {
-            const model = {
-                errors: errors,
-                adOffers: adOffers,
-                session: request.session,
-                layout: 'account.hbs'
-            }
-            response.render("myAds.hbs", model)
-        } else {
-            allBids = adOffers
+        })
 
-            for (const ad of allAds) {
-                ad.bids = []
-                for (const bid of allBids) {
-                    if (bid.adID == ad.adID && bid.status == "Pending" && ad.isClosed == 0 ) {
-                        ad.bids.push(bid)
+        adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
+            if (errors.length !== 0) {
+
+                const model = {
+                    errors: errors,
+                    adOffers: adOffers,
+                    session: request.session,
+                    layout: 'account.hbs'
+                }
+
+                response.render("myAds.hbs", model)
+            } else {
+                allBids = adOffers
+
+                for (const ad of allAds) {
+                    ad.bids = []
+
+                    for (const bid of allBids) {
+                        if (bid.adID == ad.adID && bid.status == "Pending" && ad.isClosed == 0) {
+                            ad.bids.push(bid)
+                        }
+                    }
+
+                    console.log("ad of allAdsBidsUser that are == Pending : ", ad)
+                }
+
+                var adAccepted = []
+                var adDeclined = []
+
+                for (index in adOffers) {
+                    if (adOffers[index].status == "Accepted") {
+                        adAccepted.push(adOffers[index])
+                    }
+
+                    if (adOffers[index].status == "Declined") {
+                        adDeclined.push(adOffers[index])
                     }
                 }
-            }
 
-            var adAccepted = []
-            var adDeclined = []
-            for (index in adOffers) {
-                if (adOffers[index].status == "Accepted") {
-                    adAccepted.push(adOffers[index])
-                }
-                if (adOffers[index].status == "Declined") {
-                    adDeclined.push(adOffers[index])
-                }
-            }
-            model.adAccepted = adAccepted
-            model.adDeclined = adDeclined
+                model.adAccepted = adAccepted
+                model.adDeclined = adDeclined
 
-            response.render("myAds.hbs", model)
-        }
-    })
-})
-
-router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
-    const adID = request.params.adID
-    const title = request.body.title
-    const latinName = request.body.latinname
-    const description = request.body.description
-    /* const coverImagePath = request.body.coverimagepath
-     const firstImagePath = request.body.firstimagepath
-     const secondImagePath = request.body.secondimagepath*/
-
-    console.log("adID", adID)
-    console.log("title", title)
-    console.log("latinName", latinName)
-    console.log("description", description)
-    /*console.log("coverImagePath", coverImagePath)
-    console.log("firstImagePath", firstImagePath)
-    console.log("secondImagePath", secondImagePath)*/
-
-    const errors = []//validators.getDonValidationErrors(Name, Description)
-    if (errors.length == 0) {
-        adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
-            if (error) {
-                errors.push("Internal server error")
-                model = {
-                    errors,
-                    adID,
-                    title,
-                    latinName,
-                    description,
-                    layout: 'account.hbs'
-                    //   csrfToken: request.csrfToken()
-                }
-                response.render('adUpdate.hbs', model)
-            }
-            else {
-
-                //Update ImageBundle
-                response.redirect('/ads/adUpdate/' + adID)
+                response.render("myAds.hbs", model)
             }
         })
-    }
-    else {
-        const model = {
-            errors,
-            adID,
-            title,
-            latinName,
-            description,
-            layout: 'account.hbs'
-            //   csrfToken: request.csrfToken()
-        }
-        response.render('adUpdate.hbs', model)
-    }
-})
-
-router.get("/adUpdate/:adID", function (request, response) {
-    const adID = request.params.adID
-
-    adManager.getAdByAdID(adID, function (errors, ad) {
-        const model = {
-            errors: errors,
-            ad: ad,
-            session: request.session,
-            layout: 'account.hbs'
-        }
-        response.render("adUpdate.hbs", model)
     })
-})
 
-router.get("/adDelete/:adID", function (request, response) {
-    const adID = request.params.adID
+    router.post('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
 
-    adManager.getAdByAdID(adID, function (errors, ad) {
-        const model = {
-            errors: errors,
-            ad: ad,
-            session: request.session,
-            layout: 'account.hbs'
+        const adID = request.params.adID
+        const title = request.body.title
+        const latinName = request.body.latinname
+        const description = request.body.description
+
+        const errors = []//validators.getDonValidationErrors(Name, Description)
+
+        if (errors.length == 0) {
+            adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
+
+                if (error) {
+                    errors.push("Internal server error")
+
+                    model = {
+                        errors,
+                        adID,
+                        title,
+                        latinName,
+                        description,
+                        layout: 'account.hbs'
+                        //   csrfToken: request.csrfToken()
+                    }
+
+                    response.render('adUpdate.hbs', model)
+                } else {
+                    response.redirect('/ads/adUpdate/' + adID)
+                }
+            })
+        } else {
+            const model = {
+                errors,
+                adID,
+                title,
+                latinName,
+                description,
+                layout: 'account.hbs'
+                //   csrfToken: request.csrfToken()
+            }
+
+            response.render('adUpdate.hbs', model)
         }
-        response.render("adDelete.hbs", model)
     })
-})
 
-router.post("/adDelete/:adID/delete", function (request, response) {
-    const adID = request.params.adID
+    router.get("/adUpdate/:adID", function (request, response) {
+        const adID = request.params.adID
 
-    adManager.deleteAd(adID, function (errors) {
-        if (errors.length !== 0) {
+        adManager.getAdByAdID(adID, function (errors, ad) {
             const model = {
                 errors: errors,
+                ad: ad,
                 session: request.session,
                 layout: 'account.hbs'
             }
-            response.render("myAds.hbs", model)
-        } else {
-            console.log("Ad was delete succesfully")
-            response.redirect("/ads/myAds")
-        }
+
+            response.render("adUpdate.hbs", model)
+        })
     })
-})
 
-router.get('/myAds/:userID', function (request, response) {
-    const userID = request.params.userID
+    router.get("/adDelete/:adID", function (request, response) {
+        const adID = request.params.adID
 
-    adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
-        var adAccepted = []
-        var adPending = []
-        var adDeclined = []
-        for (index in ad) {
-            //    console.log("status!!!!!!!!!!!!!-----------------------------------------: ",ad[index].status)
-            if (ad[index].status == "Accepted") {
-                //      console.log("Accepted!!!!---------------------------: ")
-                adAccepted.push(ad[index])
+        adManager.getAdByAdID(adID, function (errors, ad) {
+            const model = {
+                errors: errors,
+                ad: ad,
+                session: request.session,
+                layout: 'account.hbs'
             }
-            if (ad[index].status == "Pending") {
-                //      console.log("Pending!!!!---------------------------: ")
-                adPending.push(ad[index])
-            }
-            if (ad[index].status == "Declined") {
-                //    console.log("Declined!!!!---------------------------: ")
-                adDeclined.push(ad[index])
-            }
-        }
-        /*   console.log("-----------------------------------------------------------------------------")
-           console.log("ad: ", ad)
-           console.log("adAccepted: ",adAccepted)
-           console.log("adPending: ",adPending)
-           console.log("adDeclined: ", adDeclined)
-           console.log("-----------------------------------------------------------------------------")*/
-        const model = {
-            errors: errors,
-            adAccepted,
-            adPending,
-            adDeclined,
-            layout: 'account.hbs'
-        }
-        response.render("myAdBids.hbs", model)
+            response.render("adDelete.hbs", model)
+        })
     })
-})
 
-router.get("/adCreate", function (request, response) {
-    const model = {
-        session: request.session,
-        layout: 'account.hbs'
-    }
-    response.render("adCreate.hbs", model)
-})
+    router.post("/adDelete/:adID/delete", function (request, response) {
+        const adID = request.params.adID
 
-router.post("/adCreate", function (request, response) {
+        adManager.deleteAd(adID, function (errors) {
+            if (errors.length !== 0) {
+                const model = {
+                    errors: errors,
+                    session: request.session,
+                    layout: 'account.hbs'
+                }
 
-    const ad = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
-    const errors = []
-
-    const coverImageFile = request.files.coverImageFile
-    const firstImageFile = request.files.firstImageFile
-    const secondImageFile = request.files.secondImageFile
-
-    const images = [coverImageFile, firstImageFile, secondImageFile]
-    console.log("images: ", images)
-
-    for (var i = 0; i < images.length; i++) {
-        const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
-
-        images[i].mv(uploadPath, function (error) {
-            if (error) {
-                console.log("Error in uploading pathway")
-                errors.push("couldn't upload picture")
-                response.render('adCreate.hbs', errors)
+                response.render("myAds.hbs", model)
             } else {
-                console.log("file uploaded successfully")
+                console.log("Ad was delete succesfully")
+                response.redirect("/ads/myAds")
             }
         })
-    }
+    })
 
-    adManager.createAd(ad, function (error, adID) {
-        if (error) {
-            model = {
-                error,
-                session: request.session,
+    router.get('/myAds/:userID', function (request, response) {
+        const userID = request.params.userID
+
+        adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
+            
+            var adAccepted = []
+            var adPending = []
+            var adDeclined = []
+
+            for (index in ad) {
+                if (ad[index].status == "Accepted") {
+                    adAccepted.push(ad[index])
+                }
+
+                if (ad[index].status == "Pending") {
+                    adPending.push(ad[index])
+                }
+
+                if (ad[index].status == "Declined") {
+                    adDeclined.push(ad[index])
+                }
+            }
+
+            const model = {
+                errors: errors,
+                adAccepted,
+                adPending,
+                adDeclined,
                 layout: 'account.hbs'
             }
-            response.render("myAds.hbs", model)
-        } else {
-            console.log("New ad created with the adID: ", adID)
-            const imageBundle = { adID: adID, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
 
-            adManager.createImageBundle(imageBundle, function (error, ibID) {
+            response.render("myAdBids.hbs", model)
+        })
+    })
+
+    router.get("/adCreate", function (request, response) {
+
+        const model = {
+            session: request.session,
+            layout: 'account.hbs'
+        }
+
+        response.render("adCreate.hbs", model)
+    })
+
+    router.post("/adCreate", function (request, response) {
+
+        const coverImageFile = request.files.coverImageFile
+        const firstImageFile = request.files.firstImageFile
+        const secondImageFile = request.files.secondImageFile
+
+        const images = [coverImageFile, firstImageFile, secondImageFile]
+        const ad = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
+        const errors = []
+
+        for (var i = 0; i < images.length; i++) {
+            const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
+
+            images[i].mv(uploadPath, function (error) {
                 if (error) {
-                    console.log("error in create Imagebundle")
+                    console.log("Error in uploading pathway")
+                    errors.push("couldn't upload picture")
+                    response.render('adCreate.hbs', errors)
                 } else {
-                    console.log("new imageBundle created with the iD: ", ibID)
-                    response.redirect("/ads/myAds")
+                    console.log("file uploaded successfully")
                 }
             })
         }
-    })
-})
 
-router.get('/:adID', function (request, response) {
-    const adID = request.params.adID
+        adManager.createAd(ad, function (error, adID) {
+            if (error) {
+                model = {
+                    error,
+                    session: request.session,
+                    layout: 'account.hbs'
+                }
 
-    adManager.getAdByAdID(adID, function (errors, ad) {
+                response.render("myAds.hbs", model)
+            } else {
+                console.log("New ad created with the adID: ", adID)
+                const imageBundle = { adID: adID, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
 
-        userManager.getUserByUserID(ad.userID, function (errors, user) {
-            const model = {
-                errors: errors,
-                ad: ad,
-                user: user,
-                session: request.session
+                adManager.createImageBundle(imageBundle, function (error, ibID) {
+                    if (error) {
+                        console.log("error in create Imagebundle")
+                    } else {
+                        console.log("new imageBundle created with the iD: ", ibID)
+                        response.redirect("/ads/myAds")
+                    }
+                })
             }
-            response.render("ad.hbs", model)
         })
     })
-})
 
-router.get("/ad", function (request, response) {
-    const model = {
-        session: request.session
-    }
-    response.render("ad.hbs", model)
-})
+    router.get('/:adID', function (request, response) {
+        const adID = request.params.adID
 
-router.get("/ads", function (request, response) {
-    response.render("ads.hbs")
-})
+        adManager.getAdByAdID(adID, function (errors, ad) {
 
+            userManager.getUserByUserID(ad.userID, function (errors, user) {
+                const model = {
+                    errors: errors,
+                    ad: ad,
+                    user: user,
+                    session: request.session
+                }
 
-module.exports = router
+                response.render("ad.hbs", model)
+            })
+        })
+    })
+
+    router.get("/ad", function (request, response) {
+
+        const model = {
+            session: request.session
+        }
+
+        response.render("ad.hbs", model)
+    })
+
+    router.get("/ads", function (request, response) {
+        response.render("ads.hbs")
+    })
+
+    return router
+}

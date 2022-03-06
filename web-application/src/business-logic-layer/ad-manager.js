@@ -1,60 +1,62 @@
 const adRepository = require('../data-access-layer/ad-repository')
 
 
-exports.getAllAds = function (callback) {
-	adRepository.getAllAds(callback)
-}
 
-exports.getAdByAdID = function (adID, callback) {
-	adRepository.getAdByAdID(adID, callback)
-}
+module.exports = function ({ adRepository}) {
+	return {
 
-exports.getAllAdsByUserID = function (userID, callback) {
-	adRepository.getAllAdsByUserID(userID, callback)
-}
+		getAllAds: function (callback) {
+			adRepository.getAllAds(callback)
+		},
 
-exports.getAdByUserID = function (userID, callback) {
-	adRepository.getAdByUserID(userID, callback)
-}
+		getAdByAdID: function (adID, callback) {
+			adRepository.getAdByAdID(adID, callback)
+		},
 
-exports.getImageBundleByAdID = function (adID, callback) {
-	adRepository.getImageBundleByAdID(adID, callback)
-}
+		getAllAdsByUserID: function (userID, callback) {
+			adRepository.getAllAdsByUserID(userID, callback)
+		},
 
-exports.getAllAdsByTitleOrLatinName = function(title, callback){
-	adRepository.getAllAdsByTitleOrLatinName(title, callback)
+		getAdByUserID: function (userID, callback) {
+			adRepository.getAdByUserID(userID, callback)
+		},
 
-}
+		getImageBundleByAdID: function (adID, callback) {
+			adRepository.getImageBundleByAdID(adID, callback)
+		},
 
-//-------------------------------Create Ad -------------------------------
-exports.createAd = function(ad, callback){
-	adRepository.createAd(ad,callback)
-}
-// Create imageBundle
-exports.createImageBundle = function(imageBundle, callback){
-	adRepository.createImageBundle(imageBundle, callback)
-}
+		getAllAdsByTitleOrLatinName: function (title, callback) {
+			adRepository.getAllAdsByTitleOrLatinName(title, callback)
+		},
 
-//----------------------------- Update Ad -------------------------------
-exports.updateAdByAdID = function (adID, title, latinName, description, callback) {
-	adRepository.updateAdByAdID(adID, title, latinName, description, callback)
-}
+		createAd: function (ad, callback) {
+			adRepository.createAd(ad, callback)
+		},
 
-//----------------------------- Delete Ad -------------------------------
-exports.deleteAd = function(adID, callback){
-	adRepository.deleteAd(adID, callback)
-}
+		createImageBundle: function (imageBundle, callback) {
+			adRepository.createImageBundle(imageBundle, callback)
+		},
+	
+		updateAdByAdID: function (adID, title, latinName, description, callback) {
+			adRepository.updateAdByAdID(adID, title, latinName, description, callback)
+		},
+	
+		deleteAd: function (adID, callback) {
+			adRepository.deleteAd(adID, callback)
+		},
+	
+		//vart?? 
+		getAllAdsBidsUsersByUserID: function (userID, callback) {
+			adRepository.getAllAdsBidsUsersByUserID(userID, callback)
+		},
+	
+		getAllBidsAndUserByAdID: function (adID, callback) {
+			adRepository.getAllBidsAndUserByAdID(adID, callback)
+		},
+	
+		closeAd: function (adID, callback) {
+			adRepository.closeAd(adID, callback)
+		}
 
-//vart?? 
-exports.getAllAdsBidsUsersByUserID = function (userID, callback) {
-	adRepository.getAllAdsBidsUsersByUserID(userID, callback)
-}
-
-exports.getAllBidsAndUserByAdID = function(adID,callback){
-	adRepository.getAllBidsAndUserByAdID(adID, callback)
-}
-
-// Closeing Ad
-exports.closeAd = function(adID, callback){
-	adRepository.closeAd(adID,callback)
+	}
 }

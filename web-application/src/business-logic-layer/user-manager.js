@@ -1,19 +1,25 @@
 const userRepository = require('../data-access-layer/user-repository')
 
 
-exports.getUserByAccountID = function (userAccountID, callback) {
-	userRepository.getUserByAccountID(userAccountID, callback)
-}
+module.exports = function ({ userRepository }) {
+	return{
 
-exports.getUserByUserID = function (userID, callback) {
-	userRepository.getUserByUserID(userID, callback)
-}
-
-exports.updateUserByUserID = function (userID, firstName, lastName, email, phoneNumber, city, callback) {
-	userRepository.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, callback)
-}
-
-exports.createUser = function(user, callback){
-	userRepository.createUser(user,callback)
+		getUserByAccountID: function (userAccountID, callback) {
+			userRepository.getUserByAccountID(userAccountID, callback)
+		},
+	
+		getUserByUserID: function (userID, callback) {
+			userRepository.getUserByUserID(userID, callback)
+		},
+	
+		updateUserByUserID: function (userID, firstName, lastName, email, phoneNumber, city, callback) {
+			userRepository.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, callback)
+		},
+	
+		createUser: function (user, callback) {
+			userRepository.createUser(user, callback)
+		}
+		
+	}
 }
 
