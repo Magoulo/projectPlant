@@ -1,20 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = new Sequelize("postgres://user:pass@example.com:5432/dbname")
-
-const User = sequelize.define("user", {
-	firstName: DataTypes.TEXT,
-	lastName: DataTypes.TEXT,
-	email: DataTypes.TEXT,
-	phoneNumber: DataTypes.TEXT,
-	city: DataTypes.TEXT
-})
-const UserAccount = sequelize.define("userAccount",{
-	username: DataTypes.TEXT,
-	passwordHash: DataTypes.TEXT
-})
-User.belongsTo(UserAccount)
-
-//User.sync()
+const { models } = require('./dbSequelize')
 
 /*
 CREATE TABLE IF NOT EXISTS UserAccount (
@@ -40,6 +24,20 @@ module.exports = function () {
 	return {
 
 		getUserByAccountID: function (userAccountID, callback) {
+			models.User.findOne({ 
+				include: [{ 
+					model: models.UserAccount,
+				 where: { id: userAccountID }				
+				}]			
+			}).then((user) => { 
+				callback(user.dataValues)
+				console.log("Results: ", results)
+			 }).catch((error) => {
+				console.log("error: ", error)
+			 })	
+		},
+
+	/*	getUserByAccountID: function (userAccountID, callback) {
 
 			const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
 			const values = [userAccountID]
@@ -51,7 +49,7 @@ module.exports = function () {
 					callback([], User[0])
 				}
 			})
-		},
+		},*/
 
 		getUserByUserID: function (userID, callback) {
 

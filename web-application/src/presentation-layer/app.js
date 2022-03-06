@@ -57,7 +57,7 @@ app.use(function (req, res, next) {
 const accountRepository = require('/web-application/src/data-access-layer/account-repository')
 const adRepository = require('/web-application/src/data-access-layer/ad-repository')
 const bidRepository = require('/web-application/src/data-access-layer/bid-repository')
-const userRepository = require('/web-application/src/data-access-layer/user-repository')
+const userRepository = require('/web-application/src/dal-sequelize/user-repository')
 
 //business-logic-layer
 const accountManager = require('/web-application/src/business-logic-layer/account-manager')

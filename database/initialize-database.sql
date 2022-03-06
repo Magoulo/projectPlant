@@ -1,11 +1,3 @@
--- Create a table to store user accounts in.
-/*CREATE TABLE accounts (
-	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	username VARCHAR(50) NOT NULL,
-	password VARCHAR(30) NOT NULL,
-	CONSTRAINT usernameUnique UNIQUE (username)
-);*/
-
 CREATE TABLE IF NOT EXISTS UserAccount (
   userAccountID INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(45) NOT NULL,
@@ -66,9 +58,6 @@ CREATE TABLE IF NOT EXISTS Bid (
     REFERENCES Ad (adID) 
     ON DELETE CASCADE);
   
-
-
-
 -- Dummy data for testing.
 INSERT INTO UserAccount (username, passwordHash) VALUES ("moo", "123");
 INSERT INTO User (userAccountID,firstName,lastName,email,phoneNumber,city) VALUES ("1","Sabin","mooo","Sabimooon@com","555-123","GBG");
