@@ -78,7 +78,6 @@ router.get("/myAds", function (request, response) {
                         ad.bids.push(bid)
                     }
                 }
-                console.log("ad of allAdsBidsUser that are == Pending : ", ad)
             }
 
             var adAccepted = []
@@ -250,10 +249,6 @@ router.post("/adCreate", function (request, response) {
 
     const ad = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
     const errors = []
-
-    /*const coverImagePath = "https://www.thespruce.com/thmb/_6OfTexQcyd-3aW8Z1O2y78sc-Q=/2048x1545/filters:fill(auto,1)/snake-plant-care-overview-1902772-04-d3990a1d0e1d4202a824e929abb12fc1-349b52d646f04f31962707a703b94298.jpeg"
-    const firstImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3sNBXTUiieX57OSxUWNAgdWNSwmz6xKWWkD9rzknwLh95ogckDEdJ_EqLYR-0VEkHfiE&usqp=CAU"
-    const secondImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMLD3FCy2W6ETP4Jb1JdBGrrJ3ttuxmNenJQ&usqp=CAU"*/
 
     const coverImageFile = request.files.coverImageFile
     const firstImageFile = request.files.firstImageFile

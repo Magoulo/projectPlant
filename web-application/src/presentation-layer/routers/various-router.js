@@ -45,7 +45,6 @@ router.get("/about", function (request, response) {
 
 router.get("/contact", function (request, response) {
 
-
 	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 		const model = {
 			errors: errors,

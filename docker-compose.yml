@@ -10,6 +10,7 @@ services:
     depends_on:
       - database
       - redis
+      - postgres
   database:
     build: ./database
     ports:
@@ -18,6 +19,10 @@ services:
       - MYSQL_ROOT_PASSWORD=abc123
       - MYSQL_DATABASE=plantDatabase
   "redis":
-   build: "./redis"
-   ports:
+    build: "./redis"
+    ports:
      - "6379:6379"
+  postgres:
+    build: "./postgres"
+    ports:
+    - "5432:5432"

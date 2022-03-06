@@ -33,6 +33,7 @@ router.post("/create", function (request, response) {
 	console.log("phoneNumber: ", phoneNumber)
 	console.log("city: ",city)
 
+// detta är validation? flyttas till busniess logic layer?
 	if (password === repeatedPassword) {
 		accountManager.createAccount(account, function (error, userAccountID) {
 			console.log("passed this point")
@@ -155,7 +156,6 @@ router.post("/create", function (request, response) {
 	})*/
 
 })
-
 
 router.get("/sign-in", function (request, response) {
 	response.render("accounts-sign-in.hbs")

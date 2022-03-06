@@ -26,13 +26,10 @@ router.get("/myBids", function (request, response) {
                 bidDeclined.push(Bid[index])
             }
         }
-        console.log(bidAccepted);
+      /*  console.log(bidAccepted);
         console.log(bidPending);
         console.log(bidDeclined);
-
-        console.log(Bid);
-
-
+        console.log(Bid);*/
 
         const model = {
             errors: errors,
