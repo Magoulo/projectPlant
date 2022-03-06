@@ -1,57 +1,11 @@
-const path = require('path')
-const express = require('express')
-const expressHandlebars = require('express-handlebars')
-const bodyParser = require('body-parser')
-const nodemailer = require('nodemailer')
-const fileUpload = require('express-fileupload')
 const session = require('express-session')
-const redis = require("redis")
-const awilix = require('awilix')
-const app = express()
-
-
-// redis@v4 setup----------------------------------------------------------------------
 let RedisStore = require("connect-redis")(session)
-let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
-redisClient.connect().catch(console.error)
+const awilix = require('awilix')
 
 
-//express-handlebars setup ------------------------------------------------------------
-app.set('views', path.join(__dirname, 'views'))
+//awilix setup-----------------------------------------------------------------------------------
 
-app.engine('hbs', expressHandlebars({
-	extname: 'hbs',
-	defaultLayout: 'main',
-	layoutsDir: path.join(__dirname, 'layouts')
-}))
-
-// Handle static files in the public folder.
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use(bodyParser.urlencoded({
-	extended: false
-}))
-
-app.use(fileUpload())
-
-app.use(
-	session({
-		store: new RedisStore({ client: redisClient }),
-		saveUninitialized: false,
-		secret: "keyboard cat",
-		resave: false,
-	})
-)
-
-app.use(function (req, res, next) {
-	if (!req.session) {
-		return next(new Error("oh no")) // handle error
-	}
-	next() // otherwise continue
-})
-
-
-//awilix setup---------------------------------------------------------------------
+// Import the ones we want to use (real or mockup), real in this case.
 
 //data-access-layer
 const accountRepository = require('/web-application/src/data-access-layer/account-repository')
@@ -74,7 +28,7 @@ const userRouter = require('/web-application/src/presentation-layer/routers/user
 const variousRouter = require('/web-application/src/presentation-layer/routers/various-router')
 
 
-// Creating container and dependencies
+// Create a container and add the dependencies we want to use.
 const container = awilix.createContainer()
 
 //account
@@ -102,24 +56,17 @@ container.register("userRouter", awilix.asFunction(userRouter))
 container.register("variousRouter", awilix.asFunction(variousRouter))
 
 
-// routing--------------------------------------------------------------------------------------
+// Retrieve the router, which resolves all other dependencies.
 const theAccountRouter = container.resolve("accountRouter")
-const theAdRouter = container.resolve("adRouter")
-const theBidRouter = container.resolve("bidRouter")
-const theUserRouter = container.resolve("userRouter")
+const theAdRouter = container.resolve("adRouter") 
+const theBidRouter = container.resolve("bidRouter") 
+const theUserRouter = container.resolve("userRouter") 
 const theVariousRouter = container.resolve("variousRouter")
 
+// Attach all routers.
 app.use('/', theVariousRouter)
 app.use('/accounts', theAccountRouter)
 app.use('/ads', theAdRouter)
-app.use('/bids', theBidRouter)
+app.use('/bids',theBidRouter)
 app.use('/user', theUserRouter)
 
-app.get('/upload', function (request, response) {
-	response.render('uploadpic.hbs')
-})
-
-// Start listening for incoming HTTP requests!
-app.listen(8080, function () {
-	console.log('Running on 8080!')
-})

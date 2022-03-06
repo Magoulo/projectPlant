@@ -2,28 +2,31 @@ const accountRepository = require('../data-access-layer/account-repository')
 const accountValidator = require('./account-validator')
 
 
-exports.getAllAccounts = function (callback) {
-	accountRepository.getAllAccounts(callback)
-}
+module.exports = function ({accountRepository}) {
+	return{
 
-exports.getAccountByUsername = function (username, callback) {
-	accountRepository.getAccountByUsername(username, callback)
-}
+		getAllAccounts: function (callback) {
+			accountRepository.getAllAccounts(callback)
+		},
+	
+		getAccountByUsername: function (username, callback) {
+			accountRepository.getAccountByUsername(username, callback)
+		},
+	
+		createAccount: function (account, callback) {
+			// Validate the account.
+			/*	const errors = accountValidator.getErrorsNewAccount(account)
+			
+				if (0 < errors.length) {
+					callback(errors, null)
+					return
+				}*/
+			accountRepository.createAccount(account, callback)
+		},
+	
+		deleteAccountByUserAccountID: function (userAccountID, callback) {
+			accountRepository.deleteAccountByUserAccountID(userAccountID, callback)
+		}
 
-exports.createAccount = function (account, callback) {
-
-
-	// Validate the account.
-/*	const errors = accountValidator.getErrorsNewAccount(account)
-
-	if (0 < errors.length) {
-		callback(errors, null)
-		return
-	}*/
-
-	accountRepository.createAccount(account, callback)
-}
-
-exports.deleteAccountByUserAccountID = function(userAccountID,callback){
-	accountRepository.deleteAccountByUserAccountID(userAccountID,callback)
+	}
 }
