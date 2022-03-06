@@ -22,7 +22,7 @@ services:
     build: "./redis"
     ports:
      - "6379:6379"
-  postgres:
+  "postgres":
     build: "./postgres"
     ports:
     - "5432:5432"
