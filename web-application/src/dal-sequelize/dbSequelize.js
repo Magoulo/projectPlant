@@ -56,29 +56,52 @@ Bid.belongsTo(User, { foreignKey: "userID" })
 
 sequelize.sync()
 
+// Find or Create data in tables -------------------------------------------------------------------------------------------------------------------------
 UserAccount.findOrCreate({
-	where: { username: "jym", passwordHash: "123" },
-	defaults: { username: "jym", passwordHash: "123" }
+	where: { username: "billy", passwordHash: "123" },
+	defaults: { username: "billy", passwordHash: "123" }
 }).then(([userAccount, created]) => {
 	if (created) {
-		console.log(created)
 		User.findOrCreate({
-			where: { firstName: "Jym", lastName: "asd", email: "jom@mail",phoneNumber: "123", city: "jkpg" },
-			defaults: { firstName: "Jym", lastName: "asd", email: "jom@mail",phoneNumber: "123", city: "jkpg", userAccountID: userAccount.dataValues.id}
+			where: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com",phoneNumber: "123", city: "Louisiana" },
+			defaults: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com",phoneNumber: "123", city: "Louisiana", userAccountID: userAccount.dataValues.id}
 		}).then(([user, created]) => {
-
-			console.log(userAccount);
-			console.log(user.firstName); // John
-			console.log(user.lastName); // undefined
-			console.log(created); // true
+	
+			console.log("firstname: ", user.firstName); // asd
+			console.log("lastname: ",user.lastName); // undefined
+			console.log("created: ",created); // true
 		});
 	}
-	console.log(user); // John
-	console.log(user.passwordHash); // undefined
+	console.log("userAccount: ", userAccount); // userAccount
+	console.log("user: ", User); // user
 	console.log(created); // true
 });
 
+Ad.findOrCreate({
+	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 4 },
+	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 4  }
+}).then(([ad, created]) => {
+	if (created) {
+		ImageBundle.findOrCreate({
+			where: { coverImagePath:"variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id },
+			defaults: { coverImagePath:"variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id}
+		}).then(([imageBundle, created]) => {
 
+			console.log("imageBundle: ",imageBundle); // imageBundle
+			console.log("created: ",created); // true
+		});
+	}
+	console.log("ad: ", ad); // ad
+	console.log("imageBundle: ",ImageBundle); // imageBundle
+	console.log(created); // true
+});
+
+/*
+INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","well maintained Monstera", "Monstera deliciosa","well maintained with roots in mullis", "0");
+INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("1","variegata-1.jpg", "monstera-propagation-in-water-scaled.jpg", "catesthill-propogating-monstera-plant-4.jpg");
+*/
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 const models = { User, UserAccount, Bid, Ad, ImageBundle }
 
