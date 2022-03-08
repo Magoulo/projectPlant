@@ -13,7 +13,7 @@ const sequelize = new Sequelize(dbname, user, password, {
 	port: ports,
 	dialect: dialect,
 	logging: false
-}) //user: postgres
+})
 
 const User = sequelize.define("user", {
 	firstName: DataTypes.TEXT,
@@ -67,8 +67,8 @@ UserAccount.findOrCreate({
 			defaults: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com",phoneNumber: "123", city: "Louisiana", userAccountID: userAccount.dataValues.id}
 		}).then(([user, created]) => {
 	
-			console.log("firstname: ", user.firstName); // asd
-			console.log("lastname: ",user.lastName); // undefined
+			console.log("firstname: ", user.firstName); 
+			console.log("lastname: ",user.lastName); 
 			console.log("created: ",created); // true
 		});
 	}
