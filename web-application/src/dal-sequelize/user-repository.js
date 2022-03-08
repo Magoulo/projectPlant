@@ -1,14 +1,15 @@
 const { models } = require('./dbSequelize')
 
+
 module.exports = function () {
 	return {
 
 		getUserByAccountID: function (userAccountID, callback) {
 			models.User.findOne({ 
-				
-			
-				 where: { userAccountID: userAccountID }				
-						
+				include: [{ 
+					model: models.UserAccount,
+				 where: { id: userAccountID }				
+				}]			
 			}).then((user) => { 
 				callback(user.dataValues)
 				console.log("Results: ", results)
