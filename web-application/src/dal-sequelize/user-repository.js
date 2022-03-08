@@ -1,34 +1,14 @@
 const { models } = require('./dbSequelize')
 
-/*
-CREATE TABLE IF NOT EXISTS UserAccount (
-  userAccountID INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(45) NOT NULL,
-  passwordHash VARCHAR(60) NOT NULL,
-  PRIMARY KEY (userAccountID));
-
-CREATE TABLE IF NOT EXISTS User (
-  userID INT NOT NULL AUTO_INCREMENT,
-  userAccountID INT NOT NULL,
-  firstName VARCHAR(45) NULL,
-  lastName VARCHAR(45) NULL,
-  email VARCHAR(45) NULL,
-  phoneNumber VARCHAR(45) NULL,
-  city VARCHAR(45) NULL,
-   PRIMARY KEY (userID),
-  FOREIGN KEY (userAccountID)
-	REFERENCES UserAccount (userAccountID)
-	ON DELETE CASCADE);
-*/
 module.exports = function () {
 	return {
 
 		getUserByAccountID: function (userAccountID, callback) {
 			models.User.findOne({ 
-				include: [{ 
-					model: models.UserAccount,
-				 where: { id: userAccountID }				
-				}]			
+				
+			
+				 where: { userAccountID: userAccountID }				
+						
 			}).then((user) => { 
 				callback(user.dataValues)
 				console.log("Results: ", results)
