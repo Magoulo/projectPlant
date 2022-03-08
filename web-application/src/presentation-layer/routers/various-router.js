@@ -7,6 +7,7 @@ module.exports = function ({ adManager, userManager }) {
 	router.get("/", function (request, response) {
 
 		adManager.getAllAds(function (errors, Ad) {
+// ------behöver en user hämtas?? ----------------------------------------------------------------------------------------------
 			userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
 				const model = {

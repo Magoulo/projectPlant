@@ -5,33 +5,50 @@ module.exports = function () {
 	return {
 
 		getUserByAccountID: function (userAccountID, callback) {
-			models.User.findOne({ 
-				include: [{ 
-					model: models.UserAccount,
-				 where: { id: userAccountID }				
-				}]			
-			}).then((user) => { 
+
+			models.User.findOne({
+				where: { userAccountID: 5 }
+			}).then((user) => {
+				
+				console.log("user: ", user)
 				callback(user.dataValues)
-				console.log("Results: ", results)
-			 }).catch((error) => {
+				//	console.log("Results: ", results)
+			}).catch((error) => {
 				console.log("error: ", error)
-			 })	
+			})
+
 		},
 
-	/*	getUserByAccountID: function (userAccountID, callback) {
+		/*	getUserByAccountID: function (userAccountID, callback) {
+	
+				const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
+				const values = [userAccountID]
+	
+				db.query(query, values, function (error, User) {
+					if (error) {
+						callback(['databaseError in user table'], null)
+					} else {
+						callback([], User[0])
+					}
+				})
+			},*/
 
-			const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
-			const values = [userAccountID]
+		getUserByUserID: function (userID, callback) {
 
-			db.query(query, values, function (error, User) {
-				if (error) {
-					callback(['databaseError in user table'], null)
-				} else {
-					callback([], User[0])
-				}
+			models.User.findOne({
+				where: { id: userID }
+			}).then((user) => {
+
+				console.log("user: ", user)
+				callback(user.dataValues)
+				//	console.log("Results: ", results)
+			}).catch((error) => {
+				console.log("error: ", error)
 			})
-		},*/
 
+		},
+
+		/*
 		getUserByUserID: function (userID, callback) {
 
 			const query = "SELECT * FROM User WHERE userID = ? LIMIT 1"
@@ -44,8 +61,32 @@ module.exports = function () {
 					callback([], User[0])
 				}
 			})
+		},*/
+
+
+		updateUserByUserID: function (userID, firstName, lastName, email, phoneNumber, city, callback) {
+
+			models.User.update({
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				phoneNumber:phoneNumber,
+				city:city
+			},
+			{
+				where: { id: userID }
+			}).then((user) => {
+
+				console.log("user: ", user)
+				callback(user.dataValues)
+				//	console.log("Results: ", results)
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
 		},
 
+		/*
 		updateUserByUserID: function (userID, firstName, lastName, email, phoneNumber, city, callback) {
 
 			const query = "UPDATE User SET firstName = ?, lastName = ?, email = ? , phoneNumber = ?, city = ? WHERE userID = ?"
@@ -54,8 +95,29 @@ module.exports = function () {
 			db.query(query, values, function (error) {
 				callback(error)
 			})
-		},
+		},*/
 
+		createUser: function (user, callback) {
+
+			models.User.create({
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				phoneNumber: user.phoneNumber,
+				city: user.city,
+				userAccountID: user.userAccountID
+			}).then((user) => {
+
+				console.log("user: ", user)
+				callback(user.dataValues)
+				//	console.log("Results: ", results)
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
+		}
+
+	/*
 		createUser: function (user, callback) {
 
 			const query = `INSERT INTO User (userAccountID, firstName, lastName, email, phoneNumber, city) VALUES (?, ?, ?, ?, ?, ?)`
@@ -69,7 +131,7 @@ module.exports = function () {
 					callback([], results.insertId)
 				}
 			})
-		}
+		}*/
 
 	}
 }

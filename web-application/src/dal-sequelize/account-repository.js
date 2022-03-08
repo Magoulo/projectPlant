@@ -1,10 +1,11 @@
-const { db } = require('./dbSequelize')
+const { models } = require('./dbSequelize')
 
 
 
 module.exports = function () {
 	return {
 
+		//används denna funktion?
 		getAllAccounts: function (callback) {
 
 			const query = `SELECT * FROM UserAccount ORDER BY username`
