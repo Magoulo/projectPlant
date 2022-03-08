@@ -13,24 +13,24 @@ module.exports = function () {
 			}).then((user) => { 
 				callback(user.dataValues)
 				console.log("Results: ", results)
-			 }).catch((error) => {
+			}).catch((error) => {
 				console.log("error: ", error)
-			 })	
+			})
 		},
 
-	/*	getUserByAccountID: function (userAccountID, callback) {
-
-			const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
-			const values = [userAccountID]
-
-			db.query(query, values, function (error, User) {
-				if (error) {
-					callback(['databaseError in user table'], null)
-				} else {
-					callback([], User[0])
-				}
-			})
-		},*/
+		/*	getUserByAccountID: function (userAccountID, callback) {
+	
+				const query = "SELECT * FROM User WHERE userAccountID = ? LIMIT 1"
+				const values = [userAccountID]
+	
+				db.query(query, values, function (error, User) {
+					if (error) {
+						callback(['databaseError in user table'], null)
+					} else {
+						callback([], User[0])
+					}
+				})
+			},*/
 
 		getUserByUserID: function (userID, callback) {
 

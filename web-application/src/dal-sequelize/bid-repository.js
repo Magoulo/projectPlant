@@ -1,45 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = new Sequelize("postgres://user:pass@example.com:5432/dbname")
+const { db } = require('./dbSequelize')
 
-const Bid = sequelize.define("bid",{
-	date: DataTypes.DATE,
-	imagePath: DataTypes.TEXT,
-	message: DataTypes.TEXT,
-	status: DataTypes.TEXT
-})
-const Ad = sequelize.define("ad", {
-	title: DataTypes.TEXT,
-	latinName: DataTypes.TEXT,
-	description: DataTypes.TEXT,
-	isClosed: DataTypes.NUMBER
-})
-const User = sequelize.define("user", {
-	firstName: DataTypes.TEXT,
-	lastName: DataTypes.TEXT,
-	email: DataTypes.TEXT,
-	phoneNumber: DataTypes.TEXT,
-	city: DataTypes.TEXT
-})
-
-Bid.belongsTo(Ad)
-Bid.belongsTo(User)
-/*
-CREATE TABLE IF NOT EXISTS Bid (
-  bidID INT NOT NULL AUTO_INCREMENT,
-  userID INT NOT NULL,
-  adID INT NOT NULL,
-  date DATETIME,
-  imagePath VARCHAR(45),
-  message TEXT,
-  status VARCHAR(15),
-  PRIMARY KEY (bidID),
-  FOREIGN KEY (userID)
-    REFERENCES User (userID)
-    ON DELETE CASCADE,
-  FOREIGN KEY (adID)
-    REFERENCES Ad (adID) 
-    ON DELETE CASCADE);
-*/
 
 module.exports = function () {
 	return {
