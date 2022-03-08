@@ -48,13 +48,14 @@ const ImageBundle = sequelize.define("imageBundle", {
 	secondImagePath: DataTypes.TEXT
 })
 
+sequelize.sync()
+
 User.belongsTo(UserAccount, { foreignKey: "userAccountID" })
 ImageBundle.belongsTo(Ad, { foreignKey: "adID" })
 Ad.belongsTo(User, { foreignKey: "userID" })
 Bid.belongsTo(Ad, { foreignKey: "adID" })
 Bid.belongsTo(User, { foreignKey: "userID" })
 
-sequelize.sync()
 
 // Find or Create data in tables -------------------------------------------------------------------------------------------------------------------------
 UserAccount.findOrCreate({
