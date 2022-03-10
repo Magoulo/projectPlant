@@ -65,18 +65,17 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				
-				include: [{
-					model: models.ImageBundle,
-					required: true,
-					where: { adID: 2 }
-				}],
-				where: { userID: userID },
+			include: [{ 
+				model: models.ImageBundle,
+				required: true
+			
+			}],
 			}).then((ad) => {
-				console.log("ads: ", ad)
+				console.log("ads-------------------------------------: ", ad)
 				callback([],ad.dataValues)
 
 			}).catch((error) => {
-				console.log("error: ", error)
+				console.log("error----------------------------------: ", error)
 			})
 		},
 

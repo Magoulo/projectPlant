@@ -45,6 +45,7 @@ module.exports = function ({ adManager, userManager }) {
         var allBids = []
 
         adManager.getAllAdsByUserID(userID, function (errors, ad) {
+            console.log("router getAllAdsByUserID", ad)
             if (errors.length !== 0) {
                 const model = {
                     errors: errors,
@@ -66,6 +67,7 @@ module.exports = function ({ adManager, userManager }) {
         })
 
         adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
+            console.log("router getAllAdsBidsUsersByUserID", adOffers)
             if (errors.length !== 0) {
 
                 const model = {
