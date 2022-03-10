@@ -1,10 +1,25 @@
-const { db } = require('./dbSequelize')
+const { models } = require('./dbSequelize')
 
 
 module.exports = function () {
 	return {
 
 		getAllBidsByAdID: function (adID, callback) {
+
+			models.Bid.findAll({
+				where: { adID: adID }
+
+			}).then((bid) => {
+				console.log("all bids by adID: ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
+		},
+
+		/*getAllBidsByAdID: function (adID, callback) {
 
 			const query = "SELECT * FROM Bid WHERE adID = ?"
 			const values = [adID]
@@ -16,9 +31,24 @@ module.exports = function () {
 					callback([], Bid)
 				}
 			})
-		},
+		},*/
 
 		getBidByAdID: function (adID, callback) {
+
+			models.Bid.findOne({
+				where: { adID: adID }
+
+			}).then((bid) => {
+				console.log("bid by adID: ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
+		},
+
+		/*getBidByAdID: function (adID, callback) {
 
 			const query = "SELECT * FROM Bid WHERE adID = ? LIMIT 1"
 			const values = [adID]
@@ -30,9 +60,23 @@ module.exports = function () {
 					callback([], Bid[0])
 				}
 			})
-		},
+		},*/
 
 		getAllBidsByUserID: function (userID, callback) {
+
+			models.Bid.findAll({
+				where: { userID: userID }
+
+			}).then((bid) => {
+				console.log("all bids by userID: ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+
+		/*getAllBidsByUserID: function (userID, callback) {
 
 			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImagePath FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
 			const values = [userID]
@@ -44,9 +88,30 @@ module.exports = function () {
 					callback([], Bid)
 				}
 			})
-		},
+		},*/
 
 		createBid: function (Bid, callback) {
+			const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
+			const status = "Pending"
+
+			models.Bid.create({
+				date: date,
+				imagePath: Bid.imagePath,
+				message: Bid.message,
+				status: status,
+				adID: Bid.adID,
+				userID: Bid.userID
+				
+			}).then((bid) => {
+				console.log("Created Bid: ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+
+		/*createBid: function (Bid, callback) {
 
 			const status = "Pending"
 			const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
@@ -62,9 +127,24 @@ module.exports = function () {
 					callback(error)
 				}
 			})
-		},
+		},*/
 
 		deleteBid: function (bidID, callback) {
+
+			models.Bid.destroy({
+			
+				where: { id: bidID}
+
+			}).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+				if(rowDeleted === 1){
+				   console.log('Deleted successfully');
+				 }
+			  }, function(err){
+				  console.log(err); 
+			  });
+		},
+
+		/*deleteBid: function (bidID, callback) {
 
 			const query = `DELETE FROM Bid WHERE Bid.bidID = ?`
 			const values = [bidID]
@@ -76,9 +156,28 @@ module.exports = function () {
 					callback(error)
 				}
 			})
-		},
+		},*/
 
 		updateBidByBidID: function (bid, callback) {
+
+			models.Bid.update({
+				
+				status: bid.status,		
+			},
+			{
+				where: { id: bid.bidID }
+
+			}).then((bid) => {
+				console.log("Updated Bid (status should not be 'Pending'): ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+				
+		},
+
+		/*updateBidByBidID: function (bid, callback) {
 
 			const query = "UPDATE Bid SET status = ? WHERE BidID = ?"
 			const values = [bid.status, bid.bidID]
@@ -91,9 +190,28 @@ module.exports = function () {
 					callback(error)
 				}
 			})
-		},
+		},*/
 
 		setAllBidsToDeclined: function (adID, callback) {
+			const status = "Declined"
+
+			models.Bid.update({
+				
+				status: status,		
+			},
+			{
+				where: { adID: adID }
+
+			}).then((bid) => {
+				console.log("All updated Bids (status should be 'Declined'): ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		}
+
+		/*setAllBidsToDeclined: function (adID, callback) {
 
 			const status = "Declined"
 			const query = "UPDATE Bid SET status = ? WHERE adID = ?"
@@ -107,7 +225,7 @@ module.exports = function () {
 					callback(error)
 				}
 			})
-		}
+		}*/
 
 	}
 }

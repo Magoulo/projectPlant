@@ -360,7 +360,7 @@ module.exports = function ({ }) {
 			})
 		},*/
 
-		getAllBidsAndUserByAdID: function (adID, callback) {
+		getAllBidsAndUserByAdID: function (adID, callback) { // should be in Bid repo
 
 			models.Bid.findAll({
 				where: { adID: adID },
