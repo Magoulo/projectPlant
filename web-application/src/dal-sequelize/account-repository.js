@@ -8,6 +8,20 @@ module.exports = function () {
 		//används denna funktion?
 		getAllAccounts: function (callback) {
 
+			models.UserAccount.findAll({
+				order: [
+					['username', 'ASC'],
+				],
+			}).then((userAccounts) => {
+				console.log("user accounts: ", userAccounts)
+				callback(userAccounts.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+		/*getAllAccounts: function (callback) {
+
 			const query = `SELECT * FROM UserAccount ORDER BY username`
 			const values = []
 
@@ -18,9 +32,23 @@ module.exports = function () {
 					callback([], UserAccount)
 				}
 			})
-		},
+		},*/
+
 
 		getAccountByUsername: function (username, callback) {
+
+			models.UserAccount.findOne({
+				where: { username: username }
+
+			}).then((userAccount) => {
+				console.log("user account: ", userAccount)
+				callback(userAccount.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+		/*getAccountByUsername: function (username, callback) {
 
 			const query = `SELECT * FROM UserAccount WHERE username = ? LIMIT 1`
 			const values = [username]
@@ -32,9 +60,25 @@ module.exports = function () {
 					callback([], UserAccount[0])
 				}
 			})
-		},
+		},*/
 
-		createAccount: function (account, callback) {
+
+		createAccount: function (newAccount, callback) {
+
+			models.UserAccount.create({
+				username: newAccount.username,
+				passwordHash: newAccount.passwordHash
+
+			}).then((userAccount) => {
+				console.log("created account: ", userAccount)
+				callback(userAccount.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
+		},
+		/*createAccount: function (account, callback) {
 
 			const query = `INSERT INTO UserAccount (username, passwordHash) VALUES (?, ?)`
 			const values = [account.username, account.passwordHash]
@@ -49,9 +93,26 @@ module.exports = function () {
 				}
 			})
 
+		},*/
+
+
+		deleteAccountByUserAccountID: function (userAccount, callback) {
+
+			models.UserAccount.destroy({
+			
+				where: { userAccountID: userAccount.userAccountID}
+
+			}).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+				if(rowDeleted === 1){
+				   console.log('Deleted successfully');
+				 }
+			  }, function(err){
+				  console.log(err); 
+			  });
+			
 		},
 
-		deleteAccountByUserAccountID: function (userAccountID, callback) {
+		/*deleteAccountByUserAccountID: function (userAccountID, callback) {
 			const query = 'DELETE FROM UserAccount WHERE userAccountID = ?'
 			const values = [userAccountID]
 
@@ -65,7 +126,7 @@ module.exports = function () {
 					callback([])
 				}
 			})
-		}
+		}*/
 
 	}
 }
