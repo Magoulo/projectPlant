@@ -14,19 +14,19 @@
     </ul>
     {{else}}
 
-    {{#if ad}}
+    {{#if Ad}}
 
     <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Delete ad</h1>
             <div>
-                <p>Are you sure you want to delete the ad <b>"{{ad.title}}"</b>? </p>
+                <p>Are you sure you want to delete the ad <b>"{{Ad.title}}"</b>? </p>
             </div>
             <div>
                 <div class="mb-3 col-12">
                     <div class="row">
                         <div class="col-12">
-                            <form action="/ads/adDelete/{{ad.adID}}/delete" method="POST">
+                            <form action="/ads/adDelete/{{Ad.adID}}/delete" method="POST">
                                 <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
                                 <input class="btn btn-primary" type="submit" value="Yes">
                                 

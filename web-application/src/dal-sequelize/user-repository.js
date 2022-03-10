@@ -33,11 +33,12 @@ module.exports = function () {
 		getUserByUserID: function (userID, callback) {
 
 			models.User.findOne({
+				raw: true,
 				where: { id: userID }
 			}).then((user) => {
 
 				console.log("user: ", user)
-				callback(user.dataValues)
+				callback([],user)
 				//	console.log("Results: ", results)
 			}).catch((error) => {
 				console.log("error: ", error)

@@ -40,11 +40,19 @@ module.exports = function ({ }) {
 		getAdByAdID: function (adID, callback) {
 
 			models.Ad.findOne({
-				where: { id: adID }
+				raw: true,
+				where: { id: adID },
+
+				include: [{ 
+					model: models.ImageBundle, 
+					required: true
+				
+				}],
+				
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback([],ad.dataValues)
+				callback([],ad)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -109,7 +117,7 @@ module.exports = function ({ }) {
 				where: { userID: userID }
 
 			}).then((ad) => {
-				console.log("ad found by userID: ", ad)
+				console.log("Ad found by userID: ", ad)
 				callback([],ad.dataValues)
 
 			}).catch((error) => {
@@ -138,7 +146,7 @@ module.exports = function ({ }) {
 				where: { adID: adID }
 
 			}).then((imageBundle) => {
-				console.log("gotten imageBundle: ", imageBundle)
+				console.log("Gotten imageBundle: ", imageBundle)
 				callback(imageBundle.dataValues)
 
 			}).catch((error) => {
@@ -169,7 +177,7 @@ module.exports = function ({ }) {
 				adID: imageBundle.adID
 
 			}).then((imageBundle) => {
-				console.log("created imageBundle: ", imageBundle)
+				console.log("Created imageBundle: ", imageBundle)
 				callback(imageBundle.dataValues)
 
 			}).catch((error) => {
@@ -241,7 +249,7 @@ module.exports = function ({ }) {
 					where: { id: adID }
 
 				}).then((ad) => {
-					console.log("updated ad: ", ad)
+					console.log("Updated ad: ", ad)
 					callback([],ad.dataValues)
 
 				}).catch((error) => {

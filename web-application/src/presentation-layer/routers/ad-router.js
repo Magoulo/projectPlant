@@ -160,10 +160,10 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/adUpdate/:adID", function (request, response) {
         const adID = request.params.adID
 
-        adManager.getAdByAdID(adID, function (errors, ad) {
+        adManager.getAdByAdID(adID, function (errors, Ad) {
             const model = {
                 errors: errors,
-                ad: ad,
+                Ad: Ad,
                 session: request.session,
                 layout: 'account.hbs'
             }
@@ -175,10 +175,10 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/adDelete/:adID", function (request, response) {
         const adID = request.params.adID
 
-        adManager.getAdByAdID(adID, function (errors, ad) {
+        adManager.getAdByAdID(adID, function (errors, Ad) {
             const model = {
                 errors: errors,
-                ad: ad,
+                Ad: Ad,
                 session: request.session,
                 layout: 'account.hbs'
             }
@@ -302,13 +302,14 @@ module.exports = function ({ adManager, userManager }) {
     router.get('/:adID', function (request, response) {
         const adID = request.params.adID
 
-        adManager.getAdByAdID(adID, function (errors, ad) {
+        adManager.getAdByAdID(adID, function (errors, Ad) {
 
-            userManager.getUserByUserID(ad.userID, function (errors, user) {
+            userManager.getUserByUserID(Ad.userID, function (errors, User) {
+
                 const model = {
                     errors: errors,
-                    ad: ad,
-                    user: user,
+                    Ad: Ad,
+                    User: User,
                     session: request.session
                 }
 

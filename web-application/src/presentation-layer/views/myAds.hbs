@@ -82,9 +82,9 @@
 					<div class="col-12 mt-2 mb-2">
 						<div class="row">
 							<div class="col-12">
-								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{adID}}">Update</a>
+								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{id}}">Update</a>
 
-								<a class="btn btn-primary m-1" href="/ads/adDelete/{{adID}}">Delete</a>
+								<a class="btn btn-primary m-1" href="/ads/adDelete/{{id}}">Delete</a>
 							</div>
 
 						</div>
@@ -180,10 +180,10 @@
 									{{/each}}
 								</ul>
 								{{else}}
-								{{#if ad}}
+								{{#if Ad}}
 
 
-								{{#each ad}}
+								{{#each Ad}}
 								{{#unless isClosed}}
 
 
@@ -192,7 +192,7 @@
 										<div class="row">
 
 											<div class="col-2 text-center">
-												<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
+												<img src="/images/{{'ImageBundle.coverImagePath'}}" alt="{{'ImageBundle.coverImagePath'}}"
 													class="flowerImage" style="width: 200px; height: 200px">
 											</div>
 
@@ -202,7 +202,7 @@
 
 											<div class="col-2 text-center align-self-end">
 												<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-													data-bs-target="#id{{adID}}ad" aria-expanded="false"
+													data-bs-target="#id{{id}}ad" aria-expanded="false"
 													aria-controls="collapseExample">
 													Show offers <i class="bi bi-caret-down"></i>
 												</button>
@@ -214,7 +214,7 @@
 
 								<hr>
 
-								<div class="collapse" id="id{{adID}}ad">
+								<div class="collapse" id="id{{id}}ad">
 									<div class="card card-body">
 										{{#each this.bids}}
 

@@ -15,46 +15,46 @@
     </ul>
     {{else}}
 
-    {{#if ad}}
+    {{#if Ad}}
 
     <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Update Data</h1>
         </div>
         <div>
-            <form class="form-inline justify-content-center" action="/ads/adUpdate/{{ad.adID}}/update" method="POST">
+            <form class="form-inline justify-content-center" action="/ads/adUpdate/{{Ad.id}}/update" method="POST">
                 <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 
                 <div class="col-sm-4 offset-sm-4 text-center">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="title" value="{{ad.title}}">
+                        <input class="form-control" type="text" name="title" value="{{Ad.title}}">
                         <label class="form-label">Title</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="latinname" value="{{ad.latinName}}">
+                        <input class="form-control" type="text" name="latinname" value="{{Ad.latinName}}">
                         <label class="form-label">Latin name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="description" value="{{ad.description}}">
+                        <input class="form-control" type="text" name="description" value="{{Ad.description}}">
                         <label class="form-label">Description</label>
                     </div>
                 </div>
-
+                {{#Ad}}
                 <div class="row offset-sm-2">
                     <div class="col-3 ms-3">
-                        <img class="img-thumbnail" src="/images/{{ad.coverImagePath}}" alt="{{ad.imageBundleID}}"
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}" alt="{{ad.imageBundleID}}"
                             name="coverimagepath" class="flowerImage" style="width: 300px; height: 300px">
                     </div>
                     <div class="col-3">
-                        <img class="img-thumbnail" src="/images/{{ad.firstImagePath}}" alt="{{ad.imageBundleID}}"
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.firstImagePath'}}" alt="{{ad.imageBundleID}}"
                             name="firstimagepath" class="flowerImage" style="width: 300px; height: 300px">
                     </div>
                     <div class="col-3">
-                        <img class="img-thumbnail" src="/images/{{ad.secondImagePath}}" alt="{{ad.imageBundleID}}"
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.secondImagePath'}}" alt="{{ad.imageBundleID}}"
                             name="secondimagepath" class="flowerImage" style="width: 300px; height: 300px">
                     </div>
                 </div>
- 
+                {{/Ad}}
                 <div class="mb-3 mt-3 col-sm-4 offset-sm-4 text-center">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
