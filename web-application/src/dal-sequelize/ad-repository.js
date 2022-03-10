@@ -1,5 +1,5 @@
-const { includes } = require('lodash')
 const { models } = require('./dbSequelize')
+const Op = Sequelize.Op
 
 module.exports = function ({ }) {
 	return {
@@ -317,6 +317,37 @@ module.exports = function ({ }) {
 
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
 
+			models.Ad.findAll({
+				where: { userID: userID },
+
+				include: [{
+					model: models.ImageBundle,
+					required: true
+
+					//	where: { adID: ad.adID }
+				}],
+
+				include: [{
+					model: models.Bid,
+					required: true,
+				
+					include:[{
+						model: models.User,
+						required: true,
+					}]
+				}]
+
+			}).then((ad) => {
+				console.log("ads: ", ad)
+				callback(ad.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+
+		/*getAllAdsBidsUsersByUserID: function (userID, callback) {
+
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID JOIN Bid ON Ad.adID = Bid.adID JOIN User ON Bid.userID = User.userID WHERE Ad.userID = ? ORDER BY Ad.userID`
 			const values = [userID]
 
@@ -327,9 +358,30 @@ module.exports = function ({ }) {
 					callback([], Ad)
 				}
 			})
-		},
+		},*/
 
 		getAllBidsAndUserByAdID: function (adID, callback) {
+
+			models.Bid.findAll({
+				where: { adID: adID },
+
+				include: [{
+					model: models.User,
+					required: true,
+
+					where: { userID: bid.userID }
+				}],
+
+			}).then((bid) => {
+				console.log("bids: ", bid)
+				callback(bid.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+		},
+
+		/*getAllBidsAndUserByAdID: function (adID, callback) {
 
 			const query = "SELECT * FROM Bid JOIN User ON Bid.userID = User.userID WHERE Bid.adID = ?"
 			const values = [adID]
@@ -341,9 +393,38 @@ module.exports = function ({ }) {
 					callback([], adOffers)
 				}
 			})
-		},
+		},*/
 
 		getAllAdsByTitleOrLatinName: function (searchInput, callback) {
+
+			models.Ad.findAll({
+				where: {
+					title: { [Op.like] : '%$' + searchInput + '%' },
+
+					$or:[{
+
+						latinName: { [Op.like] : '%$' + searchInput + '%' }
+
+					}]
+				},
+
+				include: [{
+					model: models.ImageBundle,
+					required: true
+
+				}],
+
+			}).then((ad) => {
+				console.log("ads: ", ad)
+				callback(ad.dataValues)
+
+			}).catch((error) => {
+				console.log("error: ", error)
+			})
+
+		}
+
+		/*getAllAdsByTitleOrLatinName: function (searchInput, callback) {
 
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%' OR latinName LIKE '%${searchInput}%'`
 
@@ -354,7 +435,7 @@ module.exports = function ({ }) {
 					callback([], Ad)
 				}
 			})
-		}
+		}*/
 
 	}
 }
