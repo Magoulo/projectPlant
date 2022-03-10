@@ -8,6 +8,7 @@ module.exports = function ({ adManager, userManager }) {
 
 		adManager.getAllAds(function (errors, Ad) {
 // ------behöver en user hämtas?? ----------------------------------------------------------------------------------------------
+			console.log("AD----------------:", Ad)
 			userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
 				const model = {

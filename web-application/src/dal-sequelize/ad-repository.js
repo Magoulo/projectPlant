@@ -5,8 +5,16 @@ module.exports = function ({ }) {
 
 		getAllAds: function (callback) {
 
-			models.Ad.findAll().then((ad) => {
-				callback([],ad.dataValues)
+			models.Ad.findAll({
+				raw:true,
+				include: [{ 
+					model: models.ImageBundle,
+				
+					required: true
+				
+				}],
+			}).then((ad) => {
+				callback([],ad)
 
 			}).catch((error) => {
 				console.log("error: ", error)
