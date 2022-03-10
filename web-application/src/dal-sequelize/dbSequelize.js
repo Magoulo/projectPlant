@@ -48,7 +48,7 @@ const ImageBundle = sequelize.define("imageBundle", {
 	secondImagePath: DataTypes.TEXT
 })
 
-sequelize.sync()
+
 
 User.belongsTo(UserAccount, { foreignKey: "userAccountID" })
 ImageBundle.belongsTo(Ad, { foreignKey: "adID" })
@@ -56,7 +56,7 @@ Ad.belongsTo(User, { foreignKey: "userID" })
 Bid.belongsTo(Ad, { foreignKey: "adID" })
 Bid.belongsTo(User, { foreignKey: "userID" })
 
-
+sequelize.sync()
 // Find or Create data in tables -------------------------------------------------------------------------------------------------------------------------
 UserAccount.findOrCreate({
 	where: { username: "billy", passwordHash: "123" },
@@ -79,8 +79,8 @@ UserAccount.findOrCreate({
 });
 
 Ad.findOrCreate({
-	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 4 },
-	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 4  }
+	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 1 },
+	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 1 }
 }).then(([ad, created]) => {
 	if (created) {
 		ImageBundle.findOrCreate({
