@@ -44,22 +44,22 @@ module.exports = function ({ adManager, userManager }) {
         var allAds = []
         var allBids = []
 
-        adManager.getAllAdsByUserID(userID, function (errors, ad) {
-            console.log("router getAllAdsByUserID", ad)
+        adManager.getAllAdsByUserID(userID, function (errors, Ad) {
+            console.log("router getAllAdsByUserID", Ad)
             if (errors.length !== 0) {
                 const model = {
                     errors: errors,
-                    ad: ad,
+                    Ad: Ad,
                     session: request.session,
                     layout: 'account.hbs'
                 }
 
                 response.render("myAds.hbs", model)
             } else {
-                allAds = ad
+                allAds = Ad
 
                 model = {
-                    ad: ad,
+                    Ad: Ad,
                     session: request.session,
                     layout: 'account.hbs'
                 }

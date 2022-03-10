@@ -16,7 +16,7 @@ const sequelize = new Sequelize(dbname, user, password, {
 	logging: false
 })
 
-const User = sequelize.define("user", {
+const User = sequelize.define("User", {
 	firstName: DataTypes.TEXT,
 	lastName: DataTypes.TEXT,
 	email: DataTypes.TEXT,
@@ -24,26 +24,26 @@ const User = sequelize.define("user", {
 	city: DataTypes.TEXT
 })
 
-const UserAccount = sequelize.define("userAccount", {
+const UserAccount = sequelize.define("UserAccount", {
 	username: DataTypes.TEXT,
 	passwordHash: DataTypes.TEXT
 })
 
-const Bid = sequelize.define("bid", {
+const Bid = sequelize.define("Bid", {
 	date: DataTypes.DATE,
 	imagePath: DataTypes.TEXT,
 	message: DataTypes.TEXT,
 	status: DataTypes.TEXT
 })
 
-const Ad = sequelize.define("ad", {
+const Ad = sequelize.define("Ad", {
 	title: DataTypes.TEXT,
 	latinName: DataTypes.TEXT,
 	description: DataTypes.TEXT,
 	isClosed: DataTypes.BOOLEAN
 })
 
-const ImageBundle = sequelize.define("imageBundle", {
+const ImageBundle = sequelize.define("ImageBundle", {
 	coverImagePath: DataTypes.TEXT,
 	firstImagePath: DataTypes.TEXT,
 	secondImagePath: DataTypes.TEXT

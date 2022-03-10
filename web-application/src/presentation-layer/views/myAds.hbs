@@ -59,10 +59,10 @@
 			</ul>
 
 			{{else}}
-			{{#if ad}}
+			{{#if Ad}}
 
 			<div class="row justify-content-start align-items-center">
-				{{#each ad}}
+				{{#each Ad}}
 
 				<div class="col-3 text-center">
 
@@ -71,21 +71,21 @@
 							{{#if isClosed}}
 							(Closed)
 							{{/if}}
-							</h3>
+						</h3>
 					</div>
 
 					<div class="col-12">
-						<img class="img-thumbnail" src="/images/{{coverImagePath}}" alt="{{imageBundleID}}"
-							class="flowerImage" style="width: 300px; height: 300px">
+						<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}" class="flowerImage"
+							style="width: 300px; height: 300px">
 					</div>
 
 					<div class="col-12 mt-2 mb-2">
 						<div class="row">
 							<div class="col-12">
 								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{adID}}">Update</a>
-						
+
 								<a class="btn btn-primary m-1" href="/ads/adDelete/{{adID}}">Delete</a>
-						</div>
+							</div>
 
 						</div>
 					</div>
@@ -106,10 +106,10 @@
 			<div class="row">
 				<div class="col-12">
 
-		
 
-<!----------- Accepted Offers ------------------------------------------------------------------------------->
-				<!--	<div class="col-12">
+
+					<!----------- Accepted Offers ------------------------------------------------------------------------------->
+					<!--	<div class="col-12">
 						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
 							data-bs-target="#acceptedOffers" aria-expanded="false" aria-controls="collapseExample">
 							Accepted Offers
@@ -161,7 +161,7 @@
 						</div>
 					</div>-->
 
-<!----------- Pending Offers ------------------------------------------------------------------------------->
+					<!----------- Pending Offers ------------------------------------------------------------------------------->
 					<div class="col-12">
 						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
 							data-bs-target="#pendingOffers" aria-expanded="false" aria-controls="collapseExample">
@@ -181,12 +181,12 @@
 								</ul>
 								{{else}}
 								{{#if ad}}
-								
+
 
 								{{#each ad}}
 								{{#unless isClosed}}
-								
-								
+
+
 								<div class="card">
 									<div class="card-body">
 										<div class="row">
@@ -313,7 +313,7 @@
 
 												<hr>
 
-												<p>{{message}}</p>	
+												<p>{{message}}</p>
 											</div>
 											<div class="col-4 text-center">
 												<div class="col-12">
@@ -350,7 +350,7 @@
 						</div>
 					</div>
 
-<!----------- Declined Offers ------------------------------------------------------------------------------->
+					<!----------- Declined Offers ------------------------------------------------------------------------------->
 					<div class="col-12">
 						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
 							data-bs-target="#declinedOffers" aria-expanded="false" aria-controls="collapseExample">
@@ -406,8 +406,9 @@
 		</div>
 
 		<!-- My Closed Ads -->
-		
-		<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
+
+		<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel"
+			aria-labelledby="nav-closed-ads-tab">
 			<div class="row justify-content-start">
 				{{#if adAccepted}}
 				{{#each adAccepted}}
@@ -453,7 +454,7 @@
 						</div>
 
 					</div>
-				</div>		
+				</div>
 				{{/each}}
 				{{else}}
 				<div class="col-12 text-center">
@@ -462,9 +463,9 @@
 				{{/if}}
 			</div>
 		</div>
-							
-							
-	
+
+
+
 
 
 	</div>

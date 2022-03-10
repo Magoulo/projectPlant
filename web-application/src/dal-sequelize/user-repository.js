@@ -7,12 +7,9 @@ module.exports = function () {
 		getUserByAccountID: function (userAccountID, callback) {
 
 			models.User.findOne({
-				where: { userAccountID: 1 } // hårdkodat atm ------------------------------------------------------------------
-			}).then((user) => {
-				
-				console.log("user: ", user)
-				callback(user.dataValues)
-				//	console.log("Results: ", results)
+				where: { userAccountID: 1 } // hårdkodat atm
+			}).then((User) => {
+				callback([], User.dataValues)
 			}).catch((error) => {
 				console.log("error: ", error)
 			})
