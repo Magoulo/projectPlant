@@ -6,7 +6,6 @@ module.exports = function ({ }) {
 		getAllAds: function (callback) {
 
 			models.Ad.findAll().then((ad) => {
-				console.log("ads: ", ad)
 				callback([],ad.dataValues)
 
 			}).catch((error) => {
