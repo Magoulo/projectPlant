@@ -1,5 +1,4 @@
 const { models } = require('./dbSequelize')
-const Op = Sequelize.Op
 
 module.exports = function ({ }) {
 	return {
@@ -62,15 +61,14 @@ module.exports = function ({ }) {
 
 		getAllAdsByUserID: function (userID, callback) {
 			console.log("getAllAdsByUserID ----------------------------------------------") // måste kolla så att denna funktion returnerar rätt imagebundle till rätt ad!
+			console.log(models.Ad.id)
 
 			models.Ad.findAll({
 				where: { userID: 1 },
 
 				include: [{
 					model: models.ImageBundle,
-					required: true
-
-					//	where: { adID: ad.adID }
+					where: { adID: models.Ad.id }
 				}]
 
 			}).then((ad) => {
@@ -229,18 +227,18 @@ module.exports = function ({ }) {
 			models.Ad.update({
 				title: title,
 				latinName: latinName,
-				description: description,			
+				description: description,
 			},
-			{
-				where: { id: adID }
+				{
+					where: { id: adID }
 
-			}).then((ad) => {
-				console.log("updated ad: ", ad)
-				callback(ad.dataValues)
+				}).then((ad) => {
+					console.log("updated ad: ", ad)
+					callback(ad.dataValues)
 
-			}).catch((error) => {
-				console.log("error: ", error)
-			})
+				}).catch((error) => {
+					console.log("error: ", error)
+				})
 		},
 
 		/*updateAdByAdID: function (adID, title, latinName, description, callback) {
@@ -256,17 +254,17 @@ module.exports = function ({ }) {
 		deleteAd: function (adID, callback) {
 
 			models.Ad.destroy({
-			
-				where: { id: adID}
 
-			}).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
-				if(rowDeleted === 1){
-				   console.log('Deleted successfully');
-				 }
-			  }, function(err){
-				  console.log(err); 
-			  });
-			
+				where: { id: adID }
+
+			}).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
+				if (rowDeleted === 1) {
+					console.log('Deleted successfully');
+				}
+			}, function (err) {
+				console.log(err);
+			});
+
 		},
 
 		/*deleteAd: function (adID, callback) {
@@ -289,20 +287,20 @@ module.exports = function ({ }) {
 
 			models.Ad.update({
 				isClosed: closed,
-				
+
 			},
-			{
-				where: { id: adID }
+				{
+					where: { id: adID }
 
-			}).then((ad) => {
-				console.log("Closed ad: ", ad)
-				callback(ad.dataValues)
+				}).then((ad) => {
+					console.log("Closed ad: ", ad)
+					callback(ad.dataValues)
 
-			}).catch((error) => {
-				console.log("error: ", error)
-			})
+				}).catch((error) => {
+					console.log("error: ", error)
+				})
 
-		
+
 		},
 		/*closeAd: function (adID, callback) {
 
@@ -330,8 +328,8 @@ module.exports = function ({ }) {
 				include: [{
 					model: models.Bid,
 					required: true,
-				
-					include:[{
+
+					include: [{
 						model: models.User,
 						required: true,
 					}]
@@ -399,11 +397,11 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				where: {
-					title: { [Op.like] : '%$' + searchInput + '%' },
+					title: { [Op.like]: '%$' + searchInput + '%' },
 
-					$or:[{
+					$or: [{
 
-						latinName: { [Op.like] : '%$' + searchInput + '%' }
+						latinName: { [Op.like]: '%$' + searchInput + '%' }
 
 					}]
 				},

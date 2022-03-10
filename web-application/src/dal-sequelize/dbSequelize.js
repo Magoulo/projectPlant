@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const { addAbortSignal } = require('stream')
+const Op = Sequelize.Op
 
 const dbname = "postgres"
 const hostname = "postgres"
@@ -49,11 +50,19 @@ const ImageBundle = sequelize.define("imageBundle", {
 })
 
 
-
+UserAccount.hasMany(User, { foreignKey: 'userAccountID' });
 User.belongsTo(UserAccount, { foreignKey: "userAccountID" })
+
+Ad.hasOne(ImageBundle, { foreignKey: 'adID' });
 ImageBundle.belongsTo(Ad, { foreignKey: "adID" })
+
+User.hasMany(Ad, { foreignKey: 'userID' });
 Ad.belongsTo(User, { foreignKey: "userID" })
+
+Ad.hasMany(Bid, { foreignKey: 'adID' });
 Bid.belongsTo(Ad, { foreignKey: "adID" })
+
+User.hasMany(Bid, { foreignKey: 'userID' });
 Bid.belongsTo(User, { foreignKey: "userID" })
 
 sequelize.sync()
@@ -64,13 +73,13 @@ UserAccount.findOrCreate({
 }).then(([userAccount, created]) => {
 	if (created) {
 		User.findOrCreate({
-			where: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com",phoneNumber: "123", city: "Louisiana" },
-			defaults: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com",phoneNumber: "123", city: "Louisiana", userAccountID: userAccount.dataValues.id}
+			where: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com", phoneNumber: "123", city: "Louisiana" },
+			defaults: { firstName: "Billy", lastName: "May", email: "BillyMay@mail.com", phoneNumber: "123", city: "Louisiana", userAccountID: userAccount.dataValues.id }
 		}).then(([user, created]) => {
-	
-			console.log("firstname: ", user.firstName); 
-			console.log("lastname: ",user.lastName); 
-			console.log("created: ",created); // true
+
+			console.log("firstname: ", user.firstName);
+			console.log("lastname: ", user.lastName);
+			console.log("created: ", created); // true
 		});
 	}
 	console.log("userAccount: ", userAccount); // userAccount
@@ -79,21 +88,21 @@ UserAccount.findOrCreate({
 });
 
 Ad.findOrCreate({
-	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 1 },
-	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description:"well maintained speciement, 3 years old", isClosed:"0", userID: 1 }
+	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 },
+	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 }
 }).then(([ad, created]) => {
 	if (created) {
 		ImageBundle.findOrCreate({
-			where: { coverImagePath:"variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id },
-			defaults: { coverImagePath:"variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id}
+			where: { coverImagePath: "variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id },
+			defaults: { coverImagePath: "variegata-1.jpg", firstImagePath: "monstera-propagation-in-water-scaled.jpg", secondImagePath: "catesthill-propogating-monstera-plant-4.jpg", adID: ad.dataValues.id }
 		}).then(([imageBundle, created]) => {
 
-			console.log("imageBundle: ",imageBundle); // imageBundle
-			console.log("created: ",created); // true
+			console.log("imageBundle: ", imageBundle); // imageBundle
+			console.log("created: ", created); // true
 		});
 	}
 	console.log("ad: ", ad); // ad
-	console.log("imageBundle: ",ImageBundle); // imageBundle
+	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
 });
 
@@ -106,4 +115,4 @@ INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) 
 
 const models = { User, UserAccount, Bid, Ad, ImageBundle }
 
-module.exports = { models }
+module.exports = { models, Op }

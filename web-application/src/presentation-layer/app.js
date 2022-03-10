@@ -54,9 +54,9 @@ app.use(function (req, res, next) {
 //awilix setup---------------------------------------------------------------------
 
 //data-access-layer
-const accountRepository = require('/web-application/src/data-access-layer/account-repository')
-const adRepository = require('/web-application/src/data-access-layer/ad-repository')
-const bidRepository = require('/web-application/src/data-access-layer/bid-repository')
+const accountRepository = require('/web-application/src/dal-sequelize/account-repository')
+const adRepository = require('/web-application/src/dal-sequelize/ad-repository')
+const bidRepository = require('/web-application/src/dal-sequelize/bid-repository')
 const userRepository = require('/web-application/src/dal-sequelize/user-repository')
 
 //business-logic-layer
