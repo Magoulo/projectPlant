@@ -7,7 +7,7 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll().then((ad) => {
 				console.log("ads: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -37,7 +37,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -61,19 +61,19 @@ module.exports = function ({ }) {
 
 		getAllAdsByUserID: function (userID, callback) {
 			console.log("getAllAdsByUserID ----------------------------------------------") // måste kolla så att denna funktion returnerar rätt imagebundle till rätt ad!
-			console.log(models.Ad.id)
+		//	console.log("models.Ad", models.Ad.findAll( {	where: { userID: 1 }}))
 
 			models.Ad.findAll({
-				where: { userID: 1 },
-
+				
 				include: [{
 					model: models.ImageBundle,
-					where: { adID: models.Ad.id }
-				}]
-
+					required: true,
+					where: { adID: 2 }
+				}],
+				where: { userID: userID },
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -102,7 +102,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ad found by userID: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -197,7 +197,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("Created ad: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -234,7 +234,7 @@ module.exports = function ({ }) {
 
 				}).then((ad) => {
 					console.log("updated ad: ", ad)
-					callback(ad.dataValues)
+					callback([],ad.dataValues)
 
 				}).catch((error) => {
 					console.log("error: ", error)
@@ -294,7 +294,7 @@ module.exports = function ({ }) {
 
 				}).then((ad) => {
 					console.log("Closed ad: ", ad)
-					callback(ad.dataValues)
+					callback([],ad.dataValues)
 
 				}).catch((error) => {
 					console.log("error: ", error)
@@ -337,8 +337,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback(ad.dataValues)
-
+				callback([],ad.dataValues)
 			}).catch((error) => {
 				console.log("error: ", error)
 			})
@@ -414,7 +413,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback(ad.dataValues)
+				callback([],ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)

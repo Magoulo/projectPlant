@@ -50,23 +50,16 @@ const ImageBundle = sequelize.define("imageBundle", {
 })
 
 
-UserAccount.hasMany(User, { foreignKey: 'userAccountID' });
 User.belongsTo(UserAccount, { foreignKey: "userAccountID" })
-
-Ad.hasOne(ImageBundle, { foreignKey: 'adID' });
 ImageBundle.belongsTo(Ad, { foreignKey: "adID" })
-
-User.hasMany(Ad, { foreignKey: 'userID' });
 Ad.belongsTo(User, { foreignKey: "userID" })
-
-Ad.hasMany(Bid, { foreignKey: 'adID' });
 Bid.belongsTo(Ad, { foreignKey: "adID" })
-
-User.hasMany(Bid, { foreignKey: 'userID' });
 Bid.belongsTo(User, { foreignKey: "userID" })
 
 sequelize.sync()
+
 // Find or Create data in tables -------------------------------------------------------------------------------------------------------------------------
+/*
 UserAccount.findOrCreate({
 	where: { username: "billy", passwordHash: "123" },
 	defaults: { username: "billy", passwordHash: "123" }
@@ -105,7 +98,7 @@ Ad.findOrCreate({
 	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
 });
-
+*/
 /*
 INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("1","well maintained Monstera", "Monstera deliciosa","well maintained with roots in mullis", "0");
 INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("1","variegata-1.jpg", "monstera-propagation-in-water-scaled.jpg", "catesthill-propogating-monstera-plant-4.jpg");

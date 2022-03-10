@@ -41,7 +41,7 @@ module.exports = function () {
 				where: { username: username }
 
 			}).then((userAccount) => {
-				console.log("user account: ", userAccount)
+				console.log("user account: ", userAccount.dataValues)
 				callback([], userAccount.dataValues)
 
 			}).catch((error) => {

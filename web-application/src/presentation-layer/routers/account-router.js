@@ -162,12 +162,13 @@ module.exports = function ({ accountManager, userManager }) {
 		const password = request.body.password
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccounts) {
+			console.log("userAccounts--------------------............-------------: ", UserAccounts)
 			if (errors.length == 0) {
 
 				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
 					console.log("Username and Password are correct!")
 					request.session.isLoggedIn = true
-					request.session.userID = UserAccounts.userAccountID
+					request.session.userID = UserAccounts.id // UserAccounts.userAccountID ------------------------------------------------ MySQL
 					console.log("sessionUserID: ", request.session.userID)
 
 					response.redirect('/')
