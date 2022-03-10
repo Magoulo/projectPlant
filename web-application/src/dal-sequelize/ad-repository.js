@@ -64,15 +64,17 @@ module.exports = function ({ }) {
 		//	console.log("models.Ad", models.Ad.findAll( {	where: { userID: 1 }}))
 
 			models.Ad.findAll({
+				raw:true,
 				
 			include: [{ 
 				model: models.ImageBundle,
+			
 				required: true
 			
 			}],
 			}).then((ad) => {
 				console.log("ads-------------------------------------: ", ad)
-				callback([],ad.dataValues)
+				callback([],ad)
 
 			}).catch((error) => {
 				console.log("error----------------------------------: ", error)
@@ -315,13 +317,13 @@ module.exports = function ({ }) {
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
 
 			models.Ad.findAll({
+				raw:true,
 				where: { userID: userID },
 
-				include: [{
-					model: models.ImageBundle,
-					required: true
-
-					//	where: { adID: ad.adID }
+				include: [{ 
+				model: models.ImageBundle,
+				required: true
+			
 				}],
 
 				include: [{
@@ -336,7 +338,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback([],ad.dataValues)
+				callback([],ad)
 			}).catch((error) => {
 				console.log("error: ", error)
 			})

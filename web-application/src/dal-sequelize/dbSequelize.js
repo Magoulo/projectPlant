@@ -50,20 +50,20 @@ const ImageBundle = sequelize.define("imageBundle", {
 })
 
 
+UserAccount.hasMany(User, { foreignKey: 'userAccountID' });
 User.belongsTo(UserAccount, { foreignKey: "userAccountID" })
-//UserAccount.hasOne(User, { as: "user" })
 
+Ad.hasOne(ImageBundle, { foreignKey: 'adID' });
 ImageBundle.belongsTo(Ad, { foreignKey: "adID" })
-//Ad.hasOne(ImageBundle)
 
+User.hasMany(Ad, { foreignKey: 'userID' });
 Ad.belongsTo(User, { foreignKey: "userID" })
 
-
+Ad.hasMany(Bid, { foreignKey: 'adID' });
 Bid.belongsTo(Ad, { foreignKey: "adID" })
-//Ad.hasOne(Bid)
 
+User.hasMany(Bid, { foreignKey: 'userID' });
 Bid.belongsTo(User, { foreignKey: "userID" })
-//User.hasOne(Bid, { as: "bid" })
 
 sequelize.sync()
 
