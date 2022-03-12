@@ -1,111 +1,115 @@
 <!-- My Ads -->
-
-<!-- tab navigation -->
-<nav>
-	<div class="nav nav-tabs" id="nav-tab" role="tablist">
-
-		<button class="nav-link active" id="nav-manage-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-manage-ads"
-			type="button" role="tab" aria-controls="nav-manage-ads" aria-selected="true">
-			Manage My Ads
-		</button>
-
-		<button class="nav-link" id="nav-ad-offers-tab" data-bs-toggle="tab" data-bs-target="#nav-ad-offers"
-			type="button" role="tab" aria-controls="nav-ad-offers" aria-selected="false">
-			My Ad Offers
-		</button>
-
-		<button class="nav-link" id="nav-closed-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-closed-ads"
-			type="button" role="tab" aria-controls="nav-closed-ads" aria-selected="false">
-			My Closed Ads
-		</button>
-
-	</div>
-</nav>
+<div class="container p-0 m-0" style="max-width: 100%;">
 
 
-<!-- navigation content -->
-<div class="tab-content" id="nav-tabContent">
 
+	<!-- tab navigation -->
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-	<!-- Manage ads -->
-	<div class="tab-pane fade show active" id="nav-manage-ads" role="tabpanel" aria-labelledby="nav-manage-ads-tab">
+			<button class="nav-link active" id="nav-manage-ads-tab" data-bs-toggle="tab"
+				data-bs-target="#nav-manage-ads" type="button" role="tab" aria-controls="nav-manage-ads"
+				aria-selected="true">
+				Manage My Ads
+			</button>
 
-		<div class="row justify-content-start">
-			<h1>Manage My Ads</h1>
+			<button class="nav-link" id="nav-ad-offers-tab" data-bs-toggle="tab" data-bs-target="#nav-ad-offers"
+				type="button" role="tab" aria-controls="nav-ad-offers" aria-selected="false">
+				My Ad Offers
+			</button>
+
+			<button class="nav-link" id="nav-closed-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-closed-ads"
+				type="button" role="tab" aria-controls="nav-closed-ads" aria-selected="false">
+				My Closed Ads
+			</button>
+
 		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-auto"></div>
-			<div class="col-3 text-center d-grid gap-2">
-				<a href="/ads/adCreate"><button type="button" class="btn btn-primary">Create Ad</button></a>
+	</nav>
 
 
+	<!-- navigation content -->
+	<div class="tab-content" id="nav-tabContent">
+
+
+		<!-- Manage ads -->
+		<div class="tab-pane fade show active" id="nav-manage-ads" role="tabpanel" aria-labelledby="nav-manage-ads-tab">
+
+			<div class="row justify-content-start">
+				<h1>Manage My Ads</h1>
 			</div>
-			<div class="col-auto"></div>
-		</div>
+
+			<div class="row justify-content-center">
+				<div class="col-auto"></div>
+				<div class="col-3 text-center d-grid gap-2">
+					<a href="/ads/adCreate"><button type="button" class="btn btn-primary">Create Ad</button></a>
 
 
-		{{#if errors.length}}
-		<p class="text-center">Oh no, something went wrong:</p>
-
-		<ul>
-			{{#each errors}}
-			<li>{{this}}</li>
-			{{/each}}
-		</ul>
-
-		{{else}}
-		{{#if Ad}}
-
-		<div class="row justify-content-start align-items-center">
-			{{#each Ad}}
-
-			<div class="col-3 text-center">
-
-				<div class="col-12">
-					<h3>{{title}}
-						{{#if isClosed}}
-						(Closed)
-						{{/if}}
-					</h3>
 				</div>
+				<div class="col-auto"></div>
+			</div>
 
-				<div class="col-12">
-					<img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}" class="flowerImage"
-						style="width: 300px; height: 300px">
-				</div>
 
-				<div class="col-12 mt-2 mb-2">
-					<div class="row">
-						<div class="col-12">
-							<a class="btn btn-primary m-1" href="/ads/adUpdate/{{id}}">Update</a>
+			{{#if errors.length}}
+			<p class="text-center">Oh no, something went wrong:</p>
 
-							<a class="btn btn-primary m-1" href="/ads/adDelete/{{id}}">Delete</a>
+			<ul>
+				{{#each errors}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+
+			{{else}}
+			{{#if Ad}}
+
+			<div class="row justify-content-start align-items-center">
+				{{#each Ad}}
+
+				<div class="col-3 text-center">
+
+					<div class="col-12">
+						<h3>{{title}}
+							{{#if isClosed}}
+							(Closed)
+							{{/if}}
+						</h3>
+					</div>
+
+					<div class="col-12">
+						<img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}" class="flowerImage"
+							style="width: 300px; height: 300px">
+					</div>
+
+					<div class="col-12 mt-2 mb-2">
+						<div class="row">
+							<div class="col-12">
+								<a class="btn btn-primary m-1" href="/ads/adUpdate/{{id}}">Update</a>
+
+								<a class="btn btn-primary m-1" href="/ads/adDelete/{{id}}">Delete</a>
+							</div>
+
 						</div>
-
 					</div>
 				</div>
+
+				{{/each}}
 			</div>
 
-			{{/each}}
+			{{else}}
+			<div class="col-12 text-center">
+				<p>No, your ads doesn't exist.</p>
+			</div>
+			{{/if}}
+			{{/if}}
 		</div>
 
-		{{else}}
-		<div class="col-12 text-center">
-			<p>No, your ads doesn't exist.</p>
-		</div>
-		{{/if}}
-		{{/if}}
-	</div>
-
-	<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
-		<div class="row">
-			<div class="col-12">
+		<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
+			<div class="row">
+				<div class="col-12">
 
 
 
-				<!----------- Accepted Offers ------------------------------------------------------------------------------->
-				<!--	<div class="col-12">
+					<!----------- Accepted Offers ------------------------------------------------------------------------------->
+					<!--	<div class="col-12">
 						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
 							data-bs-target="#acceptedOffers" aria-expanded="false" aria-controls="collapseExample">
 							Accepted Offers
@@ -157,308 +161,359 @@
 						</div>
 					</div>-->
 
-				<!----------- Pending Offers ------------------------------------------------------------------------------->
-				<div class="col-12">
-					<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-						data-bs-target="#pendingOffers" aria-expanded="false" aria-controls="collapseExample">
-						Pending Offers
-					</button>
+					<!----------- Pending Offers ------------------------------------------------------------------------------->
+					<div class="col-12">
+						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+							data-bs-target="#pendingOffers" aria-expanded="false" aria-controls="collapseExample">
+							Pending Offers
+						</button>
 
-					<div class="collapse" id="pendingOffers">
-						<div class="card card-body">
+						<div class="collapse" id="pendingOffers">
+							<div class="card card-body">
 
-							{{#if errors.length}}
-							<p class="text-center">Oh no, something went wrong:</p>
+								{{#if errors.length}}
+								<p class="text-center">Oh no, something went wrong:</p>
 
-							<ul>
-								{{#each errors}}
-								<li>{{this}}</li>
-								{{/each}}
-							</ul>
-							{{else}}
-							{{#if Ad}}
-
-
-							{{#each Ad}}
-							{{#unless isClosed}}
+								<ul>
+									{{#each errors}}
+									<li>{{this}}</li>
+									{{/each}}
+								</ul>
+								{{else}}
+								{{#if Ad}}
 
 
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
+								{{#each Ad}}
+								{{#unless isClosed}}
 
-										<div class="col-2 text-center">
-											<img src="/images/{{'ImageBundle.coverImagePath'}}"
-												alt="{{'ImageBundle.coverImagePath'}}" class="flowerImage"
-												style="width: 200px; height: 200px">
+
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+
+											<div class="col-2 text-center">
+												<img src="/images/{{'ImageBundle.coverImagePath'}}" alt="{{'ImageBundle.coverImagePath'}}"
+													class="flowerImage" style="width: 200px; height: 200px">
+											</div>
+
+											<div class="col-8 text-start align-self-center">
+												<h1>{{title}}</h1>
+											</div>
+
+											<div class="col-2 text-center align-self-end">
+												<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+													data-bs-target="#id{{id}}ad" aria-expanded="false"
+													aria-controls="collapseExample">
+													Show offers <i class="bi bi-caret-down"></i>
+												</button>
+											</div>
+
 										</div>
-
-										<div class="col-8 text-start align-self-center">
-											<h1>{{title}}</h1>
-										</div>
-
-										<div class="col-2 text-center align-self-end">
-											<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-												data-bs-target="#id{{id}}ad" aria-expanded="false"
-												aria-controls="collapseExample">
-												Show offers <i class="bi bi-caret-down"></i>
-											</button>
-										</div>
-
 									</div>
 								</div>
+
+								<hr>
+
+								<div class="collapse" id="id{{id}}ad">
+									<div class="card card-body">
+										{{#each this.bids}}
+
+										<!-- Accept Bid Modal -->
+										<div class="modal fade" id="acceptBidID{{id}}Modal" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel">Accept bid for
+															"{{../title}}?"</h3>
+														<button type="button" class="btn-close" data-bs-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+
+													<form action="/bids/updateBid/{{id}}/Accepted" method="POST"
+														encType="multipart/form-data">
+														<div class="modal-body">
+
+															<input type="hidden" name="adID" value="{{adID}}">
+
+															<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+															<div class="mb-0">
+															
+																<h3>{{User.firstName}} {{User.lastName}}</h3>
+															
+																<p>{{message}}</p>
+															</div>
+
+															<div class="mb-0">
+																<img class="flowerImage" src="/images/{{imagePath}}"
+																	alt="imageToID{{adID}}"
+																	style="width: 400px; height: 400px">
+															</div>
+
+														</div>
+
+														<div class="modal-footer">
+															<button type="submit"
+																class="btn btn-primary">confirm</button>
+														</div>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+										<!-- Decline Bid Modal -->
+										<div class="modal fade" id="declineBidID{{id}}Modal" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+
+													<div class="modal-header">
+														<h3 class="modal-title" id="exampleModalLabel">Decline bid for
+															"{{../title}}?"</h3>
+														<button type="button" class="btn-close" data-bs-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+
+													<form action="/bids/updateBid/{{id}}/Declined" method="POST"
+														encType="multipart/form-data">
+														<div class="modal-body">
+
+															<input type="hidden" name="adID" value="{{ad.adID}}">
+
+															<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+															<div class="mb-0">
+																<h3>{{User.firstName}} {{User.lastName}}</h3>
+																<p>{{message}}</p>
+															</div>
+
+															<div class="mb-0">
+																<img class="flowerImage" src="/images/{{imagePath}}"
+																	alt="imageToID{{adID}}"
+																	style="width: 400px; height: 400px">
+															</div>
+
+														</div>
+
+														<div class="modal-footer">
+															<button type="submit"
+																class="btn btn-primary">confirm</button>
+														</div>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-8 text start">
+												<h3>{{User.firstName}} {{User.lastName}}</h3>
+												<p>Placed: {{date}}</p>
+
+												<hr>
+
+												<p>{{message}}</p>
+											</div>
+											<div class="col-4 text-center">
+												<div class="col-12">
+													<img class="flowerImage" src="/images/{{imagePath}}"
+														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+												</div>
+
+												<!-- Modal Buttons -->
+												<div class="col-12 align-items-end">
+													<button class="btn btn-primary m-1" data-bs-toggle="modal"
+														data-bs-target="#declineBidID{{id}}Modal">Decline</button>
+													<button class="btn btn-primary m-1" data-bs-toggle="modal"
+														data-bs-target="#acceptBidID{{id}}Modal">Accept</button>
+												</div>
+
+											</div>
+										</div>
+
+										<hr>
+
+										{{/each}}
+									</div>
+								</div>
+
+								{{/unless}}
+								{{/each}}
+								{{else}}
+								<div class="col-12 text-center">
+									<p>No, your ads doesn't exist.</p>
+								</div>
+								{{/if}}
+								{{/if}}
 							</div>
+						</div>
+					</div>
 
-							<hr>
+					<!----------- Declined Offers ------------------------------------------------------------------------------->
+					<div class="col-12">
+						<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+							data-bs-target="#declinedOffers" aria-expanded="false" aria-controls="collapseExample">
+							Declined Offers
+						</button>
 
-							<div class="collapse" id="id{{id}}ad">
-								<div class="card card-body">
-									{{#each this.bids}}
+						<div class="collapse" id="declinedOffers">
+							<div class="card card-body">
 
-									<!-- Accept Bid Modal -->
-									<div class="modal fade" id="acceptBidID{{bidID}}Modal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content">
+								{{#if errors.length}}
+								<p class="text-center">Oh no, something went wrong:</p>
 
-												<div class="modal-header">
-													<h3 class="modal-title" id="exampleModalLabel">Accept bid for
-														"{{title}}?"</h3>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
-												</div>
-
-												<form action="/bids/updateBid/{{bidID}}/Accepted" method="POST"
-													encType="multipart/form-data">
-													<div class="modal-body">
-
-														<input type="hidden" name="adID" value="{{adID}}">
-
-														<input type="hidden" name="_csrf" value="{{csrfToken}}">
-
-														<div class="mb-0">
-															<h3>{{firstName}} {{lastName}}</h3>
-															<p>{{message}}</p>
-														</div>
-
-														<div class="mb-0">
-															<img class="flowerImage" src="/images/{{imagePath}}"
-																alt="imageToID{{adID}}"
-																style="width: 400px; height: 400px">
-														</div>
-
-													</div>
-
-													<div class="modal-footer">
-														<button type="submit" class="btn btn-primary">confirm</button>
-													</div>
-												</form>
-
-											</div>
+								<ul>
+									{{#each errors}}
+									<li>{{this}}</li>
+									{{/each}}
+								</ul>
+								{{else}}
+								{{#if adDeclined}}
+								<div class="row justify-content-start align-items-center">
+									{{#each adDeclined}}
+									<div class="col-3 text-center">
+										<div class="col-12">
+											<h3>{{title}}</h3>
 										</div>
-									</div>
-
-									<!-- Decline Bid Modal -->
-									<div class="modal fade" id="declineBidID{{bidID}}Modal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content">
-
-												<div class="modal-header">
-													<h1 class="modal-title" id="exampleModalLabel">Decline bid for
-														"{{title}}?"</h1>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
-												</div>
-
-												<form action="/bids/updateBid/{{bidID}}/Declined" method="POST"
-													encType="multipart/form-data">
-													<div class="modal-body">
-
-														<input type="hidden" name="adID" value="{{ad.adID}}">
-
-														<input type="hidden" name="_csrf" value="{{csrfToken}}">
-
-														<div class="mb-0">
-															<h3>{{firstName}} {{lastName}}</h3>
-															<p>{{message}}</p>
-														</div>
-
-														<div class="mb-0">
-															<img class="flowerImage" src="/images/{{imagePath}}"
-																alt="imageToID{{adID}}"
-																style="width: 400px; height: 400px">
-														</div>
-
-													</div>
-
-													<div class="modal-footer">
-														<button type="submit" class="btn btn-primary">confirm</button>
-													</div>
-												</form>
-
-											</div>
+										<div class="col-12">
+											<img class="img-thumbnail" src="/images/{{coverImagePath}}"
+												alt="{{imageBundleID}}" class="flowerImage"
+												style="width: 300px; height: 300px">
 										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-8 text start">
+										<div class="col-12">
 											<h3>{{firstName}} {{lastName}}</h3>
-											<p>Placed: {{date}}</p>
-
-											<hr>
-
+										</div>
+										<div class="col-12">
 											<p>{{message}}</p>
 										</div>
-										<div class="col-4 text-center">
-											<div class="col-12">
-												<img class="flowerImage" src="/images/{{imagePath}}"
-													alt="imageToID{{adID}}" style="width: 400px; height: 400px">
-											</div>
-
-											<!-- Modal Buttons -->
-											<div class="col-12 align-items-end">
-												<button class="btn btn-primary m-1" data-bs-toggle="modal"
-													data-bs-target="#declineBidID{{bidID}}Modal">Decline</button>
-												<button class="btn btn-primary m-1" data-bs-toggle="modal"
-													data-bs-target="#acceptBidID{{bidID}}Modal">Accept</button>
-											</div>
-
-										</div>
 									</div>
-
-									<hr>
-
 									{{/each}}
 								</div>
-							</div>
 
-							{{/unless}}
-							{{/each}}
-							{{else}}
-							<div class="col-12 text-center">
-								<p>No, your ads doesn't exist.</p>
-							</div>
-							{{/if}}
-							{{/if}}
-						</div>
-					</div>
-				</div>
-
-				<!----------- Declined Offers ------------------------------------------------------------------------------->
-				<div class="col-12">
-					<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-						data-bs-target="#declinedOffers" aria-expanded="false" aria-controls="collapseExample">
-						Declined Offers
-					</button>
-
-					<div class="collapse" id="declinedOffers">
-						<div class="card card-body">
-
-							{{#if errors.length}}
-							<p class="text-center">Oh no, something went wrong:</p>
-
-							<ul>
-								{{#each errors}}
-								<li>{{this}}</li>
-								{{/each}}
-							</ul>
-							{{else}}
-							{{#if adDeclined}}
-							<div class="row justify-content-start align-items-center">
-								{{#each adDeclined}}
-								<div class="col-3 text-center">
-									<div class="col-12">
-										<h3>{{title}}</h3>
-									</div>
-									<div class="col-12">
-										<img class="img-thumbnail" src="/images/{{coverImagePath}}"
-											alt="{{imageBundleID}}" class="flowerImage"
-											style="width: 300px; height: 300px">
-									</div>
-									<div class="col-12">
-										<h3>{{firstName}} {{lastName}}</h3>
-									</div>
-									<div class="col-12">
-										<p>{{message}}</p>
-									</div>
+								{{else}}
+								<div class="col-12 text-center">
+									<p>No, your ads doesn't exist.</p>
 								</div>
-								{{/each}}
+								{{/if}}
+								{{/if}}
 							</div>
-
-							{{else}}
-							<div class="col-12 text-center">
-								<p>No, your ads doesn't exist.</p>
-							</div>
-							{{/if}}
-							{{/if}}
 						</div>
 					</div>
 				</div>
+				<div class="col-auto"></div>
 			</div>
-			<div class="col-auto"></div>
 		</div>
-	</div>
 
-	<!-- My Closed Ads -->
+		<!-- My Closed Ads -->
 
-	<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
-		<div class="row justify-content-start">
-			{{#if adAccepted}}
-			{{#each adAccepted}}
-			<div>
-				<div class="card card-body">
-					<div class="row">
+		<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel"
+			aria-labelledby="nav-closed-ads-tab">
+			<div class="row justify-content-start">
+				{{#if adAccepted}}
+				{{#each adAccepted}}
+				<div>
+					<div class="card card-body">
+						<div class="row">
 
-						<div class="col-2 text-center">
-							<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
-								style="width: 200px; height: 200px">
+							<div class="col-2 text-center">
+								<img src="/images/{{ImageBundle.coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
+									style="width: 200px; height: 200px">
+							</div>
+
+							<div class="col-8 text-start align-self-center">
+								<h1>{{title}}</h1>
+							</div>
+
+							<div class="col-2 text-center align-self-end">
+								<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+									data-bs-target="#id{{id}}ad" aria-expanded="false"
+									aria-controls="collapseExample">
+									Show Accepted offer <i class="bi bi-caret-down"></i>
+								</button>
+							</div>
+
 						</div>
-
-						<div class="col-8 text-start align-self-center">
-							<h1>{{title}}</h1>
-						</div>
-
-						<div class="col-2 text-center align-self-end">
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-								data-bs-target="#id{{adID}}ad" aria-expanded="false" aria-controls="collapseExample">
-								Show Accepted offer <i class="bi bi-caret-down"></i>
-							</button>
-						</div>
-
 					</div>
 				</div>
-			</div>
 
-			<div class="collapse" id="id{{adID}}ad">
-				<div class="card card-body">
+				<div class="collapse" id="id{{id}}ad">
+					<div class="card card-body">
 
-					<div class="row">
-						<div class="col-8 text start">
-							<h3>{{firstName}} {{lastName}}</h3>
-							<p>{{message}}</p>
-						</div>
-						<div class="col-4 text-center">
-							<div class="col-12">
-								<img class="flowerImage" src="/images/{{imagePath}}" alt="imageToID{{adID}}"
-									style="width: 400px; height: 400px">
+						<div class="row">
+							<div class="col-8 text start">
+								<h3>{{Bids.User.firstName}} {{Bids.User.lastName}}</h3>
+								<p>{{Bids.message}}</p>
+							</div>
+							<div class="col-4 text-center">
+								<div class="col-12">
+									<img class="flowerImage" src="/images/{{Bids.imagePath}}" alt="imageToID{{adID}}"
+										style="width: 400px; height: 400px">
+								</div>
 							</div>
 						</div>
+
 					</div>
-
 				</div>
+				{{/each}}
+				{{else}}
+				<div class="col-12 text-center">
+					<p>No, your ads doesn't exist.</p>
+				</div>
+				{{/if}}
 			</div>
-			{{/each}}
-			{{else}}
-			<div class="col-12 text-center">
-				<p>No, your ads doesn't exist.</p>
-			</div>
-			{{/if}}
 		</div>
+
+
+
+
+
 	</div>
-
-
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Lägg till
+1.Tabs mellan olika contents
+
+ Closed Ads
+ 1. Fin lista av ads (med title och bild) som man kan klicka på och se
+
+
+ Ad Offers
+ 1. -Accepted Offers lista som innerhåller; Titel, "show offer" (öppna listan) där man kan se offer och vem som lagt den
+ 1. -Accepted Offers lista som innerhåller; Titel, "show offer" (öppna listan) där man kan se offer och vem som lagt den.
+    -Accept offer och Decline offer knapp
+ 
+ Manage Ads
+ 1. Fin lista av adds
+ 2. Create ad knapp 
+ 3. Update knapp
+ 4. Delete Knapp
+-->

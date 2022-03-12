@@ -39,13 +39,13 @@ module.exports = function ({ }) {
 				raw: true,
 				where: { id: adID },
 
-				include: [{ 
-					model: models.ImageBundle, 
+				include: [{
+					model: models.ImageBundle,
 					required: true
-				}],	
+				}],
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback([],ad)
+				callback([], ad)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -71,14 +71,14 @@ module.exports = function ({ }) {
 			//	console.log("models.Ad", models.Ad.findAll( {	where: { userID: 1 }}))
 
 			models.Ad.findAll({
-				raw:true,
-				where: {userID : userID},
-			include: [{ 
-				model: models.ImageBundle,
-			
-				required: true
-			
-			}],
+				raw: true,
+				where: { userID: userID },
+				include: [{
+					model: models.ImageBundle,
+
+					required: true
+
+				}],
 			}).then((ad) => {
 				console.log("ads-------------------------------------: ", ad)
 				callback([], ad)
@@ -110,7 +110,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("Ad found by userID: ", ad)
-				callback([],ad.dataValues)
+				callback([], ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -242,7 +242,7 @@ module.exports = function ({ }) {
 
 				}).then((ad) => {
 					console.log("Updated ad: ", ad)
-					callback([],ad.dataValues)
+					callback([], ad.dataValues)
 
 				}).catch((error) => {
 					console.log("error: ", error)
@@ -325,22 +325,13 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				raw: true,
+				nest: true,
 				where: { userID: userID },
-
-				include: [{ 
-				model: models.ImageBundle,
-				required: true,
-			
-				//model: models.Bid,
-				//	required: true,
-
-					/*include: [{
-						model: models.User,
-						required: true,
-					}]*/
-				}],
-
-				/*include: [{
+	
+				include: [{
+					model: models.ImageBundle,
+					required: true,},
+					{
 					model: models.Bid,
 					required: true,
 
@@ -348,11 +339,11 @@ module.exports = function ({ }) {
 						model: models.User,
 						required: true,
 					}]
-				}]*/
+				}],
 
 			}).then((ad) => {
-				console.log("adsssssss: ", ad)
-				callback([],ad)
+				console.log("ads, imageBundle, bids and user: ", ad)
+				callback([], ad)
 			}).catch((error) => {
 				console.log("error: ", error)
 			})
