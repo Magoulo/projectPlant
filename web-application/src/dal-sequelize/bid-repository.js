@@ -66,6 +66,7 @@ module.exports = function () {
 
 			models.Bid.findAll({
 				raw: true,
+				nest: true,
 				where: { userID: userID },
 
 				
@@ -119,8 +120,8 @@ module.exports = function () {
 				userID: Bid.userID
 				
 			}).then((bid) => {
-				console.log("Created Bid: ", bid)
-				callback(bid.dataValues)
+				console.log("Created Bid: ", bid.dataValues)
+				callback()
 
 			}).catch((error) => {
 				console.log("error: ", error)

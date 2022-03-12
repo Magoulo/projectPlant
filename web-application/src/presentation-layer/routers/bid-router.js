@@ -11,7 +11,7 @@ module.exports = function ({ adManager, bidManager }) {
         var bidDeclined = []
 
         bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
-          //  console.log("Bid-------------: ", Bid)
+            console.log("Bid-------------: ", Bid)
 
             for (index in Bid) {
                 console.log("Bid[index].status:",Bid[index].status)
@@ -93,6 +93,7 @@ module.exports = function ({ adManager, bidManager }) {
     })
 
     router.post("/placeBid", function (request, response) {
+        console.log("inside place bid!------------")
 
         const adID = request.body.adID
         const message = request.body.message
@@ -135,6 +136,8 @@ module.exports = function ({ adManager, bidManager }) {
             })
 
             bidManager.createBid(Ad, function (error) {
+                console.log("kommer inte ens hit?")
+                console.log("Error: ", error)
                 if (error) {
                     const model = {
                         errors: errors,

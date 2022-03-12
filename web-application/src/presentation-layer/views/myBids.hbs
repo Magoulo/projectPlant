@@ -53,13 +53,13 @@
 					<div class="row">
 					
 						<div class="col-2 text-center">
-							<img src="/images/{{'Ad.ImageBundle.coverImagePath'}}" alt="{{'Ad.ImageBundle.coverImagePath'}}" class="flowerImage"
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
 								style="width: 200px; height: 200px">
 						</div>
 
 						<div class="col-8 text-start align-self-center">
-							<h1>{{'Ad.title'}}</h1>
-							<h3>{{'Ad.latinName'}}</h3>
+							<h1>{{Ad.title}}</h1>
+							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
@@ -136,13 +136,13 @@
 					<div class="row">
 
 						<div class="col-2 text-center">
-							<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
 								style="width: 200px; height: 200px">
 						</div>
 
 						<div class="col-8 text-start align-self-center">
-							<h1>{{title}}</h1>
-							<h3>{{latinName}}</h3>
+							<h1>{{Ad.title}}</h1>
+							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
@@ -208,19 +208,19 @@
 					<div class="row">
 
 						<div class="col-2 text-center">
-							<img src="/images/{{coverImagePath}}" alt="{{imageBundleID}}" class="flowerImage"
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
 								style="width: 200px; height: 200px">
 						</div>
 
 						<div class="col-8 text-start align-self-center">
-							<h1>{{title}}</h1>
-							<h3>{{latinName}}</h3>
+							<h1>{{Ad.title}}</h1>
+							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
 						<div class="col-2 text-center align-self-end">
 							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-								data-bs-target="#bid{{bidID}}Info" aria-expanded="false"
+								data-bs-target="#bid{{id}}Info" aria-expanded="false"
 								aria-controls="collapseExample">
 								my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
 							</button>
@@ -231,7 +231,7 @@
 			</div>
 
 
-			<div class="collapse" id="bid{{bidID}}Info">
+			<div class="collapse" id="bid{{id}}Info">
 				<div class="card card-body">
 
 					<div class="row">
@@ -246,8 +246,8 @@
 							</div>
 
 							<div class="col-12">
-							<form action="/bids/{{bidID}}/delete" method="POST">
-							<input type="hidden" name="bidID" value="{{bidID}}">
+							<form action="/bids/{{id}}/delete" method="POST">
+							<input type="hidden" name="bidID" value="{{id}}">
 								<div class="col-12">
 									<button type="submit" class="btn btn-primary">
 										Delete
