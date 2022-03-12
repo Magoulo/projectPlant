@@ -170,10 +170,11 @@ module.exports = function ({ }) {
 
 			}).then((imageBundle) => {
 				console.log("Created imageBundle: ", imageBundle)
-				callback(imageBundle.dataValues)
+				callback([],imageBundle.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
+			
 			})
 
 		},
@@ -204,7 +205,7 @@ module.exports = function ({ }) {
 				userID: ad.userID
 
 			}).then((ad) => {
-				console.log("Created ad: ", ad)
+				console.log("Created ad: ", ad.dataValues)
 				callback([], ad.dataValues)
 
 			}).catch((error) => {
@@ -267,7 +268,8 @@ module.exports = function ({ }) {
 
 			}).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
 				if (rowDeleted === 1) {
-					console.log('Deleted successfully');
+					console.log('Deleted successfully')
+					callback([])
 				}
 			}, function (err) {
 				console.log(err);
