@@ -85,7 +85,7 @@ module.exports = function ({ adManager, userManager }) {
                 response.render("myAds.hbs", model)
             } else {
                 allBids = adOffers
-
+                var adAccepted = []
                 for (const ad of allAds) {
                     ad.bids = []
 
@@ -94,11 +94,15 @@ module.exports = function ({ adManager, userManager }) {
                         if (bid.Bids.adID == ad.id && bid.Bids.status == "Pending" && ad.isClosed == false) {            
                             ad.bids.push(bid.Bids)
                         }
+                        if(bid.Bids.status == "Accepted" && ad.isClosed == true){
+                            adAccepted.push(bid)
+                        }
                     }
                 }
                 console.log("allAds: ", allAds)
+                console.log("adAccepted", adAccepted)
              
-                var adAccepted = []
+              
                 var adDeclined = []
 
                 for (index in adOffers) {
