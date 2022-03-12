@@ -273,11 +273,36 @@ Ad.findOrCreate({
 	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
 });
+*/
 
+// Find or Create Ad and ImageBundle -------------------------------------------------------------------------------------------------------------------------
+
+/*
+Bid.findOrCreate({
+	where: { date: "2022-02-16", imagePath: "no-image.png", message: "Hi I would like to buy your Lillies", status: "Pending", userID: 2, adID: 4 },
+	defaults: { date: "2022-02-16", imagePath: "no-image.png", message: "Hi I would like to buy your Lillies", status: "Pending", userID: 2, adID: 4 }
+}).then(([bid, created]) => {
+	
+	console.log("bid: ", bid); // bid
+	console.log(created); // true
+});
 */
 
 
 /*
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Hi I would like to buy your Lillies","Accepted");
+
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Jag har saab bror","Declined");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "kommer ta dom","Declined");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("4", "4", "2022-02-16", "no-image.png", "those look supreme! trade agaisnt monstera? ","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "4", "2022-02-16", "no-image.png", "Interesting Lillies","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("2", "5", "2022-02-16", "no-image.png", "Ooooh want some for appetizers ","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "5", "2022-02-16", "no-image.png", "I want cactus","Pending");
+
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "2", "2022-02-22", "no-image.png", "Hi I would like to buy your Moneytree","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("3", "1", "2022-02-22", "no-image.png", "I am takeing the monstera with me","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "3", "2022-02-11", "no-image.png", "I wanna trade that for this","Pending");
+INSERT INTO Bid(userID, adID, date, imagePath, message, status) VALUES ("1", "4", "2022-02-27", "no-image.png", "Sling som lillies my way","Pending");
 */
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------

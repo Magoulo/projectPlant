@@ -11,8 +11,10 @@ module.exports = function ({ adManager, bidManager }) {
         var bidDeclined = []
 
         bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
+          //  console.log("Bid-------------: ", Bid)
 
             for (index in Bid) {
+                console.log("Bid[index].status:",Bid[index].status)
 
                 if (Bid[index].status == "Accepted") {
                     bidAccepted.push(Bid[index])

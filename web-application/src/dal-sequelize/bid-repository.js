@@ -65,11 +65,27 @@ module.exports = function () {
 		getAllBidsByUserID: function (userID, callback) {
 
 			models.Bid.findAll({
-				where: { userID: userID }
+				raw: true,
+				where: { userID: userID },
+
+				
+				include: [{ 
+					model: models.Ad,
+				
+					required: true,
+
+					include: [{ 
+						model: models.ImageBundle,
+					
+						required: true
+					
+					}],
+				
+				}],
 
 			}).then((bid) => {
 				console.log("all bids by userID: ", bid)
-				callback(bid.dataValues)
+				callback([],bid)
 
 			}).catch((error) => {
 				console.log("error: ", error)
