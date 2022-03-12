@@ -18,6 +18,8 @@ module.exports = function ({ adManager, userManager }) {
                     session: request.session
                 }
 
+                console.log("--------------------------------" + Ad);
+
                 response.render("ads.hbs", model)
        //     })
         })
@@ -34,6 +36,8 @@ module.exports = function ({ adManager, userManager }) {
                 Ad: Ad,
                 session: request.session
             }
+
+            console.log("--------------------------------" + Ad);
 
             response.render("ads.hbs", model)
         })
