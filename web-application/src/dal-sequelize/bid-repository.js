@@ -155,6 +155,7 @@ module.exports = function () {
 			}).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
 				if(rowDeleted === 1){
 				   console.log('Deleted successfully');
+				   callback()
 				 }
 			  }, function(err){
 				  console.log(err); 

@@ -157,9 +157,10 @@ module.exports = function ({ adManager, bidManager }) {
 
         bidManager.deleteBid(bidID, function (error) {
             if (error) {
+                console.log("??????????????????????????????????????????????")
                 response.redirect("/bids/myBids")
-
             } else {
+                console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 response.redirect("/bids/myBids")
             }
         })
