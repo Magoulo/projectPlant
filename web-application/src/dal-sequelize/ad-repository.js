@@ -6,20 +6,16 @@ module.exports = function ({ }) {
 		getAllAds: function (callback) {
 
 			models.Ad.findAll({
-				raw:true,
-				include: [{ 
+				raw: true,
+				include: [{
 					model: models.ImageBundle,
-				
 					required: true
-				
 				}],
 			}).then((ad) => {
-				callback([],ad)
+				callback([], ad)
 
 			}).catch((error) => {
-				console.log("error: ", error)
 			})
-
 		},
 
 		/*getAllAds: function (callback) {
@@ -46,10 +42,7 @@ module.exports = function ({ }) {
 				include: [{ 
 					model: models.ImageBundle, 
 					required: true
-				
-				}],
-				
-
+				}],	
 			}).then((ad) => {
 				console.log("ads: ", ad)
 				callback([],ad)
@@ -57,7 +50,6 @@ module.exports = function ({ }) {
 			}).catch((error) => {
 				console.log("error: ", error)
 			})
-
 		},
 
 		/*	getAdByAdID: function (adID, callback) {
@@ -76,7 +68,7 @@ module.exports = function ({ }) {
 
 		getAllAdsByUserID: function (userID, callback) {
 			console.log("getAllAdsByUserID ----------------------------------------------") // måste kolla så att denna funktion returnerar rätt imagebundle till rätt ad!
-		//	console.log("models.Ad", models.Ad.findAll( {	where: { userID: 1 }}))
+			//	console.log("models.Ad", models.Ad.findAll( {	where: { userID: 1 }}))
 
 			models.Ad.findAll({
 				raw:true,
@@ -89,7 +81,7 @@ module.exports = function ({ }) {
 			}],
 			}).then((ad) => {
 				console.log("ads-------------------------------------: ", ad)
-				callback([],ad)
+				callback([], ad)
 
 			}).catch((error) => {
 				console.log("error----------------------------------: ", error)
@@ -213,7 +205,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("Created ad: ", ad)
-				callback([],ad.dataValues)
+				callback([], ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -310,7 +302,7 @@ module.exports = function ({ }) {
 
 				}).then((ad) => {
 					console.log("Closed ad: ", ad)
-					callback([],ad.dataValues)
+					callback([], ad.dataValues)
 
 				}).catch((error) => {
 					console.log("error: ", error)
@@ -332,7 +324,7 @@ module.exports = function ({ }) {
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
 
 			models.Ad.findAll({
-				raw:true,
+				raw: true,
 				where: { userID: userID },
 
 				include: [{ 
@@ -436,7 +428,7 @@ module.exports = function ({ }) {
 
 			}).then((ad) => {
 				console.log("ads: ", ad)
-				callback([],ad.dataValues)
+				callback([], ad.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
