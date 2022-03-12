@@ -7,17 +7,19 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/", function (request, response) {
 
         adManager.getAllAds(function (errors, Ad) {
-            userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+
+            // lämnar kvar i koden men tror inte detta behövs samma sak i various router till '/' -> start.hbs
+        //    userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
                 const model = {
                     errors: errors,
                     Ad: Ad,
-                    User: User,
+            //        User: User,
                     session: request.session
                 }
 
                 response.render("ads.hbs", model)
-            })
+       //     })
         })
     })
 

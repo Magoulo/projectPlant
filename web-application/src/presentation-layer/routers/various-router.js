@@ -9,17 +9,17 @@ module.exports = function ({ adManager, userManager }) {
 		adManager.getAllAds(function (errors, Ad) {
 // ------behöver en user hämtas?? ----------------------------------------------------------------------------------------------
 
-			userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+		//	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
 				const model = {
 					errors: errors,
-					User: User,
+				//	User: User,
 					Ad: Ad,
 					session: request.session
 				}
 
 				response.render("start.hbs", model)
-			})
+		//	})
 		})
 	})
 
