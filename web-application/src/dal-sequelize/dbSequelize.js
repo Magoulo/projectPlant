@@ -68,11 +68,10 @@ Bid.belongsTo(User, { foreignKey: "userID" })
 sequelize.sync()
 
 
-/*
 // Find or Create UserAccount and User ---------------------------------------------------------------------------------------------------------------------------
 
 // Billy, userID: 1
-UserAccount.findOrCreate({
+/*UserAccount.findOrCreate({
 	where: { username: "billy", passwordHash: "123" },
 	defaults: { username: "billy", passwordHash: "123" }
 }).then(([userAccount, created]) => {
@@ -155,6 +154,7 @@ UserAccount.findOrCreate({
 	console.log("user: ", User); // user
 	console.log(created); // true
 });
+
 */
 
 // Find or Create Ad and ImageBundle -------------------------------------------------------------------------------------------------------------------------

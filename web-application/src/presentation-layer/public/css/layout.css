@@ -1,9 +1,5 @@
-.meh {
-    max-width: 2000px;
-    margin: auto;
-  }
 
-  .img-thumbnail {
+.img-thumbnail {
     float: center;
     width:  400px;
     height: 400px;
@@ -17,4 +13,49 @@
 
 .offer{
   background-color: aquamarine;
+}
+
+.bi-list::before {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+  font-size: 40px;
+  color:#2b2b2b;
+}
+
+.bi-person-check::before, .bi-person::before {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+  font-size: 35px;
+  color:#2b2b2b;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0;
+  z-index: 10000;
+
+  font-family: 'Catamaran', sans-serif;
+}
+
+main {
+  max-width: 2000px;
+  margin: auto;
+  min-height: auto;
+  margin-top: 128px;
+
+  font-family: 'Catamaran', sans-serif;
+}
+
+.nav-link.active, .show>.nav-link {
+  color: #fff;
+  background-color: #2b2b2b;
+}
+
+p{
+  font-family: 'Catamaran', sans-serif;
 }

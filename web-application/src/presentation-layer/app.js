@@ -9,7 +9,6 @@ const redis = require("redis")
 const awilix = require('awilix')
 const app = express()
 
-
 // redis@v4 setup----------------------------------------------------------------------
 let RedisStore = require("connect-redis")(session)
 let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
@@ -22,7 +21,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.engine('hbs', expressHandlebars({
 	extname: 'hbs',
 	defaultLayout: 'main',
-	layoutsDir: path.join(__dirname, 'layouts')
+	layoutsDir: path.join(__dirname, 'layouts'),
+	partialsDir: path.join(__dirname, 'partials')
 }))
 
 // Handle static files in the public folder.
