@@ -96,6 +96,7 @@ module.exports = function ({ adManager, userManager }) {
                         }
                     }
                 }
+                console.log("allAds: ", allAds)
              
                 var adAccepted = []
                 var adDeclined = []

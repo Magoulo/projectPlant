@@ -219,19 +219,19 @@
 										{{#each this.bids}}
 
 										<!-- Accept Bid Modal -->
-										<div class="modal fade" id="acceptBidID{{bidID}}Modal" tabindex="-1"
+										<div class="modal fade" id="acceptBidID{{id}}Modal" tabindex="-1"
 											aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content">
 
 													<div class="modal-header">
 														<h3 class="modal-title" id="exampleModalLabel">Accept bid for
-															"{{title}}?"</h3>
+															"{{../title}}?"</h3>
 														<button type="button" class="btn-close" data-bs-dismiss="modal"
 															aria-label="Close"></button>
 													</div>
 
-													<form action="/bids/updateBid/{{bidID}}/Accepted" method="POST"
+													<form action="/bids/updateBid/{{id}}/Accepted" method="POST"
 														encType="multipart/form-data">
 														<div class="modal-body">
 
@@ -241,7 +241,7 @@
 
 															<div class="mb-0">
 															
-																<h3>{{firstName}}{{lastName}}</h3>
+																<h3>{{User.firstName}} {{User.lastName}}</h3>
 															
 																<p>{{message}}</p>
 															</div>
@@ -265,19 +265,19 @@
 										</div>
 
 										<!-- Decline Bid Modal -->
-										<div class="modal fade" id="declineBidID{{bidID}}Modal" tabindex="-1"
+										<div class="modal fade" id="declineBidID{{id}}Modal" tabindex="-1"
 											aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content">
 
 													<div class="modal-header">
-														<h1 class="modal-title" id="exampleModalLabel">Decline bid for
-															"{{title}}?"</h1>
+														<h3 class="modal-title" id="exampleModalLabel">Decline bid for
+															"{{../title}}?"</h3>
 														<button type="button" class="btn-close" data-bs-dismiss="modal"
 															aria-label="Close"></button>
 													</div>
 
-													<form action="/bids/updateBid/{{bidID}}/Declined" method="POST"
+													<form action="/bids/updateBid/{{id}}/Declined" method="POST"
 														encType="multipart/form-data">
 														<div class="modal-body">
 
@@ -286,7 +286,7 @@
 															<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 															<div class="mb-0">
-																<h3>{{firstName}} {{lastName}}</h3>
+																<h3>{{User.firstName}} {{User.lastName}}</h3>
 																<p>{{message}}</p>
 															</div>
 
@@ -326,9 +326,9 @@
 												<!-- Modal Buttons -->
 												<div class="col-12 align-items-end">
 													<button class="btn btn-primary m-1" data-bs-toggle="modal"
-														data-bs-target="#declineBidID{{bidID}}Modal">Decline</button>
+														data-bs-target="#declineBidID{{id}}Modal">Decline</button>
 													<button class="btn btn-primary m-1" data-bs-toggle="modal"
-														data-bs-target="#acceptBidID{{bidID}}Modal">Accept</button>
+														data-bs-target="#acceptBidID{{id}}Modal">Accept</button>
 												</div>
 
 											</div>
