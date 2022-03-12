@@ -254,7 +254,7 @@ Ad.findOrCreate({
 	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
 });
-*/
+
 Ad.findOrCreate({
 	where: { title: "Gras tree", latinName: "Xanthorrhoea", description: "Tradeing very rare Grass tree cuttings. Grass tree is native to the bush in Austalia and very rare outside the continent. I want to trade my cuttings for other ultra rare species", isClosed: "0", userID: 4 },
 	defaults: { title: "Gras tree", latinName: "Xanthorrhoea", description: "Tradeing very rare Grass tree cuttings. Grass tree is native to the bush in Austalia and very rare outside the continent. I want to trade my cuttings for other ultra rare species", isClosed: "0", userID: 4 }
@@ -274,11 +274,10 @@ Ad.findOrCreate({
 	console.log(created); // true
 });
 
+*/
 
 
 /*
-INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES ("4","Gras tree", "Xanthorrhoea","Tradeing very rare Grass tree cuttings. Grass tree is native to the bush in Austalia and very rare outside the continent. I want to trade my cuttings for other ultra rare species", "0");
-INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES ("6","2015-08-25 13.30.02.jpg", "grass-tree-4-heads.jpg", "IMG_8737.jpg");
 */
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
