@@ -75,7 +75,7 @@ module.exports = function () {
 				where: { id: userID }
 			}).then((user) => {
 
-				console.log("user: ", user)
+				console.log("user updated: ", user)
 				callback(user.dataValues)
 				//	console.log("Results: ", results)
 			}).catch((error) => {

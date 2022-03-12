@@ -17,7 +17,7 @@ module.exports = function ({ adManager, userManager }) {
 					Ad: Ad,
 					session: request.session
 				}
-
+				
 				response.render("start.hbs", model)
 		//	})
 		})
