@@ -80,7 +80,7 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				raw:true,
-				
+				where: {userID : userID},
 			include: [{ 
 				model: models.ImageBundle,
 			
@@ -337,11 +337,18 @@ module.exports = function ({ }) {
 
 				include: [{ 
 				model: models.ImageBundle,
-				required: true
+				required: true,
 			
+				//model: models.Bid,
+				//	required: true,
+
+					/*include: [{
+						model: models.User,
+						required: true,
+					}]*/
 				}],
 
-				include: [{
+				/*include: [{
 					model: models.Bid,
 					required: true,
 
@@ -349,10 +356,10 @@ module.exports = function ({ }) {
 						model: models.User,
 						required: true,
 					}]
-				}]
+				}]*/
 
 			}).then((ad) => {
-				console.log("ads: ", ad)
+				console.log("adsssssss: ", ad)
 				callback([],ad)
 			}).catch((error) => {
 				console.log("error: ", error)
