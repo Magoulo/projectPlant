@@ -18,7 +18,7 @@ module.exports = function ({ adManager, userManager }) {
 					session: request.session,
 					layout: 'start.hbs'
 				}
-
+				
 				response.render("start.hbs", model)
 		//	})
 		})

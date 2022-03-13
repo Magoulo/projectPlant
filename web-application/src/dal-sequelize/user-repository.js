@@ -7,7 +7,7 @@ module.exports = function () {
 		getUserByAccountID: function (userAccountID, callback) {
 
 			models.User.findOne({
-				where: { id: userAccountID }
+				where: { userAccountID: userAccountID }
 			}).then((User) => {
 				callback([], User.dataValues)
 			}).catch((error) => {
@@ -75,7 +75,7 @@ module.exports = function () {
 				where: { id: userID }
 			}).then((user) => {
 
-				console.log("user: ", user)
+				console.log("user updated: ", user)
 				callback(user.dataValues)
 				//	console.log("Results: ", results)
 			}).catch((error) => {

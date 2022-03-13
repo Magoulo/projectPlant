@@ -135,7 +135,7 @@ module.exports = function ({ adManager, userManager }) {
         if (errors.length == 0) {
             adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
 
-                if (error) {
+                if (error.length !== 0) {
                     errors.push("Internal server error")
 
                     model = {
@@ -150,7 +150,7 @@ module.exports = function ({ adManager, userManager }) {
 
                     response.render('adUpdate.hbs', model)
                 } else {
-                    response.redirect('/ads/adUpdate/' + adID)
+                    response.redirect('/ads/myAds')
                 }
             })
         } else {
@@ -285,8 +285,9 @@ module.exports = function ({ adManager, userManager }) {
             })
         }
 
-        adManager.createAd(ad, function (error, adID) {
-            if (error) {
+        adManager.createAd(ad, function (error, Ad) {
+            if (error.length !== 0) {
+                console.log("this here is an error")
                 model = {
                     error,
                     session: request.session,
@@ -295,14 +296,14 @@ module.exports = function ({ adManager, userManager }) {
 
                 response.render("myAds.hbs", model)
             } else {
-                console.log("New ad created with the adID: ", adID)
-                const imageBundle = { adID: adID, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
+                console.log("New ad created with the adID: ", Ad.id)
+                const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
 
-                adManager.createImageBundle(imageBundle, function (error, ibID) {
-                    if (error) {
+                adManager.createImageBundle(imageBundle, function (error, ImageBundle) {
+                    if (error.length !== 0) {
                         console.log("error in create Imagebundle")
                     } else {
-                        console.log("new imageBundle created with the iD: ", ibID)
+                        console.log("new imageBundle created with the iD: ", ImageBundle.id)
                         response.redirect("/ads/myAds")
                     }
                 })
