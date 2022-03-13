@@ -27,9 +27,9 @@ module.exports = function ({ accountManager, userManager }) {
 		const errors = []
 
 		if (password === repeatedPassword) {
-			accountManager.createAccount(account, function (error, userAccountID) {
+			accountManager.createAccount(account, function (error, userAccount) {
 
-				if (error) {
+				if (error.length !== 0) {
 					console.log("error in createAccount")
 					errors.push("Internal server error")
 
@@ -47,9 +47,9 @@ module.exports = function ({ accountManager, userManager }) {
 					response.render('accountCreate.hbs', model)
 				} else {
 					console.log("Account created")
-					console.log("userAccountID: ", userAccountID)
+					console.log("userAccountID: ", userAccount.id)
 
-					const user = { userAccountID: userAccountID, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+					const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
 
 					userManager.createUser(user, function (error, results) {
 						console.log("results", results)
@@ -58,8 +58,8 @@ module.exports = function ({ accountManager, userManager }) {
 						if (error.length !== 0) {
 							errors.push("Internal server error")
 
-							accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
-								if (error) {
+							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
+								if (error.length !==0) {
 									console.log("Couldn't delete the account")
 									errors.push("Couldn't delete the account")
 
