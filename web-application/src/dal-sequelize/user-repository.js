@@ -107,7 +107,7 @@ module.exports = function () {
 			}).then((user) => {
 
 				console.log("user: ", user)
-				callback(user.dataValues)
+				callback([],user.dataValues)
 				//	console.log("Results: ", results)
 			}).catch((error) => {
 				console.log("error: ", error)

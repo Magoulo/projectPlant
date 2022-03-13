@@ -71,7 +71,7 @@ module.exports = function () {
 
 			}).then((userAccount) => {
 				console.log("created account: ", userAccount)
-				callback(userAccount.dataValues)
+				callback([],userAccount.dataValues)
 
 			}).catch((error) => {
 				console.log("error: ", error)
