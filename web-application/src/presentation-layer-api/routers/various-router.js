@@ -19,7 +19,7 @@ module.exports = function ({ adManager, userManager }) {
 					layout: 'start.hbs'
 				}
 				
-				response.render("start.hbs", model)
+				response.status(201).json(Ad)
 		//	})
 		})
 	})

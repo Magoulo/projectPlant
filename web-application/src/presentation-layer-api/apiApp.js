@@ -31,9 +31,7 @@ module.exports = function ({}) {
 	// Handle static files in the public folder.
 	app.use(express.static(path.join(__dirname, 'public')))
 
-	app.use(bodyParser.urlencoded({
-		extended: false
-	}))
+	app.use(bodyParser.json())
 
 	app.use(fileUpload())
 
@@ -69,12 +67,12 @@ module.exports = function ({}) {
 	const bidManager = require('/web-application/src/business-logic-layer/bid-manager')
 	const userManager = require('/web-application/src/business-logic-layer/user-manager')
 
-	//presintation-layer
-	const accountRouter = require('/web-application/src/presentation-layer/routers/account-router')
-	const adRouter = require('/web-application/src/presentation-layer/routers/ad-router')
-	const bidRouter = require('/web-application/src/presentation-layer/routers/bid-router')
-	const userRouter = require('/web-application/src/presentation-layer/routers/user-router')
-	const variousRouter = require('/web-application/src/presentation-layer/routers/various-router')
+	//presentation-layer
+	const accountRouter = require('/web-application/src/presentation-layer-api/routers/account-router')
+	const adRouter = require('/web-application/src/presentation-layer-api/routers/ad-router')
+	const bidRouter = require('/web-application/src/presentation-layer-api/routers/bid-router')
+	const userRouter = require('/web-application/src/presentation-layer-api/routers/user-router')
+	const variousRouter = require('/web-application/src/presentation-layer-api/routers/various-router')
 
 
 	// Creating container and dependencies
@@ -119,8 +117,8 @@ module.exports = function ({}) {
 	app.use('/user', theUserRouter)
 
 
-	app.listen(8080, function () {
-		console.log('Running on 8080!')
+	app.listen(3000, function () {
+		console.log('Running on 3000!')
 	})
 
 	return router
