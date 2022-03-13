@@ -15,7 +15,8 @@ module.exports = function ({ adManager, userManager }) {
 					errors: errors,
 				//	User: User,
 					Ad: Ad,
-					session: request.session
+					session: request.session,
+					layout: 'start.hbs'
 				}
 
 				response.render("start.hbs", model)

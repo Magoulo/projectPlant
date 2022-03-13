@@ -1,3 +1,41 @@
+html {
+height: 100%;
+width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Catamaran', sans-serif;  
+  margin: 0px;
+}
+
+.start-body {
+  background-image: url("/images/startpage-backround.jpg")  ;
+  height: 100%;
+  width: 100%;
+  max-width: 2400px;
+  margin: auto;
+}
+
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0;
+  z-index: 10000;
+}
+
+main {
+  max-width: 2000px;
+  margin: auto;
+  min-height: 100%;
+  margin-top: 115px;
+}
+
+
 
 .img-thumbnail {
     float: center;
@@ -6,13 +44,9 @@
     
 }
 
-.image-hight{
+.image-hight {
   height:700px;
   object-fit: cover;
-}
-
-.offer{
-  background-color: aquamarine;
 }
 
 .bi-list::before {
@@ -31,31 +65,19 @@
   color:#2b2b2b;
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 0;
-  z-index: 10000;
-
-  font-family: 'Catamaran', sans-serif;
-}
-
-main {
-  max-width: 2000px;
-  margin: auto;
-  min-height: auto;
-  margin-top: 128px;
-
-  font-family: 'Catamaran', sans-serif;
-}
 
 .nav-link.active, .show>.nav-link {
   color: #fff;
   background-color: #2b2b2b;
 }
 
-p{
+p {
   font-family: 'Catamaran', sans-serif;
 }
+
+.logo {
+width: auto;
+height: 100px;
+}
+
+
