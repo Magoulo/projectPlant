@@ -107,7 +107,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 	/* router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")}) */
 
-	router.post("/sign-in", function (request, response) {
+	router.post("/sign-in", function (request, response) { //
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
