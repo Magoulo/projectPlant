@@ -2,6 +2,7 @@ FROM node:14.15.4
 
 EXPOSE 8080
 EXPOSE 9229
+EXPOSE 3000
 
 WORKDIR /web-application
 
