@@ -10,12 +10,9 @@ module.exports = function ({ adManager, bidManager }) {
         var bidPending = []
         var bidDeclined = []
 
-        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
-            console.log("Bid-------------: ", Bid)
+        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
 
             for (index in Bid) {
-                console.log("Bid[index].status:",Bid[index].status)
-
                 if (Bid[index].status == "Accepted") {
                     bidAccepted.push(Bid[index])
                 }
@@ -29,46 +26,26 @@ module.exports = function ({ adManager, bidManager }) {
                 }
             }
 
-            const model = {
-                errors: errors,
-                session: request.session,
-                bidAccepted: bidAccepted,
-                bidPending: bidPending,
-                bidDeclined: bidDeclined,
-                layout: 'account.hbs'
-            }
-
-            response.render("myBids.hbs", model)
+            response.status(200).json(Bid)
         })
     })
 
-    router.post("/updateBid/:bidID/:status", function (request, response) {
+    router.put("/updateBid/:bidID/:status", function (request, response) {
 
         const adID = request.body.adID
         const bid = { status: request.params.status, bidID: request.params.bidID }
 
         if (request.params.status == "Accepted") {
+
             bidManager.setAllBidsToDeclined(adID, function (error) {
-
                 if (error) {
-                    const model = {
-                        error: error,
-                        session: request.session,
-                        layout: 'account.hbs'
-                    }
-
-                    response.render("myAds.hbs", model)
+                    response.status(500).json(error)
                 } else {
                     console.log("All bids set to declined")
 
                     adManager.closeAd(adID, function (error) {
                         if (error) {
-                            const model = {
-                                error: error,
-                                session: request.session
-                            }
-
-                            response.render("myAds.hbs", model)
+                            response.status(500).json(error)
                         } else {
                             console.log("Ad closed successfully")
                         }
@@ -79,21 +56,14 @@ module.exports = function ({ adManager, bidManager }) {
 
         bidManager.updateBidByBidID(bid, function (error) {
             if (error) {
-                const model = {
-                    error: error,
-                    session: request.session,
-                    layout: 'account.hbs'
-                }
-
-                response.render("myAds.hbs", model)
+                response.status(500).json(error)
             } else {
-                response.redirect("/ads/myAds")
+                response.status(204)
             }
         })
     })
 
-    router.post("/placeBid", function (request, response) {
-        console.log("inside place bid!------------")
+    router.put("/placeBid", function (request, response) {
 
         const adID = request.body.adID
         const message = request.body.message
@@ -105,16 +75,10 @@ module.exports = function ({ adManager, bidManager }) {
             const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
 
             bidManager.createBid(Ad, function (error) {
-
                 if (error) {
-                    const model = {
-                        errors: errors,
-                        session: request.session
-                    }
-
-                    response.render("ad.hbs", model)
+                    response.status(500).json(error)
                 } else {
-                    response.redirect("/ads/" + adID)
+                    response.setHeader("/ads/" + adID).status(200)
                 }
             })
 
@@ -129,7 +93,8 @@ module.exports = function ({ adManager, bidManager }) {
                 if (error) {
                     console.log("Error in uploading pathway")
                     errors.push("couldn't upload picture")
-                    response.render('adCreate.hbs', errors)
+
+                    response.status(500).json(error)
                 } else {
                     console.log("file uploaded successfully")
                 }
@@ -138,30 +103,24 @@ module.exports = function ({ adManager, bidManager }) {
             bidManager.createBid(Ad, function (error) {
                 console.log("kommer inte ens hit?")
                 console.log("Error: ", error)
+               
                 if (error) {
-                    const model = {
-                        errors: errors,
-                        session: request.session
-                    }
-
-                    response.render(model)
+                    response.status(500).json(error)
                 } else {
-                    response.redirect("/ads/" + adID)
+                    response.setHeader("/ads/" + adID).status(200)
                 }
             })
         }
     })
 
-    router.post("/:bidID/delete", function (request, response) {
+    router.delete("/:bidID/delete", function (request, response) {
         const bidID = request.params.bidID
 
         bidManager.deleteBid(bidID, function (error) {
             if (error) {
-                console.log("??????????????????????????????????????????????")
-                response.redirect("/bids/myBids")
+                response.status(404).json(error)
             } else {
-                console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                response.redirect("/bids/myBids")
+                response.status(200)
             }
         })
     })

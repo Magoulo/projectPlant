@@ -6,18 +6,11 @@ module.exports = function ({ userManager }) {
     router.get("/personalData", function (request, response) {
         userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
-            const model = {
-                errors: errors,
-                User: User,
-                session: request.session,
-                layout: 'account.hbs'
-            }
-
-            response.render("personalData.hbs", model)
+            response.status(200).json(User)
         })
     })
 
-    router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
+    router.put('/personalData/:userID/update', function (request, response) {
 
         const userID = request.params.userID
         const firstName = request.body.firstname
@@ -26,46 +19,22 @@ module.exports = function ({ userManager }) {
         const phoneNumber = request.body.phonenumber
         const city = request.body.city
 
-        const errors = []//validators.getDonValidationErrors(Name, Description)
+        const errors = [] //validators.getDonValidationErrors(Name, Description)
 
         if (errors.length == 0) {
+
             userManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
+
                 if (error) {
                     errors.push("Internal server error")
-
-                    model = {
-                        errors,
-                        userID,
-                        firstName,
-                        lastName,
-                        email,
-                        phoneNumber,
-                        city,
-                        session: request.session,
-                        layout: 'account.hbs'
-                        //   csrfToken: request.csrfToken()
-                    }
-
-                    response.render('personalData.hbs', model)
+                    response.status(500)
                 } else {
-                    response.redirect('/user/personalData')
+                    response.status(204).end()
                 }
             })
-        } else {
-            const model = {
-                errors,
-                userID,
-                firstName,
-                lastName,
-                email,
-                phoneNumber,
-                city,
-                session: request.session,
-                layout: 'account.hbs'
-                //   csrfToken: request.csrfToken()
-            }
 
-            response.render('personalData.hbs', model)
+        } else {
+            response.status(418).json(errors)
         }
     })
 

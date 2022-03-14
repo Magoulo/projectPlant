@@ -4,15 +4,13 @@ module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
 
-	router.get("/sign-up", function (request, response) {
-		response.render("accounts-sign-up.hbs")
-	})
+	/* 
+	router.get("/sign-up", function (request, response) {response.render("accounts-sign-up.hbs")})
 
-	router.get("/create", function (request, response) {
-		response.render("accountCreate.hbs")
-	})
+	router.get("/create", function (request, response) {response.render("accountCreate.hbs")})
+	*/
 
-	router.post("/create", function (request, response) {
+	router.put("/create", function (request, response) {
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -32,19 +30,8 @@ module.exports = function ({ accountManager, userManager }) {
 				if (error) {
 					console.log("error in createAccount")
 					errors.push("Internal server error")
+					response.status(500).json(error)
 
-					model = {
-						errors,
-						userName,
-						firstname,
-						lastname,
-						email,
-						phoneNumber,
-						city
-						//   csrfToken: request.csrfToken()
-					}
-
-					response.render('accountCreate.hbs', model)
 				} else {
 					console.log("Account created")
 					console.log("userAccountID: ", userAccountID)
@@ -52,8 +39,6 @@ module.exports = function ({ accountManager, userManager }) {
 					const user = { userAccountID: userAccountID, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
 
 					userManager.createUser(user, function (error, results) {
-						console.log("results", results)
-						console.log("error: ", error)
 
 						if (error.length !== 0) {
 							errors.push("Internal server error")
@@ -63,37 +48,14 @@ module.exports = function ({ accountManager, userManager }) {
 									console.log("Couldn't delete the account")
 									errors.push("Couldn't delete the account")
 
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
+									response.status(500).json(error)
 								} else {
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city,
-										results
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
+									response.status(500).json(error)
 								}
 							})
 						} else {
 							console.log("account and user created succesfully")
-							response.redirect("/")
+							response.status(201)
 						}
 					})
 				}
@@ -101,17 +63,7 @@ module.exports = function ({ accountManager, userManager }) {
 		} else {
 			errors.push("Repeat the same password")
 
-			model = {
-				errors,
-				userName,
-				firstname,
-				lastname,
-				email,
-				phoneNumber,
-				city
-			}
-
-			response.render("accountCreate.hbs", model)
+			response.status(401).json(errors)
 		}
 
 		// ------------------------------ Create Account Test ---------------------------------------------------
@@ -152,57 +104,38 @@ module.exports = function ({ accountManager, userManager }) {
 
 	})
 
-	router.get("/sign-in", function (request, response) {
-		response.render("accounts-sign-in.hbs")
-	})
+	/* router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")}) */
 
-	router.post("/sign-in", function (request, response) {
+	router.put("/sign-in", function (request, response) {
 
 		const username = request.body.username
 		const password = request.body.password
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccounts) {
-			console.log("userAccounts--------------------............-------------: ", UserAccounts)
 			if (errors.length == 0) {
 
 				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
-					console.log("Username and Password are correct!")
 					request.session.isLoggedIn = true
-					request.session.userID = UserAccounts.id // UserAccounts.userAccountID ------------------------------------------------ MySQL
-					console.log("sessionUserID: ", request.session.userID)
+					request.session.userID = UserAccounts.id
+					response.status(200)
 
-					response.redirect('/')
 				} else {
-					console.log("Wrong Username or Password")
 					errors.push("Wrong Username or Password")
-					
-					const model = {
-						errors,
-						UserAccounts
-					}
-
-					response.render('start.hbs', model)
+					response.status(418).json(errors)
 				}
 			} else {
-				console.log("Internal server error")
 				errors.push("Internal server error")
-				
-				const model = {
-					errors,
-					//	csrfToken: request.csrfToken()
-				}
-
-				response.render('start.hbs', model)
+				response.status(500).json(errors)
 			}
 		})
 	})
 
 	router.post('/sign-out', function (request, response) {
 		request.session.destroy();
-		response.redirect('/')
+		response.status(200)
 	})
 
-
+	/*
 	// TEST---------------------------------------------------------------------------------------------------------------
 
 	router.get("/", function (request, response) {
@@ -214,6 +147,7 @@ module.exports = function ({ accountManager, userManager }) {
 			response.render("accounts-list-all.hbs", model)
 		})
 	})
+	*/
 
 	return router
 }
