@@ -1,8 +1,12 @@
 const express = require('express')
 const path = require('path')
 
+var jwt = require('jsonwebtoken');
+const SECRET = 'lelelelelelelble'
+
 module.exports = function ({ adManager, bidManager }) {
     const router = express.Router()
+
 
     router.get("/myBids", function (request, response) {
 
@@ -29,6 +33,7 @@ module.exports = function ({ adManager, bidManager }) {
             response.status(200).json(Bid)
         })
     })
+
 
     router.put("/updateBid/:bidID/:status", function (request, response) {
 
@@ -63,55 +68,65 @@ module.exports = function ({ adManager, bidManager }) {
         })
     })
 
+
     router.put("/placeBid", function (request, response) {
+
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring("Bearer ".length)
 
         const adID = request.body.adID
         const message = request.body.message
 
-        if (request.files == null) {
+        jwt.verify(accessToken, SECRET, function (error, payload) {
 
-            const imagePath = "no-image.png"
-            const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
+            if (error) {
+                response.status(401).end()
+            } else {
+                if (request.files == null) {
 
-            bidManager.createBid(Ad, function (error) {
-                if (error) {
-                    response.status(500).json(error)
+                    const imagePath = "no-image.png"
+                    const errors = []
+                    const Ad = { userID: payload.userID, adID: adID, imagePath: imagePath, message: message }
+
+                    bidManager.createBid(Ad, function (error) {
+                        if (error) {
+                            response.status(500).json(error)
+                        } else {
+                            response.setHeader("/ads/" + adID).status(200)
+                        }
+                    })
+
                 } else {
-                    response.setHeader("/ads/" + adID).status(200)
+                    const imagePath = request.files.bidImagePath
+                    const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
+
+                    const errors = []
+                    const Ad = { userID: payload.userID, adID: adID, imagePath: imagePath.name, message: message }
+
+                    imagePath.mv(uploadPath, function (error) {
+                        if (error) {
+                            errors.push("couldn't upload picture")
+                            response.status(500).json(error)
+                        } else {
+                            console.log("file uploaded successfully")
+                        }
+                    })
+
+                    bidManager.createBid(Ad, function (error) {
+                        console.log("kommer inte ens hit?")
+                        console.log("Error: ", error)
+
+                        if (error) {
+                            response.status(500).json(error)
+                        } else {
+                            response.setHeader("/ads/" + adID).status(200)
+                        }
+                    })
                 }
-            })
-
-        } else {
-            const imagePath = request.files.bidImagePath
-            const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
-
-            const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
-
-            imagePath.mv(uploadPath, function (error) {
-                if (error) {
-                    console.log("Error in uploading pathway")
-                    errors.push("couldn't upload picture")
-
-                    response.status(500).json(error)
-                } else {
-                    console.log("file uploaded successfully")
-                }
-            })
-
-            bidManager.createBid(Ad, function (error) {
-                console.log("kommer inte ens hit?")
-                console.log("Error: ", error)
-               
-                if (error) {
-                    response.status(500).json(error)
-                } else {
-                    response.setHeader("/ads/" + adID).status(200)
-                }
-            })
-        }
+            }
+        })
     })
+
 
     router.delete("/:bidID/delete", function (request, response) {
         const bidID = request.params.bidID
@@ -126,4 +141,5 @@ module.exports = function ({ adManager, bidManager }) {
     })
 
     return router
+
 }
