@@ -4,7 +4,7 @@ module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-        userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+        userManager.getUserByUserID(request.session.userID, function (errors, User) {
 
             response.status(200).json(User)
         })
