@@ -66,7 +66,7 @@ const adManager = require('/web-application/src/business-logic-layer/ad-manager'
 const bidManager = require('/web-application/src/business-logic-layer/bid-manager')
 const userManager = require('/web-application/src/business-logic-layer/user-manager')
 
-//presintation-layer
+//presentation-layer
 const accountRouter = require('/web-application/src/presentation-layer/routers/account-router')
 const adRouter = require('/web-application/src/presentation-layer/routers/ad-router')
 const bidRouter = require('/web-application/src/presentation-layer/routers/bid-router')
