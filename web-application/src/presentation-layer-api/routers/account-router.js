@@ -1,4 +1,5 @@
 const express = require('express')
+var jwt = require('jsonwebtoken');
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
@@ -106,8 +107,9 @@ module.exports = function ({ accountManager, userManager }) {
 
 	/* router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")}) */
 
-	router.put("/sign-in", function (request, response) {
+	router.post("/sign-in", function (request, response) {
 
+		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
 
@@ -115,9 +117,19 @@ module.exports = function ({ accountManager, userManager }) {
 			if (errors.length == 0) {
 
 				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
-					request.session.isLoggedIn = true
-					request.session.userID = UserAccounts.id
-					response.status(200)
+					//request.session.isLoggedIn = true
+					//request.session.userID = UserAccounts.id
+
+					const payload = {
+						isLoggedIn: true,
+						userID: UserAccounts.id
+					}
+
+					jwt.sign(payload, 'lelelelelelelble', function (err, token) {
+						response.status(200).json({
+							"access_token": token
+						})
+					})
 
 				} else {
 					errors.push("Wrong Username or Password")

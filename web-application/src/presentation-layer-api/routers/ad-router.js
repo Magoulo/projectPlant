@@ -46,10 +46,8 @@ module.exports = function ({ adManager, userManager }) {
 
             if (errors.length !== 0) {
                 response.status(400).json(errors)
-
             } else {
                 allAds = Ad
-
             }
         })
 

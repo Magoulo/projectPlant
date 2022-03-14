@@ -8,6 +8,7 @@ const session = require('express-session')
 const redis = require("redis")
 const awilix = require('awilix')
 const app = express()
+var jwt = require('jsonwebtoken');
 
 module.exports = function ({}) {
 	const router = express.Router()
@@ -32,6 +33,9 @@ module.exports = function ({}) {
 	app.use(express.static(path.join(__dirname, 'public')))
 
 	app.use(bodyParser.json())
+	app.use(bodyParser.urlencoded({
+		extended: false
+	}))
 
 	app.use(fileUpload())
 
