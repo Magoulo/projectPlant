@@ -72,11 +72,11 @@ module.exports = function ({}) {
 	const userManager = require('/web-application/src/business-logic-layer/user-manager')
 
 	//presentation-layer
-	const accountRouter = require('/web-application/src/presentation-layer-api/routers/account-router')
-	const adRouter = require('/web-application/src/presentation-layer-api/routers/ad-router')
-	const bidRouter = require('/web-application/src/presentation-layer-api/routers/bid-router')
-	const userRouter = require('/web-application/src/presentation-layer-api/routers/user-router')
-	const variousRouter = require('/web-application/src/presentation-layer-api/routers/various-router')
+	const accountRouter = require('/web-application/src/presentation-layer-api/routers/account-api-router')
+	const adRouter = require('/web-application/src/presentation-layer-api/routers/ad-api-router')
+	const bidRouter = require('/web-application/src/presentation-layer-api/routers/bid-api-router')
+	const userRouter = require('/web-application/src/presentation-layer-api/routers/user-api-router')
+	const variousRouter = require('/web-application/src/presentation-layer-api/routers/various-api-router')
 
 
 	// Creating container and dependencies

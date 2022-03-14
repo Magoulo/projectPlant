@@ -1,14 +1,16 @@
 const express = require('express')
+
 var jwt = require('jsonwebtoken');
+const SECRET = 'lelelelelelelble'
+
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-
 	/* 
 	router.get("/sign-up", function (request, response) {response.render("accounts-sign-up.hbs")})
-
 	router.get("/create", function (request, response) {response.render("accountCreate.hbs")})
+	router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")})
 	*/
 
 	router.put("/create", function (request, response) {
@@ -29,29 +31,21 @@ module.exports = function ({ accountManager, userManager }) {
 			accountManager.createAccount(account, function (error, userAccountID) {
 
 				if (error) {
-					console.log("error in createAccount")
 					errors.push("Internal server error")
 					response.status(500).json(error)
-
 				} else {
-					console.log("Account created")
-					console.log("userAccountID: ", userAccountID)
-
 					const user = { userAccountID: userAccountID, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
-
 					userManager.createUser(user, function (error, results) {
 
 						if (error.length !== 0) {
 							errors.push("Internal server error")
-
 							accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
-								if (error) {
-									console.log("Couldn't delete the account")
-									errors.push("Couldn't delete the account")
 
+								if (error) {
+									errors.push("Couldn't delete the account")
 									response.status(500).json(error)
 								} else {
-									response.status(500).json(error)
+									response.status(418).json(error) //? 
 								}
 							})
 						} else {
@@ -63,51 +57,12 @@ module.exports = function ({ accountManager, userManager }) {
 			})
 		} else {
 			errors.push("Repeat the same password")
-
 			response.status(401).json(errors)
 		}
-
-		// ------------------------------ Create Account Test ---------------------------------------------------
-
-		/*accountManager.getAllAccounts(function(error,userAccount){
-			if(error.length !== 0){
-				console.log("error in getAllAccounts")
-			} else {
-				console.log(userAccount)
-			}
-		})
-		*/
-
-		/*accountManager.createAccount(account, function (error, userAccountID) {
-			if(error){
-			console.log("error in createAccount")	
-			} else {
-				console.log("Account created with userAccountID: ", userAccountID)
-	
-				accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
-					if (error.length !== 0) {
-						console.log("Couldn't delete the account")
-						console.log("error: ", error)
-					} else {
-					console.log("Account deleted")
-					//Get all accounts to verify?
-					accountManager.getAllAccounts(function(error,userAccount){
-						if(error.length !== 0){
-							console.log("error in getAllAccounts")
-						} else {
-							console.log(userAccount)
-						}
-					})
-					}
-				})
-			}
-		})*/
-
 	})
 
-	/* router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")}) */
 
-	router.post("/sign-in", function (request, response) { //
+	router.post("/sign-in", function (request, response) {
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
@@ -117,20 +72,21 @@ module.exports = function ({ accountManager, userManager }) {
 			if (errors.length == 0) {
 
 				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
-					//request.session.isLoggedIn = true
-					//request.session.userID = UserAccounts.id
 
 					const payload = {
 						isLoggedIn: true,
 						userID: UserAccounts.id
 					}
 
-					jwt.sign(payload, 'lelelelelelelble', function (err, token) {
-						response.status(200).json({
-							"access_token": token
-						})
+					jwt.sign(payload, SECRET, function (error, token) {
+						if (error) {
+							response.status(401)
+						} else {
+							response.status(200).json({
+								"access_token": token
+							})
+						}
 					})
-
 				} else {
 					errors.push("Wrong Username or Password")
 					response.status(418).json(errors)
@@ -142,24 +98,67 @@ module.exports = function ({ accountManager, userManager }) {
 		})
 	})
 
+
 	router.post('/sign-out', function (request, response) {
 		request.session.destroy();
 		response.status(200)
 	})
 
-	/*
-	// TEST---------------------------------------------------------------------------------------------------------------
-
-	router.get("/", function (request, response) {
-		accountManager.getAllAccounts(function (errors, UserAccounts) {
-			const model = {
-				errors: errors,
-				UserAccounts: UserAccounts
-			}
-			response.render("accounts-list-all.hbs", model)
-		})
-	})
-	*/
 
 	return router
 }
+
+
+
+
+// TA BORT INNAN INLÄMMNING
+
+		// ------------------------------ Create Account Test ---------------------------------------------------
+
+/*accountManager.getAllAccounts(function(error,userAccount){
+	if(error.length !== 0){
+		console.log("error in getAllAccounts")
+	} else {
+		console.log(userAccount)
+	}
+})
+*/
+
+/*accountManager.createAccount(account, function (error, userAccountID) {
+	if(error){
+	console.log("error in createAccount")	
+	} else {
+		console.log("Account created with userAccountID: ", userAccountID)
+	
+		accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
+			if (error.length !== 0) {
+				console.log("Couldn't delete the account")
+				console.log("error: ", error)
+			} else {
+			console.log("Account deleted")
+			//Get all accounts to verify?
+			accountManager.getAllAccounts(function(error,userAccount){
+				if(error.length !== 0){
+					console.log("error in getAllAccounts")
+				} else {
+					console.log(userAccount)
+				}
+			})
+			}
+		})
+	}
+})*/
+
+/*
+// TEST---------------------------------------------------------------------------------------------------------------
+
+router.get("/", function (request, response) {
+accountManager.getAllAccounts(function (errors, UserAccounts) {
+const model = {
+	errors: errors,
+	UserAccounts: UserAccounts
+}
+response.render("accounts-list-all.hbs", model)
+})
+})
+*/

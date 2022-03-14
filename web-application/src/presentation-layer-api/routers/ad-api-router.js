@@ -1,12 +1,13 @@
 const express = require('express')
-const { JsonWebTokenError } = require('jsonwebtoken')
 const path = require('path')
-var jwt = require('jsonwebtoken');
 
+var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
+
 
 module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
+
 
     router.get("/", function (request, response) {
 
@@ -20,29 +21,11 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    // väntar med sök funktionen
-    router.post("/search", function (request, response) {
-        const searchInput = request.body.searchInput
-
-        adManager.getAllAdsByTitleOrLatinName(searchInput, function (errors, Ad) {
-
-            const model = {
-                errors: errors,
-                searchInput: searchInput,
-                Ad: Ad,
-                session: request.session
-            }
-
-            console.log("--------------------------------" + Ad);
-
-            response.render("ads.hbs", model)
-        })
-    })
 
     router.get("/myAds", function (request, response) {
 
-        const authorizationHeader = request.header("Authorization") //"Bearer XXXX"
-        const accessToken = authorizationHeader.substring("Bearer ".length) // "XXXX"
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring("Bearer ".length)
 
         var allAds = []
         var allBids = []
@@ -51,18 +34,17 @@ module.exports = function ({ adManager, userManager }) {
 
             if (error) {
                 response.status(401).end()
-            
             } else {
-                adManager.getAllAdsByUserID(payload.userID, function (errors, Ad) { // Hårdkodat atm! byta ut mot tokenID
+                adManager.getAllAdsByUserID(payload.userID, function (errors, Ad) {
 
                     if (errors.length !== 0) {
                         response.status(400).json(errors)
                     } else {
-                        allAds = Ad
+                        allAds = Ad //???
                     }
                 })
 
-                adManager.getAllAdsBidsUsersByUserID(payload.userID, function (errors, adOffers) { //Hårdkodat atm! byta ut mot tokenID
+                adManager.getAllAdsBidsUsersByUserID(payload.userID, function (errors, adOffers) {
                     if (errors.length !== 0) {
                         response.status(400).json(errors)
 
