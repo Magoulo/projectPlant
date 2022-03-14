@@ -1,12 +1,30 @@
 const express = require('express')
+var jwt = require('jsonwebtoken');
+const SECRET = 'lelelelelelelble'
 
 module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-        userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
-            response.status(200).json(User)
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring("Bearer ".length)
+
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).end()
+
+            } else {
+                userManager.getUserByUserID(payload.userID, function (errors, User) {
+
+                    if(errors){
+                        response.status(400).json(errors)
+                    } else {
+                        response.status(200).json(User)
+                    }            
+                })
+
+            }
         })
     })
 

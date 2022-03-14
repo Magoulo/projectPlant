@@ -14,7 +14,7 @@ module.exports = function ({ adManager, bidManager }) {
         var bidPending = []
         var bidDeclined = []
 
-        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
+        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) { // <----------------------------------------- session
 
             for (index in Bid) {
                 if (Bid[index].status == "Accepted") {
@@ -30,7 +30,7 @@ module.exports = function ({ adManager, bidManager }) {
                 }
             }
 
-            response.status(200).json(Bid)
+            response.status(200).json([bidAccepted,bidPending,bidDeclined]) // tidigare  response.status(200).json(Bid) 
         })
     })
 
