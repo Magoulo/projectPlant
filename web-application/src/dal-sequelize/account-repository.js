@@ -38,11 +38,19 @@ module.exports = function () {
 		getAccountByUsername: function (username, callback) {
 
 			models.UserAccount.findOne({
-				where: { username: username }
+				raw: true,
+				nest: true,
+
+				where: { username: username },
+
+				include:[{
+					model: models.User,
+					required: true
+				}]
 
 			}).then((userAccount) => {
-				console.log("user account: ", userAccount.dataValues)
-				callback([], userAccount.dataValues)
+				console.log("user account: ", userAccount)
+				callback([], userAccount)
 
 			}).catch((error) => {
 				console.log("error: ", error)

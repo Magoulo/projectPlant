@@ -72,14 +72,14 @@ module.exports = function ({ accountManager, userManager }) {
 		const username = request.body.username
 		const password = request.body.password
 
-		accountManager.getAccountByUsername(username, function (errors, UserAccounts) {
+		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
 
-				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
+				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
 
 					const payload = {
 						isLoggedIn: true,
-						userID: UserAccounts.id
+						userID: UserAccount.Users.id
 					}
 
 					jwt.sign(payload, SECRET, function (error, token) {
