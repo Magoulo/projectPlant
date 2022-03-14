@@ -99,7 +99,7 @@ module.exports = function ({ adManager, userManager }) {
                         }
                     }
                 }
-                console.log("allAds: ", allAds)
+               /* console.log("allAds: ", allAds)
                 console.log("adAccepted", adAccepted)
              
               
@@ -113,10 +113,10 @@ module.exports = function ({ adManager, userManager }) {
                     if (adOffers[index].status == "Declined") {
                         adDeclined.push(adOffers[index])
                     }
-                }
+                }*/
 
                 model.adAccepted = adAccepted
-                model.adDeclined = adDeclined
+              //  model.adDeclined = adDeclined
 
                 response.render("myAds.hbs", model)
             }
@@ -130,16 +130,11 @@ module.exports = function ({ adManager, userManager }) {
         const latinName = request.body.latinname
         const description = request.body.description
 
-        const errors = []//validators.getDonValidationErrors(Name, Description)
-
-        if (errors.length == 0) {
             adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
 
                 if (error.length !== 0) {
-                    errors.push("Internal server error")
 
-                    model = {
-                        errors,
+                    model = {                
                         adID,
                         title,
                         latinName,
@@ -153,19 +148,7 @@ module.exports = function ({ adManager, userManager }) {
                     response.redirect('/ads/myAds')
                 }
             })
-        } else {
-            const model = {
-                errors,
-                adID,
-                title,
-                latinName,
-                description,
-                layout: 'account.hbs'
-                //   csrfToken: request.csrfToken()
-            }
-
-            response.render('adUpdate.hbs', model)
-        }
+        
     })
 
     router.get("/adUpdate/:adID", function (request, response) {
@@ -215,8 +198,9 @@ module.exports = function ({ adManager, userManager }) {
             }
         })
     })
-
+/* Tror inte denna används!
     router.get('/myAds/:userID', function (request, response) {
+        console.log("/myAds/:userID------------------------------------------------------------------------------------------------")
         const userID = request.params.userID
 
         adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
@@ -249,7 +233,7 @@ module.exports = function ({ adManager, userManager }) {
 
             response.render("myAdBids.hbs", model)
         })
-    })
+    })*/
 
     router.get("/adCreate", function (request, response) {
 

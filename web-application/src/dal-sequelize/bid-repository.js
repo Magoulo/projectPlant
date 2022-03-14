@@ -68,16 +68,13 @@ module.exports = function () {
 				raw: true,
 				nest: true,
 				where: { userID: userID },
-
 				
 				include: [{ 
-					model: models.Ad,
-				
+					model: models.Ad,	
 					required: true,
 
 					include: [{ 
-						model: models.ImageBundle,
-					
+						model: models.ImageBundle,			
 						required: true
 					
 					}],
@@ -148,8 +145,7 @@ module.exports = function () {
 
 		deleteBid: function (bidID, callback) {
 
-			models.Bid.destroy({
-			
+			models.Bid.destroy({		
 				where: { id: bidID}
 
 			}).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
@@ -178,8 +174,7 @@ module.exports = function () {
 
 		updateBidByBidID: function (bid, callback) {
 
-			models.Bid.update({
-				
+			models.Bid.update({		
 				status: bid.status,		
 			},
 			{
@@ -213,8 +208,7 @@ module.exports = function () {
 		setAllBidsToDeclined: function (adID, callback) {
 			const status = "Declined"
 
-			models.Bid.update({
-				
+			models.Bid.update({		
 				status: status,		
 			},
 			{
