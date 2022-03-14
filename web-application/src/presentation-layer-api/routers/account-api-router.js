@@ -28,19 +28,23 @@ module.exports = function ({ accountManager, userManager }) {
 		const errors = []
 
 		if (password === repeatedPassword) {
-			accountManager.createAccount(account, function (error, userAccountID) {
+			accountManager.createAccount(account, function (error, userAccount) {
 
 				if (error) {
 					errors.push("Internal server error")
 					response.status(500).json(error)
 				} else {
-					const user = { userAccountID: userAccountID, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+					console.log("Account created")
+					console.log("userAccountID: ", userAccount.id)
+
+					const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+
 					userManager.createUser(user, function (error, results) {
 
 						if (error.length !== 0) {
 							errors.push("Internal server error")
-							accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
 
+							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
 								if (error) {
 									errors.push("Couldn't delete the account")
 									response.status(500).json(error)

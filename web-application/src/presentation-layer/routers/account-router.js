@@ -59,7 +59,7 @@ module.exports = function ({ accountManager, userManager }) {
 							errors.push("Internal server error")
 
 							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-								if (error.length !==0) {
+								if (error.length !== 0) {
 									console.log("Couldn't delete the account")
 									errors.push("Couldn't delete the account")
 
@@ -162,20 +162,31 @@ module.exports = function ({ accountManager, userManager }) {
 		const password = request.body.password
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccounts) {
-			console.log("userAccounts--------------------............-------------: ", UserAccounts)
+
 			if (errors.length == 0) {
 
 				if (username == UserAccounts.username && password == UserAccounts.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
 					console.log("Username and Password are correct!")
-					request.session.isLoggedIn = true
-					request.session.userID = UserAccounts.id // UserAccounts.userAccountID ------------------------------------------------ MySQL
-					console.log("sessionUserID: ", request.session.userID)
 
-					response.redirect('/')
+					userManager.getUserByAccountID(UserAccounts.id, function (error,User) {
+						if (error.length !== 0) {
+							console.log("Couldn't get user by accountID")
+							response.render('start.hbs', error)
+
+						} else {
+							console.log("got the user:", User)
+							request.session.isLoggedIn = true
+							request.session.userID = User.id
+							console.log("sessionUserID: ", request.session.userID)
+
+							response.redirect('/')
+						}
+					})
+
 				} else {
 					console.log("Wrong Username or Password")
 					errors.push("Wrong Username or Password")
-					
+
 					const model = {
 						errors,
 						UserAccounts
@@ -186,7 +197,7 @@ module.exports = function ({ accountManager, userManager }) {
 			} else {
 				console.log("Internal server error")
 				errors.push("Internal server error")
-				
+
 				const model = {
 					errors,
 					//	csrfToken: request.csrfToken()
