@@ -1,5 +1,9 @@
 const express = require('express')
+const { JsonWebTokenError } = require('jsonwebtoken')
 const path = require('path')
+var jwt = require('jsonwebtoken');
+
+const SECRET = 'lelelelelelelble'
 
 module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
@@ -37,46 +41,55 @@ module.exports = function ({ adManager, userManager }) {
 
     router.get("/myAds", function (request, response) {
 
-        //  const userID = request.session.userID
+        const authorizationHeader = request.header("Authorization") //"Bearer XXXX"
+        const accessToken = authorizationHeader.substring("Bearer ".length) // "XXXX"
 
         var allAds = []
         var allBids = []
 
-        adManager.getAllAdsByUserID(3, function (errors, Ad) { // Hårdkodat atm! byta ut mot tokenID
+        jwt.verify(accessToken, SECRET, function (error, payload) {
 
-            if (errors.length !== 0) {
-                response.status(400).json(errors)
+            if (error) {
+                response.status(401).end()
+            
             } else {
-                allAds = Ad
-            }
-        })
+                adManager.getAllAdsByUserID(payload.userID, function (errors, Ad) { // Hårdkodat atm! byta ut mot tokenID
 
-        adManager.getAllAdsBidsUsersByUserID(3, function (errors, adOffers) { //Hårdkodat atm! byta ut mot tokenID
-            if (errors.length !== 0) {
-                response.status(400).json(errors)
-
-            } else {
-
-                allBids = adOffers
-                var adAccepted = []
-
-                for (const ad of allAds) {
-                    ad.bids = []
-
-                    for (const bid of allBids) {
-
-                        if (bid.Bids.adID == ad.id && bid.Bids.status == "Pending" && ad.isClosed == false) {
-                            ad.bids.push(bid.Bids)
-                        }
-                        if (bid.Bids.status == "Accepted" && ad.isClosed == true) {
-                            adAccepted.push(bid)
-                        }
+                    if (errors.length !== 0) {
+                        response.status(400).json(errors)
+                    } else {
+                        allAds = Ad
                     }
-                }
+                })
 
-                console.log("json response: [allAds,adAccepted]", [allAds, adAccepted])
+                adManager.getAllAdsBidsUsersByUserID(payload.userID, function (errors, adOffers) { //Hårdkodat atm! byta ut mot tokenID
+                    if (errors.length !== 0) {
+                        response.status(400).json(errors)
 
-                response.status(200).json([allAds, adAccepted])
+                    } else {
+
+                        allBids = adOffers
+                        var adAccepted = []
+
+                        for (const ad of allAds) {
+                            ad.bids = []
+
+                            for (const bid of allBids) {
+
+                                if (bid.Bids.adID == ad.id && bid.Bids.status == "Pending" && ad.isClosed == false) {
+                                    ad.bids.push(bid.Bids)
+                                }
+                                if (bid.Bids.status == "Accepted" && ad.isClosed == true) {
+                                    adAccepted.push(bid)
+                                }
+                            }
+                        }
+
+                        console.log("json response: [allAds,adAccepted]", [allAds, adAccepted])
+
+                        response.status(200).json([allAds, adAccepted])
+                    }
+                })
             }
         })
     })
@@ -204,7 +217,7 @@ module.exports = function ({ adManager, userManager }) {
         adManager.getAdByAdID(adID, function (errors, Ad) {
             if (errors.length !== 0) {
                 response.status(400).json(errors)
-                
+
             } else {
 
                 userManager.getUserByUserID(Ad.userID, function (errors, User) {
