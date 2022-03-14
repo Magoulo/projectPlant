@@ -10,7 +10,7 @@ module.exports = function ({ adManager, bidManager }) {
         var bidPending = []
         var bidDeclined = []
 
-        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
+        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) { // <----------------------------------------- session
 
             for (index in Bid) {
                 if (Bid[index].status == "Accepted") {
@@ -26,7 +26,7 @@ module.exports = function ({ adManager, bidManager }) {
                 }
             }
 
-            response.status(200).json(Bid)
+            response.status(200).json([bidAccepted,bidPending,bidDeclined]) // tidigare  response.status(200).json(Bid) 
         })
     })
 
@@ -72,7 +72,7 @@ module.exports = function ({ adManager, bidManager }) {
 
             const imagePath = "no-image.png"
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
+            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message } // <----------------------------------------- session
 
             bidManager.createBid(Ad, function (error) {
                 if (error) {
@@ -87,7 +87,7 @@ module.exports = function ({ adManager, bidManager }) {
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message } // <----------------------------------------- session
 
             imagePath.mv(uploadPath, function (error) {
                 if (error) {
