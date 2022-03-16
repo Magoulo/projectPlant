@@ -1,6 +1,6 @@
 async function loadHumanPage(id){
 	
-	const response = await fetch("http://localhost:3000/humans/"+id)
+	const response = await fetch("http://localhost:3000/ads")
 	
 	// TODO: Check status code and act accordingly!
 	
