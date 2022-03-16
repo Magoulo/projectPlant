@@ -153,14 +153,14 @@ UserAccount.findOrCreate({
 	console.log("userAccount: ", userAccount); // userAccount
 	console.log("user: ", User); // user
 	console.log(created); // true
-});
+});*/
 
-*/
+
 
 // Find or Create Ad and ImageBundle -------------------------------------------------------------------------------------------------------------------------
 
-/*
-Ad.findOrCreate({
+
+/*Ad.findOrCreate({
 	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 },
 	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 }
 }).then(([ad, created]) => {
@@ -272,13 +272,13 @@ Ad.findOrCreate({
 	console.log("ad: ", ad); // ad
 	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
-});
-*/
+});*/
+
 
 // Find or Create Bid -------------------------------------------------------------------------------------------------------------------------
 
-/*
-Bid.findOrCreate({
+
+/*Bid.findOrCreate({
 	where: { date: "2022-02-16", imagePath: "no-image.png", message: "Hi I would like to buy your Lillies", status: "Pending", userID: 2, adID: 4 },
 	defaults: { date: "2022-02-16", imagePath: "no-image.png", message: "Hi I would like to buy your Lillies", status: "Pending", userID: 2, adID: 4 }
 }).then(([bid, created]) => {
@@ -294,8 +294,8 @@ Bid.findOrCreate({
 	
 	console.log("bid: ", bid); // bid
 	console.log(created); // true
-});
-*/
+});*/
+
 
 
 /*

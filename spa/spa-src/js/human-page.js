@@ -1,13 +1,15 @@
-async function loadHumanPage(id){
-	
-	const response = await fetch("http://localhost:3000/ads")
-	
+async function loadAdsPage(id) {
+
+	const response = await fetch("http://localhost:3000/")
+
 	// TODO: Check status code and act accordingly!
-	
-	const human = await response.json()
-	
-	document.getElementById('human-id').innerText = human.id
-	document.getElementById('human-name').innerText = human.name
-	document.getElementById('human-age').innerText = human.age
-	
+
+	const ads = await response.json()
+	for (ad in ads) {
+		document.getElementById('ad-id').innerText = ad.id
+		document.getElementById('ad-title').innerText = ad.title
+		document.getElementById('ad-latinName').innerText = ad.latinName
+		document.getElementById('ad-description').innerText = ad.description
+	}
+
 }

@@ -47,9 +47,9 @@ function showPage(url){
 			nextPageId = 'about-page'
 			break
 	
-		case '/humans':
-			nextPageId = 'humans-page'
-			loadHumansPage()
+		case '/ads':
+			nextPageId = 'ads-page'
+			loadAdsPage()
 			break
 		
 		default:
