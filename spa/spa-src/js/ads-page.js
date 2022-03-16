@@ -1,42 +1,54 @@
-async function loadAdsPage() {
-    console.log("-------------------------------------------Ads");
+async function loadAdsPage(){
 
-    const response = await fetch("http://localhost:3000/ads")
+	const response = await fetch("http://localhost:3000/ads")
+	
+	// TODO: Check status code and act accordingly!
+	
+	const ads = await response.json()
+	//console.log("asd:", ads)
+	
+	const allAdsUl = document.getElementById('all-plant-ads')
+	
+	allAdsUl.innerText = ""
+	
+	for(const ad of ads){
+        //const h3Title = document.createElement('h3')
 
-    const statusCode = response.status
-    const ads = await response.json()
+        const aTitle = document.createElement('a')
+        aTitle.innerText = ad.title
+        aTitle.setAttribute('href',"/ads/"+ad.id)
 
-    if (statusCode == 200) {
-        console.log("-------------------------------------------"+ { ads: "title" });
+        const aImage = document.createElement('a')
+        aImage.setAttribute('href',"/ads/"+ad.id)
 
-        const allAdsUl = document.getElementById('all-ads')
-        allAdsUl.innerText = ""
+        const imgImage = document.createElement('img')
+        imgImage.setAttribute('src',"/web-application/src/presentation-layer/public/images"+ad.ImageBundle.coverImagePath)
+        
+        aImage.appendChild(imgImage)
 
-        for (const ad of ads) {
-            console.log("-------------------------------------------"+ad);
+		const li = document.createElement('li')
+		li.appendChild(aTitle)
+        li.appendChild(aImage)
+		
+		allAdsUl.appendChild(li)
+		
+        
+        
+        console.log("aTitle: ", aTitle)
+        console.log("imagr ref: ", aImage.innerText)
+        console.log("li: ", li)
+        console.log("a image ", aImage)
+		
+	}
+	
+		/*
+		document.getElementById('ad-id').innerText = ad.id
 
-            const li = document.createElement('li')
+		document.getElementById('ad-title').innerText = ad.title
 
-            const anchor = document.createElement('a')
-            anchor.innerText = ad.id
-            anchor.setAttribute('href', "/ads/" + ad.id)
+		document.getElementById('ad-latinName').innerText = ad.latinName
 
-            li.appendChild(anchor)
-
-            allAdsUl.appendChild(li)
-
-        }
-
-
-
-
-    }
-
-
-    // TODO: Check status code and act accordingly!
-
-
-
-
-
+		document.getElementById('ad-description').innerText = ad.description*/
+	
+	
 }

@@ -7,6 +7,7 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				raw: true,
+				nest: true,
 				include: [{
 					model: models.ImageBundle,
 					required: true

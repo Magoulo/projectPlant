@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Humans</title>
+
+	<!--- fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;400&display=swap" rel="stylesheet">
+
+	<!--- style -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="/css/layout.css">
+
+	<!--- js -->
 	<script src="/js/navigation.js"></script>
 	<script src="/js/humans-page.js"></script>
 	<script src="/js/human-page.js"></script>
+	<script src="/js/ads-page.js"></script>
 </head>
+
 <body>
-	
-	<header>
-		Humans
-	</header>
-	
+
 	<nav>
 		<ul>
 			<li><a href="/">Start</a></li>
@@ -23,46 +34,242 @@
 			<li><a href="/gibberish">Gibberish</a></li>
 		</ul>
 	</nav>
-	
+
+
+	<div class="header">
+
+		<!--Navbar -->
+		<div class="col-12">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+				<div class="container-fluid">
+
+					<div class="ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft"
+						aria-controls="offcanvasLeft">
+						<i class="bi bi-list"></i>
+					</div>
+
+					<img class="logo" src="/images/logo.png">
+
+					<!--{{#if session.isLoggedIn}} -->
+					<div class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+						aria-controls="offcanvasRight">
+						<i class="bi bi-person-check"></i>
+					</div>
+
+					<!-- {{else}}
+					<div class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+						aria-controls="offcanvasRight">
+						<i class="bi bi-person"></i>
+					</div>-->
+					<!--{{/if}} -->
+				</div>
+			</nav>
+		</div>
+
+		<!--Offcanvas menu -->
+		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
+
+			<div class="offcanvas-header">
+				<h5 class="offcanvas-title" id="offcanvasLeftLabel">Menu</h5>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+					aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body">
+				<div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><a class="nav-link" href="/">Start</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/ads">Ads</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/about">About</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+
+		<!-- "Account Menu" when logged in      {{#if session.isLoggedIn}}          -->
+
+
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+			<div class="offcanvas-header">
+				<h5 id="offcanvasRightLabel">Account Menu</h5>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+					aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body text-start">
+
+				<div class="row">
+					<div class="col-6 text-start align-self-end">
+						<h5>Hello {{User.firstName}}</h5>
+					</div>
+
+					<div class="col-6 text-end">
+						<form action="/accounts/sign-out" method="POST">
+							<input class="btn btn-light" type="submit" value="sign out">
+						</form>
+					</div>
+				</div>
+
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><a class="nav-link" href="/ads/myAds">My Ads</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/bids/myBids">My Bids</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/myFavoriteAds">Favorites</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/user/personalData">Personal Data</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+
+
+		<!-- Account Menu when not logged in  {{else}} 
+
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+			<div class="offcanvas-header">
+				<p id="offcanvasRightLabel">Sign In</p>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+					aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body text-start">
+				<ul class="list-group list-group-flush">
+
+					<li class="list-group-item">
+						<div class="col">
+							<form action="/accounts/sign-in" method="POST">
+								<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+								<div class="mb-0">
+									<label class="form-label"></label>
+									<input class="form-control" type="text" name="username" placeholder="username*">
+								</div>
+
+								<div class="mb-0">
+									<label class="form-label"></label>
+									<input class="form-control" type="password" name="password" placeholder="password*">
+								</div>
+
+								<div class="d-grid gap-2 mt-3 mb-5">
+									<button type="submit" value="Sign in" class="btn btn-light">Sign in</button>
+								</div>
+
+							</form>
+						</div>
+					</li>
+
+					<li class="list-group-item">
+						<div class="d-grid gap-2 mt-5">
+							<a class="btn btn-secondary btn-lg" role="button" aria-disabled="true"
+								href="/accounts/create">Create an account</a>
+							<p>I'd like to be a plant ye</p>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+		{{/if}}-->
+
+	</div>
+
+
+
+
+
+
 	<main>
-		
+
 		<div class="page" id="start-page">
 			<h1>Start Page</h1>
 			<p>This is the start page.</p>
 		</div>
-		
+
 		<div class="page" id="about-page">
 			<h1>About Page</h1>
 			<p>This is the about page.</p>
 		</div>
-		
+
+
+
+
 		<div class="page" id="ads-page">
 			<h1>Ads</h1>
-			<ul id="all-adsss">
-				
-			</ul>
-			<p>efter ul</p>
-		</div>
-		
-		<div class="page" id="ad-page">
-			<h1>Ads</h1>
-		
-			<div>Id: <span id="ad-id"></span></div>
-			<div>Title: <span id="ad-title"></span></div>
-			<div>Latin name: <span id="ad-latinName"></span></div>
-			<div>Description: <span id="ad-description"></span></div>
-		</div>
-		
-		<div class="page" id="not-found-page">
-			<h1>Not Found Page</h1>
-			<p>This is the not found page.</p>
-		</div>
-		
+
+
+			<div class="container p-0 m-0" style="max-width: 100%;">
+
+
+				<div class="row align-items-center">
+					<div class="col-12 text-center">
+
+						<ul class="list-group" id="all-plant-ads">
+
+
+
+						</ul>
+
+					</div>
+				</div>
+
+
+
+
+
+
+
+				<!-- All ads -->
+
+				<h3><a href="/ads/{{id}}">{{title}}</a></h3>
+
+				<a href="/ads/{{id}}">
+					<img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}"
+						alt="{{'ImageBundle.coverImagePath'}}" class="flowerImage">
+				</a>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+			<div class="page" id="ad-page">
+				<h1>Ads</h1>
+
+				<div>Id: <span id="ad-id"></span></div>
+				<div>Title: <span id="ad-title"></span></div>
+				<div>Latin name: <span id="ad-latinName"></span></div>
+				<div>Description: <span id="ad-description"></span></div>
+			</div>
+
+			<div class="page" id="not-found-page">
+				<h1>Not Found Page</h1>
+				<p>This is the not found page.</p>
+			</div>
+
 	</main>
-	
+
 	<footer>
 		Created by Magoulo | <a href="/about">About</a>
 	</footer>
-	
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+		</script>
 </body>
+
 </html>
