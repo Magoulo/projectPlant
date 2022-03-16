@@ -1,0 +1,11 @@
+body{
+	background-color: silver;
+}
+
+.page{
+	display: none;
+}
+
+.page.current-page{
+	display: block;
+}
