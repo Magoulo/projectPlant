@@ -10,7 +10,7 @@ const awilix = require('awilix')
 const app = express()
 var jwt = require('jsonwebtoken');
 
-module.exports = function ({}) {
+module.exports = function ({ }) {
 	const router = express.Router()
 
 	// redis@v4 setup----------------------------------------------------------------------
@@ -36,6 +36,16 @@ module.exports = function ({}) {
 	app.use(bodyParser.urlencoded({
 		extended: false
 	}))
+
+	// Add CORS, so client-side code on other websites are allowed
+	// to send HTTP requests to us.
+	app.use(function (request, response, next) {
+		response.setHeader("Access-Control-Allow-Origin", "*")
+		response.setHeader("Access-Control-Allow-Methods", "*")
+		response.setHeader("Access-Control-Allow-Headers", "*")
+		response.setHeader("Access-Control-Expose-Headers", "*")
+		next()
+	})
 
 	app.use(fileUpload())
 

@@ -1,28 +1,24 @@
 async function loadAdsPage(){
-	
-	const response = await fetch("http://localhost:3000/ads")
+
+	const response = await fetch("http://localhost:3000")
 	
 	// TODO: Check status code and act accordingly!
 	
 	const ads = await response.json()
-	console.log("asd:", ads)
+	//console.log("asd:", ads)
 	
-	const alladsUl = document.getElementById('all-ads')
+	const allAdsUl = document.getElementById('all-adsss')
 	
-	alladsUl.innerText = ""
+	allAdsUl.innerText = ""
 	
 	for(const ad of ads){
 		console.log("ad: ", ad)
 		
 		const li = document.createElement('li')
-		const anchor = document.createElement('a')
-
-		anchor.innerText = ad.title
-		anchor.setAttribute('href', "/ads/"+ad.id)
+		li.innerText = ad.title
 		
-		li.appendChild(anchor)
-		
-		alladsUl.appendChild(li)
+		allAdsUl.appendChild(li)
+		console.log("li: ", li)
 		
 	}
 	

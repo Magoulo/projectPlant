@@ -1,4 +1,4 @@
-async function loadAdsPage(id) {
+async function loadAdPage(id) {
 
 	const response = await fetch("http://localhost:3000/")
 
