@@ -1,3 +1,6 @@
+
+
+
 async function loadHUmansPage(){
 
 	const response = await fetch("http://localhost:3000")
@@ -30,6 +33,4 @@ async function loadHUmansPage(){
 		document.getElementById('ad-latinName').innerText = ad.latinName
 
 		document.getElementById('ad-description').innerText = ad.description*/
-	
-	
 }

@@ -23,18 +23,10 @@
 	<script src="/js/humans-page.js"></script>
 	<script src="/js/human-page.js"></script>
 	<script src="/js/ads-page.js"></script>
+	<script src="/js/ad-page.js"></script>
 </head>
 
 <body>
-
-	<nav>
-		<ul>
-			<li><a href="/">Start</a></li>
-			<li><a href="/ads">Ads</a></li>
-			<li><a href="/gibberish">Gibberish</a></li>
-		</ul>
-	</nav>
-
 
 	<div class="header">
 
@@ -184,73 +176,39 @@
 
 
 	<main>
+		<div class="container p-0 m-0" style="max-width: 100%;">
 
-		<div class="page" id="start-page">
-			<h1>Start Page</h1>
-			<p>This is the start page.</p>
-		</div>
+			<div class="page" id="start-page">
+				<h1>Start Page</h1>
+				<p>This is the start page.</p>
+			</div>
 
-		<div class="page" id="about-page">
-			<h1>About Page</h1>
-			<p>This is the about page.</p>
-		</div>
-
-
-
-
-		<div class="page" id="ads-page">
-			<h1>Ads</h1>
+			<div class="page" id="about-page">
+				<h1>About Page</h1>
+				<p>This is the about page.</p>
+			</div>
 
 
-			<div class="container p-0 m-0" style="max-width: 100%;">
 
+			<!-- All ads -->
+			<div class="page" id="ads-page">
+				<h1>Ads</h1>
 
 				<div class="row align-items-center">
 					<div class="col-12 text-center">
-
-						<ul class="list-group" id="all-plant-ads">
-
-
-
-						</ul>
-
+						<ul class="list-group" id="all-plant-ads"></ul>
 					</div>
 				</div>
-
-
-
-
-
-
-
-				<!-- All ads -->
-
-				<h3><a href="/ads/{{id}}">{{title}}</a></h3>
-
-				<a href="/ads/{{id}}">
-					<img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}"
-						alt="{{'ImageBundle.coverImagePath'}}" class="flowerImage">
-				</a>
-
 			</div>
-
-
-
-
-
-
-
-
 
 
 			<div class="page" id="ad-page">
-				<h1>Ads</h1>
+				<h1>Ad</h1>
 
-				<div>Id: <span id="ad-id"></span></div>
-				<div>Title: <span id="ad-title"></span></div>
-				<div>Latin name: <span id="ad-latinName"></span></div>
-				<div>Description: <span id="ad-description"></span></div>
+				<div id="plant-ad-container" class="col-12 text-center"></div>
+
 			</div>
+
 
 			<div class="page" id="not-found-page">
 				<h1>Not Found Page</h1>

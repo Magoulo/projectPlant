@@ -38,14 +38,14 @@ module.exports = function ({ }) {
 
 			models.Ad.findOne({
 				raw: true,
+				nest: true, //la till
 				where: { id: adID },
-
 				include: [{
 					model: models.ImageBundle,
 					required: true
 				}],
 			}).then((ad) => {
-				console.log("ads: ", ad)
+				console.log("---------", ad)
 				callback([], ad)
 
 			}).catch((error) => {

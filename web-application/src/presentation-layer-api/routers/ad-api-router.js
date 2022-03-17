@@ -203,10 +203,7 @@ module.exports = function ({ adManager, userManager }) {
                     if (errors.length !== 0) {
                         response.status(400).json(errors)
                     } else {
-                        response.status(200).json({
-                            Ad,
-                            User
-                        })
+                        response.status(200).json({Ad,User})
                     }
                 })
 
