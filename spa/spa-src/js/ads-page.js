@@ -9,6 +9,7 @@ async function loadAdsPage(){
 	//console.log("asd:", ads)
 	
 	const allAdsUl = document.getElementById('all-plant-ads')
+	var fragment = document.createDocumentFragment();
 	
 	allAdsUl.innerText = ""
 	
@@ -18,30 +19,32 @@ async function loadAdsPage(){
 
         const aTitle = document.createElement('a')
         aTitle.innerText = ad.title
-        aTitle.setAttribute('href',"/ads/"+ad.id)
+        aTitle.setAttribute('href',"/ads/" + ad.id)
 
         const aImage = document.createElement('a')
-        aImage.setAttribute('href',"/ads/"+ad.id)
+        aImage.setAttribute('href',"/ads/" + ad.id)
 
         const imgImage = document.createElement('img')
         imgImage.setAttribute('src',"/web-application/src/presentation-layer/public/images"+ad.ImageBundle.coverImagePath)
         
         aImage.appendChild(imgImage)
-
-		const li = document.createElement('li')
-		li.appendChild(aTitle)
-        li.appendChild(aImage)
+		const liIitle = document.createElement('li')
+		const liImage = document.createElement('li')
+		liIitle.appendChild(aTitle)
+        liImage.appendChild(aImage)
 		
-		allAdsUl.appendChild(li)
+	    allAdsUl.appendChild(liIitle)
+	    allAdsUl.appendChild(liImage)
 		
         
         
         console.log("aTitle: ", aTitle)
-        console.log("imagr ref: ", aImage.innerText)
-        console.log("li: ", li)
-        console.log("a image ", aImage)
+       // console.log("imagr ref: ", aImage.innerText)
+      // console.log("li: ", li)
+      //  console.log("a image ", aImage)
 		
 	}
+	//allAdsUl.appendChild(fragment.cloneNode(true))
 	
 		/*
 		document.getElementById('ad-id').innerText = ad.id
