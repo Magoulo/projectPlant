@@ -24,6 +24,8 @@
 	<script src="/js/human-page.js"></script>
 	<script src="/js/ads-page.js"></script>
 	<script src="/js/ad-page.js"></script>
+	<script src="/js/start-page.js"></script>
+	<script src="/js/account-pages/sign-in-page.js"></script>
 </head>
 
 <body>
@@ -176,21 +178,26 @@
 
 
 	<main>
+		
 		<div class="container p-0 m-0" style="max-width: 100%;">
 
+			<!-- Start page-->
 			<div class="page" id="start-page">
 				<h1>Start Page</h1>
-				<p>This is the start page.</p>
+				<div class="row align-items-center">
+					<div class="col-12 text-center">
+						<ul class="list-group" id="all-plant-ads-start-page"></ul>
+					</div>
+				</div>
 			</div>
 
+			<!-- About page -->
 			<div class="page" id="about-page">
 				<h1>About Page</h1>
 				<p>This is the about page.</p>
 			</div>
 
-
-
-			<!-- All ads -->
+			<!-- Ads page -->
 			<div class="page" id="ads-page">
 				<h1>Ads</h1>
 
@@ -201,7 +208,7 @@
 				</div>
 			</div>
 
-
+			<!-- Ad page-->
 			<div class="page" id="ad-page">
 				<h1>Ad</h1>
 
@@ -209,7 +216,7 @@
 
 			</div>
 
-
+			<!-- Not found page-->
 			<div class="page" id="not-found-page">
 				<h1>Not Found Page</h1>
 				<p>This is the not found page.</p>
