@@ -25,6 +25,9 @@
 	<script src="/js/ads-page.js"></script>
 	<script src="/js/ad-page.js"></script>
 	<script src="/js/start-page.js"></script>
+	<script src="/js/account-pages/my-ads-page.js"></script>
+	<script src="/js/account-pages/my-bids-page.js"></script>
+	<script src="/js/account-pages/personal-data-page.js"></script>
 	<script src="/js/account-pages/sign-in-page.js"></script>
 </head>
 
@@ -84,7 +87,7 @@
 		</div>
 
 
-		<!-- "Account Menu" when logged in      {{#if session.isLoggedIn}}         
+		<!-- "Account Menu" when logged in      {{#if session.isLoggedIn}}   -->      
 
 
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -99,7 +102,7 @@
 
 				<div class="row">
 					<div class="col-6 text-start align-self-end">
-						<h5>Hello {{User.firstName}}</h5>
+						<h5>Hello friend</h5>
 					</div>
 
 					<div class="col-6 text-end">
@@ -110,20 +113,19 @@
 				</div>
 
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><a class="nav-link" href="/ads/myAds">My Ads</a></li>
-					<li class="list-group-item"><a class="nav-link" href="/bids/myBids">My Bids</a></li>
-					<li class="list-group-item"><a class="nav-link" href="/myFavoriteAds">Favorites</a></li>
-					<li class="list-group-item"><a class="nav-link" href="/user/personalData">Personal Data</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/accounts/myAds">My Ads</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/accounts/myBids">My Bids</a></li>
+					<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a></li>
 				</ul>
 
 			</div>
 
-		</div> -->
+		</div> 
 
 
 		<!-- Account Menu when not logged in  {{else}} -->
 
-		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<!--<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
 			<div class="offcanvas-header">
 				<p id="offcanvasRightLabel">Sign In</p>
@@ -136,10 +138,10 @@
 
 					<li class="list-group-item">
 						<div class="col"> 
-							<!-- The sign-in form-->
+							 The sign-in form
 
 							<form href="/accounts/sign-in" id="sign-in-form">
-							<!--	<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+							<input type="hidden" name="_csrf" value="{{csrfToken}}"> 
 
 								<div class="mb-0">
 									<label class="form-label"></label>
@@ -171,7 +173,7 @@
 				</ul>
 			</div>
 
-		</div>
+		</div>-->
 	<!--{{/if}} -->	
 
 	</div>

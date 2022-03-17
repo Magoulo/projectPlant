@@ -53,17 +53,15 @@ function showPage(url) {
 			loadAdsPage()
 			break
 
-		case '/myAds':
+		case '/accounts/myAds':
 			nextPageId = 'my-ads-page'
-			loadAdsPage()
 			break
 
-		case '/myBids':
+		case '/accounts/myBids':
 			nextPageId = 'my-bids-page'
-			loadAdsPage()
 			break
 		
-		case '/personalData' :
+		case '/accounts/personalData' :
 			nextPageId = 'personal-data-page'
 			break
 
@@ -78,7 +76,7 @@ function showPage(url) {
 				console.log(id);
 
 				nextPageId = 'ad-page'
-				loadAdPage(id)
+				loadAdPage(id)//loadAdsPage()
 			} else {
 				nextPageId = 'not-found-page'
 			}
