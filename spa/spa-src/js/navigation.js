@@ -41,6 +41,7 @@ function showPage(url) {
 
 		case '/':
 			nextPageId = 'start-page'
+			loadStartPage()
 			break
 
 		case '/about':
