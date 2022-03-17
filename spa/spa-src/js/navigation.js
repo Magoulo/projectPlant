@@ -63,11 +63,12 @@ function showPage(url) {
 		
 		case '/accounts/personalData' :
 			nextPageId = 'personal-data-page'
+			loadPersonalData(1)
 			break
 
 		case '/accounts/sign-in':
-			signIn()
 			nextPageId = 'start-page'
+			signIn()
 			break	
 		default:
 			console.log("token from global in default: ", token)
