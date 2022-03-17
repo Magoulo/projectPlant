@@ -2,17 +2,26 @@ async function signIn() {
     console.log("inne i signIn()")
     const username = "kent" //request.body.username
     const password = "123" //request.body.password
+   // const data = FormData(document.getElementById("sign-in-form"))
+    //document.getElementById("sign-in-form")
+    var token = ""
 
-    const data = {username: username, password: password}
+    const body = JSON.stringify({
+        username: username,
+        password: password
+     })
     console.log("username, password: ", username, password)
 
     var request = new XMLHttpRequest()
     request.open("POST", "http://localhost:3000/accounts/sign-in")
-    request.send(data)
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(body)
     request.addEventListener('load', function(event){
-        const responseBody = request.responseText
-        console.log("responseBody: ", responseBody)
+         token = request.responseText
+        console.log("responseBody: ", token)
     })
+
+    console.log("token: ", token)
 
 
   /*  const response = await fetch("http://localhost:3000/accounts/sign-in", {
