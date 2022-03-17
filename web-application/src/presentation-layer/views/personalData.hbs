@@ -15,30 +15,43 @@
             <div>
                 <form class="form-inline justify-content-center" action="/user/personalData/{{User.id}}/update"
                     method="POST">
-                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    
+                    <input type="hidden" name="User" value="{{User}}">
+
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="firstname" value="{{User.firstName}}">
+                        <input class="form-control" type="text" name="firstName" value="{{User.firstName}}">
                         <label class="form-label">Firstname</label>
+                        <p class="text-start text-danger">{{firstNameErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="lastname" value="{{User.lastName}}">
+                        <input class="form-control" type="text" name="lastName" value="{{User.lastName}}">
                         <label class="form-label">Lastname</label>
+                        <p class="text-start text-danger">{{lastNameErrors}}</p>
                     </div>
+                    
                     <div class="form-floating mb-3">
                         <input class="form-control" type="email" name="email" value="{{User.email}}">
                         <label class="form-label">Email</label>
+                        <p class="text-start text-danger">{{mailErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="phonenumber" value="{{User.phoneNumber}}">
+                        <input class="form-control" type="text" name="phoneNumber" value="{{User.phoneNumber}}">
                         <label class="form-label">Phonenumber</label>
+                        <p class="text-start text-danger">{{phoneNumberErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="city" value="{{User.city}}">
                         <label class="form-label">City</label>
+                        {{cityErrors}}
                     </div>
+
                     <div class="mb-3">
                         <input class="btn btn-primary" type="submit" value="Update">
                     </div>
+
                 </form>
             </div>
 

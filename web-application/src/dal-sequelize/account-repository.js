@@ -75,7 +75,7 @@ module.exports = function () {
 
 			models.UserAccount.create({
 				username: newAccount.username,
-				passwordHash: newAccount.passwordHash
+				passwordHash: newAccount.repeatedPassword
 
 			}).then((userAccount) => {
 				console.log("created account: ", userAccount)

@@ -1,22 +1,36 @@
-const MIN_USERNAME_LENGTH = 3
-const MAX_USERNAME_LENGTH = 10
-
 module.exports = function () {
 	return {
 
-		getErrorsCreateNewAccount: function (account) {
-			const errors = []
+		getUpdateUserPersonalDataErrors: function (User) {
+			const firstNameErrors = []
+			const lastNameErrors = []
+			const emailErrors = []
+			const phoneNumberErrors = []
+			const cityErrors = []
 
-			// Validate username.
-			if (!account.hasOwnProperty("username")) {
-				errors.push("usernameMissing")
-			} else if (account.username.length < MIN_USERNAME_LENGTH) {
-				errors.push("usernameTooShort")
-			} else if (MAX_USERNAME_LENGTH < account.username.length) {
-				errors.push("usernameTooLong")
+			const emptyFieldErrorMsg = "this field is mandatory"
+
+			if (!User.firstName.length) {
+				firstNameErrors.push(emptyFieldErrorMsg)
 			}
 
-			return errors
+			if (!User.lastName.length) {
+				lastNameErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!User.email.length) {
+				emailErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!User.phoneNumber.length) {
+				phoneNumberErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!User.city.length) {
+				cityErrors.push(emptyFieldErrorMsg)
+			}
+
+			return [firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 
 	}

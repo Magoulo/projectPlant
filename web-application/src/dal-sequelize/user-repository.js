@@ -38,7 +38,7 @@ module.exports = function () {
 			}).then((user) => {
 
 				console.log("user: ", user)
-				callback([],user)
+				callback([], user)
 				//	console.log("Results: ", results)
 			}).catch((error) => {
 				console.log("error: ", error)
@@ -62,25 +62,25 @@ module.exports = function () {
 		},*/
 
 
-		updateUserByUserID: function (userID, firstName, lastName, email, phoneNumber, city, callback) {
+		updateUserByUserID: function (User, callback) {
 
 			models.User.update({
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				phoneNumber:phoneNumber,
-				city:city
+				firstName: User.firstName,
+				lastName: User.lastName,
+				email: User.email,
+				phoneNumber: User.phoneNumber,
+				city: User.city
 			},
-			{
-				where: { id: userID }
-			}).then((user) => {
+				{
+					where: { id: User.id }
+				}).then((user) => {
 
-				console.log("user updated: ", user)
-				callback(user.dataValues)
-				//	console.log("Results: ", results)
-			}).catch((error) => {
-				console.log("error: ", error)
-			})
+					console.log("user updated: ", user)
+					callback([], user.dataValues)
+
+				}).catch((error) => {
+					console.log("error: ", error)
+				})
 
 		},
 
@@ -107,29 +107,28 @@ module.exports = function () {
 			}).then((user) => {
 
 				console.log("user: ", user)
-				callback([],user.dataValues)
-				//	console.log("Results: ", results)
+				callback([], user.dataValues)
 			}).catch((error) => {
 				console.log("error: ", error)
 			})
 
 		}
 
-	/*
-		createUser: function (user, callback) {
-
-			const query = `INSERT INTO User (userAccountID, firstName, lastName, email, phoneNumber, city) VALUES (?, ?, ?, ?, ?, ?)`
-			const values = [user.userAccountID, user.firstName, user.lastName, user.email, user.phoneNumber, user.city]
-
-			db.query(query, values, function (error, results) {
-				if (error) {
-					// TODO: Look for usernameUnique violation.
-					callback(['databaseError in createUser'], null)
-				} else {
-					callback([], results.insertId)
-				}
-			})
-		}*/
+		/*
+			createUser: function (user, callback) {
+	
+				const query = `INSERT INTO User (userAccountID, firstName, lastName, email, phoneNumber, city) VALUES (?, ?, ?, ?, ?, ?)`
+				const values = [user.userAccountID, user.firstName, user.lastName, user.email, user.phoneNumber, user.city]
+	
+				db.query(query, values, function (error, results) {
+					if (error) {
+						// TODO: Look for usernameUnique violation.
+						callback(['databaseError in createUser'], null)
+					} else {
+						callback([], results.insertId)
+					}
+				})
+			}*/
 
 	}
 }

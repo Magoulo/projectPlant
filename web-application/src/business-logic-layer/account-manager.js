@@ -17,8 +17,15 @@ module.exports = function ({ accountRepository, accountValidator}) {
 
 		createAccount: function (newAccount, callback) {
 			const errors = accountValidator.getCreateNewAccountErrors(newAccount)
+			var errorsExist = false
 
-			if (0 < errors.length) {
+			for (let i = 0; i < errors.length; i++) {
+				if(0 < errors[i].length){
+					errorsExist = true
+				}
+			  }
+
+			if (errorsExist) {
 				callback(errors, null)
 			} else {
 				accountRepository.createAccount(newAccount, callback)

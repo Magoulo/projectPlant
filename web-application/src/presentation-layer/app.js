@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
-const nodemailer = require('nodemailer')
 const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const redis = require("redis")
@@ -27,8 +26,6 @@ module.exports = function ({}) {
 		partialsDir: path.join(__dirname, 'partials')
 	}))
 
-
-	// Handle static files in the public folder.
 	app.use(express.static(path.join(__dirname, 'public')))
 
 	app.use(bodyParser.urlencoded({
@@ -80,7 +77,6 @@ module.exports = function ({}) {
 	const userRouter = require('/web-application/src/presentation-layer/routers/user-router')
 	const variousRouter = require('/web-application/src/presentation-layer/routers/various-router')
 
-
 	// Creating container and dependencies
 	const container = awilix.createContainer()
 
@@ -101,6 +97,7 @@ module.exports = function ({}) {
 	container.register("bidManager", awilix.asFunction(bidManager))
 	container.register("bidRouter", awilix.asFunction(bidRouter))
 	container.register("bidValidator", awilix.asFunction(bidValidator))
+	container.register("bidRouter", awilix.asFunction(bidRouter))
 
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))
