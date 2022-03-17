@@ -14,6 +14,8 @@ module.exports = function ({ accountManager, userManager }) {
 
 	router.post("/create", function (request, response) {
 
+		console.log("------------i create")
+
 		const userName = request.body.username
 		const password = request.body.password
 		const repeatedPassword = request.body.repeatpassword
@@ -23,18 +25,21 @@ module.exports = function ({ accountManager, userManager }) {
 		const phoneNumber = request.body.phonenumber
 		const city = request.body.city
 
-		const account = { username: userName, passwordHash: password }
+		const account = { username: userName, password: password, repeatedPassword: repeatedPassword }
 		const errors = []
 
-		if (password === repeatedPassword) {
+		if (true) {//password === repeatedPassword
 			accountManager.createAccount(account, function (error, userAccount) {
 
 				if (error.length !== 0) {
-					console.log("error in createAccount")
-					errors.push("Internal server error")
+
+					const usernameErrors = error[0]
+					const passwordErrors = error[1]
 
 					model = {
 						errors,
+						usernameErrors,
+						passwordErrors,
 						userName,
 						firstname,
 						lastname,
@@ -59,7 +64,7 @@ module.exports = function ({ accountManager, userManager }) {
 							errors.push("Internal server error")
 
 							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-								if (error.length !==0) {
+								if (error.length !== 0) {
 									console.log("Couldn't delete the account")
 									errors.push("Couldn't delete the account")
 
@@ -98,7 +103,7 @@ module.exports = function ({ accountManager, userManager }) {
 					})
 				}
 			})
-		} else {
+		} /*else {
 			errors.push("Repeat the same password")
 
 			model = {
@@ -112,7 +117,7 @@ module.exports = function ({ accountManager, userManager }) {
 			}
 
 			response.render("accountCreate.hbs", model)
-		}
+		}*/
 
 		// ------------------------------ Create Account Test ---------------------------------------------------
 
@@ -163,7 +168,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			console.log("fetched userAccounts and user: ", UserAccount)
-	
+
 			if (errors.length == 0) {
 
 				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
@@ -177,7 +182,7 @@ module.exports = function ({ accountManager, userManager }) {
 				} else {
 					console.log("Wrong Username or Password")
 					errors.push("Wrong Username or Password")
-					
+
 					const model = {
 						errors,
 						UserAccount
@@ -188,7 +193,7 @@ module.exports = function ({ accountManager, userManager }) {
 			} else {
 				console.log("Internal server error")
 				errors.push("Internal server error")
-				
+
 				const model = {
 					errors,
 					//	csrfToken: request.csrfToken()

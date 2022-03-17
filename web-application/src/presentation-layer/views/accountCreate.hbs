@@ -1,27 +1,33 @@
 <div class="content">
     {{#each errors}}
-        <li>{{this}}</li>
+    <li>{{this}}</li>
     {{/each}}
 
-  <div class="row">
+    <div class="row">
         <div class="col-sm-4 offset-sm-4 text-center">
             <h1 class="display-3">Create Account</h1>
             <div>
-                <form class="form-inline justify-content-center" action="/accounts/create"
-                    method="POST">
+                <form class="form-inline justify-content-center" action="/accounts/create" method="POST">
                     <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="username">
                         <label class="form-label">Username</label>
+                        <p class="text-start text-danger">{{usernameErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="password">
                         <label class="form-label">Password</label>
+                        <p class="text-start text-danger">{{passwordErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="repeatpassword">
                         <label class="form-label">Repeat Password</label>
+                        <p class="text-start text-danger">{{passwordErrors}}</p>
                     </div>
+
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="firstname">
                         <label class="form-label">Firstname</label>
