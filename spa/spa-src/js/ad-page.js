@@ -1,4 +1,5 @@
 async function loadAdPage(id) {
+    console.log("token from global in Ad: ", token)
 
     const response = await fetch("http://localhost:3000/ads/"+id)
 

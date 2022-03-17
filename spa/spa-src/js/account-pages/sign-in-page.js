@@ -1,4 +1,4 @@
-var token = "this should be a token!"
+var token = "--- No Token here ---"
 
 async function signIn() {
     console.log("inne i signIn()")

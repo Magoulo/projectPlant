@@ -53,6 +53,20 @@ function showPage(url) {
 			loadAdsPage()
 			break
 
+		case '/myAds':
+			nextPageId = 'my-ads-page'
+			loadAdsPage()
+			break
+
+		case '/myBids':
+			nextPageId = 'my-bids-page'
+			loadAdsPage()
+			break
+		
+		case '/personalData' :
+			nextPageId = 'personal-data-page'
+			break
+
 		case '/accounts/sign-in':
 			signIn()
 			nextPageId = 'start-page'
