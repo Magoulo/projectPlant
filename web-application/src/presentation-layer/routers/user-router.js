@@ -55,7 +55,16 @@ module.exports = function ({ userManager }) {
 
                 response.render('personalData.hbs', model)
             } else {
-                response.redirect('/user/personalData')
+
+                model = {
+                    User,
+                    msg: "The update of personal data has been carried out successfully",
+                    session: request.session,
+                    layout: 'account.hbs'
+                    //   csrfToken: request.csrfToken()
+                }
+
+                response.render('personalData.hbs', model)
             }
         })
 

@@ -28,13 +28,13 @@ body {
   z-index: 10000;
 }
 
+
 main {
   max-width: 2000px;
   margin: auto;
   min-height: 100%;
   margin-top: 115px;
 }
-
 
 
 .img-thumbnail {

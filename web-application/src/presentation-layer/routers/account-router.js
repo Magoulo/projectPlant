@@ -18,9 +18,9 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const userName = request.body.username
 		const password = request.body.password
-		const repeatedPassword = request.body.repeatpassword
-		const firstname = request.body.firstname
-		const lastname = request.body.lastname
+		const repeatedPassword = request.body.repeatPassword
+		const firstName = request.body.firstName
+		const lastName = request.body.lastName
 		const email = request.body.email
 		const phoneNumber = request.body.phonenumber
 		const city = request.body.city
@@ -39,8 +39,10 @@ module.exports = function ({ accountManager, userManager }) {
 					usernameErrors,
 					passwordErrors,
 					userName,
-					firstname,
-					lastname,
+					password,
+					repeatedPassword,
+					firstName,
+					lastName,
 					email,
 					phoneNumber,
 					city
@@ -52,7 +54,7 @@ module.exports = function ({ accountManager, userManager }) {
 				console.log("Account created")
 				console.log("userAccountID: ", userAccount.id)
 
-				const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
 				userManager.createUser(user, function (error, results) {
 					console.log("results", results)
@@ -69,8 +71,8 @@ module.exports = function ({ accountManager, userManager }) {
 								model = {
 									errors,
 									userName,
-									firstname,
-									lastname,
+									firstName,
+									lastName,
 									email,
 									phoneNumber,
 									city
@@ -82,8 +84,8 @@ module.exports = function ({ accountManager, userManager }) {
 								model = {
 									errors,
 									userName,
-									firstname,
-									lastname,
+									firstName,
+									lastName,
 									email,
 									phoneNumber,
 									city,
