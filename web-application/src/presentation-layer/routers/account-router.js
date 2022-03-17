@@ -28,96 +28,80 @@ module.exports = function ({ accountManager, userManager }) {
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword }
 		const errors = []
 
-		if (true) {//password === repeatedPassword
-			accountManager.createAccount(account, function (error, userAccount) {
+		accountManager.createAccount(account, function (error, userAccount) {
+			if (error.length !== 0) {
 
-				if (error.length !== 0) {
+				const usernameErrors = error[0]
+				const passwordErrors = error[1]
 
-					const usernameErrors = error[0]
-					const passwordErrors = error[1]
-
-					model = {
-						errors,
-						usernameErrors,
-						passwordErrors,
-						userName,
-						firstname,
-						lastname,
-						email,
-						phoneNumber,
-						city
-						//   csrfToken: request.csrfToken()
-					}
-
-					response.render('accountCreate.hbs', model)
-				} else {
-					console.log("Account created")
-					console.log("userAccountID: ", userAccount.id)
-
-					const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
-
-					userManager.createUser(user, function (error, results) {
-						console.log("results", results)
-						console.log("error: ", error)
-
-						if (error.length !== 0) {
-							errors.push("Internal server error")
-
-							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-								if (error.length !== 0) {
-									console.log("Couldn't delete the account")
-									errors.push("Couldn't delete the account")
-
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
-								} else {
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city,
-										results
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
-								}
-							})
-						} else {
-							console.log("account and user created succesfully")
-							response.redirect("/")
-						}
-					})
+				model = {
+					errors,
+					usernameErrors,
+					passwordErrors,
+					userName,
+					firstname,
+					lastname,
+					email,
+					phoneNumber,
+					city
+					//   csrfToken: request.csrfToken()
 				}
-			})
-		} /*else {
-			errors.push("Repeat the same password")
 
-			model = {
-				errors,
-				userName,
-				firstname,
-				lastname,
-				email,
-				phoneNumber,
-				city
+				response.render('accountCreate.hbs', model)
+			} else {
+				console.log("Account created")
+				console.log("userAccountID: ", userAccount.id)
+
+				const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+
+				userManager.createUser(user, function (error, results) {
+					console.log("results", results)
+					console.log("error: ", error)
+
+					if (error.length !== 0) {
+						errors.push("Internal server error")
+
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
+							if (error.length !== 0) {
+								console.log("Couldn't delete the account")
+								errors.push("Couldn't delete the account")
+
+								model = {
+									errors,
+									userName,
+									firstname,
+									lastname,
+									email,
+									phoneNumber,
+									city
+									//   csrfToken: request.csrfToken()
+								}
+
+								response.render('accountCreate.hbs', model)
+							} else {
+								model = {
+									errors,
+									userName,
+									firstname,
+									lastname,
+									email,
+									phoneNumber,
+									city,
+									results
+									//   csrfToken: request.csrfToken()
+								}
+
+								response.render('accountCreate.hbs', model)
+							}
+						})
+					} else {
+						console.log("account and user created succesfully")
+						response.redirect("/")
+					}
+				})
 			}
+		})
 
-			response.render("accountCreate.hbs", model)
-		}*/
 
 		// ------------------------------ Create Account Test ---------------------------------------------------
 
