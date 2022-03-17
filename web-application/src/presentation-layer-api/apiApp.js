@@ -36,7 +36,7 @@ module.exports = function ({ }) {
 	app.use(bodyParser.urlencoded({
 		extended: false
 	}))
-
+	console.log("heina?")
 	// Add CORS, so client-side code on other websites are allowed
 	// to send HTTP requests to us.
 	app.use(function (request, response, next) {

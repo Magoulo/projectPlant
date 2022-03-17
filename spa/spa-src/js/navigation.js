@@ -53,6 +53,11 @@ function showPage(url) {
 			loadAdsPage()
 			break
 
+		case '/accounts/sign-in':
+			signIn()
+			nextPageId = 'start-page'
+			break
+
 		default:
 			if (url.startsWith("/ads/")) {
 				const [empty, ads, id] = url.split("/")
@@ -68,4 +73,8 @@ function showPage(url) {
 
 	document.getElementById(nextPageId).classList.add('current-page')
 
+}
+
+function showLogin(url){
+	//TODO make a function like showPage function that displays the right state of the login part (login/logout)
 }

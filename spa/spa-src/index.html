@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Humans</title>
+	<title>Plant Swap</title>
 
 	<!--- fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,6 +76,7 @@
 						<li class="list-group-item"><a class="nav-link" href="/ads">Ads</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/about">About</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/contact">Contact</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/accounts/sign-in">Sign-in</a></li>
 					</ul>
 				</div>
 			</div>
@@ -83,7 +84,7 @@
 		</div>
 
 
-		<!-- "Account Menu" when logged in      {{#if session.isLoggedIn}}          -->
+		<!-- "Account Menu" when logged in      {{#if session.isLoggedIn}}         
 
 
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -117,10 +118,10 @@
 
 			</div>
 
-		</div>
+		</div> -->
 
 
-		<!-- Account Menu when not logged in  {{else}} 
+		<!-- Account Menu when not logged in  {{else}} -->
 
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
@@ -134,9 +135,11 @@
 				<ul class="list-group list-group-flush">
 
 					<li class="list-group-item">
-						<div class="col">
-							<form action="/accounts/sign-in" method="POST">
-								<input type="hidden" name="_csrf" value="{{csrfToken}}">
+						<div class="col"> 
+							<!-- The sign-in form-->
+
+							<form href="/accounts/sign-in">
+							<!--	<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 
 								<div class="mb-0">
 									<label class="form-label"></label>
@@ -153,6 +156,7 @@
 								</div>
 
 							</form>
+
 						</div>
 					</li>
 
@@ -168,7 +172,7 @@
 			</div>
 
 		</div>
-		{{/if}}-->
+	<!--{{/if}} -->	
 
 	</div>
 

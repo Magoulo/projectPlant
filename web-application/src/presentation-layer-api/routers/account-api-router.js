@@ -67,10 +67,13 @@ module.exports = function ({ accountManager, userManager }) {
 
 
 	router.post("/sign-in", function (request, response) {
+		console.log("inne i sign-in i backenden")
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
+
+		console.log("username, password: ", username, password)
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
@@ -86,6 +89,7 @@ module.exports = function ({ accountManager, userManager }) {
 						if (error) {
 							response.status(401)
 						} else {
+							
 							response.status(200).json({
 								"access_token": token
 							})
