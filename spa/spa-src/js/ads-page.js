@@ -1,4 +1,5 @@
 async function loadAdsPage(){
+	console.log("token from global: ", token)
 
 	const response = await fetch("http://localhost:3000/ads")
 	
@@ -12,6 +13,7 @@ async function loadAdsPage(){
 	allAdsUl.innerText = ""
 	
 	for(const ad of ads){
+
         //const h3Title = document.createElement('h3')
 
         const aTitle = document.createElement('a')

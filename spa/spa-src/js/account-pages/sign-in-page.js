@@ -1,10 +1,12 @@
+var token = "this should be a token!"
+
 async function signIn() {
     console.log("inne i signIn()")
     const username = "kent" //request.body.username
     const password = "123" //request.body.password
    // const data = FormData(document.getElementById("sign-in-form"))
     //document.getElementById("sign-in-form")
-    var token = ""
+  
 
     const body = JSON.stringify({
         username: username,
@@ -17,7 +19,8 @@ async function signIn() {
     request.setRequestHeader("Content-Type", "application/json")
     request.send(body)
     request.addEventListener('load', function(event){
-         token = request.responseText
+        token = request.responseText
+        
         console.log("responseBody: ", token)
     })
 
