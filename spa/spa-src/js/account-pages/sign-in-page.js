@@ -45,14 +45,13 @@ async function signIn() {
     request.setRequestHeader("Content-Type", "application/json")
     request.send(body)
     request.addEventListener('load', function(event){
-      const token = request.responseText
+      
+      const token = JSON.parse(request.responseText)
+      console.log("token--------:", typeof(token))
       sessionStorage.setItem("token", token)
-      console.log("responseBody: ", token)
-      console.log("sessionStorage: ", sessionStorage.token)
-    //  request.session.accessToken = ""
-      //request.session.accessToken = token // Uncaught TypeError: Cannot set properties of undefined (setting 'token') at XMLHttpRequest.<anonymous>
-     // console.log("request.session.token: ", request.session.accessToken)
-        
+     
+      console.log("sessionStorage: ", JSON.stringify(sessionStorage.token))
+     
     })
 
    // console.log("token: ", session.token)

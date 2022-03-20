@@ -86,13 +86,15 @@ module.exports = function ({ accountManager, userManager }) {
 					}
 
 					jwt.sign(payload, SECRET, function (error, token) {
+						console.log("the token in backend:",token)
+
 						if (error) {
 							response.status(401)
 						} else {
 							
-							response.status(200).json({
-								"access_token": token
-							})
+							response.status(200).json(
+								token
+							)
 						}
 					})
 				} else {

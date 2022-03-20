@@ -299,6 +299,8 @@ module.exports = function ({ adManager, userManager }) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
+            console.log("Ad-----------------------------------",Ad)
+            console.log("Ad.ImageBundle.coverImagePath: ", Ad.ImageBundle.coverImagePath)
 
             userManager.getUserByUserID(Ad.userID, function (errors, User) {
 

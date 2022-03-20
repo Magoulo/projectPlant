@@ -55,6 +55,7 @@ function showPage(url) {
 
 		case '/accounts/myAds':
 			nextPageId = 'my-ads-page'
+			loadMyAdsPage()
 			break
 
 		case '/accounts/myBids':

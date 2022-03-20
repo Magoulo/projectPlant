@@ -73,6 +73,7 @@ module.exports = function ({ }) {
 
 			models.Ad.findAll({
 				raw: true,
+				nest: true,
 				where: { userID: userID },
 				include: [{
 					model: models.ImageBundle,

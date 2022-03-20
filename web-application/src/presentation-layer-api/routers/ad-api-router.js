@@ -27,9 +27,18 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.get("/myAds", function (request, response) {
+        console.log("inne i myAds i backend")
 
         const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("Bearer ".length)
+        
+        const accessToken = authorizationHeader.substring('bearer '.length)
+        //accessToken.replace(/["*]/g,"")
+        //const accessTokenTest = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0xvZ2dlZEluIjp0cnVlLCJ1c2VySUQiOjMsImlhdCI6MTY0Nzc3ODY1MH0.NXZdOzperW2sVy4IgImicy5knO8ax9DGyZGmtKNp5Ic"
+       // console.log("authorizationHeader: ",request.header("Authorization") )
+       console.log("accessToken:",JSON.stringify(accessToken))
+        //console.log("accessToken:",accessToken.token)
+        //console.log("accessTokenTest:",accessTokenTest)
+       // console.log("accessToken1:",accessToken1)
 
         var allAds = []
         var allBids = []
@@ -37,6 +46,7 @@ module.exports = function ({ adManager, userManager }) {
         jwt.verify(accessToken, SECRET, function (error, payload) {
 
             if (error) {
+                console.log("jwt.verify error!", error)
                 response.status(401).end()
             } else {
                 adManager.getAllAdsByUserID(payload.userID, function (errors, Ad) {
