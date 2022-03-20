@@ -31,22 +31,27 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="firstName" value="{{firstName}}">
                         <label class="form-label">Firstname</label>
+                        <p class="text-start text-danger">{{firstNameErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="lastName" value="{{lastName}}">
                         <label class="form-label">Lastname</label>
+                        <p class="text-start text-danger">{{lastNameErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" value="{{email}}">
+                        <input class="form-control" type="text" name="email" value="{{email}}">
                         <label class="form-label">Email</label>
+                        <p class="text-start text-danger">{{emailErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="phonenumber" value="{{phoneNumber}}">
                         <label class="form-label">Phonenumber</label>
+                        <p class="text-start text-danger">{{phoneNumberErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="city" value="{{city}}">
                         <label class="form-label">City</label>
+                        <p class="text-start text-danger">{{cityErrors}}</p>
                     </div>
                     <div class="mb-3">
                         <input class="btn btn-primary" type="submit" value="Create">

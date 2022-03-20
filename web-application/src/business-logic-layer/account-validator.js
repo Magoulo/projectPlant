@@ -8,16 +8,23 @@ module.exports = function () {
 	return {
 
 		getCreateNewAccountErrors: function (newAccount) {
+
 			const usernameErrors = []
 			const passwordErrors = []
+			const firstNameErrors = []
+			const lastNameErrors = []
+			const emailErrors = []
+			const phoneNumberErrors = []
+			const cityErrors = []
+			
+			const emptyFieldErrorMsg = "this field is mandatory"
 
 
-			// Validating username
 			if (!newAccount.username.length) {
-				usernameErrors.push("this field is mandatory")
+				usernameErrors.push(emptyFieldErrorMsg)
 			} else {
 
-				if (newAccount.username.length < MIN_USERNAME_LENGTH) {
+				if (newAccount.username.length < MIN_USERNAME_LENGTH) { // See if username alrady exists? 
 					usernameErrors.push("username must be at least 3 characters long")
 				}
 
@@ -26,9 +33,8 @@ module.exports = function () {
 				}
 			}
 
-			// Validating password
 			if (!newAccount.password.length) {
-				passwordErrors.push("this field is mandatory")
+				passwordErrors.push(emptyFieldErrorMsg)
 			} else {
 
 				if (newAccount.password != newAccount.repeatedPassword) {
@@ -45,7 +51,27 @@ module.exports = function () {
 				}
 			}
 
-			return [usernameErrors, passwordErrors]
+			if (!newAccount.firstName.length) {
+				firstNameErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!newAccount.lastName.length) {
+				lastNameErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!newAccount.email.length) {
+				emailErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!newAccount.phoneNumber.length) {
+				phoneNumberErrors.push(emptyFieldErrorMsg)
+			}
+
+			if (!newAccount.city.length) {
+				cityErrors.push(emptyFieldErrorMsg)
+			}
+
+			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 
 	}

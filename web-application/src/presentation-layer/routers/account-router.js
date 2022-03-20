@@ -25,7 +25,7 @@ module.exports = function ({ accountManager, userManager }) {
 		const phoneNumber = request.body.phonenumber
 		const city = request.body.city
 
-		const account = { username: userName, password: password, repeatedPassword: repeatedPassword }
+		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 		const errors = []
 
 		accountManager.createAccount(account, function (error, userAccount) {
@@ -33,11 +33,24 @@ module.exports = function ({ accountManager, userManager }) {
 
 				const usernameErrors = error[0]
 				const passwordErrors = error[1]
+				const firstNameErrors = error[2]
+                const lastNameErrors = error[3]
+                const emailErrors = error[4]
+                const phoneNumberErrors = error[5]
+                const cityErrors = error[6]
+
+				errors.push(lastNameErrors)
+
+				console.log(errors.lastNameErrors);
 
 				model = {
-					errors,
 					usernameErrors,
 					passwordErrors,
+					firstNameErrors,
+					lastNameErrors,
+					emailErrors,
+					phoneNumberErrors,
+					cityErrors,
 					userName,
 					password,
 					repeatedPassword,
