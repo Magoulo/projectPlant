@@ -1,5 +1,5 @@
 const MIN_TITLE_LENGTH = 5
-const MAX_TITLE_LENGTH = 16
+const MAX_TITLE_LENGTH = 31
 const MIN_DESCRIPTION_LENGTH = 10
 const MAX_DESCRIPTION_LENGTH = 201
 
@@ -25,7 +25,7 @@ module.exports = function () {
 				}
 
 				else if (MAX_TITLE_LENGTH < Ad.title.length) {
-					titleErrors.push("title must be under 16 characters long")
+					titleErrors.push("title must be under 31 characters long")
 				}
 			}
 

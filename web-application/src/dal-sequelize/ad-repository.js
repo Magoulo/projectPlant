@@ -232,19 +232,19 @@ module.exports = function ({ }) {
 			})
 		},*/
 
-		updateAdByAdID: function (adID, title, latinName, description, callback) {
+		updateAdByAdID: function (Ad, callback) {
 
 			models.Ad.update({
-				title: title,
-				latinName: latinName,
-				description: description,
+				title: Ad.title,
+				latinName: Ad.latinName,
+				description: Ad.description,
 			},
 				{
-					where: { id: adID }
+					where: { id: Ad.id }
 
-				}).then((ad) => {
-					console.log("Updated ad: ", ad)
-					callback([], ad.dataValues)
+				}).then((Ad) => {
+					console.log("Updated ad: ", Ad)
+					callback([], Ad.dataValues)
 
 				}).catch((error) => {
 					console.log("error: ", error)

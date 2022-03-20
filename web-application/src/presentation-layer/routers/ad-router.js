@@ -131,15 +131,22 @@ module.exports = function ({ adManager, userManager }) {
         const latinName = request.body.latinname
         const description = request.body.description
 
-        adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
+        const Ad = {id: adID, title: title, latinName: latinName, description: description}
 
-            if (error.length !== 0) {
+        adManager.updateAdByAdID(Ad, function (errors) {
+
+            if (errors.length !== 0) {
+
+                const titleErrors = errors[0]
+                const latinNameErrors = errors[1]
+                const descriptionErrors = errors[2]
 
                 model = {
-                    adID,
-                    title,
-                    latinName,
-                    description,
+                    Ad: Ad,
+                    titleErrors, 
+                    latinNameErrors,
+                    descriptionErrors,
+                    session: request.session,
                     layout: 'account.hbs'
                     //   csrfToken: request.csrfToken()
                 }
@@ -149,7 +156,6 @@ module.exports = function ({ adManager, userManager }) {
                 response.redirect('/ads/myAds')
             }
         })
-
     })
 
     router.get("/adUpdate/:adID", function (request, response) {
@@ -340,7 +346,7 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    
+
     router.get('/:adID', function (request, response) {
         const adID = request.params.adID
 

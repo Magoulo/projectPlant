@@ -29,29 +29,35 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="title" value="{{Ad.title}}">
                         <label class="form-label">Title</label>
+                        <p class="text-start text-danger">{{titleErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="latinname" value="{{Ad.latinName}}">
                         <label class="form-label">Latin name</label>
+                        <p class="text-start text-danger">{{latinNameErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="description" value="{{Ad.description}}">
                         <label class="form-label">Description</label>
+                        <p class="text-start text-danger">{{descriptionErrors}}</p>
                     </div>
                 </div>
                 {{#Ad}}
                 <div class="row offset-sm-2">
                     <div class="col-3 ms-3">
-                        <img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}" alt="{{ad.imageBundleID}}"
-                            name="coverimagepath" class="flowerImage" style="width: 300px; height: 300px">
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.coverImagePath'}}"
+                            alt="{{ad.imageBundleID}}" name="coverimagepath" class="flowerImage"
+                            style="width: 300px; height: 300px">
                     </div>
                     <div class="col-3">
-                        <img class="img-thumbnail" src="/images/{{'ImageBundle.firstImagePath'}}" alt="{{ad.imageBundleID}}"
-                            name="firstimagepath" class="flowerImage" style="width: 300px; height: 300px">
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.firstImagePath'}}"
+                            alt="{{ad.imageBundleID}}" name="firstimagepath" class="flowerImage"
+                            style="width: 300px; height: 300px">
                     </div>
                     <div class="col-3">
-                        <img class="img-thumbnail" src="/images/{{'ImageBundle.secondImagePath'}}" alt="{{ad.imageBundleID}}"
-                            name="secondimagepath" class="flowerImage" style="width: 300px; height: 300px">
+                        <img class="img-thumbnail" src="/images/{{'ImageBundle.secondImagePath'}}"
+                            alt="{{ad.imageBundleID}}" name="secondimagepath" class="flowerImage"
+                            style="width: 300px; height: 300px">
                     </div>
                 </div>
                 {{/Ad}}

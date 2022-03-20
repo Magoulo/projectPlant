@@ -52,8 +52,8 @@ module.exports = function ({ adRepository, adValidator }) {
 			adRepository.createImageBundle(imageBundle, callback)
 		},
 
-		
-		updateAdByAdID: function (adID, title, latinName, description, callback) {
+
+		updateAdByAdID: function (Ad, callback) {
 
 			const errors = adValidator.getAdErrors(Ad)
 			var errorsExist = false
@@ -67,7 +67,7 @@ module.exports = function ({ adRepository, adValidator }) {
 			if (errorsExist) {
 				callback(errors, null)
 			} else {
-				adRepository.updateAdByAdID(adID, title, latinName, description, callback)
+				adRepository.updateAdByAdID(Ad, callback)
 			}
 		},
 
