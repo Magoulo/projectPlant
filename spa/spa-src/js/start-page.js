@@ -19,7 +19,7 @@ async function loadStartPage(){
         aImage.setAttribute('href',"/ads/" + ad.id)
 
         const imgImage = document.createElement('img')
-        imgImage.setAttribute('src',"/web-application/src/presentation-layer/public/images"+ad.ImageBundle.coverImagePath)
+        imgImage.setAttribute('src',"/images/"+ad.ImageBundle.coverImagePath)
         
         aImage.appendChild(imgImage)
 		const liIitle = document.createElement('li')

@@ -1,4 +1,30 @@
-var token = "--- No Token here ---"
+//var token = "--- No Token here ---"
+/*const express = require('express')
+const path = require('path')
+const session = require('express-session')
+const redis = require("redis")
+
+let RedisStore = require("connect-redis")(session)
+	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
+	redisClient.connect().catch(console.error)
+
+app.use(
+	session({
+		store: new RedisStore({ client: redisClient }),
+		saveUninitialized: false,
+		secret: "always tired",
+		resave: false,
+		
+	})
+	
+)
+
+app.use(function (req, res, next) {
+	if (!req.session) {
+		return next(new Error("oh no")) // handle error
+	}
+	next() // otherwise continue
+})*/
 
 async function signIn() {
     console.log("inne i signIn()")
@@ -6,7 +32,7 @@ async function signIn() {
     const password = "123" //request.body.password
    // const data = FormData(document.getElementById("sign-in-form"))
     //document.getElementById("sign-in-form")
-  
+    
 
     const body = JSON.stringify({
         username: username,
@@ -19,12 +45,17 @@ async function signIn() {
     request.setRequestHeader("Content-Type", "application/json")
     request.send(body)
     request.addEventListener('load', function(event){
-        token = request.responseText
+      const token = request.responseText
+      sessionStorage.setItem("token", token)
+      console.log("responseBody: ", token)
+      console.log("sessionStorage: ", sessionStorage.token)
+    //  request.session.accessToken = ""
+      //request.session.accessToken = token // Uncaught TypeError: Cannot set properties of undefined (setting 'token') at XMLHttpRequest.<anonymous>
+     // console.log("request.session.token: ", request.session.accessToken)
         
-        console.log("responseBody: ", token)
     })
 
-    console.log("token: ", token)
+   // console.log("token: ", session.token)
 
 
   /*  const response = await fetch("http://localhost:3000/accounts/sign-in", {

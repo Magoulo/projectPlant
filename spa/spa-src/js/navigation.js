@@ -71,17 +71,17 @@ function showPage(url) {
 			signIn()
 			break	
 		default:
-			console.log("token from global in default: ", token)
+			
 
 			if (url.startsWith("/ads/")) { // problemet med att consolen samt globaler laddas om/ resetas verkar vara att ett element skapat från ads-filen appends as child clickas på
-				console.log("token from global after if url startswith: ", token)
+				
 				const [empty, ads, id] = url.split("/")
 				console.log(id);
 
 				nextPageId = 'ad-page'
 				loadAdPage(id)//loadAdsPage() issue is not here
 			} else {
-				console.log("token from global in default ->: ", token)
+				
 				nextPageId = 'not-found-page'
 			}
 
