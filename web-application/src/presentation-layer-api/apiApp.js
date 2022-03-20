@@ -112,7 +112,7 @@ module.exports = function ({ }) {
 	container.register("bidRepository", awilix.asFunction(bidRepository))
 	container.register("bidManager", awilix.asFunction(bidManager))
 	container.register("bidRouter", awilix.asFunction(bidRouter))
-	container.register("bidRouter", awilix.asFunction(bidRouter))
+	container.register("bidValidator", awilix.asFunction(bidValidator))
 
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))

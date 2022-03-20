@@ -96,20 +96,21 @@ module.exports = function ({ adManager, bidManager }) {
         console.log("inside place bid!------------")
 
         const adID = request.body.adID
-        const message = request.body.message
+        const bidMessage = request.body.message
 
         if (request.files == null) {
 
             const imagePath = "no-image.png"
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
+            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
             bidManager.createBid(Ad, function (error) {
 
-                if (error) {
+                if (error) { //------------------------------------------------NÄR ERROR: LÄGG TILL AD I MODEL
+                    
                     const model = {
-                        errors: errors,
-                        session: request.session
+                        msgError: error,
+                        session: request.session,
                     }
 
                     response.render("ad.hbs", model)
@@ -123,7 +124,7 @@ module.exports = function ({ adManager, bidManager }) {
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, bidMessage: bidMessage }
 
             imagePath.mv(uploadPath, function (error) {
                 if (error) {

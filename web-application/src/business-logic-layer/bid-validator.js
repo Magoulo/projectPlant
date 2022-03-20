@@ -1,23 +1,31 @@
-const MIN_USERNAME_LENGTH = 3
-const MAX_USERNAME_LENGTH = 10
+const MIN_MESSAGE_LENGTH = 10
+const MAX_MESSAGE_LENGTH = 200
 
 module.exports = function () {
 	return {
 
-		getErrorsCreateNewAccount: function (account) {
-			const errors = []
+		getPlaceBidErrors: function (Bid) {
 
-			// Validate username.
-			if (!account.hasOwnProperty("username")) {
-				errors.push("usernameMissing")
-			} else if (account.username.length < MIN_USERNAME_LENGTH) {
-				errors.push("usernameTooShort")
-			} else if (MAX_USERNAME_LENGTH < account.username.length) {
-				errors.push("usernameTooLong")
+			const msgErrors = []
+			const emptyFieldErrorMsg = "Could not place bid because message field was empty"
+
+
+			if (!Bid.message.length) {
+				msgErrors.push(emptyFieldErrorMsg)
+			} else {
+
+				if (Bid.message.length < MIN_MESSAGE_LENGTH) {
+					msgErrors.push("Could not place bid because message field must be at least 3 characters long")
+				}
+
+				else if (MAX_MESSAGE_LENGTH < newAccount.username.length) {
+					msgErrors.push("Could not place bid because message field must be under 200 characters long")
+				}
 			}
 
-			return errors
+			return msgErrors
 		}
+
 
 	}
 }
