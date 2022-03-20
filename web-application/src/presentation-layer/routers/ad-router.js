@@ -352,17 +352,13 @@ module.exports = function ({ adManager, userManager }) {
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
 
-            userManager.getUserByUserID(Ad.userID, function (errors, User) {
-
                 const model = {
                     errors: errors,
                     Ad: Ad,
-                    User: User,
                     session: request.session
                 }
 
                 response.render("ad.hbs", model)
-            })
         })
     })
 

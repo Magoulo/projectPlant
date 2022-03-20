@@ -14,8 +14,6 @@ module.exports = function ({ accountManager, userManager }) {
 
 	router.post("/create", function (request, response) {
 
-		console.log("------------i create")
-
 		const userName = request.body.username
 		const password = request.body.password
 		const repeatedPassword = request.body.repeatPassword
@@ -26,7 +24,6 @@ module.exports = function ({ accountManager, userManager }) {
 		const city = request.body.city
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
-		const errors = []
 
 		accountManager.createAccount(account, function (error, userAccount) {
 			if (error.length !== 0) {
@@ -34,14 +31,10 @@ module.exports = function ({ accountManager, userManager }) {
 				const usernameErrors = error[0]
 				const passwordErrors = error[1]
 				const firstNameErrors = error[2]
-                const lastNameErrors = error[3]
-                const emailErrors = error[4]
-                const phoneNumberErrors = error[5]
-                const cityErrors = error[6]
-
-				errors.push(lastNameErrors)
-
-				console.log(errors.lastNameErrors);
+				const lastNameErrors = error[3]
+				const emailErrors = error[4]
+				const phoneNumberErrors = error[5]
+				const cityErrors = error[6]
 
 				model = {
 					usernameErrors,
@@ -64,25 +57,22 @@ module.exports = function ({ accountManager, userManager }) {
 
 				response.render('accountCreate.hbs', model)
 			} else {
-				console.log("Account created")
-				console.log("userAccountID: ", userAccount.id)
 
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
+				const errors = []
 
 				userManager.createUser(user, function (error, results) {
-					console.log("results", results)
-					console.log("error: ", error)
-
 					if (error.length !== 0) {
+
 						errors.push("Internal server error")
 
 						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
 							if (error.length !== 0) {
-								console.log("Couldn't delete the account")
-								errors.push("Couldn't delete the account")
+
+								errors.push(": couldn't resolve the problem") //couldn't delete the account
 
 								model = {
-									errors,
+									msgError: errors,
 									userName,
 									firstName,
 									lastName,
@@ -93,9 +83,13 @@ module.exports = function ({ accountManager, userManager }) {
 								}
 
 								response.render('accountCreate.hbs', model)
+
 							} else {
+
+								errors.push(": please try again")
+
 								model = {
-									errors,
+									msgError: errors,
 									userName,
 									firstName,
 									lastName,
@@ -110,7 +104,6 @@ module.exports = function ({ accountManager, userManager }) {
 							}
 						})
 					} else {
-						console.log("account and user created succesfully")
 						response.redirect("/")
 					}
 				})

@@ -14,7 +14,7 @@ module.exports = function ({ adManager, bidManager }) {
             console.log("Bid-------------: ", Bid)
 
             for (index in Bid) {
-                console.log("Bid[index].status:",Bid[index].status)
+                console.log("Bid[index].status:", Bid[index].status)
 
                 if (Bid[index].status == "Accepted") {
                     bidAccepted.push(Bid[index])
@@ -93,23 +93,24 @@ module.exports = function ({ adManager, bidManager }) {
     })
 
     router.post("/placeBid", function (request, response) {
-        console.log("inside place bid!------------")
 
         const adID = request.body.adID
         const bidMessage = request.body.message
+        const Ad = request.body.Ad
+
 
         if (request.files == null) {
 
             const imagePath = "no-image.png"
-            const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
+            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
-            bidManager.createBid(Ad, function (error) {
+            bidManager.createBid(Bid, function (error) {
 
-                if (error) { //------------------------------------------------NÄR ERROR: LÄGG TILL AD I MODEL
-                    
+                if (error) {
+
                     const model = {
                         msgError: error,
+                        Ad,
                         session: request.session,
                     }
 
@@ -124,7 +125,7 @@ module.exports = function ({ adManager, bidManager }) {
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, bidMessage: bidMessage }
+            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: bidMessage }
 
             imagePath.mv(uploadPath, function (error) {
                 if (error) {
@@ -136,16 +137,14 @@ module.exports = function ({ adManager, bidManager }) {
                 }
             })
 
-            bidManager.createBid(Ad, function (error) {
-                console.log("kommer inte ens hit?")
-                console.log("Error: ", error)
+            bidManager.createBid(Bid, function (error) {
                 if (error) {
                     const model = {
-                        errors: errors,
+                        msgError: error,
                         session: request.session
                     }
 
-                    response.render(model)
+                    response.render("ad.hbs", model)
                 } else {
                     response.redirect("/ads/" + adID)
                 }
