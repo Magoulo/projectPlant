@@ -1,7 +1,3 @@
-const adRepository = require('../data-access-layer/ad-repository')
-
-
-
 module.exports = function ({ adRepository, adValidator }) {
 	return {
 
@@ -29,7 +25,7 @@ module.exports = function ({ adRepository, adValidator }) {
 			adRepository.getAllAdsByTitleOrLatinName(title, callback)
 		},
 
-		createAd: function (Ad, callback) { // -----------------------
+		createAd: function (Ad, callback) {
 
 			const errors = adValidator.getAdErrors(Ad)
 			var errorsExist = false
@@ -47,11 +43,9 @@ module.exports = function ({ adRepository, adValidator }) {
 			}
 		},
 
-
 		createImageBundle: function (imageBundle, callback) {
 			adRepository.createImageBundle(imageBundle, callback)
 		},
-
 
 		updateAdByAdID: function (Ad, callback) {
 
@@ -75,7 +69,6 @@ module.exports = function ({ adRepository, adValidator }) {
 			adRepository.deleteAd(adID, callback)
 		},
 
-		//vart?? 
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
 			adRepository.getAllAdsBidsUsersByUserID(userID, callback)
 		},

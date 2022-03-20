@@ -1,7 +1,3 @@
-const bidRepository = require('../data-access-layer/bid-repository')
-
-
-
 module.exports = function ({ bidRepository, bidValidator }) {
 	return {
 
@@ -17,8 +13,8 @@ module.exports = function ({ bidRepository, bidValidator }) {
 			bidRepository.getAllBidsByUserID(userID, callback)
 		},
 
-		createBid: function (Bid, callback) { // error handeling
-
+		createBid: function (Bid, callback) {
+			
 			const error = bidValidator.getPlaceBidErrors(Bid)
 
 			if (error.length) {

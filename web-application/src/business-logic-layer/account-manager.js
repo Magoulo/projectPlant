@@ -1,7 +1,3 @@
-const accountRepository = require('../data-access-layer/account-repository')
-const accountValidator = require('./account-validator')
-
-
 module.exports = function ({ accountRepository, accountValidator}) {
 	return {
 
@@ -9,13 +5,12 @@ module.exports = function ({ accountRepository, accountValidator}) {
 			accountRepository.getAllAccounts(callback)
 		},
 
-
 		getAccountByUsername: function (username, callback) {
 			accountRepository.getAccountByUsername(username, callback)
 		},
 
-
 		createAccount: function (newAccount, callback) {
+			
 			const errors = accountValidator.getCreateNewAccountErrors(newAccount)
 			var errorsExist = false
 
@@ -31,7 +26,6 @@ module.exports = function ({ accountRepository, accountValidator}) {
 				accountRepository.createAccount(newAccount, callback)
 			}
 		},
-
 
 		deleteAccountByUserAccountID: function (userAccountID, callback) {
 			accountRepository.deleteAccountByUserAccountID(userAccountID, callback)
