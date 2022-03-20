@@ -2,7 +2,7 @@ const adRepository = require('../data-access-layer/ad-repository')
 
 
 
-module.exports = function ({ adRepository}) {
+module.exports = function ({ adRepository, adValidator }) {
 	return {
 
 		getAllAds: function (callback) {
@@ -29,31 +29,61 @@ module.exports = function ({ adRepository}) {
 			adRepository.getAllAdsByTitleOrLatinName(title, callback)
 		},
 
-		createAd: function (ad, callback) {
-			adRepository.createAd(ad, callback)
+		createAd: function (Ad, callback) { // -----------------------
+
+			const errors = adValidator.getAdErrors(Ad)
+			var errorsExist = false
+
+			for (let i = 0; i < errors.length; i++) {
+				if (0 < errors[i].length) {
+					errorsExist = true
+				}
+			}
+
+			if (errorsExist) {
+				callback(errors, null)
+			} else {
+				adRepository.createAd(Ad, callback)
+			}
 		},
+
 
 		createImageBundle: function (imageBundle, callback) {
 			adRepository.createImageBundle(imageBundle, callback)
 		},
-	
+
+		
 		updateAdByAdID: function (adID, title, latinName, description, callback) {
-			adRepository.updateAdByAdID(adID, title, latinName, description, callback)
+
+			const errors = adValidator.getAdErrors(Ad)
+			var errorsExist = false
+
+			for (let i = 0; i < errors.length; i++) {
+				if (0 < errors[i].length) {
+					errorsExist = true
+				}
+			}
+
+			if (errorsExist) {
+				callback(errors, null)
+			} else {
+				adRepository.updateAdByAdID(adID, title, latinName, description, callback)
+			}
 		},
-	
+
 		deleteAd: function (adID, callback) {
 			adRepository.deleteAd(adID, callback)
 		},
-	
+
 		//vart?? 
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
 			adRepository.getAllAdsBidsUsersByUserID(userID, callback)
 		},
-	
+
 		getAllBidsAndUserByAdID: function (adID, callback) {
 			adRepository.getAllBidsAndUserByAdID(adID, callback)
 		},
-	
+
 		closeAd: function (adID, callback) {
 			adRepository.closeAd(adID, callback)
 		}
