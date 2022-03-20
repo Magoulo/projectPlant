@@ -56,7 +56,7 @@ async function loadMyAdsPage() {
             aUpdate.classList.add("btn")
             aUpdate.classList.add("btn-primary")
             aUpdate.classList.add("m-2")
-            aUpdate.setAttribute('href',"/ads/adUpdate/" + ad.id)
+            aUpdate.setAttribute('href',"/ads/adUpdate/" + ad.id+ "/update")
             console.log("anchor Update: ", aUpdate)
 
             //delete button
@@ -65,7 +65,7 @@ async function loadMyAdsPage() {
             aDelete.classList.add("btn")
             aDelete.classList.add("btn-primary")
             aDelete.classList.add("m-2")
-            aDelete.setAttribute('href',"/ads/adDelete/" + ad.id)
+            aDelete.setAttribute('href',"/ads/adDelete/" + ad.id + "/delete")
 
             //Append Update and Delete buttons to Ul
             myAdsUl.appendChild(aUpdate)

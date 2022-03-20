@@ -1,31 +1,3 @@
-//var token = "--- No Token here ---"
-/*const express = require('express')
-const path = require('path')
-const session = require('express-session')
-const redis = require("redis")
-
-let RedisStore = require("connect-redis")(session)
-	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
-	redisClient.connect().catch(console.error)
-
-app.use(
-	session({
-		store: new RedisStore({ client: redisClient }),
-		saveUninitialized: false,
-		secret: "always tired",
-		resave: false,
-		
-	})
-	
-)
-
-app.use(function (req, res, next) {
-	if (!req.session) {
-		return next(new Error("oh no")) // handle error
-	}
-	next() // otherwise continue
-})*/
-
 async function signIn() {
     console.log("inne i signIn()")
     const username = "kent" //request.body.username

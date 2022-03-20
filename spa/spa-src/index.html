@@ -29,6 +29,7 @@
 	<script src="/js/account-pages/my-bids-page.js"></script>
 	<script src="/js/account-pages/personal-data-page.js"></script>
 	<script src="/js/account-pages/sign-in-page.js"></script>
+	<script src="/js/account-pages/ad-update-page.js"></script>
 </head>
 
 <body>
@@ -227,6 +228,107 @@
 				<h1>My Ads</h1>
 
 				<div id="my-ads-container" class="col-12 text-center"></div>
+
+			</div>
+
+			<!-- Create Ad page -->
+			<div class="page" id="create-ad-page">
+
+				<div id="create-ad-container" class="col-12 text-center">
+
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6 offset-sm-3 text-center">
+								<h1 class="display-3">Create Ad</h1>
+								<div>
+									<form class="form-inline justify-content-center" action="/ads/adCreate"
+										method="POST" encType="multipart/form-data">
+										<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+										<div class="form-floating mb-3">
+											<input class="form-control" type="text" name="title">
+											<label class="form-label">Title</label>
+										</div>
+										<div class="form-floating mb-3">
+											<input class="form-control" type="text" name="latinname" >
+											<label class="form-label">Latin name</label>
+										</div>
+										<div class="form-floating mb-3">
+											<input class="form-control" type="text" name="description">
+											<label class="form-label">Description</label>
+										</div>
+										<div class="mb-3">
+											<b>Upload Coverimage:</b>
+											<input  type="file" name="coverImageFile">
+										</div>
+										<div class="mb-3">
+											<b>Upload image:</b>
+											<input type="file" name="firstImageFile">
+										</div>
+										<div class="mb-3">
+											<b>Upload image:</b> 
+											<input type="file" name="secondImageFile">
+										</div>
+										<div class="mb-3">
+											<input class="btn btn-primary btn" type="submit" value="Create">
+										</div>
+									</form>
+								</div>
+					
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- Update Ad page -->
+
+			<div class="page" id="update-ad-page">
+				<h1>Update Ads</h1>
+
+				<div id="update-ad-container" class="col-12 text-center">
+
+					<form class="form-inline justify-content-center"  enctype='multipart/form-data' id="update-ad-form">
+						<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+		
+						<div class="col-sm-4 offset-sm-4 text-center">
+							<input type="hidden" name="id" value="" id="update-ad-form-ad-id">
+							<div class="form-floating mb-3">
+								<input class="form-control" type="text" name="title" value="Title" id="update-ad-form-title">
+								<label class="form-label">Title</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input class="form-control" type="text" name="latinname" value="Latin" id="update-ad-form-latinname">
+								<label class="form-label">Latin name</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input class="form-control" type="text" name="description" value="Desc" id="update-ad-form-description">
+								<label class="form-label">Description</label>
+							</div>
+						</div>
+						
+					<div class="row offset-sm-2">
+							<div class="col-3 ms-3">
+								<img class="img-thumbnail" src="" alt="coverImage"
+									name="coverimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-coverimage">
+							</div>
+							<div class="col-3">
+								<img class="img-thumbnail" src="" alt="firstImage"
+									name="firstimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-firstimage">
+							</div>
+							<div class="col-3">
+								<img class="img-thumbnail" src="" alt="secondImage"
+									name="secondimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-secondimage">
+							</div>
+						</div>	
+						
+						<div class="mb-3 mt-3 col-sm-4 offset-sm-4 text-center">
+							<button type="submit" class="btn btn-primary" onclick= sendUpdate() id="update-ad-update-Button">Update</button>
+						</div>
+					</form>
+
+				</div>
 
 			</div>
 

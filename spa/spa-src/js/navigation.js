@@ -52,6 +52,10 @@ function showPage(url) {
 			nextPageId = 'ads-page'
 			loadAdsPage()
 			break
+		
+		case '/ads/adCreate':
+			nextPageId = 'create-ad-page'
+			break
 
 		case '/accounts/myAds':
 			nextPageId = 'my-ads-page'
@@ -72,15 +76,21 @@ function showPage(url) {
 			signIn()
 			break	
 		default:
+			if (url.startsWith("/ads/adUpdate/")) { 
 			
+				const [empty, ads, adUpdate, id] = url.split("/")
+				nextPageId = 'update-ad-page'
+				loadAdUpdatePage(id)
+				break
+			}
 
-			if (url.startsWith("/ads/")) { // problemet med att consolen samt globaler laddas om/ resetas verkar vara att ett element skapat från ads-filen appends as child clickas på
+			if (url.startsWith("/ads/")) { 
 				
 				const [empty, ads, id] = url.split("/")
 				console.log(id);
 
 				nextPageId = 'ad-page'
-				loadAdPage(id)//loadAdsPage() issue is not here
+				loadAdPage(id)
 			} else {
 				
 				nextPageId = 'not-found-page'
