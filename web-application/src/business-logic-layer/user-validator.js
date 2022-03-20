@@ -2,6 +2,7 @@ module.exports = function () {
 	return {
 
 		getUpdateUserPersonalDataErrors: function (User) {
+
 			const firstNameErrors = []
 			const lastNameErrors = []
 			const emailErrors = []
@@ -9,6 +10,7 @@ module.exports = function () {
 			const cityErrors = []
 
 			const emptyFieldErrorMsg = "this field is mandatory"
+
 
 			if (!User.firstName.length) {
 				firstNameErrors.push(emptyFieldErrorMsg)
@@ -30,6 +32,7 @@ module.exports = function () {
 				cityErrors.push(emptyFieldErrorMsg)
 			}
 
+			
 			return [firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 

@@ -1,8 +1,7 @@
 const MIN_USERNAME_LENGTH = 3
-const MAX_USERNAME_LENGTH = 10
-
+const MAX_USERNAME_LENGTH = 21
 const MIN_PASSWORD_LENGTH = 3
-const MAX_PASSWORD_LENGTH = 10
+const MAX_PASSWORD_LENGTH = 21
 
 module.exports = function () {
 	return {
@@ -16,40 +15,42 @@ module.exports = function () {
 			const emailErrors = []
 			const phoneNumberErrors = []
 			const cityErrors = []
-			
-			const emptyFieldErrorMsg = "this field is mandatory"
+
+			const emptyFieldErrorMsg = "This field is mandatory"
 
 
 			if (!newAccount.username.length) {
 				usernameErrors.push(emptyFieldErrorMsg)
-			} else {
+			} else {// See if username alrady exists? 
 
-				if (newAccount.username.length < MIN_USERNAME_LENGTH) { // See if username alrady exists? 
-					usernameErrors.push("username must be at least 3 characters long")
+				if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
+					usernameErrors.push("Username must be at least" + MIN_USERNAME_LENGTH + "characters")
 				}
 
 				else if (MAX_USERNAME_LENGTH < newAccount.username.length) {
-					usernameErrors.push("username must be under 11 characters long")
+					usernameErrors.push("Username must be under" + MAX_USERNAME_LENGTH + "characters")
 				}
 			}
+
 
 			if (!newAccount.password.length) {
 				passwordErrors.push(emptyFieldErrorMsg)
-			} else {
 
+			} else {
 				if (newAccount.password != newAccount.repeatedPassword) {
-					passwordErrors.push("password fields do not match")
+					passwordErrors.push("Password fields do not match")
 				} else {
 
-					if (newAccount.username.length < MIN_PASSWORD_LENGTH) {
-						passwordErrors.push("password must be at least 3 characters long")
+					if (newAccount.password.length < MIN_PASSWORD_LENGTH) {
+						passwordErrors.push("Password must be at least" + MIN_PASSWORD_LENGTH + "characters")
 					}
 
-					else if (MAX_PASSWORD_LENGTH < newAccount.username.length) {
-						passwordErrors.push("password must be under 11 characters long")
+					else if (MAX_PASSWORD_LENGTH < newAccount.password.length) {
+						passwordErrors.push("Password must be under" + MAX_PASSWORD_LENGTH + "characters")
 					}
 				}
 			}
+
 
 			if (!newAccount.firstName.length) {
 				firstNameErrors.push(emptyFieldErrorMsg)
@@ -71,6 +72,7 @@ module.exports = function () {
 				cityErrors.push(emptyFieldErrorMsg)
 			}
 
+			
 			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 
