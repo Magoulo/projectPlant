@@ -38,12 +38,15 @@ async function loadMyAdsPage() {
             const h3Title = document.createElement('h3')
             h3Title.innerText = ad.title
             const liIitle = document.createElement('li')
+            liIitle.classList.add("hidden-list")
             liIitle.appendChild(h3Title)
 
             //Ad Image
             const imgImage = document.createElement('img')
-            imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImagePath)  
+            imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImagePath)
+            imgImage.classList.add("img-thumbnail")  
             const liImage = document.createElement('li')
+            liImage.classList.add("hidden-list")
             liImage.appendChild(imgImage)
 
             //Append title and Imge to Ul

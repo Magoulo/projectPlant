@@ -45,13 +45,15 @@ html {
 	  margin-top: 115px;
 	}
 	
-	
+	.hidden-list {
+		list-style: none
+	}
 	
 	.img-thumbnail {
 		float: center;
 		width:  400px;
 		height: 400px;
-		
+		list-style: none;
 	}
 	
 	.image-hight {
