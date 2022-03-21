@@ -62,7 +62,16 @@ html {
 	
 	.image-hight {
 	  height:700px;
-	  object-fit: cover;
+	 
+	}
+
+	.divider-style {
+		margin-left: 40%;
+		width:20%;
+		align-content: center;
+		margin-top: 50px;
+		margin-bottom: 25px;
+	
 	}
 	
 	.bi-list::before {

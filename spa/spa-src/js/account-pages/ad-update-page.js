@@ -24,6 +24,7 @@ async function loadAdUpdatePage(id){
     updateFormLatinName.value = ad.latinName  
     updateFormDescription.value = ad.description   
 
+    //Eventlistener for update button
     updateButton.addEventListener('click', function (event) {
         event.preventDefault()
 

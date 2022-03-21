@@ -83,7 +83,6 @@
 						<li class="list-group-item"><a class="nav-link" href="/ads">Ads</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/about">About</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/contact">Contact</a></li>
-						<li class="list-group-item"><a class="nav-link" href="/accounts/sign-in">Sign-in</a></li>
 					</ul>
 				</div>
 			</div>
@@ -187,7 +186,7 @@
 
 			<!-- Start page-->
 			<div class="page" id="start-page">
-				<h1>Start Page</h1>
+				<h1 class="text-center">Start Page</h1>
 				<div class="row align-items-center">
 					<div class="col-12 text-center">
 						<ul class="list-group" id="all-plant-ads-start-page"></ul>
@@ -196,14 +195,14 @@
 			</div>
 
 			<!-- About page -->
-			<div class="page" id="about-page">
+			<div class="page text-center" id="about-page">
 				<h1>About Page</h1>
 				<p>This is the about page.</p>
 			</div>
 
 			<!-- Ads page -->
 			<div class="page" id="ads-page">
-				<h1>Ads</h1>
+				<h1 class="text-center">Ads</h1>
 
 				<div class="row align-items-center">
 					<div class="col-12 text-center">
@@ -214,7 +213,6 @@
 
 			<!-- Ad page-->
 			<div class="page" id="ad-page">
-				<h1>Ad</h1>
 
 				<div id="plant-ad-container" class="col-12 text-center"></div>
 
@@ -222,9 +220,11 @@
 
 			<!-- My Ads page-->
 			<div class="page" id="my-ads-page">
-				<h1>My Ads</h1>
-
-				<div id="my-ads-container" class="col-12 text-center"></div>
+				
+			<h1 class="text-center">My Ads</h1>
+				<div id="my-ads-container" class="col-12 text-center">
+					
+				</div>
 
 			</div>
 
@@ -265,7 +265,7 @@
 											<input type="file" name="secondImageFile">
 										</div>-->
 										<div class="mb-3">
-											<input class="btn btn-primary btn" onclick= createAd() type="submit" value="Create">
+											<input class="btn btn-primary btn" onclick= createAd() type="submit" value="Create" id="create-ad-button">
 										</div>
 									</form>
 								</div>
@@ -426,9 +426,45 @@
 
 			<!-- Personal data page-->
 			<div class="page" id="personal-data-page">
-				<h1>Personal Data</h1>
 
-				<div id="personal-data-container" class="col-12 text-center"></div>
+				<div id="personal-data-container" class="col-12 text-center">
+
+					<div class="row">
+						<div class="col-sm-4 offset-sm-4 text-center">
+							<h1 class="display-3">Personal Data</h1>
+							<div>
+								<form class="form-inline justify-content-center" id="personal-data-form">
+									<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+									<div class="form-floating mb-3">
+										<input class="form-control" type="text" name="firstname" id="personal-data-firstname">
+										<label class="form-label">Firstname</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input class="form-control" type="text" name="lastname" id="personal-data-lastname">
+										<label class="form-label">Lastname</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input class="form-control" type="email" name="email" id="personal-data-email">
+										<label class="form-label">Email</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input class="form-control" type="text" name="phonenumber" id="personal-data-phonenumber">
+										<label class="form-label">Phonenumber</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input class="form-control" type="text" name="city" id="personal-data-city">
+										<label class="form-label">City</label>
+									</div>
+									<div class="mb-3">
+										<input class="btn btn-primary" type="submit" value="Update" id="personal-data-update-button">
+									</div>
+								</form>
+							</div>
+				
+						</div>
+					</div>
+
+				</div>
 
 			</div>
 

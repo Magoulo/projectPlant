@@ -32,6 +32,8 @@ async function loadStartPage(){
 		//Createing list elements and assigning class
 		const liIitle = document.createElement('li')
 		const liImage = document.createElement('li')
+		const divider = document.createElement('hr')
+		divider.classList.add("divider-style")
 
 		liIitle.classList.add("hidden-list")
 		liImage.classList.add("hidden-list")
@@ -39,9 +41,11 @@ async function loadStartPage(){
 		//Appending elements to parent
 		liIitle.appendChild(aTitle)
 		liImage.appendChild(aImage)
-
+		
 		allAdsUl.appendChild(liIitle)
 		allAdsUl.appendChild(liImage)
+		allAdsUl.appendChild(divider)
+		
 
 		//EventListeners for title and image
 		aTitle.addEventListener('click', function (event) {

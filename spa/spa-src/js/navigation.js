@@ -75,7 +75,7 @@ function showPage(url) {
 
 		case '/ads/adCreate':
 			nextPageId = 'create-ad-page'
-			
+			createAd()
 			break
 
 		case '/accounts/myAds':
