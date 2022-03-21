@@ -104,7 +104,7 @@ function showPage(url) {
 			if (url.startsWith("/ads/adUpdate/")) {
 
 				const [empty, ads, adUpdate, id] = url.split("/")
-				nextPageId = 'update-ad-page'
+				nextPageId = 'update-ad-page'	
 				loadAdUpdatePage(id)
 				break
 			}
@@ -117,10 +117,12 @@ function showPage(url) {
 			}
 
 			if (url.startsWith("/ads/")) {
-
+				
+				
 				const [empty, ads, id] = url.split("/")
 				console.log(id);
 				nextPageId = 'ad-page'
+				timeOut(url)
 				loadAdPage(id)
 			} else {
 
@@ -130,6 +132,19 @@ function showPage(url) {
 	
 	document.getElementById(nextPageId).classList.add('current-page')
 
+}
+
+function timeOut(url) {
+	
+      
+	setTimeout(function () {
+		document.getElementById("loader-spinner").classList.add('current-page')  
+	
+		
+		hideCurrentPage()
+		showPage(url)
+	}, 5000)
+	document.getElementById("loader-spinner").classList.remove('current-page')
 }
 
 function setPushState(url){

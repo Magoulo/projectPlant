@@ -1,5 +1,29 @@
 async function loadMyAdsPage() {
-    console.log("token from global: ", sessionStorage.token)
+
+  function timeOut(url){
+    hideCurrentPage()
+    const spinner = document.getElementById("loader-spinner").classList.add('current-page')
+    setTimeout(5000)
+    showPage(url)
+  }
+/*
+<div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+ */
+    /*const loadDiv = document.createElement("div") Atempt with createing a loader in script, issue is the role attribute
+    const spinnerDiv = document.createElement("div")
+    const spinnerSpan = document.createElement("span")
+    spinnerSpan.classList.add("sr-only")
+    spinnerSpan.innerText = "Loading..."
+
+    spinnerDiv.appendChild(spinnerSpan)
+    spinnerDiv.classList.add("spinner-border")
+
+    loadDiv.appendChild(spinnerDiv)
+    loadDiv.classList.add(loadDiv)*/
 
     const response = await fetch("http://localhost:3000/ads/myAds", {
         method: 'GET',
@@ -7,6 +31,8 @@ async function loadMyAdsPage() {
             'Authorization': "bearer " + sessionStorage.token,
         }),
     })
+
+    
 
     // TODO: Check status code and act accordingly!
 
