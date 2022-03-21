@@ -14,6 +14,7 @@ module.exports = function ({ accountManager, userManager }) {
 	*/
 
 	router.put("/create", function (request, response) {
+		console.log("inne i create account i backend")
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -26,11 +27,11 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const account = { username: userName, passwordHash: password }
 		const errors = []
-
+		console.log("account: ", account)
 		if (password === repeatedPassword) {
 			accountManager.createAccount(account, function (error, userAccount) {
 
-				if (error) {
+				if (error.length !== 0) {
 					errors.push("Internal server error")
 					response.status(500).json(error)
 				} else {

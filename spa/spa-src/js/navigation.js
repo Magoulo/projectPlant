@@ -65,6 +65,10 @@ function showPage(url) {
 		case '/accounts/myBids':
 			nextPageId = 'my-bids-page'
 			break
+
+		case '/accounts/create':
+			nextPageId = 'create-account-page'
+			break
 		
 		case '/accounts/personalData' :
 			nextPageId = 'personal-data-page'
@@ -73,7 +77,7 @@ function showPage(url) {
 
 		case '/accounts/sign-in':
 			nextPageId = 'start-page'
-			signIn()
+			//signIn()
 			break	
 		default:
 			if (url.startsWith("/ads/adUpdate/")) { 

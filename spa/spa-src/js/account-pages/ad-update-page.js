@@ -1,63 +1,53 @@
 async function loadAdUpdatePage(id){
-    console.log("inne i loadADUPDATE")
 
+    //Fetch ad from REST api
     const response = await fetch("http://localhost:3000/ads/adUpdate/"+ id)
     const ad = await response.json()
     console.log("fetched ad: ", ad)
 
-    const updateForm = document.getElementById('update-ad-form')
+    //Get all elements in update form
     const updateFormTitle = document.getElementById("update-ad-form-title")
     const updateFormLatinName = document.getElementById("update-ad-form-latinname")
     const updateFormDescription = document.getElementById("update-ad-form-description")
     const updateFormAdId = document.getElementById("update-ad-form-ad-id")
-    updateFormAdId.value = id
-   
     const coverImage = document.getElementById("update-ad-form-coverimage")
-    coverImage.src = "/images/" + ad.ImageBundle.coverImagePath
-    
     const firstImage = document.getElementById("update-ad-form-firstimage")
-    firstImage.src = "/images/" + ad.ImageBundle.firstImagePath
-
     const secondImage = document.getElementById("update-ad-form-secondimage")
+
+    //Asign the element data from the fetched ad
+    updateFormAdId.value = id
+    coverImage.src = "/images/" + ad.ImageBundle.coverImagePath
+    firstImage.src = "/images/" + ad.ImageBundle.firstImagePath
     secondImage.src = "/images/" + ad.ImageBundle.secondImagePath
-
-    updateFormTitle.value = ad.title
-    console.log("updateFormTitle after: ", updateFormTitle.value)
-
-    
-    updateFormLatinName.value = ad.latinName
-    console.log("updateFormLatinName: ", updateFormLatinName.value)
-
-    
-    updateFormDescription.value = ad.description
-    console.log("updateFormDescription: ", updateFormDescription.value)
-    
-    
+    updateFormTitle.value = ad.title 
+    updateFormLatinName.value = ad.latinName  
+    updateFormDescription.value = ad.description   
 }
 
 async function sendUpdate(){
   
+    //Get all elements in update form
     const updateFormAdId = document.getElementById("update-ad-form-ad-id")
     const updateFormTitle = document.getElementById("update-ad-form-title")
     const updateFormLatinName = document.getElementById("update-ad-form-latinname")
     const updateFormDescription = document.getElementById("update-ad-form-description")
   
+    //Read the values of the form elements
+    let adIdValue = updateFormAdId.value
     let titleValue = updateFormTitle.value
-    console.log("updateFormTitle.value: ", titleValue);
-    console.log("updateFormLatinName.value: ", updateFormLatinName.value);
-    console.log("updateFormDescription.value: ", updateFormDescription.value);
-    console.log("------------------------------------------------")
-
-    
+    let latinNameValue = updateFormLatinName.value
+    let descriptionValue = updateFormDescription.value
+   
+    //create body
     const body = JSON.stringify({
-        adID: updateFormAdId.value,
-        title: updateFormTitle.value,
-        latinName: updateFormLatinName.value,
-        description: updateFormDescription.value
+        adID: adIdValue,
+        title: titleValue,
+        latinName: latinNameValue,
+        description: descriptionValue
      })
      console.log("body: ", body)
 
-    
+    //Send the data for update 
     const response = await fetch("http://localhost:3000/ads/adUpdate/" + updateFormAdId.value + "/update", {
         method: 'Put',
         headers: new Headers({
