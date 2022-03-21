@@ -1,11 +1,18 @@
 <script> // antingen funkar redirect eller så funkar funktionen med event.preventDefault() men länkar redirectar inte
     document.addEventListener("DOMContentLoaded", function () {
 
-        const links = document.querySelectorAll("nav a")
+        const accoutMenuLink = document.getElementById("offcanvasRight")
+        accoutMenuLink.id = ""
+
+
+
+        /*const links = document.querySelectorAll("nav a")
 
         links.forEach(element => element.addEventListener("click", function (event) {
 
-            for (i = 0; i < links.length; i += 1) { // hide all forms
+            window.event.preventDefault()
+
+            for (i = 0; i < links.length; i += 1) {
 
                 if (element == links[i]) {
                     element.classList.add("active")
@@ -14,21 +21,19 @@
                 }
             }
 
-            //event.preventDefault()
-        }))
+        }))*/
     })
 </script>
 
-<nav class="nav flex-column">
+<nav id="account-menu" class="nav flex-column align-items-stretch mt-5">
 
-    <a class="nav-link active" aria-current="page" href="/ads/myAds">My Ads</a>
-    <a class="nav-link" href="/bids/myBids">My Bids</a>
-    <a class="nav-link" href="/myFavoriteAds">Favorites</a>
-    <a class="nav-link" href="/user/personalData">Personal Data</a>
+    <a class="nav-link link-dark active" aria-current="page" href="/ads/myAds">My Ads</a>
+    <a class="nav-link link-dark" href="/bids/myBids">My Bids</a>
+    <a class="nav-link link-dark" href="/user/personalData">Personal Data</a>
 
-    <div class="col-12 ">
+    <div class="col-12 ms-3 mt-5">
         <form action="/accounts/sign-out" method="POST">
-            <input class="btn btn-light" type="submit" value="sign out">
+            <input class="btn btn-outline-dark" type="submit" value="sign out">
         </form>
     </div>
 </nav>

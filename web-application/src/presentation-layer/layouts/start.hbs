@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lil bitch</title>
+    <title>Plant Swap</title>
 
     <!--- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +21,73 @@
 <body>
     {{> header}}
 
-    <div class="start-body">
-        <main>
-            {{> alertMsg}}
-            {{{body}}}
-        </main>
+    <div class="row">
+
+        <div class="col-12 start-body">
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white">
+                <div class="col-md-5 p-lg-5 mx-auto my-5">
+                    <h1 class="display-4 fw-normal">A place for plant hustlers</h1>
+                    <p class="lead fw-normal">Are you drowning in cuttlings or tired of your old plants?</p>
+                    <p class="lead fw-normal">Then this place is for you.</p>
+                    <a class="btn btn-outline-light" href="/accounts/create">Get started</a>
+                </div>
+                <div class="product-device shadow-sm d-none d-md-block"></div>
+                <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+            </div>
+
+
+            <div class="row mx-5 align-items-center">
+                <div id="start-card" class="col">
+                    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-5">Create an account</h2>
+                            <p class="lead">And an even wittier subheading.</p>
+                            <i class="bi bi-arrow-right" style="font-size:60px;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="start-card" class="col">
+                    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="col-11">
+                            <div class="my-3 p-3">
+                                <h2 class="display-5">Post an ad of your plant</h2>
+                                <h2 class="display-6">OR</h2>
+                                <h2 class="display-5">Explore other's ads
+                                    <a class="link-dark" href="#startPageAds">here.</a>
+                                </h2>
+                            </div>
+                        </div>
+                        <i class="bi bi-arrow-right" style="font-size:60px;"></i>
+                    </div>
+                </div>
+
+                <div id="start-card" class="col">
+                    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 p-3">
+                            <h2 class="display-5">Swap it!</h2>
+                            <p class="lead">And an even wittier subheading.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div id="startPageAds" class="col-12">
+            <main>
+                {{> alertMsg}}
+                {{{body}}}
+            </main>
+        </div>
+
     </div>
 
     <footer>
-        <p>Copyright © The Pigus 2021</p>
+        {{> footer}}
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

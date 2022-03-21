@@ -55,7 +55,7 @@
 									placeholder="message to seller"></textarea>
 							</div>
 
-							<div class="mb-0">
+							<div class="mb-0 mt-4">
 								<label class="form-label">Upload image</label>
 								<input type="file" name="bidImagePath">
 							</div>
@@ -63,7 +63,7 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-light">confirm</button>
+							<button type="submit" class="btn btn-outline-dark">confirm</button>
 						</div>
 					</form>
 
@@ -103,7 +103,7 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="submit" value="Sign in" class="btn btn-light">Sign in</button>
+							<button type="submit" value="Sign in" class="btn btn-outline-dark">Sign in</button>
 						</div>
 					</form>
 
@@ -112,50 +112,6 @@
 		</div>
 		{{/if}}
 		<!-- /bidModal -->
-
-
-
-
-
-		<!-- mailModal -->
-		<div class="modal fade" id="mailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Contact Seller {{User.email}}</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-
-					<div class="modal-body">
-						<form action="/placeBid" method="POST">
-
-							<!-- Lägg till alla nödvändiga forms-->
-							<input type="hidden" name="_csrf" value="{{csrfToken}}">
-
-							<div class="mb-0">
-								<label class="form-label"></label>
-								<input class="form-control" type="text" name="" placeholder="username*">
-							</div>
-
-							<div class="mb-0">
-								<label class="form-label"></label>
-								<input class="form-control" type="password" name="" placeholder="password*">
-							</div>
-
-						</form>
-					</div>
-
-
-					<div class="modal-footer">
-						<button type="submit" value="Place Bid" class="btn btn-light">Send message</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- /mailModal -->
-
 	</div>
 
 
@@ -216,16 +172,8 @@
 
 		<div class="col-2">
 			<div class="d-grid gap-2">
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bidModal">
+				<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#bidModal">
 					Place a bid
-				</button>
-			</div>
-		</div>
-
-		<div class="col-2">
-			<div class="d-grid gap-2">
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mailModal">
-					Contact seller
 				</button>
 			</div>
 		</div>
