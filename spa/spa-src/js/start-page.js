@@ -25,9 +25,15 @@ async function loadStartPage(){
         aImage.appendChild(imgImage)
 		const liIitle = document.createElement('li')
 		const liImage = document.createElement('li')
+        
+       
 		liIitle.appendChild(aTitle)
         liImage.appendChild(aImage)
-		
+
+        liIitle.classList.add("hidden-list")
+        liImage.classList.add("hidden-list")
+    
+
 	    allAdsUl.appendChild(liIitle)
 	    allAdsUl.appendChild(liImage)
     }

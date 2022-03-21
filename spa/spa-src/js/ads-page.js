@@ -26,6 +26,10 @@ async function loadAdsPage(){
         aImage.appendChild(imgImage)
 		const liIitle = document.createElement('li')
 		const liImage = document.createElement('li')
+
+		liIitle.classList.add("hidden-list")
+        liImage.classList.add("hidden-list")
+		
 		liIitle.appendChild(aTitle)
         liImage.appendChild(aImage)
 		
