@@ -31,6 +31,8 @@
 	<script src="/js/account-pages/sign-in-page.js"></script>
 	<script src="/js/account-pages/ad-update-page.js"></script>
 	<script src="/js/account-pages/account-create-page.js"></script>
+	<script src="/js/account-pages/ad-create-page.js"></script>
+	<script src="/js/account-pages/ad-delete-page.js"></script>
 </head>
 
 <body>
@@ -90,87 +92,90 @@
 
 		<!-- Menu Right -->
 
-		<!-- "Account Menu" when logged in  -->      
-		<!--<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-
-			<div class="offcanvas-header">
-				<h5 id="offcanvasRightLabel">Account Menu</h5>
-				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-					aria-label="Close"></button>
-			</div>
-
-			<div class="offcanvas-body text-start">
-
-				<div class="row">
-					<div class="col-6 text-start align-self-end">
-						<h5>Hello friend</h5>
-					</div>
-
-					<div class="col-6 text-end">
-						<form action="/accounts/sign-out" method="POST">
-							<input class="btn btn-light" type="submit" value="sign out">
-						</form>
-					</div>
-				</div>
-
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><a class="nav-link" href="/accounts/myAds">My Ads</a></li>
-					<li class="list-group-item"><a class="nav-link" href="/accounts/myBids">My Bids</a></li>
-					<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a></li>
-				</ul>
-
-			</div>
-
-		</div>-->
-
-		<!-- Account Menu when not logged in -->
+		     
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
-			<div class="offcanvas-header">
-				<p id="offcanvasRightLabel">Sign In</p>
-				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-					aria-label="Close"></button>
-			</div>
+			<!-- "Account Menu" when logged in  --> 
+			<div class="hidden-sign-in-out" id="sign-out-body">
 
-			<div class="offcanvas-body text-start">
-				<ul class="list-group list-group-flush">
+				<div class="offcanvas-header">
+					<h5 id="offcanvasRightLabel">Account Menu</h5>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+						aria-label="Close"></button>
+				</div>
 
-					<li class="list-group-item">
-						<div class="col"> 
-							 The sign-in form
+				<div class="offcanvas-body text-start">
 
-							<form href="/accounts/sign-in" id="sign-in-form">
-							<input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+					<div class="row">
+						<div class="col-6 text-start align-self-end">
+							<h5>Hello friend</h5>
+						</div>
 
-								<div class="mb-0">
-									<label class="form-label"></label>
-									<input class="form-control" type="text" name="username" placeholder="username*" id="sign-in-form-username" value="">
-								</div>
-
-								<div class="mb-0">
-									<label class="form-label"></label>
-									<input class="form-control" type="password" name="password" placeholder="password*" id="sign-in-form-password" value="">
-								</div>
-
-								<div class="d-grid gap-2 mt-3 mb-5">
-									<button type="submit" value="Sign in" class="btn btn-light" onclick=signIn() id="sign-in-form-Button">Sign in</button>
-								</div>
-
+						<div class="col-6 text-end">
+							<form>
+								<input class="btn btn-light" type="submit" value="sign out" id="sign-out-form-button">
 							</form>
-
 						</div>
-					</li>
+					</div>
 
-					<li class="list-group-item">
-						<div class="d-grid gap-2 mt-5">
-							<a class="btn btn-secondary btn-lg" role="button" aria-disabled="true"
-								href="/accounts/create">Create an account</a>
-							<p>I'd like to be a plant ye</p>
-						</div>
-					</li>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><a class="nav-link" href="/accounts/myAds">My Ads</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/accounts/myBids">My Bids</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a></li>
+					</ul>
 
-				</ul>
+				</div>
 			</div>
+			
+			<!-- Account Menu when not logged in -->
+			<div id="sign-in-body">
+				<div class="offcanvas-header">
+					<p id="offcanvasRightLabel">Sign In</p>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+						aria-label="Close"></button>
+				</div>
+
+				<div class="offcanvas-body text-start">
+					<ul class="list-group list-group-flush">
+
+						<li class="list-group-item">
+							<div class="col"> 
+								 The sign-in form
+
+								<form href="/accounts/sign-in" id="sign-in-form">
+								<input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+
+									<div class="mb-0">
+										<label class="form-label"></label>
+										<input class="form-control" type="text" name="username" placeholder="username*" id="sign-in-form-username" value="">
+									</div>
+
+									<div class="mb-0">
+										<label class="form-label"></label>
+										<input class="form-control" type="password" name="password" placeholder="password*" id="sign-in-form-password" value="">
+									</div>
+
+									<div class="d-grid gap-2 mt-3 mb-5">
+										<button type="submit" value="Sign in" class="btn btn-light" onclick=signIn() id="sign-in-form-button">Sign in</button>
+									</div>
+
+								</form>
+
+							</div>
+						</li>
+
+						<li class="list-group-item">
+							<div class="d-grid gap-2 mt-5">
+								<a class="btn btn-secondary btn-lg" role="button" aria-disabled="true"
+									href="/accounts/create">Create an account</a>
+								<p>I'd like to be a plant ye</p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
@@ -233,22 +238,21 @@
 							<div class="col-sm-6 offset-sm-3 text-center">
 								<h1 class="display-3">Create Ad</h1>
 								<div>
-									<form class="form-inline justify-content-center" action="/ads/adCreate"
-										method="POST" encType="multipart/form-data">
+									<form class="form-inline justify-content-center" encType="multipart/form-data">
 										<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="title">
+											<input class="form-control" type="text" name="title" id="create-ad-title">
 											<label class="form-label">Title</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="latinname" >
+											<input class="form-control" type="text" name="latinname" id="create-ad-latinname">
 											<label class="form-label">Latin name</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="description">
+											<input class="form-control" type="text" name="description" id="create-ad-description">
 											<label class="form-label">Description</label>
 										</div>
-										<div class="mb-3">
+										<!--<div class="mb-3">
 											<b>Upload Coverimage:</b>
 											<input  type="file" name="coverImageFile">
 										</div>
@@ -259,9 +263,9 @@
 										<div class="mb-3">
 											<b>Upload image:</b> 
 											<input type="file" name="secondImageFile">
-										</div>
+										</div>-->
 										<div class="mb-3">
-											<input class="btn btn-primary btn" type="submit" value="Create">
+											<input class="btn btn-primary btn" onclick= createAd() type="submit" value="Create">
 										</div>
 									</form>
 								</div>
@@ -275,7 +279,6 @@
 			</div>
 
 			<!-- Update Ad page -->
-
 			<div class="page" id="update-ad-page">
 				<h1>Update Ads</h1>
 
@@ -300,7 +303,7 @@
 							</div>
 						</div>
 						
-					<div class="row offset-sm-2">
+						<div class="row offset-sm-2">
 							<div class="col-3 ms-3">
 								<img class="img-thumbnail" src="" alt="coverImage"
 									name="coverimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-coverimage">
@@ -318,7 +321,40 @@
 						<div class="mb-3 mt-3 col-sm-4 offset-sm-4 text-center">
 							<button type="submit" class="btn btn-primary" onclick= sendUpdate() id="update-ad-update-Button">Update</button>
 						</div>
+						
 					</form>
+
+				</div>
+
+			</div>
+
+			<!-- Delete Ad page-->
+			<div class="page" id="delete-ad-page">
+
+				<div id="delete-ad-container" class="col-12 text-center">
+
+					<div class="row">
+						<div class="col-sm-4 offset-sm-4 text-center">
+							<h1 class="display-3">Delete ad</h1>
+							<div>
+								<p>Are you sure you want to delete the ad <b id="ad-delete-title"></b>? </p>
+							</div>
+							<div>
+								<div class="mb-3 col-12">
+									<div class="row">
+										<div class="col-12">
+											<form >
+												<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+												<input class="btn btn-primary" type="submit" value="Yes" id="ad-delete-button-yes">
+												<input type="submit" class="btn btn-primary m-2" value="No" id="ad-delete-button-no"> 
+											</form>    
+											   
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 				</div>
 

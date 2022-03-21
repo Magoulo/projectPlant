@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 	const anchors = document.querySelectorAll('a')
+	const signInButton = document.getElementById("sign-in-form-button")
+	const signInBody = document.getElementById("sign-in-body")
+	const signOutBody = document.getElementById("sign-out-body")
+	const signOutButton = document.getElementById("sign-out-form-button")
+
+	signInButton.addEventListener('click', function (event) {
+		event.preventDefault()
+
+		signOutBody.classList.remove("hidden-sign-in-out")
+		signInBody.classList.add("hidden-sign-in-out")
+	})
+
+	signOutButton.addEventListener('click', function (event) {
+		event.preventDefault()
+
+		signInBody.classList.remove("hidden-sign-in-out")
+		signOutBody.classList.add("hidden-sign-in-out")
+		showPage("/")
+		sessionStorage.setItem("token", "No token here")
+		console.log("sessionStorage token: ", sessionStorage.token)
+	})
 
 	for (const anchor of anchors) {
 
@@ -9,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			const url = anchor.getAttribute('href')
 
-			history.pushState(null, "", url)
+			setPushState(url)
 
 			hideCurrentPage()
 			showPage(url)
-
+			
 		})
 
 	}
@@ -34,11 +55,10 @@ function hideCurrentPage() {
 }
 
 function showPage(url) {
-
+	
 	let nextPageId
 
 	switch (url) {
-
 		case '/':
 			nextPageId = 'start-page'
 			loadStartPage()
@@ -52,9 +72,10 @@ function showPage(url) {
 			nextPageId = 'ads-page'
 			loadAdsPage()
 			break
-		
+
 		case '/ads/adCreate':
 			nextPageId = 'create-ad-page'
+			
 			break
 
 		case '/accounts/myAds':
@@ -69,8 +90,8 @@ function showPage(url) {
 		case '/accounts/create':
 			nextPageId = 'create-account-page'
 			break
-		
-		case '/accounts/personalData' :
+
+		case '/accounts/personalData':
 			nextPageId = 'personal-data-page'
 			loadPersonalData(1)
 			break
@@ -78,34 +99,39 @@ function showPage(url) {
 		case '/accounts/sign-in':
 			nextPageId = 'start-page'
 			//signIn()
-			break	
+			break
 		default:
-			if (url.startsWith("/ads/adUpdate/")) { 
-			
+			if (url.startsWith("/ads/adUpdate/")) {
+
 				const [empty, ads, adUpdate, id] = url.split("/")
 				nextPageId = 'update-ad-page'
 				loadAdUpdatePage(id)
 				break
 			}
+			if (url.startsWith("/ads/adDelete/")) {
 
-			if (url.startsWith("/ads/")) { 
-				
+				const [empty, ads, aDelete, id] = url.split("/")
+				nextPageId = 'delete-ad-page'
+				loadAdDeletePage(id)
+				break
+			}
+
+			if (url.startsWith("/ads/")) {
+
 				const [empty, ads, id] = url.split("/")
 				console.log(id);
-
 				nextPageId = 'ad-page'
 				loadAdPage(id)
 			} else {
-				
+
 				nextPageId = 'not-found-page'
-			}
-
+			}		
 	}
-
+	
 	document.getElementById(nextPageId).classList.add('current-page')
 
 }
 
-function showLogin(url){
-	//TODO make a function like showPage function that displays the right state of the login part (login/logout)
+function setPushState(url){
+	history.pushState(null, "", url)
 }

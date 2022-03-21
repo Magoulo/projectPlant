@@ -48,6 +48,10 @@ html {
 	.hidden-list {
 		list-style: none
 	}
+
+	.hidden-sign-in-out {
+		display: none;
+	}
 	
 	.img-thumbnail {
 		float: center;

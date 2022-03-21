@@ -129,8 +129,9 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.delete("/adDelete/:adID/delete", function (request, response) {
+        console.log("inne i delete adDelete")
         const adID = request.params.adID
-
+      
         adManager.deleteAd(adID, function (errors) {
             if (errors.length !== 0) {
                 response.status(400).json(errors)
@@ -141,14 +142,15 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.post("/adCreate", function (request, response) {
+    router.put("/adCreate", function (request, response) {
+        console.log("inne i adCreate i backend")
 
-        const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("Bearer ".length)
+        const authorizationHeader = request.header("Authorization")      
+        const accessToken = authorizationHeader.substring('bearer '.length)
 
-        const coverImageFile = request.files.coverImageFile
-        const firstImageFile = request.files.firstImageFile
-        const secondImageFile = request.files.secondImageFile
+        const coverImageFile = "no-image.png"
+        const firstImageFile = "no-image.png"
+        const secondImageFile = "no-image.png"
 
         const images = [coverImageFile, firstImageFile, secondImageFile]
         const errors = []
@@ -161,7 +163,7 @@ module.exports = function ({ adManager, userManager }) {
                 response.status(401).end()
 
             } else {
-                for (var i = 0; i < images.length; i++) {
+            /*    for (var i = 0; i < images.length; i++) {
 
                     const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
 
@@ -171,14 +173,14 @@ module.exports = function ({ adManager, userManager }) {
                             response.status(418).json(errors)
                         }
                     })
-                }
+                }*/
 
                 adManager.createAd(ad, function (error, Ad) {
 
                     if (error.length !== 0) {
                         response.status(400).json(errors)
                     } else {
-                        const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
+                        const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile, firstImagePath: firstImageFile, secondImagePath: secondImageFile }
 
                         adManager.createImageBundle(imageBundle, function (error, ImageBundle) {
                             if (error.length !== 0) {

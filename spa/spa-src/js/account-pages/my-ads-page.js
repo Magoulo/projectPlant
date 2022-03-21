@@ -20,10 +20,18 @@ async function loadMyAdsPage() {
     //Create button
     const aCreate = document.createElement("a")
     aCreate.innerText = "Create Ad"
-    aCreate.classList.add("btn")
-    aCreate.classList.add("btn-primary")
-    aCreate.classList.add("m-3")
-    aCreate.setAttribute('href',"/ads/adCreate")
+    aCreate.classList.add("btn","btn-primary","m-3")
+    aCreate.setAttribute('href', "/ads/adCreate")
+
+    //Eventlistener for create button
+    aCreate.addEventListener('click', function (event) {
+        event.preventDefault()
+
+        const url = event.target.getAttribute("href")
+        hideCurrentPage()
+        showPage(url)
+        setPushState(url)
+    })
 
     //Append Create button to Div
     myAdsDiv.appendChild(aCreate)
@@ -44,31 +52,46 @@ async function loadMyAdsPage() {
             //Ad Image
             const imgImage = document.createElement('img')
             imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImagePath)
-            imgImage.classList.add("img-thumbnail")  
+            imgImage.classList.add("img-thumbnail")
             const liImage = document.createElement('li')
             liImage.classList.add("hidden-list")
             liImage.appendChild(imgImage)
 
-            //Append title and Imge to Ul
+            //Append title and Image to Ul
             myAdsUl.appendChild(liIitle)
             myAdsUl.appendChild(liImage)
 
             //update button
             const aUpdate = document.createElement('a')
             aUpdate.innerText = "Update"
-            aUpdate.classList.add("btn")
-            aUpdate.classList.add("btn-primary")
-            aUpdate.classList.add("m-2")
-            aUpdate.setAttribute('href',"/ads/adUpdate/" + ad.id+ "/update")
-            console.log("anchor Update: ", aUpdate)
+            aUpdate.classList.add("btn","btn-primary","m-2")
+            aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id + "/update")
+
+            //Eventlistener for update button
+            aUpdate.addEventListener('click', function (event) {
+                event.preventDefault()
+
+                const url = event.target.getAttribute("href")
+                hideCurrentPage()
+                showPage(url)
+                setPushState(url)
+            })
 
             //delete button
             const aDelete = document.createElement('a')
             aDelete.innerText = "Delete"
-            aDelete.classList.add("btn")
-            aDelete.classList.add("btn-primary")
-            aDelete.classList.add("m-2")
-            aDelete.setAttribute('href',"/ads/adDelete/" + ad.id + "/delete")
+            aDelete.classList.add("btn","btn-primary","m-2")
+            aDelete.setAttribute('href', "/ads/adDelete/" + ad.id + "/delete")
+
+            //Eventlistener for delete button
+            aDelete.addEventListener('click', function (event) {
+                event.preventDefault()
+
+                const url = event.target.getAttribute("href")
+                hideCurrentPage()
+                showPage(url)
+                setPushState(url)
+            })
 
             //Append Update and Delete buttons to Ul
             myAdsUl.appendChild(aUpdate)
@@ -77,6 +100,23 @@ async function loadMyAdsPage() {
             //Append Ul to Div
             myAdsDiv.appendChild(myAdsUl)
 
+            //EventListeners for update and delete buttons
+            aUpdate.addEventListener('click', function (event) {
+                event.preventDefault()
+
+                const url = aUpdate.getAttribute("href")
+                hideCurrentPage()
+                showPage(url)
+                setPushState(url)
+            })
+            aDelete.addEventListener('click', function (event) {
+                event.preventDefault()
+
+                const url = aDelete.getAttribute("href")
+                hideCurrentPage()
+                showPage(url)
+                setPushState(url)
+            })
         }
     }
 

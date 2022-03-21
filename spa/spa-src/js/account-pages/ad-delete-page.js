@@ -1,39 +1,46 @@
-async function loadAdUpdatePage(id){
+async function loadAdDeletePage(id){
 
     //Fetch ad from REST api
-    const response = await fetch("http://localhost:3000/ads/adUpdate/"+ id)
+    const response = await fetch("http://localhost:3000/ads/adDelete/"+ id)
     const ad = await response.json()
     console.log("fetched ad: ", ad)
 
-    //Get all elements in update form
-    const updateFormTitle = document.getElementById("update-ad-form-title")
-    const updateFormLatinName = document.getElementById("update-ad-form-latinname")
-    const updateFormDescription = document.getElementById("update-ad-form-description")
-    const updateFormAdId = document.getElementById("update-ad-form-ad-id")
-    const coverImage = document.getElementById("update-ad-form-coverimage")
-    const firstImage = document.getElementById("update-ad-form-firstimage")
-    const secondImage = document.getElementById("update-ad-form-secondimage")
-    const updateButton = document.getElementById("update-ad-update-Button")
+    //Get all elements in delete form
+    const deleteAdTitle = document.getElementById("ad-delete-title")
+    const yesButton = document.getElementById("ad-delete-button-yes")
+    const noButton = document.getElementById("ad-delete-button-no")
 
-    //Asign the element data from the fetched ad
-    updateFormAdId.value = id
-    coverImage.src = "/images/" + ad.ImageBundle.coverImagePath
-    firstImage.src = "/images/" + ad.ImageBundle.firstImagePath
-    secondImage.src = "/images/" + ad.ImageBundle.secondImagePath
-    updateFormTitle.value = ad.title 
-    updateFormLatinName.value = ad.latinName  
-    updateFormDescription.value = ad.description   
+    //Assign the element data from the fetched ad
+    deleteAdTitle.innerText = ad.title
+   
 
-    updateButton.addEventListener('click', function (event) {
+    yesButton.addEventListener('click', function (event) {
         event.preventDefault()
 
-        const url = "/ads/adUpdate/" + ad.id + "/update"
+         //Send the data for delete
+         const response = fetch("http://localhost:3000/ads/adDelete/" + ad.id + "/delete", {
+            method: 'Delete',
+            headers: new Headers({
+                "Content-Type": "application/json"
+            }),
+        })
+
+        const url = "/accounts/myAds"
+        hideCurrentPage()
+        showPage(url)
+        setPushState(url)
+    })
+
+    noButton.addEventListener('click', function (event) {
+        event.preventDefault()
+
+        const url = "/accounts/myAds"
         hideCurrentPage()
         showPage(url)
         setPushState(url)
     })
 }
-
+/*
 async function sendUpdate(){
   
     //Get all elements in update form
@@ -70,4 +77,4 @@ async function sendUpdate(){
     //const updateStatus = await response.json()
     //console.log("updateStatus: ", updateStatus)
 
-}
+}*/
