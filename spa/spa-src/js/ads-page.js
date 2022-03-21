@@ -21,6 +21,7 @@ async function loadAdsPage(){
 
         const imgImage = document.createElement('img')
         imgImage.setAttribute('src',"/images/"+ad.ImageBundle.coverImagePath)
+		imgImage.classList.add("img-thumbnail")
         
         aImage.appendChild(imgImage)
 		const liIitle = document.createElement('li')
