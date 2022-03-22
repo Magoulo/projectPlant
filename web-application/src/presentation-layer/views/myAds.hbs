@@ -2,7 +2,6 @@
 <!-- tab navigation -->
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
-
 		<button class="nav-link active" id="nav-manage-ads-tab" data-bs-toggle="tab" data-bs-target="#nav-manage-ads"
 			type="button" role="tab" aria-controls="nav-manage-ads" aria-selected="true">
 			Manage My Ads
@@ -17,7 +16,6 @@
 			type="button" role="tab" aria-controls="nav-closed-ads" aria-selected="false">
 			My Closed Ads
 		</button>
-
 	</div>
 </nav>
 
@@ -270,43 +268,46 @@
 		<div class="row justify-content-start">
 			{{#if adAccepted}}
 			{{#each adAccepted}}
-			<div>
-				<div class="card card-body">
-					<div class="row">
 
-						<div class="col-2 text-center">
-							<img src="/images/{{ImageBundle.coverImagePath}}" alt="{{imageBundleID}}"
-								class="flowerImage" style="width: 200px; height: 200px">
+			<div class="card">
+				<div class="card-body">
+
+					<div class="row justify-content-between">
+
+						<div id="card-element" class="col-auto text-center">
+							<img class="img-card" src="/images/{{ImageBundle.coverImagePath}}">
 						</div>
 
-						<div class="col-8 text-start align-self-center">
+						<div id="card-element" class="col-6 text-start align-self-center">
 							<h1>{{title}}</h1>
 						</div>
 
-						<div class="col-2 text-center align-self-end">
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-								data-bs-target="#id{{id}}ad" aria-expanded="false" aria-controls="collapseExample">
-								Show Accepted offer <i class="bi bi-caret-down"></i>
+						<div class="col-auto text-center align-self-end">
+							<button id="card-element" class="btn btn-outline-dark my-2" type="button"
+								data-bs-toggle="collapse" data-bs-target="#id{{id}}ad" aria-expanded="false"
+								aria-controls="collapseExample">
+								Show offers <i class="bi bi-caret-down"></i>
 							</button>
 						</div>
 
 					</div>
+
 				</div>
 			</div>
+
 
 			<div class="collapse" id="id{{id}}ad">
 				<div class="card card-body">
 
-					<div class="row">
-						<div class="col-8 text start">
-							<h3>{{Bids.User.firstName}} {{Bids.User.lastName}}</h3>
-							<p>{{Bids.message}}</p>
+					<div class="row justify-content-between mb-2">
+						<div class="col-6 text-start align-self-start">
+							<h3>Winning bid by {{Bids.User.firstName}} {{Bids.User.lastName}}</h3>
+							<p>Contact for swap: {{Bids.User.email}}</p>
+							<p class="mt-2">{{Bids.message}}</p>
 						</div>
-						<div class="col-4 text-center">
-							<div class="col-12">
-								<img class="flowerImage" src="/images/{{Bids.imagePath}}" alt="imageToID{{adID}}"
-									style="width: 400px; height: 400px">
-							</div>
+
+						<div class="col-auto text-center align-self-end">
+							<img class="img-thumbnail" src="/images/{{Bids.imagePath}}" alt="imageToID{{adID}}">
 						</div>
 					</div>
 

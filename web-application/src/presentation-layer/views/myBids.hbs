@@ -52,9 +52,8 @@
 				<div class="card-body">
 					<div class="row justify-content-between">
 
-						<div class="col-auto text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
-								class="flowerImage" style="width: 200px; height: 200px">
+						<div id="card-element" class="col-auto text-center">
+							<img class="img-card" src="/images/{{Ad.ImageBundle.coverImagePath}}">
 						</div>
 
 						<div id="card-element" class="col-6 text-start align-self-center">
@@ -85,20 +84,18 @@
 
 						<div class="col-4 text-center">
 							<div class="col-12">
-								<img src="/images/{{imagePath}}" class="flowerImage"
-									style="width: 400px; height: 400px">
+								<img src="/images/{{imagePath}}" class="img-card">
 							</div>
-
-							<form action="/bids/{{id}}/delete" method="POST">
-								<input type="hidden" name="bidID" value="{{id}}">
-								<div class="col-12">
-									<button type="submit" class="btn btn-outline-danger">
-										Delete
-									</button>
-								</div>
-							</form>
-
 						</div>
+					</div>
+
+					<div class="col-12 text-center">
+						<form action="/bids/{{id}}/delete" method="POST">
+							<input type="hidden" name="bidID" value="{{id}}">
+							<button type="submit" class="btn btn-outline-danger">
+								Delete
+							</button>
+						</form>
 					</div>
 
 				</div>
@@ -132,24 +129,23 @@
 
 			<div class="card">
 				<div class="card-body">
-					<div class="row">
+					<div class="row justify-content-between">
 
-						<div class="col-2 text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
-								class="flowerImage" style="width: 200px; height: 200px">
+						<div id="card-element" class="col-auto text-center">
+							<img class="img-card" src="/images/{{Ad.ImageBundle.coverImagePath}}">
 						</div>
 
-						<div class="col-8 text-start align-self-center">
+						<div id="card-element" class="col-6 text-start align-self-center">
 							<h1>{{Ad.title}}</h1>
 							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
-						<div class="col-2 text-center align-self-end">
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+						<div id="card-element" class="col-auto text-center align-self-end">
+							<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse"
 								data-bs-target="#bid{{bidID}}Info" aria-expanded="false"
 								aria-controls="collapseExample">
-								my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
+								Show my offer <i class="bi bi-caret-down"></i>
 							</button>
 						</div>
 
@@ -160,17 +156,19 @@
 
 			<div class="collapse" id="bid{{bidID}}Info">
 				<div class="card card-body">
-
 					<div class="row">
+
 						<div class="col-8 text-start">
 							<p>{{message}}</p>
 						</div>
 
 						<div class="col-4 text-center">
-							<img src="/images/{{imagePath}}" class="flowerImage" style="width: 400px; height: 400px">
+							<div class="col-12">
+								<img src="/images/{{imagePath}}" class="img-card">
+							</div>
 						</div>
-					</div>
 
+					</div>
 				</div>
 			</div>
 
@@ -201,23 +199,22 @@
 
 			<div class="card">
 				<div class="card-body">
-					<div class="row">
+					<div class="row justify-content-between">
 
-						<div class="col-2 text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
-								class="flowerImage" style="width: 200px; height: 200px">
+						<div id="card-element" class="col-auto text-center">
+							<img class="img-card" src="/images/{{Ad.ImageBundle.coverImagePath}}">
 						</div>
 
-						<div class="col-8 text-start align-self-center">
+						<div id="card-element" class="col-6 text-start align-self-center">
 							<h1>{{Ad.title}}</h1>
 							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
-						<div class="col-2 text-center align-self-end">
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+						<div id="card-element" class="col-auto text-center align-self-end">
+							<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse"
 								data-bs-target="#bid{{id}}Info" aria-expanded="false" aria-controls="collapseExample">
-								my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
+								my offer <i class="bi bi-caret-down"></i>
 							</button>
 						</div>
 
@@ -239,18 +236,16 @@
 								<img src="/images/{{imagePath}}" class="flowerImage"
 									style="width: 400px; height: 400px">
 							</div>
-
-							<div class="col-12">
-								<form action="/bids/{{id}}/delete" method="POST">
-									<input type="hidden" name="bidID" value="{{id}}">
-									<div class="col-12">
-										<button type="submit" class="btn btn-primary">
-											Delete
-										</button>
-									</div>
-								</form>
-							</div>
 						</div>
+					</div>
+
+					<div class="col-12 text-center">
+						<form action="/bids/{{id}}/delete" method="POST">
+							<input type="hidden" name="bidID" value="{{id}}">
+							<button type="submit" class="btn btn-outline-danger">
+								Delete
+							</button>
+						</form>
 					</div>
 
 				</div>

@@ -16,25 +16,18 @@
 
     {{#if Ad}}
 
-    <div class="row">
-        <div class="col-sm-4 offset-sm-4 text-center">
-            <h1 class="display-3">Delete ad</h1>
-            <div>
-                <p>Are you sure you want to delete the ad <b>"{{Ad.title}}"</b>? </p>
+    <div class="col-12 text-center align-middle mt-5">
+        <h5>Are you sure you want to delete the ad <b>"{{Ad.title}}"</b>? </h5>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <form action="/ads/adDelete/{{Ad.id}}/delete" method="POST">
+                    <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+                    <input class="btn btn-outline-danger" type="submit" value="Yes">
+                </form>
             </div>
-            <div>
-                <div class="mb-3 col-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <form action="/ads/adDelete/{{Ad.id}}/delete" method="POST">
-                                <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-                                <input class="btn btn-primary" type="submit" value="Yes">
-                                
-                            </form>    
-                                       <a href="/ads/myAds"> <button type="submit" class="btn btn-primary m-2">No</button></a>    
-                        </div>
-                    </div>
-                </div>
+            <div class="col-auto">
+                <a href="/ads/myAds"> <button type="submit" class="btn btn-outline-dark">No</button></a>
             </div>
         </div>
     </div>

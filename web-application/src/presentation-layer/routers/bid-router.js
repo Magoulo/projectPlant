@@ -137,7 +137,7 @@ module.exports = function ({ adManager, bidManager }) {
 
             imagePath.mv(uploadPath, function (error) {
 
-                if (error.length) {
+                if (error) {
                     response.render('adCreate.hbs', msgError = "Couldn't upload picture")
                 } else {
                     console.log("file uploaded successfully")
