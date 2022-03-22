@@ -1,4 +1,5 @@
 const { models } = require('./dbSequelize')
+const { Op } = require("sequelize");
 
 module.exports = function ({ }) {
 	return {
@@ -160,10 +161,10 @@ module.exports = function ({ }) {
 			models.Ad.findAll({
 				raw: true,
 				nest: true,
-				where: {
-					title: { [Op.like]: '%$' + searchInput + '%' },
-					$or: [{
-						latinName: { [Op.like]: '%$' + searchInput + '%' }
+				where: { [Op.or]: [{
+					title: { [Op.iLike]: '%' + searchInput + '%' } },
+					{
+						latinName:  { [Op.iLike]: '%' + searchInput + '%' }
 					}]
 				},
 				include: [{
