@@ -1,6 +1,3 @@
-body{
-	background-color: silver;
-}
 
 .page{
 	display: none;
@@ -48,18 +45,36 @@ html {
 	  margin-top: 115px;
 	}
 	
-	
+	.hidden-list {
+		list-style: none;
+	}
+
+	.hidden-sign-in-out {
+		display: none;
+	}
+	.loader-spinner{
+		margin: 20px;
+	}
 	
 	.img-thumbnail {
 		float: center;
 		width:  400px;
 		height: 400px;
-		
+		list-style: none;
 	}
 	
 	.image-hight {
 	  height:700px;
-	  object-fit: cover;
+	 
+	}
+
+	.divider-style {
+		margin-left: 40%;
+		width:20%;
+		align-content: center;
+		margin-top: 50px;
+		margin-bottom: 25px;
+	
 	}
 	
 	.bi-list::before {

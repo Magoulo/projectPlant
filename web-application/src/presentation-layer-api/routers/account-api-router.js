@@ -14,63 +14,59 @@ module.exports = function ({ accountManager, userManager }) {
 	*/
 
 	router.put("/create", function (request, response) {
+		console.log("inne i create account i backend")
 
 		const userName = request.body.username
 		const password = request.body.password
 		const repeatedPassword = request.body.repeatpassword
-		const firstname = request.body.firstname
-		const lastname = request.body.lastname
+		const firstName = request.body.firstname
+		const lastName = request.body.lastname
 		const email = request.body.email
 		const phoneNumber = request.body.phonenumber
 		const city = request.body.city
 
-		const account = { username: userName, passwordHash: password }
-		const errors = []
+		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-		if (password === repeatedPassword) {
-			accountManager.createAccount(account, function (error, userAccount) {
+		accountManager.createAccount(account, function (error, userAccount) {
 
-				if (error) {
-					errors.push("Internal server error")
-					response.status(500).json(error)
-				} else {
-					console.log("Account created")
-					console.log("userAccountID: ", userAccount.id)
+			if (error.length !== 0) {
+				response.status(500).json(error)
+			} else {
+				console.log("Account created")
+				console.log("userAccountID: ", userAccount.id)
 
-					const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
+				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-					userManager.createUser(user, function (error, results) {
+				userManager.createUser(user, function (error, results) {
 
-						if (error.length !== 0) {
-							errors.push("Internal server error")
+					if (error.length !== 0) {
+						console.log("error in creating user")
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
+							if (error) {
+								response.status(500).json(error)
+							} else {
+								response.status(418).end()
+							}
+						})
+					} else {
+						console.log("account and user created succesfully")
+						response.status(201)
+					}
+				})
+			}
+		})
 
-							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-								if (error) {
-									errors.push("Couldn't delete the account")
-									response.status(500).json(error)
-								} else {
-									response.status(418).json(error) //? 
-								}
-							})
-						} else {
-							console.log("account and user created succesfully")
-							response.status(201)
-						}
-					})
-				}
-			})
-		} else {
-			errors.push("Repeat the same password")
-			response.status(401).json(errors)
-		}
 	})
 
 
 	router.post("/sign-in", function (request, response) {
+		console.log("inne i sign-in i backenden")
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
+
+		console.log("username, password: ", username, password)
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
@@ -83,12 +79,15 @@ module.exports = function ({ accountManager, userManager }) {
 					}
 
 					jwt.sign(payload, SECRET, function (error, token) {
+						console.log("the token in backend:", token)
+
 						if (error) {
 							response.status(401)
 						} else {
-							response.status(200).json({
-								"access_token": token
-							})
+
+							response.status(200).json(
+								token
+							)
 						}
 					})
 				} else {

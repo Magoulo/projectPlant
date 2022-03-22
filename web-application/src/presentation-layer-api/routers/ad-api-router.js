@@ -28,9 +28,9 @@ module.exports = function ({ adManager, userManager }) {
 
     router.get("/myAds", function (request, response) {
 
-        const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("Bearer ".length)
-
+        const authorizationHeader = request.header("Authorization")      
+        const accessToken = authorizationHeader.substring('bearer '.length)
+   
         var allAds = []
         var allBids = []
 
@@ -78,12 +78,15 @@ module.exports = function ({ adManager, userManager }) {
 
     router.put('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
 
+        console.log("inne PUT i adUpdate i backenden")
         const adID = request.params.adID
         const title = request.body.title
-        const latinName = request.body.latinname
+        const latinName = request.body.latinName
         const description = request.body.description
 
-        adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
+        const Ad = {id: adID, title: title, latinName: latinName, description: description}
+
+        adManager.updateAdByAdID(Ad, function (error) {
             if (error.length !== 0) {
                 response.status(400).json(error)
 
@@ -95,6 +98,7 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.get("/adUpdate/:adID", function (request, response) {
+        console.log("inne i GET update i backend")
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (error, Ad) {
@@ -121,8 +125,9 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.delete("/adDelete/:adID/delete", function (request, response) {
+        console.log("inne i delete adDelete")
         const adID = request.params.adID
-
+      
         adManager.deleteAd(adID, function (errors) {
             if (errors.length !== 0) {
                 response.status(400).json(errors)
@@ -133,14 +138,15 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.post("/adCreate", function (request, response) {
+    router.put("/adCreate", function (request, response) {
+        console.log("inne i adCreate i backend")
 
-        const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("Bearer ".length)
+        const authorizationHeader = request.header("Authorization")      
+        const accessToken = authorizationHeader.substring('bearer '.length)
 
-        const coverImageFile = request.files.coverImageFile
-        const firstImageFile = request.files.firstImageFile
-        const secondImageFile = request.files.secondImageFile
+        const coverImageFile = "no-image.png"
+        const firstImageFile = "no-image.png"
+        const secondImageFile = "no-image.png"
 
         const images = [coverImageFile, firstImageFile, secondImageFile]
         const errors = []
@@ -153,7 +159,7 @@ module.exports = function ({ adManager, userManager }) {
                 response.status(401).end()
 
             } else {
-                for (var i = 0; i < images.length; i++) {
+            /*    for (var i = 0; i < images.length; i++) {
 
                     const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
 
@@ -163,19 +169,19 @@ module.exports = function ({ adManager, userManager }) {
                             response.status(418).json(errors)
                         }
                     })
-                }
+                }*/
 
                 adManager.createAd(ad, function (error, Ad) {
 
                     if (error.length !== 0) {
-                        response.status(400).json(errors)
+                        response.status(400).json(error)
                     } else {
-                        const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
+                        const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile, firstImagePath: firstImageFile, secondImagePath: secondImageFile }
 
                         adManager.createImageBundle(imageBundle, function (error, ImageBundle) {
                             if (error.length !== 0) {
                                 errors.push("error in create Imagebundle")
-                                response.status(400).json(errors)
+                                response.status(400).json(error)
                             } else {
                                 console.log("new imageBundle created with the iD: ", ImageBundle.id)
                                 response.status(201).json({

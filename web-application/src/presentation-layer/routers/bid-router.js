@@ -11,10 +11,8 @@ module.exports = function ({ adManager, bidManager }) {
         var bidDeclined = []
 
         bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
-            console.log("Bid-------------: ", Bid)
 
             for (index in Bid) {
-                console.log("Bid[index].status:", Bid[index].status)
 
                 if (Bid[index].status == "Accepted") {
                     bidAccepted.push(Bid[index])
@@ -50,7 +48,7 @@ module.exports = function ({ adManager, bidManager }) {
         if (request.params.status == "Accepted") {
             bidManager.setAllBidsToDeclined(adID, function (error) {
 
-                if (error) {
+                if (error.length !==0) {
                     const model = {
                         error: error,
                         session: request.session,
@@ -62,7 +60,8 @@ module.exports = function ({ adManager, bidManager }) {
                     console.log("All bids set to declined")
 
                     adManager.closeAd(adID, function (error) {
-                        if (error) {
+                        if (error.length !==0) {
+                            console.log("error 2")
                             const model = {
                                 error: error,
                                 session: request.session
@@ -78,7 +77,8 @@ module.exports = function ({ adManager, bidManager }) {
         }
 
         bidManager.updateBidByBidID(bid, function (error) {
-            if (error) {
+            if (error.length !==0) {
+
                 const model = {
                     error: error,
                     session: request.session,

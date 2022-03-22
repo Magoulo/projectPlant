@@ -1,33 +1,68 @@
-async function loadAdsPage(){
+async function loadAdsPage() {
+	console.log("token from global: ", sessionStorage.token)
 
 	const response = await fetch("http://localhost:3000/ads")
-	
+
 	// TODO: Check status code and act accordingly!
-	
+
 	const ads = await response.json()
-	
 	const allAdsUl = document.getElementById('all-plant-ads')
-	
 	allAdsUl.innerText = ""
-	
-	for(const ad of ads){
-        const aTitle = document.createElement('a')
-        aTitle.innerText = ad.title
-        aTitle.setAttribute('href',"/ads/"+ad.id)
 
-        const aImage = document.createElement('a')
-        aImage.setAttribute('href',"/ads/"+ad.id)
+	for (const ad of ads) {
 
-        const imgImage = document.createElement('img')
-        imgImage.setAttribute('src',"/web-application/src/presentation-layer/public/images"+ad.ImageBundle.coverImagePath)
-        
-        aImage.appendChild(imgImage)
+		//Ad title
+		const h3title = document.createElement('h3')
+		const aTitle = document.createElement('a')
 
-		const li = document.createElement('li')
-		li.appendChild(aTitle)
-        li.appendChild(aImage)
-		
-		allAdsUl.appendChild(li)
-		
+		h3title.innerText = ad.title
+		aTitle.appendChild(h3title)
+		aTitle.setAttribute('href', "/ads/" + ad.id)
+
+		//Ad image
+		const aImage = document.createElement('a')
+		aImage.setAttribute('href', "/ads/" + ad.id)
+
+		const imgImage = document.createElement('img')
+		imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImagePath)
+		imgImage.classList.add("img-thumbnail")
+
+		aImage.append(imgImage)
+
+		//Createing list elements and assigning class
+		const liIitle = document.createElement('li')
+		const liImage = document.createElement('li')
+		const divider = document.createElement('hr')
+		divider.classList.add("divider-style")
+
+		liIitle.classList.add("hidden-list")
+		liImage.classList.add("hidden-list")
+
+		//Appending elements to parent
+		liIitle.appendChild(aTitle)
+		liImage.appendChild(aImage)
+
+		allAdsUl.appendChild(liIitle)
+		allAdsUl.appendChild(liImage)
+		allAdsUl.appendChild(divider)
+
+		//EventListeners for title and image
+		aTitle.addEventListener('click', function (event) {
+			event.preventDefault()
+
+			const url = aTitle.getAttribute("href")
+			hideCurrentPage()
+			showPage(url)
+			setPushState(url)
+		})
+		aImage.addEventListener('click', function (event) {
+			event.preventDefault()
+
+			const url = aImage.getAttribute("href")
+			hideCurrentPage()
+			showPage(url)
+			setPushState(url)
+		})
 	}
+		
 }

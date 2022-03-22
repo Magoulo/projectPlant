@@ -6,9 +6,9 @@ module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-
+        console.log("inne i personalData i backend")
         const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("Bearer ".length)
+        const accessToken = authorizationHeader.substring("bearer ".length)
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
             if (error) {
@@ -17,11 +17,11 @@ module.exports = function ({ userManager }) {
             } else {
                 userManager.getUserByUserID(payload.userID, function (errors, User) {
 
-                    if(errors){
+                    if (errors.length !== 0) {
                         response.status(400).json(errors)
                     } else {
                         response.status(200).json(User)
-                    }            
+                    }
                 })
 
             }
@@ -37,23 +37,17 @@ module.exports = function ({ userManager }) {
         const phoneNumber = request.body.phonenumber
         const city = request.body.city
 
-        const errors = [] //validators.getDonValidationErrors(Name, Description)
+        const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-        if (errors.length == 0) {
+        userManager.updateUserByUserID(User, function (error) {
 
-            userManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
+            if (error.length !==0) {
+                response.status(500).json(error)
+            } else {
+                response.status(204).end()
+            }
+        })
 
-                if (error) {
-                    errors.push("Internal server error")
-                    response.status(500)
-                } else {
-                    response.status(204).end()
-                }
-            })
-
-        } else {
-            response.status(418).json(errors)
-        }
     })
 
     return router

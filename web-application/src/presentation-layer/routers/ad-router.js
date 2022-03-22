@@ -87,7 +87,7 @@ module.exports = function ({ adManager, userManager }) {
             } else {
                 allBids = adOffers
                 var adAccepted = []
-
+              
                 for (const ad of allAds) {
                     ad.bids = []
 
@@ -101,7 +101,8 @@ module.exports = function ({ adManager, userManager }) {
                         }
                     }
                 }
-                model.adAccepted = adAccepted
+              
+                model.adAccepted = adAccepted         
 
                 response.render("myAds.hbs", model)
             }
@@ -189,42 +190,7 @@ module.exports = function ({ adManager, userManager }) {
             }
         })
     })
-    /* Tror inte denna används!
-        router.get('/myAds/:userID', function (request, response) {
-            console.log("/myAds/:userID------------------------------------------------------------------------------------------------")
-            const userID = request.params.userID
-    
-            adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
-                
-                var adAccepted = []
-                var adPending = []
-                var adDeclined = []
-    
-                for (index in ad) {
-                    if (ad[index].status == "Accepted") {
-                        adAccepted.push(ad[index])
-                    }
-    
-                    if (ad[index].status == "Pending") {
-                        adPending.push(ad[index])
-                    }
-    
-                    if (ad[index].status == "Declined") {
-                        adDeclined.push(ad[index])
-                    }
-                }
-    
-                const model = {
-                    errors: errors,
-                    adAccepted,
-                    adPending,
-                    adDeclined,
-                    layout: 'account.hbs'
-                }
-    
-                response.render("myAdBids.hbs", model)
-            })
-        })*/
+
 
     router.get("/adCreate", function (request, response) {
 
@@ -335,6 +301,8 @@ module.exports = function ({ adManager, userManager }) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
+            console.log("Ad-----------------------------------",Ad)
+            console.log("Ad.ImageBundle.coverImagePath: ", Ad.ImageBundle.coverImagePath)
 
             const model = {
                 errors: errors,
