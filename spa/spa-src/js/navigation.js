@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 
 	signOutButton.addEventListener('click', function (event) {
-		event.preventDefault()
-
+		
 		signInBody.classList.remove("hidden-sign-in-out")
 		signOutBody.classList.add("hidden-sign-in-out")
 		showPage("/")

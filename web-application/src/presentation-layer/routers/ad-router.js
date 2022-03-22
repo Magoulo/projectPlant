@@ -205,42 +205,7 @@ module.exports = function ({ adManager, userManager }) {
             }
         })
     })
-    /* Tror inte denna används!
-        router.get('/myAds/:userID', function (request, response) {
-            console.log("/myAds/:userID------------------------------------------------------------------------------------------------")
-            const userID = request.params.userID
-    
-            adManager.getAllAdsBidsUsersByUserID(userID, function (errors, ad) {
-                
-                var adAccepted = []
-                var adPending = []
-                var adDeclined = []
-    
-                for (index in ad) {
-                    if (ad[index].status == "Accepted") {
-                        adAccepted.push(ad[index])
-                    }
-    
-                    if (ad[index].status == "Pending") {
-                        adPending.push(ad[index])
-                    }
-    
-                    if (ad[index].status == "Declined") {
-                        adDeclined.push(ad[index])
-                    }
-                }
-    
-                const model = {
-                    errors: errors,
-                    adAccepted,
-                    adPending,
-                    adDeclined,
-                    layout: 'account.hbs'
-                }
-    
-                response.render("myAdBids.hbs", model)
-            })
-        })*/
+
 
     router.get("/adCreate", function (request, response) {
 

@@ -83,14 +83,10 @@ module.exports = function ({ adManager, userManager }) {
         const title = request.body.title
         const latinName = request.body.latinName
         const description = request.body.description
-        console.log("adID: ", adID)
-        console.log("title: ", title)
-        console.log("latinName: ", latinName)
-        console.log("description: ", description)
 
+        const Ad = {id: adID, title: title, latinName: latinName, description: description}
 
-
-        adManager.updateAdByAdID(adID, title, latinName, description, function (error) {
+        adManager.updateAdByAdID(Ad, function (error) {
             if (error.length !== 0) {
                 response.status(400).json(error)
 
@@ -178,14 +174,14 @@ module.exports = function ({ adManager, userManager }) {
                 adManager.createAd(ad, function (error, Ad) {
 
                     if (error.length !== 0) {
-                        response.status(400).json(errors)
+                        response.status(400).json(error)
                     } else {
                         const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile, firstImagePath: firstImageFile, secondImagePath: secondImageFile }
 
                         adManager.createImageBundle(imageBundle, function (error, ImageBundle) {
                             if (error.length !== 0) {
                                 errors.push("error in create Imagebundle")
-                                response.status(400).json(errors)
+                                response.status(400).json(error)
                             } else {
                                 console.log("new imageBundle created with the iD: ", ImageBundle.id)
                                 response.status(201).json({

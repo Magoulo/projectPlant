@@ -33,7 +33,6 @@ async function createAd() {
             body: body
         })
        
-
         const url = "/accounts/myAds"
         timeOut(url)
         setPushState(url)
