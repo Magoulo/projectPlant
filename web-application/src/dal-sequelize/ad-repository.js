@@ -41,6 +41,7 @@ module.exports = function ({ }) {
 			models.Ad.findAll({
 				raw: true,
 				nest: true,
+				where: { isClosed: false},
 				include: [{
 					required: true,
 					model: models.ImageBundle,
