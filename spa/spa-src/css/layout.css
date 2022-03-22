@@ -52,6 +52,9 @@ html {
 	.hidden-sign-in-out {
 		display: none;
 	}
+	.loader-spinner{
+		margin: 20px;
+	}
 	
 	.img-thumbnail {
 		float: center;

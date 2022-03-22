@@ -58,8 +58,7 @@ async function loadPersonalData(id) {
         })
 
         const url = "/accounts/personalData"
-        hideCurrentPage()
-        showPage(url)
+        timeOut(url)
         setPushState(url)
     })
 }
