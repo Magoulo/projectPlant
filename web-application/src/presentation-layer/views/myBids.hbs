@@ -50,27 +50,26 @@
 
 			<div class="card">
 				<div class="card-body">
-					<div class="row">
-					
-						<div class="col-2 text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
-								style="width: 200px; height: 200px">
+					<div class="row justify-content-between">
+
+						<div class="col-auto text-center">
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
+								class="flowerImage" style="width: 200px; height: 200px">
 						</div>
 
-						<div class="col-8 text-start align-self-center">
+						<div id="card-element" class="col-6 text-start align-self-center">
 							<h1>{{Ad.title}}</h1>
 							<h3>{{Ad.latinName}}</h3>
 							<p>Bid placed {{date}}</p>
 						</div>
 
-						<div class="col-2 text-center align-self-end">
-							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-								data-bs-target="#bid{{id}}Info" aria-expanded="false"
-								aria-controls="collapseExample">
-								my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
+						<div id="card-element" class="col-auto text-center align-self-end">
+							<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse"
+								data-bs-target="#bid{{id}}Info" aria-expanded="false" aria-controls="collapseExample">
+								my offer <i class="bi bi-caret-down"></i>
 							</button>
 						</div>
-				
+
 					</div>
 				</div>
 			</div>
@@ -91,9 +90,9 @@
 							</div>
 
 							<form action="/bids/{{id}}/delete" method="POST">
-							<input type="hidden" name="bidID" value="{{id}}">
+								<input type="hidden" name="bidID" value="{{id}}">
 								<div class="col-12">
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-outline-danger">
 										Delete
 									</button>
 								</div>
@@ -136,8 +135,8 @@
 					<div class="row">
 
 						<div class="col-2 text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
-								style="width: 200px; height: 200px">
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
+								class="flowerImage" style="width: 200px; height: 200px">
 						</div>
 
 						<div class="col-8 text-start align-self-center">
@@ -168,10 +167,7 @@
 						</div>
 
 						<div class="col-4 text-center">
-							<div class="col-12">
-								<img src="/images/{{imagePath}}" class="flowerImage"
-									style="width: 400px; height: 400px">
-							</div>
+							<img src="/images/{{imagePath}}" class="flowerImage" style="width: 400px; height: 400px">
 						</div>
 					</div>
 
@@ -208,8 +204,8 @@
 					<div class="row">
 
 						<div class="col-2 text-center">
-							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}" class="flowerImage"
-								style="width: 200px; height: 200px">
+							<img src="/images/{{Ad.ImageBundle.coverImagePath}}" alt="{{Ad.ImageBundle.coverImagePath}}"
+								class="flowerImage" style="width: 200px; height: 200px">
 						</div>
 
 						<div class="col-8 text-start align-self-center">
@@ -220,8 +216,7 @@
 
 						<div class="col-2 text-center align-self-end">
 							<button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-								data-bs-target="#bid{{id}}Info" aria-expanded="false"
-								aria-controls="collapseExample">
+								data-bs-target="#bid{{id}}Info" aria-expanded="false" aria-controls="collapseExample">
 								my offer <i class="bi bi-caret-down"></i> <!-- byt icon när collaps är öppen-->
 							</button>
 						</div>
@@ -246,14 +241,14 @@
 							</div>
 
 							<div class="col-12">
-							<form action="/bids/{{id}}/delete" method="POST">
-							<input type="hidden" name="bidID" value="{{id}}">
-								<div class="col-12">
-									<button type="submit" class="btn btn-primary">
-										Delete
-									</button>
-								</div>
-							</form>
+								<form action="/bids/{{id}}/delete" method="POST">
+									<input type="hidden" name="bidID" value="{{id}}">
+									<div class="col-12">
+										<button type="submit" class="btn btn-primary">
+											Delete
+										</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>

@@ -16,103 +16,100 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const userName = request.body.username
 		const password = request.body.password
-		const repeatedPassword = request.body.repeatpassword
-		const firstname = request.body.firstname
-		const lastname = request.body.lastname
+		const repeatedPassword = request.body.repeatPassword
+		const firstName = request.body.firstName
+		const lastName = request.body.lastName
 		const email = request.body.email
 		const phoneNumber = request.body.phonenumber
 		const city = request.body.city
 
-		const account = { username: userName, passwordHash: password }
-		const errors = []
+		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-		if (password === repeatedPassword) {
-			accountManager.createAccount(account, function (error, userAccount) {
+		accountManager.createAccount(account, function (error, userAccount) {
+			if (error.length !== 0) {
 
-				if (error.length !== 0) {
-					console.log("error in createAccount")
-					errors.push("Internal server error")
+				const usernameErrors = error[0]
+				const passwordErrors = error[1]
+				const firstNameErrors = error[2]
+				const lastNameErrors = error[3]
+				const emailErrors = error[4]
+				const phoneNumberErrors = error[5]
+				const cityErrors = error[6]
 
-					model = {
-						errors,
-						userName,
-						firstname,
-						lastname,
-						email,
-						phoneNumber,
-						city
-						//   csrfToken: request.csrfToken()
-					}
-
-					response.render('accountCreate.hbs', model)
-				} else {
-					console.log("Account created")
-					console.log("userAccountID: ", userAccount.id)
-
-					const user = { userAccountID: userAccount.id, firstName: firstname, lastName: lastname, email: email, phoneNumber: phoneNumber, city: city }
-
-					userManager.createUser(user, function (error, results) {
-						console.log("results", results)
-						console.log("error: ", error)
-
-						if (error.length !== 0) {
-							errors.push("Internal server error")
-
-							accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-								if (error.length !==0) {
-									console.log("Couldn't delete the account")
-									errors.push("Couldn't delete the account")
-
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
-								} else {
-									model = {
-										errors,
-										userName,
-										firstname,
-										lastname,
-										email,
-										phoneNumber,
-										city,
-										results
-										//   csrfToken: request.csrfToken()
-									}
-
-									response.render('accountCreate.hbs', model)
-								}
-							})
-						} else {
-							console.log("account and user created succesfully")
-							response.redirect("/")
-						}
-					})
+				model = {
+					usernameErrors,
+					passwordErrors,
+					firstNameErrors,
+					lastNameErrors,
+					emailErrors,
+					phoneNumberErrors,
+					cityErrors,
+					userName,
+					password,
+					repeatedPassword,
+					firstName,
+					lastName,
+					email,
+					phoneNumber,
+					city
+					//   csrfToken: request.csrfToken()
 				}
-			})
-		} else {
-			errors.push("Repeat the same password")
 
-			model = {
-				errors,
-				userName,
-				firstname,
-				lastname,
-				email,
-				phoneNumber,
-				city
+				response.render('accountCreate.hbs', model)
+			} else {
+
+				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
+				const errors = []
+
+				userManager.createUser(user, function (error, results) {
+					if (error.length !== 0) {
+
+						errors.push("Internal server error")
+
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
+							if (error.length !== 0) {
+
+								errors.push(": couldn't resolve the problem") //couldn't delete the account
+
+								model = {
+									msgError: errors,
+									userName,
+									firstName,
+									lastName,
+									email,
+									phoneNumber,
+									city
+									//   csrfToken: request.csrfToken()
+								}
+
+								response.render('accountCreate.hbs', model)
+
+							} else {
+
+								errors.push(": please try again")
+
+								model = {
+									msgError: errors,
+									userName,
+									firstName,
+									lastName,
+									email,
+									phoneNumber,
+									city,
+									results
+									//   csrfToken: request.csrfToken()
+								}
+
+								response.render('accountCreate.hbs', model)
+							}
+						})
+					} else {
+						response.redirect("/")
+					}
+				})
 			}
+		})
 
-			response.render("accountCreate.hbs", model)
-		}
 
 		// ------------------------------ Create Account Test ---------------------------------------------------
 
@@ -163,7 +160,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			console.log("fetched userAccounts and user: ", UserAccount)
-	
+
 			if (errors.length == 0) {
 
 				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
@@ -177,7 +174,7 @@ module.exports = function ({ accountManager, userManager }) {
 				} else {
 					console.log("Wrong Username or Password")
 					errors.push("Wrong Username or Password")
-					
+
 					const model = {
 						errors,
 						UserAccount
@@ -188,7 +185,7 @@ module.exports = function ({ accountManager, userManager }) {
 			} else {
 				console.log("Internal server error")
 				errors.push("Internal server error")
-				
+
 				const model = {
 					errors,
 					//	csrfToken: request.csrfToken()

@@ -6,7 +6,6 @@ async function loadAdsPage() {
 	// TODO: Check status code and act accordingly!
 
 	const ads = await response.json()
-
 	const allAdsUl = document.getElementById('all-plant-ads')
 	allAdsUl.innerText = ""
 

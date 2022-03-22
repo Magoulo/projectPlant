@@ -29,14 +29,17 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="title" value="{{Ad.title}}">
                         <label class="form-label">Title</label>
+                        <p class="text-start text-danger">{{titleErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="latinname" value="{{Ad.latinName}}">
                         <label class="form-label">Latin name</label>
+                        <p class="text-start text-danger">{{latinNameErrors}}</p>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="description" value="{{Ad.description}}">
                         <label class="form-label">Description</label>
+                        <p class="text-start text-danger">{{descriptionErrors}}</p>
                     </div>
                 </div>
                 {{#Ad}}

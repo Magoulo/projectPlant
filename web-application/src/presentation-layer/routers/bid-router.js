@@ -14,7 +14,7 @@ module.exports = function ({ adManager, bidManager }) {
             console.log("Bid-------------: ", Bid)
 
             for (index in Bid) {
-                console.log("Bid[index].status:",Bid[index].status)
+                console.log("Bid[index].status:", Bid[index].status)
 
                 if (Bid[index].status == "Accepted") {
                     bidAccepted.push(Bid[index])
@@ -93,37 +93,35 @@ module.exports = function ({ adManager, bidManager }) {
     })
 
     router.post("/placeBid", function (request, response) {
-        console.log("inside place bid!------------")
 
         const adID = request.body.adID
-        const message = request.body.message
+        const bidMessage = request.body.message
+        const Ad = request.body.Ad
+
 
         if (request.files == null) {
 
             const imagePath = "no-image.png"
-            const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: message }
+            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
-            bidManager.createBid(Ad, function (error) {
-
+            bidManager.createBid(Bid, function (error) {
                 if (error) {
+
                     const model = {
-                        errors: errors,
-                        session: request.session
+                        msgError: error,
+                        Ad,
+                        session: request.session,
                     }
 
                     response.render("ad.hbs", model)
-                } else {
-                    response.redirect("/ads/" + adID)
                 }
             })
-
         } else {
             const imagePath = request.files.bidImagePath
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
             const errors = []
-            const Ad = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: message }
+            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: bidMessage }
 
             imagePath.mv(uploadPath, function (error) {
                 if (error) {
@@ -132,21 +130,28 @@ module.exports = function ({ adManager, bidManager }) {
                     response.render('adCreate.hbs', errors)
                 } else {
                     console.log("file uploaded successfully")
-                }
-            })
 
-            bidManager.createBid(Ad, function (error) {
-                console.log("kommer inte ens hit?")
-                console.log("Error: ", error)
-                if (error) {
-                    const model = {
-                        errors: errors,
-                        session: request.session
-                    }
+                    bidManager.createBid(Bid, function (error) {
 
-                    response.render(model)
-                } else {
-                    response.redirect("/ads/" + adID)
+                        if (error.length) {
+
+                            console.log(error);
+                            const model = {
+                                msgError: error,
+                                session: request.session
+                            }
+
+                            response.render("ad.hbs", model)
+                        } else {
+
+                            const model = {
+                                msg: "Placed bid successfully.",
+                                session: request.session
+                            }
+
+                            response.render("ad.hbs", model)
+                        }
+                    })
                 }
             })
         }

@@ -76,10 +76,14 @@ module.exports = function ({ }) {
 
 	//business-logic-layer
 	const accountManager = require('/web-application/src/business-logic-layer/account-manager')
-	const accountValidator = require('/web-application/src/business-logic-layer/account-validator')
 	const adManager = require('/web-application/src/business-logic-layer/ad-manager')
 	const bidManager = require('/web-application/src/business-logic-layer/bid-manager')
 	const userManager = require('/web-application/src/business-logic-layer/user-manager')
+
+	const accountValidator = require('/web-application/src/business-logic-layer/account-validator')
+	const adValidator = require('/web-application/src/business-logic-layer/ad-validator')
+	const bidValidator = require('/web-application/src/business-logic-layer/bid-validator')
+	const userValidator = require('/web-application/src/business-logic-layer/user-validator')
 
 	//presentation-layer
 	const accountRouter = require('/web-application/src/presentation-layer-api/routers/account-api-router')
@@ -102,16 +106,19 @@ module.exports = function ({ }) {
 	container.register("adRepository", awilix.asFunction(adRepository))
 	container.register("adManager", awilix.asFunction(adManager))
 	container.register("adRouter", awilix.asFunction(adRouter))
+	container.register("adValidator", awilix.asFunction(adValidator))
 
 	//bid
 	container.register("bidRepository", awilix.asFunction(bidRepository))
 	container.register("bidManager", awilix.asFunction(bidManager))
 	container.register("bidRouter", awilix.asFunction(bidRouter))
+	container.register("bidValidator", awilix.asFunction(bidValidator))
 
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))
 	container.register("userManager", awilix.asFunction(userManager))
 	container.register("userRouter", awilix.asFunction(userRouter))
+	container.register("userValidator", awilix.asFunction(userValidator))
 
 	//various
 	container.register("variousRouter", awilix.asFunction(variousRouter))

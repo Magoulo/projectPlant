@@ -109,10 +109,12 @@ module.exports = function ({ }) {
 			})
 		},
 
-		updateAdByAdID: function (adID, title, latinName, description, callback) {
+		updateAdByAdID: function (Ad, callback) {
+
+			console.log(Ad.title);
 
 			const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE adID = ?"
-			const values = [title, latinName, description, adID]
+			const values = [Ad.title, Ad.latinName, Ad.description, Ad.adID]
 
 			db.query(query, values, function (error) {
 				callback(error)

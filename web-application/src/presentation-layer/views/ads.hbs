@@ -9,19 +9,12 @@
 		<div class="col-auto"></div>
 		<div class="col-7">
 			<div class="row justify-content-center">
-
-				<div class="col-10">
+				<div class="col-9">
 					<form class="w-100" action="/ads/search" method="POST">
 						<input style="background-image: ;" type="text" class="form-control" placeholder="search ads"
 							aria-describedby="basic-addon1" name="searchInput">
 					</form>
 				</div>
-
-				<div class="col-2">
-					<button type="button" class="btn btn-light"><i class="bi bi-filter-left"></i>
-						Filter</button>
-				</div>
-
 			</div>
 		</div>
 		<div class="col-auto"></div>
@@ -43,14 +36,16 @@
 	<div class="row align-items-center">
 		{{#each Ad}}
 
-		<div class="col-3 text-center">
-
-			<h3><a href="/ads/{{id}}">{{title}}</a></h3>
+		<div id="ad-clickable" class="col-3 text-center my-4">
+			<p></p>
+			<h3><a class="link-dark" href="/ads/{{id}}">{{title}}</a></h3>
 
 			<a href="/ads/{{id}}">
-				<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}" alt="{{ImageBundle.coverImagePath}}" class="flowerImage">
+				<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}"
+					alt="{{ImageBundle.coverImagePath}}" class="flowerImage">
 			</a>
 
+			<p></p>
 		</div>
 
 		{{/each}}

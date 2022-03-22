@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
-const nodemailer = require('nodemailer')
 const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const redis = require("redis")
@@ -27,8 +26,6 @@ module.exports = function ({}) {
 		partialsDir: path.join(__dirname, 'partials')
 	}))
 
-
-	// Handle static files in the public folder.
 	app.use(express.static(path.join(__dirname, 'public')))
 
 	app.use(bodyParser.urlencoded({
@@ -64,10 +61,14 @@ module.exports = function ({}) {
 
 	//business-logic-layer
 	const accountManager = require('/web-application/src/business-logic-layer/account-manager')
-	const accountValidator = require('/web-application/src/business-logic-layer/account-validator')
 	const adManager = require('/web-application/src/business-logic-layer/ad-manager')
 	const bidManager = require('/web-application/src/business-logic-layer/bid-manager')
 	const userManager = require('/web-application/src/business-logic-layer/user-manager')
+
+	const accountValidator = require('/web-application/src/business-logic-layer/account-validator')
+	const adValidator = require('/web-application/src/business-logic-layer/ad-validator')
+	const bidValidator = require('/web-application/src/business-logic-layer/bid-validator')
+	const userValidator = require('/web-application/src/business-logic-layer/user-validator')
 
 	//presintation-layer
 	const accountRouter = require('/web-application/src/presentation-layer/routers/account-router')
@@ -75,7 +76,6 @@ module.exports = function ({}) {
 	const bidRouter = require('/web-application/src/presentation-layer/routers/bid-router')
 	const userRouter = require('/web-application/src/presentation-layer/routers/user-router')
 	const variousRouter = require('/web-application/src/presentation-layer/routers/various-router')
-
 
 	// Creating container and dependencies
 	const container = awilix.createContainer()
@@ -90,16 +90,19 @@ module.exports = function ({}) {
 	container.register("adRepository", awilix.asFunction(adRepository))
 	container.register("adManager", awilix.asFunction(adManager))
 	container.register("adRouter", awilix.asFunction(adRouter))
+	container.register("adValidator", awilix.asFunction(adValidator))
 
 	//bid
 	container.register("bidRepository", awilix.asFunction(bidRepository))
 	container.register("bidManager", awilix.asFunction(bidManager))
 	container.register("bidRouter", awilix.asFunction(bidRouter))
+	container.register("bidValidator", awilix.asFunction(bidValidator))
 
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))
 	container.register("userManager", awilix.asFunction(userManager))
 	container.register("userRouter", awilix.asFunction(userRouter))
+	container.register("userValidator", awilix.asFunction(userValidator))
 
 	//various
 	container.register("variousRouter", awilix.asFunction(variousRouter))
