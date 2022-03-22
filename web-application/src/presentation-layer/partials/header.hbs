@@ -39,7 +39,7 @@
 
         <div class="offcanvas-body">
             <div>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush my-2">
                     <li class="list-group-item"><a class="nav-link link-dark" href="/">Start</a></li>
                     <li class="list-group-item"><a class="nav-link link-dark" href="/ads">Ads</a></li>
                     <li class="list-group-item"><a class="nav-link link-dark" href="/about">About</a></li>
@@ -63,19 +63,19 @@
 
         <div class="offcanvas-body text-start">
 
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-6 text-start align-self-end">
-                    <h5>Hello {{User.firstName}}</h5>
+                    <h5>Welcome!</h5>
                 </div>
 
                 <div class="col-6 text-end">
                     <form action="/accounts/sign-out" method="POST">
-                        <input class="btn btn btn-outline-dark" type="submit" value="sign out">
+                        <input class="btn btn-outline-dark" type="submit" value="sign out">
                     </form>
                 </div>
             </div>
 
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush my-4">
                 <li class="list-group-item"><a class="nav-link link-dark" href="/ads/myAds">My Ads</a></li>
                 <li class="list-group-item"><a class="nav-link link-dark" href="/bids/myBids">My Bids</a></li>
                 <li class="list-group-item"><a class="nav-link link-dark" href="/user/personalData">Personal Data</a></li>

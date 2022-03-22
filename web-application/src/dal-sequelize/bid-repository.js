@@ -66,8 +66,10 @@ module.exports = function () {
 				adID: Bid.adID,
 				userID: Bid.userID
 
+			}).then((Bid) => {
+				callback([], Bid)
 			}).catch((error) => {
-				callback(error)
+				callback(error, [])
 			})
 		},
 

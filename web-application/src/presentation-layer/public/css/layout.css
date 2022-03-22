@@ -39,17 +39,18 @@ main {
 
 .img-thumbnail {
     float: center;
-    width:  400px;
-    height: 400px;
-    min-width: 400px;
-    min-height: 400px;
+    width:  300px;
+    height: 350px;
+    min-width: 200px;
+    min-height: 250px;
     padding: 0rem;
     border: none;
     border-radius: 0.25rem;
+    object-fit: cover;
 }
 
 .image-hight {
-  height:800px;
+  height:50rem;
   object-fit: cover;
 }
 
@@ -123,9 +124,9 @@ a {
 
 .img-card {
   float: center;
-  width:  300px;
+  width:  250px;
   height: 300px;
-  min-width: 300px;
+  min-width: 250px;
   min-height: 300px;
   padding: 0rem;
   border: none;

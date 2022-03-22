@@ -1,66 +1,52 @@
-<div class="container">
-    {{#if errors.length}}
-    <p>Oh no, something went wrong:</p>
-    <ul>
-        {{#each errors}}
-        <li>{{this}}</li>
-        {{/each}}
-    </ul>
-    {{else}}
+{{#if User}}
+<div class="row">
+    <div class="col-sm-4 offset-sm-4 text-center">
 
-    {{#if User}}
-    <div class="row">
-        <div class="col-sm-4 offset-sm-4 text-center">
-            <h1 class="display-3">Personal Data</h1>
-            <div>
-                <form class="form-inline justify-content-center" action="/user/personalData/{{User.id}}/update"
-                    method="POST">
-                    
-                    <input type="hidden" name="User" value="{{User}}">
+        <h1 class="display-3">Personal Data</h1>
 
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="firstName" value="{{User.firstName}}">
-                        <label class="form-label">Firstname</label>
-                        <p class="text-start text-danger">{{firstNameErrors}}</p>
-                    </div>
+        <form class="form-inline justify-content-center" action="/user/personalData/{{User.id}}/update" method="POST">
+            <input type="hidden" name="User" value="{{User}}">
 
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="lastName" value="{{User.lastName}}">
-                        <label class="form-label">Lastname</label>
-                        <p class="text-start text-danger">{{lastNameErrors}}</p>
-                    </div>
-                    
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" value="{{User.email}}">
-                        <label class="form-label">Email</label>
-                        <p class="text-start text-danger">{{mailErrors}}</p>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="phoneNumber" value="{{User.phoneNumber}}">
-                        <label class="form-label">Phonenumber</label>
-                        <p class="text-start text-danger">{{phoneNumberErrors}}</p>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="city" value="{{User.city}}">
-                        <label class="form-label">City</label>
-                        {{cityErrors}}
-                    </div>
-
-                    <div class="mb-3">
-                        <input class="btn btn-primary" type="submit" value="Update">
-                    </div>
-
-                </form>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="firstName" value="{{User.firstName}}">
+                <label class="form-label">Firstname</label>
+                <p class="text-start text-danger">{{firstNameErrors}}</p>
             </div>
 
-        </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="lastName" value="{{User.lastName}}">
+                <label class="form-label">Lastname</label>
+                <p class="text-start text-danger">{{lastNameErrors}}</p>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="email" name="email" value="{{User.email}}">
+                <label class="form-label">Email</label>
+                <p class="text-start text-danger">{{emailErrors}}</p>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="phoneNumber" value="{{User.phoneNumber}}">
+                <label class="form-label">Phonenumber</label>
+                <p class="text-start text-danger">{{phoneNumberErrors}}</p>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="city" value="{{User.city}}">
+                <label class="form-label">City</label>
+                <p class="text-start text-danger">{{cityErrors}}</p>
+            </div>
+
+            <div class="mb-3">
+                <input class="btn btn-outline-dark" type="submit" value="Update">
+            </div>
+        </form>
+
     </div>
-
-    {{else}}
-    <p>No, that user doesn't exist here.</p>
-    {{/if}}
-
-    {{/if}}
 </div>
+
+{{else}}
+<div class="col-12 align-self-center">
+    <p>Couldn't fetch personal data.</p>
+</div>
+{{/if}}

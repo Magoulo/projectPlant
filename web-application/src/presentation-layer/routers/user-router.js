@@ -39,10 +39,11 @@ module.exports = function ({ userManager }) {
                 const phoneNumberErrors = error[3]
                 const cityErrors = error[4]
 
-                console.log(error);
+                console.log("------------------------------------"+emailErrors);
 
                 model = {
                     User,
+                    error,
                     firstNameErrors,
                     lastNameErrors,
                     emailErrors,

@@ -14,10 +14,10 @@ module.exports = function ({ bidRepository, bidValidator }) {
 		},
 
 		createBid: function (Bid, callback) {
-			
 			const error = bidValidator.getPlaceBidErrors(Bid)
 
 			if (error.length) {
+
 				callback(error, null)
 			} else {
 				bidRepository.createBid(Bid, callback)

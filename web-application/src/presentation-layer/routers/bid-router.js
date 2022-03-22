@@ -105,7 +105,6 @@ module.exports = function ({ adManager, bidManager }) {
             const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
             bidManager.createBid(Bid, function (error) {
-
                 if (error) {
 
                     const model = {
@@ -115,11 +114,8 @@ module.exports = function ({ adManager, bidManager }) {
                     }
 
                     response.render("ad.hbs", model)
-                } else {
-                    response.redirect("/ads/" + adID)
                 }
             })
-
         } else {
             const imagePath = request.files.bidImagePath
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
@@ -134,19 +130,28 @@ module.exports = function ({ adManager, bidManager }) {
                     response.render('adCreate.hbs', errors)
                 } else {
                     console.log("file uploaded successfully")
-                }
-            })
 
-            bidManager.createBid(Bid, function (error) {
-                if (error) {
-                    const model = {
-                        msgError: error,
-                        session: request.session
-                    }
+                    bidManager.createBid(Bid, function (error) {
 
-                    response.render("ad.hbs", model)
-                } else {
-                    response.redirect("/ads/" + adID)
+                        if (error.length) {
+
+                            console.log(error);
+                            const model = {
+                                msgError: error,
+                                session: request.session
+                            }
+
+                            response.render("ad.hbs", model)
+                        } else {
+
+                            const model = {
+                                msg: "Placed bid successfully.",
+                                session: request.session
+                            }
+
+                            response.render("ad.hbs", model)
+                        }
+                    })
                 }
             })
         }

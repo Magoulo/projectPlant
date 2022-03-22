@@ -1,64 +1,51 @@
-<!-- Lägg till:
-1. limit för featured ads, pagination?
+<!-- searchbar -->
+<div class="row justify-content-center m-5">
+	<div class="col-auto"></div>
 
--->
-
-
-
-	<!-- searchbar -->
-	<div class="row justify-content-center m-5">
-		<div class="col-auto"></div>
-
-		<div class="col-7 mb-3">
-			<form class="w-100" action="/ads/search" method="POST">
-				<input style="background-image: ;" type="text" class="form-control" placeholder="search ads"
-					aria-describedby="basic-addon1" name="searchInput">
-			</form>
-		</div>
-
-		<div class="col-auto"></div>
+	<div class="col-7 mb-3">
+		<form class="w-100" action="/ads/search" method="POST">
+			<input style="background-image: ;" type="text" class="form-control" placeholder="search ads"
+				aria-describedby="basic-addon1" name="searchInput">
+		</form>
 	</div>
 
+	<div class="col-auto"></div>
+</div>
 
 
+<!-- featured ads, lägg till olika -->
+{{#if errors.length}}
+<p>Oh no, something went wrong:</p>
+<ul>
+	{{#each errors}}
+	<li>{{this}}</li>
+	{{/each}}
+</ul>
 
+{{else}}
+{{#if Ad.length}}
 
-	<!-- featured ads, lägg till olika -->
-	{{#if errors.length}}
-	<p>Oh no, something went wrong:</p>
-	<ul>
-		{{#each errors}}
-		<li>{{this}}</li>
-		{{/each}}
-	</ul>
+<div class="row align-items-center">
+	{{#each Ad}}
 
-	{{else}}
-	{{#if Ad.length}}
+	<div id="ad-clickable" class="col-3 text-center my-4">
+		<p></p>
 
-	<div class="row align-items-center">
-		{{#each Ad}}
+		<h3><a class="link-dark" href="/ads/{{id}}">{{title}}</a></h3>
 
-		<div class="col-3 text-center">
+		<a href="/ads/{{id}}">
+			<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}">
+		</a>
 
-
-			<h3><a href="/ads/{{id}}">{{title}}</a></h3>
-
-
-			<a href="/ads/{{id}}">
-				<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}" alt="{{imageBundleID}}"
-					class="flowerImage">
-			</a>
-
-		</div>
-
-		{{/each}}
+		<p></p>
 	</div>
 
-	{{else}}
-	<div class="col-12 text-center">
-		<p>No, that account doesn't exist.</p>
-	</div>
-	{{/if}}
-	{{/if}}
- 
+	{{/each}}
+</div>
 
+{{else}}
+<div class="col-12 text-center">
+	<p>No, that account doesn't exist.</p>
+</div>
+{{/if}}
+{{/if}}
