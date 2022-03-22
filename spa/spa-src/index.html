@@ -20,13 +20,10 @@
 
 	<!--- js -->
 	<script src="/js/navigation.js"></script>
-	<script src="/js/humans-page.js"></script>
-	<script src="/js/human-page.js"></script>
 	<script src="/js/ads-page.js"></script>
 	<script src="/js/ad-page.js"></script>
 	<script src="/js/start-page.js"></script>
 	<script src="/js/account-pages/my-ads-page.js"></script>
-	<script src="/js/account-pages/my-bids-page.js"></script>
 	<script src="/js/account-pages/personal-data-page.js"></script>
 	<script src="/js/account-pages/sign-in-page.js"></script>
 	<script src="/js/account-pages/ad-update-page.js"></script>
@@ -51,23 +48,16 @@
 
 					<img class="logo" src="/images/logo.png">
 
-					<!--{{#if session.isLoggedIn}} -->
 					<div class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
 						aria-controls="offcanvasRight">
 						<i class="bi bi-person-check"></i>
 					</div>
 
-					<!-- {{else}}
-					<div class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-						aria-controls="offcanvasRight">
-						<i class="bi bi-person"></i>
-					</div>-->
-					<!--{{/if}} -->
 				</div>
 			</nav>
 		</div>
 
-		<!--Offcanvas menu -->
+		<!--Offcanvas Menu Left -->
 		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
 
 			<div class="offcanvas-header">
@@ -90,8 +80,6 @@
 		</div>
 
 		<!-- Menu Right -->
-
-
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
 			<!-- "Account Menu" when logged in  -->
@@ -119,7 +107,6 @@
 
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a class="nav-link" href="/accounts/myAds">My Ads</a></li>
-						<li class="list-group-item"><a class="nav-link" href="/accounts/myBids">My Bids</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a>
 						</li>
 					</ul>
@@ -522,7 +509,7 @@
 	</main>
 
 	<footer>
-		Created by Magoulo | <a href="/about">About</a>
+		Created by Fungus Gnats | <a href="/about">About</a>
 	</footer>
 
 

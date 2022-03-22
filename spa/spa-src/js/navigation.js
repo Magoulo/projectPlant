@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const signOutButton = document.getElementById("sign-out-form-button")
 	const menuLoadingSpinner = document.getElementById("menu-loader-spinner")
 
+	//simulateing 5 sec loading when logging in
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
 		signInBody.classList.add("hidden-sign-in-out")
@@ -14,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 		setTimeout(function () {
 			signOutBody.classList.remove("hidden-sign-in-out")
-			//signInBody.classList.add("hidden-sign-in-out")
 			menuLoadingSpinner.classList.add("hidden-sign-in-out")
 		}, 5000)
 
@@ -106,7 +106,6 @@ function showPage(url) {
 
 		case '/accounts/sign-in':
 			nextPageId = 'start-page'
-			//signIn()
 			break
 		default:
 			if (url.startsWith("/ads/adUpdate/")) {
@@ -141,6 +140,7 @@ function showPage(url) {
 
 }
 
+//Displays a loading indicator for 5 sec
 function timeOut(url) {
 
 	hideCurrentPage()
@@ -154,6 +154,7 @@ function timeOut(url) {
 
 }
 
+//setting history.pushState
 function setPushState(url) {
 	history.pushState(null, "", url)
 }

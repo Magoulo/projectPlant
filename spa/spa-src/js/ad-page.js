@@ -6,14 +6,19 @@ async function loadAdPage(id) {
 
     const ad = await response.json()
 
-    //Get elements
+    //Create elements
     const adDiv = document.getElementById('plant-ad-container')
     const h3Title = document.createElement('h3')
     const h5LatinName = document.createElement('h5')
     const pDescription = document.createElement('p')
+
     const imgImageCoverImage = document.createElement('img')
     const imgImageFirstImage = document.createElement('img')
     const imgImageSecondImage = document.createElement('img')
+
+    const liImageCoverImage = document.createElement('li')
+    const liImageFirstImage = document.createElement('li')
+    const liImageSecondImage = document.createElement('li')
 
     //Set attributes of elements
     adDiv.innerText = ""
@@ -30,11 +35,22 @@ async function loadAdPage(id) {
     imgImageSecondImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.secondImagePath)
     imgImageSecondImage.classList.add("img-thumbnail")
 
-    //Append elements to adDiv
+    //adding class to li
+    liImageCoverImage.classList.add("hidden-list")
+    liImageFirstImage.classList.add("hidden-list")
+    liImageSecondImage.classList.add("hidden-list")
+
+    //Append elements to parent
+
+    liImageCoverImage.appendChild(imgImageCoverImage)
+    liImageFirstImage.appendChild(imgImageFirstImage)
+    liImageSecondImage.appendChild(imgImageSecondImage)
+
     adDiv.appendChild(h3Title)
     adDiv.appendChild(h5LatinName)
-    adDiv.appendChild(imgImageCoverImage)
-    adDiv.appendChild(imgImageFirstImage)
-    adDiv.appendChild(imgImageSecondImage)
     adDiv.appendChild(pDescription)
+    adDiv.appendChild(liImageCoverImage)
+    adDiv.appendChild(liImageFirstImage)
+    adDiv.appendChild(liImageSecondImage)
+    
 }

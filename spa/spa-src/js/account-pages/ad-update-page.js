@@ -24,8 +24,6 @@ async function loadAdUpdatePage(id){
     updateFormLatinName.value = ad.latinName  
     updateFormDescription.value = ad.description   
 
-    
-    
     //Eventlistener for update button
     updateButton.addEventListener('click', function (event) {
         event.preventDefault()
@@ -57,7 +55,6 @@ async function sendUpdate(){
         latinName: latinNameValue,
         description: descriptionValue
      })
-     console.log("body: ", body)
 
     //Send the data for update 
     const response = await fetch("http://localhost:3000/ads/adUpdate/" + updateFormAdId.value + "/update", {
@@ -68,8 +65,5 @@ async function sendUpdate(){
         }),
         body: body
     })
-
-    //const updateStatus = await response.json()
-    //console.log("updateStatus: ", updateStatus)
 
 }

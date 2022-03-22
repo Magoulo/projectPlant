@@ -37,8 +37,6 @@ async function createAccount() {
             city: city
         })
 
-        console.log("body: ", body)
-
         //Send the data to create account 
         const response = fetch("http://localhost:3000/accounts/create", {
             method: 'Put',

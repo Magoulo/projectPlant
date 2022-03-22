@@ -13,7 +13,7 @@ async function loadAdDeletePage(id) {
     //Assign the element data from the fetched ad
     deleteAdTitle.innerText = ad.title
 
-
+    //Clicklistener for yes-button
     yesButton.addEventListener('click', function (event) {
         event.preventDefault()
 
@@ -29,7 +29,7 @@ async function loadAdDeletePage(id) {
         timeOut(url)
         setPushState(url)
     })
-
+    //Clicklistener for no-button
     noButton.addEventListener('click', function (event) {
         event.preventDefault()
 

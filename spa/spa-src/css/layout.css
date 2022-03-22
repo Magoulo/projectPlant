@@ -46,7 +46,7 @@ html {
 	}
 	
 	.hidden-list {
-		list-style: none
+		list-style: none;
 	}
 
 	.hidden-sign-in-out {

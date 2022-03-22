@@ -7,7 +7,8 @@ const app = express()
 const port = 6001
 
 app.use(express.static(__dirname))
-/*
+
+/* //Sessions kommer nog behövas till IDConnect
 let RedisStore = require("connect-redis")(session)
 	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
 	redisClient.connect().catch(console.error)
@@ -37,12 +38,10 @@ app.use(function (request, response, next) {
 		response.setHeader("Access-Control-Expose-Headers", "*")
 		next()
 	})
-
 	
 app.get("*", function(request, response){
 	response.sendFile(__dirname+"/index.html")
 })
-
 
 app.listen(port, function(){
 	console.log(`listening on ${port}!`)

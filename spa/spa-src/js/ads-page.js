@@ -33,6 +33,8 @@ async function loadAdsPage() {
 		//Createing list elements and assigning class
 		const liIitle = document.createElement('li')
 		const liImage = document.createElement('li')
+		const divider = document.createElement('hr')
+		divider.classList.add("divider-style")
 
 		liIitle.classList.add("hidden-list")
 		liImage.classList.add("hidden-list")
@@ -43,6 +45,7 @@ async function loadAdsPage() {
 
 		allAdsUl.appendChild(liIitle)
 		allAdsUl.appendChild(liImage)
+		allAdsUl.appendChild(divider)
 
 		//EventListeners for title and image
 		aTitle.addEventListener('click', function (event) {

@@ -32,9 +32,7 @@ async function createAd() {
             }),
             body: body
         })
-        createFormTitle.value = ""
-        createFormLatinName.value = ""
-        createFormDescription.value = ""
+       
 
         const url = "/accounts/myAds"
         timeOut(url)
