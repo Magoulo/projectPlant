@@ -87,6 +87,7 @@ module.exports = function ({ adManager, userManager }) {
             } else {
                 allBids = adOffers
                 var adAccepted = []
+
                 for (const ad of allAds) {
                     ad.bids = []
 
@@ -100,24 +101,7 @@ module.exports = function ({ adManager, userManager }) {
                         }
                     }
                 }
-                /* console.log("allAds: ", allAds)
-                 console.log("adAccepted", adAccepted)
-              
-               
-                 var adDeclined = []
- 
-                 for (index in adOffers) {
-                     if (adOffers[index].status == "Accepted") {
-                         adAccepted.push(adOffers[index])
-                     }
- 
-                     if (adOffers[index].status == "Declined") {
-                         adDeclined.push(adOffers[index])
-                     }
-                 }*/
-
                 model.adAccepted = adAccepted
-                //  model.adDeclined = adDeclined
 
                 response.render("myAds.hbs", model)
             }
@@ -131,7 +115,7 @@ module.exports = function ({ adManager, userManager }) {
         const latinName = request.body.latinname
         const description = request.body.description
 
-        const Ad = {id: adID, title: title, latinName: latinName, description: description}
+        const Ad = { id: adID, title: title, latinName: latinName, description: description }
 
         adManager.updateAdByAdID(Ad, function (errors) {
 
@@ -143,7 +127,7 @@ module.exports = function ({ adManager, userManager }) {
 
                 model = {
                     Ad: Ad,
-                    titleErrors, 
+                    titleErrors,
                     latinNameErrors,
                     descriptionErrors,
                     session: request.session,
@@ -352,13 +336,13 @@ module.exports = function ({ adManager, userManager }) {
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                const model = {
-                    errors: errors,
-                    Ad: Ad,
-                    session: request.session
-                }
+            const model = {
+                errors: errors,
+                Ad: Ad,
+                session: request.session
+            }
 
-                response.render("ad.hbs", model)
+            response.render("ad.hbs", model)
         })
     })
 

@@ -96,8 +96,6 @@ module.exports = function ({ adManager, bidManager }) {
 
         const adID = request.body.adID
         const bidMessage = request.body.message
-        const Ad = request.body.Ad
-
 
         if (request.files == null) {
 
@@ -105,51 +103,71 @@ module.exports = function ({ adManager, bidManager }) {
             const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
             bidManager.createBid(Bid, function (error) {
-                if (error) {
+                if (error.length) {
 
-                    const model = {
-                        msgError: error,
-                        Ad,
-                        session: request.session,
-                    }
+                    adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                    response.render("ad.hbs", model)
+                        const model = {
+                            msgError: error,
+                            errors: errors,
+                            Ad: Ad,
+                            session: request.session
+                        }
+                        response.render("ad.hbs", model)
+                    })
+                } else {
+
+                    adManager.getAdByAdID(adID, function (errors, Ad) {
+
+                        const model = {
+                            msg: "Bid has been placed successfully",
+                            errors: errors,
+                            Ad: Ad,
+                            session: request.session
+                        }
+                        response.render("ad.hbs", model)
+                    })
                 }
             })
         } else {
             const imagePath = request.files.bidImagePath
             const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
-            const errors = []
             const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: bidMessage }
 
             imagePath.mv(uploadPath, function (error) {
-                if (error) {
-                    console.log("Error in uploading pathway")
-                    errors.push("couldn't upload picture")
-                    response.render('adCreate.hbs', errors)
+
+                if (error.length) {
+                    response.render('adCreate.hbs', msgError = "Couldn't upload picture")
                 } else {
                     console.log("file uploaded successfully")
-
                     bidManager.createBid(Bid, function (error) {
 
                         if (error.length) {
 
-                            console.log(error);
-                            const model = {
-                                msgError: error,
-                                session: request.session
-                            }
+                            adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                            response.render("ad.hbs", model)
+                                const model = {
+                                    msgError: error,
+                                    errors: errors,
+                                    Ad: Ad,
+                                    session: request.session
+                                }
+                                response.render("ad.hbs", model)
+                            })
+
                         } else {
 
-                            const model = {
-                                msg: "Placed bid successfully.",
-                                session: request.session
-                            }
+                            adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                            response.render("ad.hbs", model)
+                                const model = {
+                                    msg: "Bid has been placed successfully",
+                                    errors: errors,
+                                    Ad: Ad,
+                                    session: request.session
+                                }
+                                response.render("ad.hbs", model)
+                            })
                         }
                     })
                 }

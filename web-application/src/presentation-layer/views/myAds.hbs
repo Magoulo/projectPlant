@@ -87,6 +87,8 @@
 		{{/if}}
 	</div>
 
+
+	<!-- My Ad Offers -->
 	<div class="tab-pane fade" id="nav-ad-offers" role="tabpanel" aria-labelledby="nav-ad-offers-tab">
 		<div class="row">
 			<div class="col-12">
@@ -104,7 +106,6 @@
 
 					{{else}}
 					{{#if Ad}}
-
 					{{#each Ad}}
 					{{#unless isClosed}}
 
@@ -138,6 +139,28 @@
 						<div class="card card-body">
 							{{#each this.bids}}
 
+							<div class="row justify-content-between mb-2">
+								<div class="col-6 text-start align-self-start">
+									<h3>By {{User.firstName}} {{User.lastName}}</h3>
+									<p>Contact: {{User.email}}</p>
+									<p>Placed: {{date}}</p>
+									<p class="mt-2">{{message}}</p>
+								</div>
+
+								<div class="col-auto text-center align-self-end">
+									<img class="img-thumbnail" src="/images/{{imagePath}}" alt="imageToID{{adID}}">
+								</div>
+							</div>
+
+							<!-- Modal Buttons -->
+							<div class="col-12 text-center">
+								<button class="btn btn-outline-danger m-1" data-bs-toggle="modal"
+									data-bs-target="#declineBidID{{id}}Modal">Decline</button>
+								<button class="btn btn-outline-dark m-1" data-bs-toggle="modal"
+									data-bs-target="#acceptBidID{{id}}Modal">Accept</button>
+							</div>
+							<hr>
+
 							<!-- Accept Bid Modal -->
 							<div class="modal fade" id="acceptBidID{{id}}Modal" tabindex="-1"
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -160,17 +183,14 @@
 												<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 												<div class="mb-0">
-
-													<h3>{{User.firstName}} {{User.lastName}}</h3>
-
-													<p>{{message}}</p>
+													<h5>Press confirm if you ACCEPT following bid placed by
+														{{User.firstName}} {{User.lastName}}.</h5>
 												</div>
 
-												<div class="mb-0">
-													<img class="img-thumbnail" src="/images/{{imagePath}}"
-														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
-												</div>
 
+												<div class="col-auto mt-2 align-self-center text-center">
+													<img class="img-thumbnail" src="/images/{{imagePath}}">
+												</div>
 											</div>
 
 											<div class="modal-footer">
@@ -203,14 +223,13 @@
 
 												<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-												<div class="mb-0">
-													<h3>{{User.firstName}} {{User.lastName}}</h3>
-													<p>{{message}}</p>
+												<div class="col-12 mb-0">
+													<h5>Press confirm if you DECLINE following bid placed by
+														{{User.firstName}} {{User.lastName}}.</h5>
 												</div>
 
-												<div class="mb-0">
-													<img class="img-thumbnail" src="/images/{{imagePath}}"
-														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+												<div class="col-auto mt-2 align-self-center text-center">
+													<img class="img-thumbnail" src="/images/{{imagePath}}">
 												</div>
 
 											</div>
@@ -223,35 +242,6 @@
 									</div>
 								</div>
 							</div>
-
-							<div class="row my-2 justify-content-between">
-								<div class="col-8 text start">
-
-									<div class="row justify-content-between mb-2">
-										<div class="col-8">
-											<h3>{{User.firstName}} {{User.lastName}}</h3>
-											<p>Placed: {{date}}</p>
-										</div>
-
-										<!-- Modal Buttons -->
-										<div class="col-4 text-end">
-											<button class="btn btn-outline-danger m-1" data-bs-toggle="modal"
-												data-bs-target="#declineBidID{{id}}Modal">Decline</button>
-											<button class="btn btn-outline-dark m-1" data-bs-toggle="modal"
-												data-bs-target="#acceptBidID{{id}}Modal">Accept</button>
-										</div>
-									</div>
-
-									<p class="mt-2">{{message}}</p>
-								</div>
-
-								<div class="col-auto text-center">
-									<img class="flowerImage" src="/images/{{imagePath}}" alt="imageToID{{adID}}"
-										style="width: 400px; height: 400px">
-								</div>
-							</div>
-
-							<hr>
 							{{/each}}
 						</div>
 					</div>
@@ -268,12 +258,11 @@
 
 
 			</div>
-			<div class="col-auto"></div>
 		</div>
 	</div>
 
-	<!-- My Closed Ads -->
 
+	<!-- My Closed Ads -->
 	<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
 		<div class="row justify-content-start">
 			{{#if adAccepted}}
@@ -321,12 +310,14 @@
 				</div>
 			</div>
 			{{/each}}
-			{{else}}
-			<div class="col-12 text-center">
-				<p>No, your ads doesn't exist.</p>
-			</div>
-			{{/if}}
 		</div>
 	</div>
+
+
+	{{else}}
+	<div class="col-12 text-center">
+		<p>Couldn't load.</p>
+	</div>
+	{{/if}}
 
 </div>
