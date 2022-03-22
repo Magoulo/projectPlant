@@ -91,10 +91,10 @@
 
 		<!-- Menu Right -->
 
-		     
+
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
-			<!-- "Account Menu" when logged in  --> 
+			<!-- "Account Menu" when logged in  -->
 			<div class="hidden-sign-in-out" id="sign-out-body">
 
 				<div class="offcanvas-header">
@@ -120,12 +120,13 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a class="nav-link" href="/accounts/myAds">My Ads</a></li>
 						<li class="list-group-item"><a class="nav-link" href="/accounts/myBids">My Bids</a></li>
-						<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a></li>
+						<li class="list-group-item"><a class="nav-link" href="/accounts/personalData">Personal Data</a>
+						</li>
 					</ul>
 
 				</div>
 			</div>
-			
+
 			<!-- Account Menu when not logged in -->
 			<div id="sign-in-body">
 				<div class="offcanvas-header">
@@ -138,24 +139,27 @@
 					<ul class="list-group list-group-flush">
 
 						<li class="list-group-item">
-							<div class="col"> 
-								 The sign-in form
+							<div class="col">
+								The sign-in form
 
 								<form href="/accounts/sign-in" id="sign-in-form">
-								<input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+									<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 									<div class="mb-0">
 										<label class="form-label"></label>
-										<input class="form-control" type="text" name="username" placeholder="username*" id="sign-in-form-username" value="">
+										<input class="form-control" type="text" name="username" placeholder="username*"
+											id="sign-in-form-username" value="">
 									</div>
 
 									<div class="mb-0">
 										<label class="form-label"></label>
-										<input class="form-control" type="password" name="password" placeholder="password*" id="sign-in-form-password" value="">
+										<input class="form-control" type="password" name="password"
+											placeholder="password*" id="sign-in-form-password" value="">
 									</div>
 
 									<div class="d-grid gap-2 mt-3 mb-5">
-										<button type="submit" value="Sign in" class="btn btn-light" onclick=signIn() id="sign-in-form-button">Sign in</button>
+										<button type="submit" value="Sign in" class="btn btn-light" onclick=signIn()
+											id="sign-in-form-button">Sign in</button>
 									</div>
 
 								</form>
@@ -175,13 +179,37 @@
 				</div>
 			</div>
 
+			<!-- Account Menu loader page -->
+			<div class="hidden-sign-in-out" id="menu-loader-spinner">
+				<div class="offcanvas-header">
+					<p id="offcanvasRightLabel">Loading..</p>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+						aria-label="Close"></button>
+				</div>
+
+				<div class="offcanvas-body text-start">
+					<div class="offcanvas-body text-start">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<div class="d-flex justify-content-center">
+									<div class="spinner-border" role="status" id="loader-spinner">
+
+										<span class="sr-only"></span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
 
 
 	<main>
-		
+
 		<div class="container p-0 m-0" style="max-width: 100%;">
 
 			<!-- Start page-->
@@ -220,10 +248,10 @@
 
 			<!-- My Ads page-->
 			<div class="page" id="my-ads-page">
-				
-			<h1 class="text-center">My Ads</h1>
+
+				<h1 class="text-center">My Ads</h1>
 				<div id="my-ads-container" class="col-12 text-center">
-					
+
 				</div>
 
 			</div>
@@ -245,31 +273,22 @@
 											<label class="form-label">Title</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="latinname" id="create-ad-latinname">
+											<input class="form-control" type="text" name="latinname"
+												id="create-ad-latinname">
 											<label class="form-label">Latin name</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="description" id="create-ad-description">
+											<input class="form-control" type="text" name="description"
+												id="create-ad-description">
 											<label class="form-label">Description</label>
 										</div>
-										<!--<div class="mb-3">
-											<b>Upload Coverimage:</b>
-											<input  type="file" name="coverImageFile">
-										</div>
 										<div class="mb-3">
-											<b>Upload image:</b>
-											<input type="file" name="firstImageFile">
-										</div>
-										<div class="mb-3">
-											<b>Upload image:</b> 
-											<input type="file" name="secondImageFile">
-										</div>-->
-										<div class="mb-3">
-											<input class="btn btn-primary btn" onclick= createAd() type="submit" value="Create" id="create-ad-button">
+											<input class="btn btn-primary btn" onclick=createAd() type="submit"
+												value="Create" id="create-ad-button">
 										</div>
 									</form>
 								</div>
-					
+
 							</div>
 						</div>
 					</div>
@@ -284,44 +303,51 @@
 
 				<div id="update-ad-container" class="col-12 text-center">
 
-					<form class="form-inline justify-content-center"  enctype='multipart/form-data' id="update-ad-form">
+					<form class="form-inline justify-content-center" enctype='multipart/form-data' id="update-ad-form">
 						<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
-		
+
 						<div class="col-sm-4 offset-sm-4 text-center">
 							<input type="hidden" name="id" value="" id="update-ad-form-ad-id">
 							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="title" value="Title" id="update-ad-form-title">
+								<input class="form-control" type="text" name="title" value="Title"
+									id="update-ad-form-title">
 								<label class="form-label">Title</label>
 							</div>
 							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="latinname" value="Latin" id="update-ad-form-latinname">
+								<input class="form-control" type="text" name="latinname" value="Latin"
+									id="update-ad-form-latinname">
 								<label class="form-label">Latin name</label>
 							</div>
 							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="description" value="Desc" id="update-ad-form-description">
+								<input class="form-control" type="text" name="description" value="Desc"
+									id="update-ad-form-description">
 								<label class="form-label">Description</label>
 							</div>
 						</div>
-						
+
 						<div class="row offset-sm-2">
 							<div class="col-3 ms-3">
-								<img class="img-thumbnail" src="" alt="coverImage"
-									name="coverimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-coverimage">
+								<img class="img-thumbnail" src="" alt="coverImage" name="coverimagepath"
+									class="flowerImage" style="width: 300px; height: 300px"
+									id="update-ad-form-coverimage">
 							</div>
 							<div class="col-3">
-								<img class="img-thumbnail" src="" alt="firstImage"
-									name="firstimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-firstimage">
+								<img class="img-thumbnail" src="" alt="firstImage" name="firstimagepath"
+									class="flowerImage" style="width: 300px; height: 300px"
+									id="update-ad-form-firstimage">
 							</div>
 							<div class="col-3">
-								<img class="img-thumbnail" src="" alt="secondImage"
-									name="secondimagepath" class="flowerImage" style="width: 300px; height: 300px" id="update-ad-form-secondimage">
+								<img class="img-thumbnail" src="" alt="secondImage" name="secondimagepath"
+									class="flowerImage" style="width: 300px; height: 300px"
+									id="update-ad-form-secondimage">
 							</div>
-						</div>	
-						
-						<div class="mb-3 mt-3 col-sm-4 offset-sm-4 text-center">
-							<button type="submit" class="btn btn-primary" onclick= sendUpdate() id="update-ad-update-Button">Update</button>
 						</div>
-						
+
+						<div class="mb-3 mt-3 col-sm-4 offset-sm-4 text-center">
+							<button type="submit" class="btn btn-primary" onclick=sendUpdate()
+								id="update-ad-update-Button">Update</button>
+						</div>
+
 					</form>
 
 				</div>
@@ -343,12 +369,14 @@
 								<div class="mb-3 col-12">
 									<div class="row">
 										<div class="col-12">
-											<form >
+											<form>
 												<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-												<input class="btn btn-primary" type="submit" value="Yes" id="ad-delete-button-yes">
-												<input type="submit" class="btn btn-primary m-2" value="No" id="ad-delete-button-no"> 
-											</form>    
-											   
+												<input class="btn btn-primary" type="submit" value="Yes"
+													id="ad-delete-button-yes">
+												<input type="submit" class="btn btn-primary m-2" value="No"
+													id="ad-delete-button-no">
+											</form>
+
 										</div>
 									</div>
 								</div>
@@ -380,23 +408,28 @@
 								<form class="form-inline justify-content-center">
 									<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="username" id="create-account-username">
+										<input class="form-control" type="text" name="username"
+											id="create-account-username">
 										<label class="form-label">Username</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="password" id="create-account-password">
+										<input class="form-control" type="text" name="password"
+											id="create-account-password">
 										<label class="form-label">Password</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="repeatpassword" id="create-account-repeat-password">
+										<input class="form-control" type="text" name="repeatpassword"
+											id="create-account-repeat-password">
 										<label class="form-label">Repeat Password</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="firstname" id="create-account-firstname">
+										<input class="form-control" type="text" name="firstname"
+											id="create-account-firstname">
 										<label class="form-label">Firstname</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="lastname" id="create-account-lastname">
+										<input class="form-control" type="text" name="lastname"
+											id="create-account-lastname">
 										<label class="form-label">Lastname</label>
 									</div>
 									<div class="form-floating mb-3">
@@ -404,7 +437,8 @@
 										<label class="form-label">Email</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="phonenumber" id="create-account-phonenumber">
+										<input class="form-control" type="text" name="phonenumber"
+											id="create-account-phonenumber">
 										<label class="form-label">Phonenumber</label>
 									</div>
 									<div class="form-floating mb-3">
@@ -412,11 +446,12 @@
 										<label class="form-label">City</label>
 									</div>
 									<div class="mb-3">
-										<input class="btn btn-primary" type="submit" onclick=createAccount() value="Create" id="create-account-create-button">
+										<input class="btn btn-primary" type="submit" onclick=createAccount()
+											value="Create" id="create-account-create-button">
 									</div>
 								</form>
 							</div>
-				
+
 						</div>
 					</div>
 
@@ -436,11 +471,13 @@
 								<form class="form-inline justify-content-center" id="personal-data-form">
 									<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="firstname" id="personal-data-firstname">
+										<input class="form-control" type="text" name="firstname"
+											id="personal-data-firstname">
 										<label class="form-label">Firstname</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="lastname" id="personal-data-lastname">
+										<input class="form-control" type="text" name="lastname"
+											id="personal-data-lastname">
 										<label class="form-label">Lastname</label>
 									</div>
 									<div class="form-floating mb-3">
@@ -448,7 +485,8 @@
 										<label class="form-label">Email</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="phonenumber" id="personal-data-phonenumber">
+										<input class="form-control" type="text" name="phonenumber"
+											id="personal-data-phonenumber">
 										<label class="form-label">Phonenumber</label>
 									</div>
 									<div class="form-floating mb-3">
@@ -456,11 +494,12 @@
 										<label class="form-label">City</label>
 									</div>
 									<div class="mb-3">
-										<input class="btn btn-primary" type="submit" value="Update" id="personal-data-update-button">
+										<input class="btn btn-primary" type="submit" value="Update"
+											id="personal-data-update-button">
 									</div>
 								</form>
 							</div>
-				
+
 						</div>
 					</div>
 
@@ -474,12 +513,12 @@
 				<p>This is the not found page.</p>
 			</div>
 
-			<!-- loader -->
-			<div class="d-flex justify-content-center page" id="loader-spinner">
-				<div class="spinner-border" role="status">
-				  <span class="sr-only"></span>
+			<!-- loader page -->
+			<div class="d-flex justify-content-center">
+				<div class="spinner-border page" role="status" id="loader-spinner">
+					<span class="sr-only"></span>
 				</div>
-			  </div>
+			</div>
 
 	</main>
 

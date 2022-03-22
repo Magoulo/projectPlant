@@ -1,20 +1,6 @@
 async function loadAdPage(id) {
-    console.log("token from global in Ad: ", sessionStorage.token)
 
-    function timeOut(url) {
-        
-        hideCurrentPage()
-        setTimeout(function () {
-            document.getElementById("loader-spinner").classList.add('current-page')
-        }, 1000)
-
-        document.getElementById("loader-spinner").classList.remove('current-page')
-        showPage(url)
-    }
-
-    const response = await fetch("http://localhost:3000/ads/" + id)
-
-    timeOut("/ads/" + id)
+    const response = await fetch("http://localhost:3000/ads/" + id)  
 
     // TODO: Check status code and act accordingly!
 

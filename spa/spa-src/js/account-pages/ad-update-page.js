@@ -24,19 +24,20 @@ async function loadAdUpdatePage(id){
     updateFormLatinName.value = ad.latinName  
     updateFormDescription.value = ad.description   
 
+    
+    
     //Eventlistener for update button
     updateButton.addEventListener('click', function (event) {
         event.preventDefault()
 
-        const url = "/ads/adUpdate/" + ad.id + "/update"
-        hideCurrentPage()
-        showPage(url)
+        const url = "/ads/adUpdate/" + ad.id + "/update"  
+        timeOut(url)
+       
         setPushState(url)
     })
 }
 
 async function sendUpdate(){
-  
     //Get all elements in update form
     const updateFormAdId = document.getElementById("update-ad-form-ad-id")
     const updateFormTitle = document.getElementById("update-ad-form-title")

@@ -26,8 +26,7 @@ async function loadAdDeletePage(id) {
         })
 
         const url = "/accounts/myAds"
-        hideCurrentPage()
-        showPage(url)
+        timeOut(url)
         setPushState(url)
     })
 

@@ -6,24 +6,6 @@ async function loadMyAdsPage() {
     setTimeout(5000)
     showPage(url)
   }
-/*
-<div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
- */
-    /*const loadDiv = document.createElement("div") Atempt with createing a loader in script, issue is the role attribute
-    const spinnerDiv = document.createElement("div")
-    const spinnerSpan = document.createElement("span")
-    spinnerSpan.classList.add("sr-only")
-    spinnerSpan.innerText = "Loading..."
-
-    spinnerDiv.appendChild(spinnerSpan)
-    spinnerDiv.classList.add("spinner-border")
-
-    loadDiv.appendChild(spinnerDiv)
-    loadDiv.classList.add(loadDiv)*/
 
     const response = await fetch("http://localhost:3000/ads/myAds", {
         method: 'GET',
@@ -33,7 +15,6 @@ async function loadMyAdsPage() {
     })
 
     
-
     // TODO: Check status code and act accordingly!
 
     const myAds = await response.json()
@@ -93,31 +74,11 @@ async function loadMyAdsPage() {
             aUpdate.classList.add("btn","btn-primary","m-2")
             aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id + "/update")
 
-            //Eventlistener for update button
-            aUpdate.addEventListener('click', function (event) {
-                event.preventDefault()
-
-                const url = event.target.getAttribute("href")
-                hideCurrentPage()
-                showPage(url)
-                setPushState(url)
-            })
-
             //delete button
             const aDelete = document.createElement('a')
             aDelete.innerText = "Delete"
             aDelete.classList.add("btn","btn-primary","m-2")
             aDelete.setAttribute('href', "/ads/adDelete/" + ad.id + "/delete")
-
-            //Eventlistener for delete button
-            aDelete.addEventListener('click', function (event) {
-                event.preventDefault()
-
-                const url = event.target.getAttribute("href")
-                hideCurrentPage()
-                showPage(url)
-                setPushState(url)
-            })
 
             //Append Update and Delete buttons to Ul
             myAdsUl.appendChild(aUpdate)

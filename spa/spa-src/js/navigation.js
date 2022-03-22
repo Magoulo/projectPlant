@@ -5,12 +5,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	const signInBody = document.getElementById("sign-in-body")
 	const signOutBody = document.getElementById("sign-out-body")
 	const signOutButton = document.getElementById("sign-out-form-button")
+	const menuLoadingSpinner = document.getElementById("menu-loader-spinner")
 
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
-
-		signOutBody.classList.remove("hidden-sign-in-out")
 		signInBody.classList.add("hidden-sign-in-out")
+		menuLoadingSpinner.classList.remove("hidden-sign-in-out")
+		
+		setTimeout(function () {
+			signOutBody.classList.remove("hidden-sign-in-out")
+			//signInBody.classList.add("hidden-sign-in-out")
+			menuLoadingSpinner.classList.add("hidden-sign-in-out")
+		}, 5000)
+
 	})
 
 	signOutButton.addEventListener('click', function (event) {
@@ -34,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			hideCurrentPage()
 			showPage(url)
-			
+
 		})
 
 	}
@@ -55,7 +62,7 @@ function hideCurrentPage() {
 }
 
 function showPage(url) {
-	
+
 	let nextPageId
 
 	switch (url) {
@@ -89,6 +96,7 @@ function showPage(url) {
 
 		case '/accounts/create':
 			nextPageId = 'create-account-page'
+			createAccount()
 			break
 
 		case '/accounts/personalData':
@@ -104,7 +112,7 @@ function showPage(url) {
 			if (url.startsWith("/ads/adUpdate/")) {
 
 				const [empty, ads, adUpdate, id] = url.split("/")
-				nextPageId = 'update-ad-page'	
+				nextPageId = 'update-ad-page'
 				loadAdUpdatePage(id)
 				break
 			}
@@ -117,36 +125,35 @@ function showPage(url) {
 			}
 
 			if (url.startsWith("/ads/")) {
-				
-				
+
+
 				const [empty, ads, id] = url.split("/")
 				console.log(id);
 				nextPageId = 'ad-page'
-				timeOut(url)
 				loadAdPage(id)
 			} else {
 
 				nextPageId = 'not-found-page'
-			}		
+			}
 	}
-	
+
 	document.getElementById(nextPageId).classList.add('current-page')
 
 }
 
 function timeOut(url) {
-	
-      
+
+	hideCurrentPage()
+	document.getElementById("loader-spinner").classList.add('current-page')
 	setTimeout(function () {
-		document.getElementById("loader-spinner").classList.add('current-page')  
-	
-		
-		hideCurrentPage()
+
+		document.getElementById("loader-spinner").classList.remove('current-page')
 		showPage(url)
+
 	}, 5000)
-	document.getElementById("loader-spinner").classList.remove('current-page')
+
 }
 
-function setPushState(url){
+function setPushState(url) {
 	history.pushState(null, "", url)
 }

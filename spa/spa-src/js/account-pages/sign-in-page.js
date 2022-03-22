@@ -1,30 +1,3 @@
-/*document.addEventListener('DOMContentLoaded', function () {
-
-  const signInButton = document.getElementById("sign-in-form-button")
-  const signInBody = document.getElementById("sign-in-body")
-  const signOutBody = document.getElementById("sign-out-body")
-  const signOutButton = document.getElementById("sign-out-form-button")
-
-  signInButton.addEventListener('click', function (event) {
-    event.preventDefault()
-
-    signOutBody.classList.remove("hidden-sign-in-out")
-    signInBody.classList.add("hidden-sign-in-out")
-  })
-
-  signOutButton.addEventListener('click', function (event) {
-    event.preventDefault()
-
-    signInBody.classList.remove("hidden-sign-in-out")
-    signOutBody.classList.add("hidden-sign-in-out")
-    showPage("/")
-    sessionStorage.setItem("token", "No token here")
-    console.log("sessionStorage token: ", sessionStorage.token)
-  })
-
-})*/
-
-
 async function signIn() {
   console.log("inne i signIn()")
 
@@ -42,6 +15,9 @@ async function signIn() {
   })
   console.log("username, password: ", username, password)
 
+
+  timeOut("/")
+
   var request = new XMLHttpRequest()
   request.open("POST", "http://localhost:3000/accounts/sign-in")
   request.setRequestHeader("Content-Type", "application/json")
@@ -54,6 +30,8 @@ async function signIn() {
     console.log("sessionStorage token: ", sessionStorage.token)
 
   })
+
+
   //-----------------------
 
 
