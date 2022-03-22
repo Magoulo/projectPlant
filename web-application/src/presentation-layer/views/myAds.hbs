@@ -25,7 +25,7 @@
 <!-- navigation content -->
 <div class="tab-content" id="nav-tabContent">
 
-	<!-- Manage ads -->
+	<!-- Manage My Ads -->
 	<div class="tab-pane fade show active" id="nav-manage-ads" role="tabpanel" aria-labelledby="nav-manage-ads-tab">
 
 		<div class="row my-5">
@@ -155,7 +155,7 @@
 											encType="multipart/form-data">
 											<div class="modal-body">
 
-												<input type="hidden" name="adID" value="{{adID}}">
+												<input type="hidden" name="adID" value="{{../id}}">
 
 												<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
@@ -168,7 +168,7 @@
 
 												<div class="mb-0">
 													<img class="img-thumbnail" src="/images/{{imagePath}}"
-														alt="imageToID{{adID}}" style="width: 400px; height: 400px">
+														alt="imageToID{{id}}" style="width: 400px; height: 400px">
 												</div>
 
 											</div>
@@ -199,7 +199,7 @@
 											encType="multipart/form-data">
 											<div class="modal-body">
 
-												<input type="hidden" name="adID" value="{{ad.adID}}">
+												<input type="hidden" name="adID" value="{{../id}}">
 
 												<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
@@ -273,7 +273,6 @@
 	</div>
 
 	<!-- My Closed Ads -->
-
 	<div class="tab-pane fade card card-body" id="nav-closed-ads" role="tabpanel" aria-labelledby="nav-closed-ads-tab">
 		<div class="row justify-content-start">
 			{{#if adAccepted}}

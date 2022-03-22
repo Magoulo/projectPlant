@@ -87,6 +87,7 @@ module.exports = function ({ adManager, userManager }) {
             } else {
                 allBids = adOffers
                 var adAccepted = []
+              
                 for (const ad of allAds) {
                     ad.bids = []
 
@@ -100,24 +101,8 @@ module.exports = function ({ adManager, userManager }) {
                         }
                     }
                 }
-                /* console.log("allAds: ", allAds)
-                 console.log("adAccepted", adAccepted)
               
-               
-                 var adDeclined = []
- 
-                 for (index in adOffers) {
-                     if (adOffers[index].status == "Accepted") {
-                         adAccepted.push(adOffers[index])
-                     }
- 
-                     if (adOffers[index].status == "Declined") {
-                         adDeclined.push(adOffers[index])
-                     }
-                 }*/
-
-                model.adAccepted = adAccepted
-                //  model.adDeclined = adDeclined
+                model.adAccepted = adAccepted         
 
                 response.render("myAds.hbs", model)
             }
