@@ -1,16 +1,18 @@
 const express = require('express')
 const path = require('path')
+const csrf = require('csurf')
+const csrfProtection = csrf()
 
 module.exports = function ({ adManager, bidManager }) {
     const router = express.Router()
 
-    router.get("/myBids", function (request, response) {
+    router.get("/myBids", csrfProtection, function (request, response) {
 
         var bidAccepted = []
         var bidPending = []
         var bidDeclined = []
 
-        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {//userID, function (errors, bid) {
+        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
 
             for (index in Bid) {
 
@@ -33,14 +35,15 @@ module.exports = function ({ adManager, bidManager }) {
                 bidAccepted: bidAccepted,
                 bidPending: bidPending,
                 bidDeclined: bidDeclined,
-                layout: 'account.hbs'
+                layout: 'account.hbs',
+                csrfToken: request.csrfToken()
             }
 
             response.render("myBids.hbs", model)
         })
     })
 
-    router.post("/updateBid/:bidID/:status", function (request, response) {
+    router.post("/updateBid/:bidID/:status", csrfProtection, function (request, response) {
 
         const adID = request.body.adID
         const bid = { status: request.params.status, bidID: request.params.bidID }
@@ -52,7 +55,8 @@ module.exports = function ({ adManager, bidManager }) {
                     const model = {
                         error: error,
                         session: request.session,
-                        layout: 'account.hbs'
+                        layout: 'account.hbs',
+                        csrfToken: request.csrfToken()
                     }
 
                     response.render("myAds.hbs", model)
@@ -64,7 +68,8 @@ module.exports = function ({ adManager, bidManager }) {
                             console.log("error 2")
                             const model = {
                                 error: error,
-                                session: request.session
+                                session: request.session,
+                                csrfToken: request.csrfToken()
                             }
 
                             response.render("myAds.hbs", model)
@@ -82,7 +87,8 @@ module.exports = function ({ adManager, bidManager }) {
                 const model = {
                     error: error,
                     session: request.session,
-                    layout: 'account.hbs'
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
                 }
 
                 response.render("myAds.hbs", model)
@@ -92,7 +98,7 @@ module.exports = function ({ adManager, bidManager }) {
         })
     })
 
-    router.post("/placeBid", function (request, response) {
+    router.post("/placeBid", csrfProtection, function (request, response) {
 
         const adID = request.body.adID
         const bidMessage = request.body.message
@@ -111,7 +117,8 @@ module.exports = function ({ adManager, bidManager }) {
                             msgError: error,
                             errors: errors,
                             Ad: Ad,
-                            session: request.session
+                            session: request.session,
+                            csrfToken: request.csrfToken()
                         }
                         response.render("ad.hbs", model)
                     })
@@ -123,7 +130,8 @@ module.exports = function ({ adManager, bidManager }) {
                             msg: "Bid has been placed successfully",
                             errors: errors,
                             Ad: Ad,
-                            session: request.session
+                            session: request.session,
+                            csrfToken: request.csrfToken()
                         }
                         response.render("ad.hbs", model)
                     })
@@ -151,7 +159,8 @@ module.exports = function ({ adManager, bidManager }) {
                                     msgError: error,
                                     errors: errors,
                                     Ad: Ad,
-                                    session: request.session
+                                    session: request.session,
+                                    csrfToken: request.csrfToken()
                                 }
                                 response.render("ad.hbs", model)
                             })
@@ -164,7 +173,8 @@ module.exports = function ({ adManager, bidManager }) {
                                     msg: "Bid has been placed successfully",
                                     errors: errors,
                                     Ad: Ad,
-                                    session: request.session
+                                    session: request.session,
+                                    csrfToken: request.csrfToken()
                                 }
                                 response.render("ad.hbs", model)
                             })

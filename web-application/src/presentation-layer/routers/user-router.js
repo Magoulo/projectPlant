@@ -1,23 +1,26 @@
 const express = require('express')
+const csrf = require('csurf')
+const csrfProtection = csrf()
 
 module.exports = function ({ userManager }) {
     const router = express.Router()
 
-    router.get("/personalData", function (request, response) {
+    router.get("/personalData", csrfProtection, function (request, response) {
         userManager.getUserByUserID(request.session.userID, function (errors, User) {
 
             const model = {
                 errors: errors,
                 User: User,
                 session: request.session,
-                layout: 'account.hbs'
+                layout: 'account.hbs',
+                csrfToken: request.csrfToken()
             }
 
             response.render("personalData.hbs", model)
         })
     })
 
-    router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
+    router.post('/personalData/:userID/update', csrfProtection, function (request, response) {
 
         const userID = request.params.userID
         const firstName = request.body.firstName
@@ -29,7 +32,7 @@ module.exports = function ({ userManager }) {
         const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
 
-        userManager.updateUserByUserID(User, function (error) { // userManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
+        userManager.updateUserByUserID(User, function (error) {
 
             if (error.length !== 0) {
 
@@ -50,8 +53,8 @@ module.exports = function ({ userManager }) {
                     phoneNumberErrors,
                     cityErrors,
                     session: request.session,
-                    layout: 'account.hbs'
-                    //   csrfToken: request.csrfToken()
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
                 }
 
                 response.render('personalData.hbs', model)
@@ -61,8 +64,8 @@ module.exports = function ({ userManager }) {
                     User,
                     msg: "The update of personal data has been carried out successfully",
                     session: request.session,
-                    layout: 'account.hbs'
-                    //   csrfToken: request.csrfToken()
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
                 }
 
                 response.render('personalData.hbs', model)

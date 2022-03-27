@@ -1,18 +1,20 @@
 const express = require('express')
+const csrf = require('csurf')
+const csrfProtection = csrf()
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
 
-	router.get("/sign-up", function (request, response) {
-		response.render("accounts-sign-up.hbs")
+/*	router.get("/sign-up", function (request, response) { // Don't think this is used
+		response.render("accounts-sign-up.hbs", { csrfToken: request.csrfToken() })
+	})*/
+
+	router.get("/create", csrfProtection, function (request, response) {
+		response.render("accountCreate.hbs", { csrfToken: request.csrfToken() })
 	})
 
-	router.get("/create", function (request, response) {
-		response.render("accountCreate.hbs")
-	})
-
-	router.post("/create", function (request, response) {
+	router.post("/create", csrfProtection, function (request, response) {
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -51,8 +53,8 @@ module.exports = function ({ accountManager, userManager }) {
 					lastName,
 					email,
 					phoneNumber,
-					city
-					//   csrfToken: request.csrfToken()
+					city,
+					csrfToken: request.csrfToken()
 				}
 
 				response.render('accountCreate.hbs', model)
@@ -69,7 +71,7 @@ module.exports = function ({ accountManager, userManager }) {
 						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
 							if (error.length !== 0) {
 
-								errors.push(": couldn't resolve the problem") //couldn't delete the account
+								errors.push(": couldn't resolve the problem")
 
 								model = {
 									msgError: errors,
@@ -78,8 +80,8 @@ module.exports = function ({ accountManager, userManager }) {
 									lastName,
 									email,
 									phoneNumber,
-									city
-									//   csrfToken: request.csrfToken()
+									city,
+									csrfToken: request.csrfToken()
 								}
 
 								response.render('accountCreate.hbs', model)
@@ -96,15 +98,15 @@ module.exports = function ({ accountManager, userManager }) {
 									email,
 									phoneNumber,
 									city,
-									results
-									//   csrfToken: request.csrfToken()
+									results,
+									csrfToken: request.csrfToken()
 								}
 
 								response.render('accountCreate.hbs', model)
 							}
 						})
 					} else {
-						response.redirect("/")
+						response.redirect("/", { csrfToken: request.csrfToken() })
 					}
 				})
 			}
@@ -149,11 +151,11 @@ module.exports = function ({ accountManager, userManager }) {
 
 	})
 
-	router.get("/sign-in", function (request, response) {
-		response.render("accounts-sign-in.hbs")
-	})
+	/*router.get("/sign-in", csrfProtection, function (request, response) { // NOt used?
+		response.render("accounts-sign-in.hbs", { csrfToken: request.csrfToken() })
+	})*/
 
-	router.post("/sign-in", function (request, response) {
+	router.post("/sign-in", csrfProtection, function (request, response) {
 
 		const username = request.body.username
 		const password = request.body.password
@@ -167,7 +169,7 @@ module.exports = function ({ accountManager, userManager }) {
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true
-					request.session.userID = UserAccount.Users.id // UserAccounts.userAccountID ------------------------------------------------ MySQL
+					request.session.userID = UserAccount.Users.id
 					console.log("sessionUserID: ", request.session.userID)
 
 					response.redirect('/')
@@ -177,7 +179,8 @@ module.exports = function ({ accountManager, userManager }) {
 
 					const model = {
 						errors,
-						UserAccount
+						UserAccount,
+						csrfToken: request.csrfToken()
 					}
 
 					response.render('start.hbs', model)
@@ -188,7 +191,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 				const model = {
 					errors,
-					//	csrfToken: request.csrfToken()
+					csrfToken: request.csrfToken()
 				}
 
 				response.render('start.hbs', model)
@@ -204,15 +207,16 @@ module.exports = function ({ accountManager, userManager }) {
 
 	// TEST---------------------------------------------------------------------------------------------------------------
 
-	router.get("/", function (request, response) {
+/*	router.get("/", function (request, response) {
 		accountManager.getAllAccounts(function (errors, UserAccounts) {
 			const model = {
 				errors: errors,
-				UserAccounts: UserAccounts
+				UserAccounts: UserAccounts,
+				csrfToken: request.csrfToken()
 			}
 			response.render("accounts-list-all.hbs", model)
 		})
-	})
+	})*/
 
 	return router
 }

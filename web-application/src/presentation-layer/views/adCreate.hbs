@@ -5,7 +5,7 @@
             <div>
                 <form class="form-inline justify-content-center" action="/ads/adCreate" method="POST"
                     encType="multipart/form-data">
-                    <!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="title" value="{{Ad.title}}">
                         <label class="form-label">Title</label>

@@ -22,8 +22,9 @@
         <div class="row justify-content-center">
             <div class="col-auto">
                 <form action="/ads/adDelete/{{Ad.id}}/delete" method="POST">
-                    <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     <input class="btn btn-outline-danger" type="submit" value="Yes">
+                    
                 </form>
             </div>
             <div class="col-auto">

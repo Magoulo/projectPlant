@@ -25,7 +25,7 @@ module.exports = function ({ accountManager, userManager }) {
 		const city = request.body.city
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
-
+		
 		accountManager.createAccount(account, function (error, userAccount) {
 
 			if (error.length !== 0) {

@@ -1,66 +1,67 @@
 const express = require('express')
 const nodemailer = require('nodemailer')
+const csrf = require('csurf')
+const csrfProtection = csrf()
 
 module.exports = function ({ adManager, userManager }) {
 	const router = express.Router()
 
-	router.get("/", function (request, response) {
+	router.get("/", csrfProtection, function (request, response) {
 
 		adManager.getAllAds(function (errors, Ad) {
-// ------behöver en user hämtas?? ----------------------------------------------------------------------------------------------
-
-		//	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 
 				const model = {
 					errors: errors,
-				//	User: User,
 					Ad: Ad,
 					session: request.session,
-					layout: 'start.hbs'
+					layout: 'start.hbs',
+					csrfToken: request.csrfToken()
 				}
 				
 				response.render("start.hbs", model)
-		//	})
 		})
 	})
 
-	router.get("/about", function (request, response) {
+	router.get("/about", csrfProtection, function (request, response) {
 
 		userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 			const model = {
 				errors: errors,
 				User: User,
 				session: request.session,
+				csrfToken: request.csrfToken()
 			}
 
 			response.render("about.hbs", model,)
 		})
 	})
 
-	router.get("/contact", function (request, response) {
+	router.get("/contact", csrfProtection, function (request, response) {
 		
 		userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 			const model = {
 				errors: errors,
 				User: User,
-				session: request.session
+				session: request.session,
+				csrfToken: request.csrfToken()
 			}
 
 			response.render("contact.hbs", model)
 		})
 	})
 
-	router.get("/myFavoriteAds", function (request, response) {
+	router.get("/myFavoriteAds", csrfProtection, function (request, response) {
 
 		const model = {
 			session: request.session,
-			layout: 'account.hbs'
+			layout: 'account.hbs',
+			csrfToken: request.csrfToken()
 		}
 
 		response.render("myFavoriteAds.hbs", model)
 	})
 
-	router.post("/mail", function (request, response) {
+	router.post("/mail", csrfProtection, function (request, response) {
 		
 		const name = request.body.name
 		const subject = request.body.subject
@@ -95,54 +96,6 @@ module.exports = function ({ adManager, userManager }) {
 		}
 		mail().catch(console.error);
 	})
-
-	/*router.post('/personalData/:userID/update', function (request, response) {//csrfProtection, function (request, response) {
-		const userID = request.params.userID
-		const firstName = request.body.firstname
-		const lastName = request.body.lastname
-		const email = request.body.email
-		const phoneNumber = request.body.phonenumber
-		const city = request.body.city
-	
-		 const errors = []//validators.getDonValidationErrors(Name, Description)
-		if (errors.length == 0) {
-			accountManager.updateUserByUserID(userID, firstName, lastName, email, phoneNumber, city, function (error) {
-				console.log("error:", error)
-				if (error) {
-					errors.push("Internal server error")
-					model = {
-						errors,
-						userID,
-						firstName,
-						lastName,
-						email,
-						phoneNumber,
-						city,
-						session: request.session
-					 //   csrfToken: request.csrfToken()
-					}
-					response.render('personalData.hbs', model)
-				}
-				else {
-					response.redirect('/personalData')
-				}
-			})
-		}
-		else { 
-			const model = {
-				errors,
-				userID,
-				firstName,
-				lastName,
-				email,
-				phoneNumber,
-				city,
-				session: request.session
-			 //   csrfToken: request.csrfToken()
-			}
-			response.render('personalData.hbs', model)
-		}
-	})	*/
 
 	return router
 }

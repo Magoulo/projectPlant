@@ -1,11 +1,13 @@
-<div class="content">
-	<h2>Sign in</h2>
-	<p>Sign in using the form below.</p>
+<div class="content"> <!-- Not used? -->
+  <h2>Sign in</h2>
+  <p>Sign in using the form below.</p>
 </div>
 
 <form action="/auth/login" method="POST">
+
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  <div class="form-group bg-grey ml-2" >
+
+  <div class="form-group bg-grey ml-2">
     <div>
       <label class="form-label text-left">Username</label>
       <input class="form-input col-4" type="text" name="username" placeholder="Username">
@@ -14,7 +16,8 @@
       <label class="form-label text-left">Password</label>
       <input class="form-input col-4 mb-2" type="password" name="password" placeholder="Password">
     </div>
-      <input class="float-left btn" type="submit" value="Sign in">
+    <input class="float-left btn" type="submit" value="Sign in">
   </div>
 </form>
+
 <a href="/auth/create" class="float-left ml-2"><button class="btn">Create account</button></a>
