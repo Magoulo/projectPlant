@@ -1,19 +1,16 @@
 const express = require('express')
-const path = require('path')
-
-var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
-
+var jwt = require('jsonwebtoken');
 
 module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
 
-    router.get("/", function (request, response) {
+    router.get("/", function (response) {
 
         adManager.getAllAds(function (errors, Ad) {
 
             if (errors.length !== 0) {
-                response.status(400).json(errors)
+                response.status(400)
             } else {
                 response.status(200).json(Ad)
             }
@@ -23,9 +20,9 @@ module.exports = function ({ adManager, userManager }) {
 
     router.get("/myAds", function (request, response) {
 
-        const authorizationHeader = request.header("Authorization")      
+        const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)
-   
+
         var allAds = []
         var allBids = []
 
@@ -78,7 +75,7 @@ module.exports = function ({ adManager, userManager }) {
         const latinName = request.body.latinName
         const description = request.body.description
 
-        const Ad = {id: adID, title: title, latinName: latinName, description: description}
+        const Ad = { id: adID, title: title, latinName: latinName, description: description }
 
         adManager.updateAdByAdID(Ad, function (error) {
             if (error.length !== 0) {
@@ -119,9 +116,9 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.delete("/adDelete/:adID/delete", function (request, response) {
- 
+
         const adID = request.params.adID
-      
+
         adManager.deleteAd(adID, function (errors) {
             if (errors.length !== 0) {
                 response.status(400).json(errors)
@@ -135,7 +132,7 @@ module.exports = function ({ adManager, userManager }) {
     router.put("/adCreate", function (request, response) {
         console.log("inne i adCreate")
 
-        const authorizationHeader = request.header("Authorization")      
+        const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)
 
         const coverImageFile = "no-image.png"
@@ -146,7 +143,7 @@ module.exports = function ({ adManager, userManager }) {
         const errors = []
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
-            
+
             const ad = { userID: payload.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
             if (error) {
@@ -178,27 +175,24 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
     router.get('/:adID', function (request, response) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
             if (errors.length !== 0) {
-                response.status(400).json(errors)
+                response.status(500)
             } else {
                 userManager.getUserByUserID(Ad.userID, function (errors, User) {
 
                     if (errors.length !== 0) {
-                        response.status(400).json(errors)
+                        response.status(500)
                     } else {
-                        response.status(200).json({Ad,User})
+                        response.status(200).json({ Ad, User })
                     }
                 })
-
             }
         })
     })
-
 
     return router
 }
