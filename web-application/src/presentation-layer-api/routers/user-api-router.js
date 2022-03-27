@@ -6,7 +6,7 @@ module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-    
+        
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring("Bearer ".length)
 

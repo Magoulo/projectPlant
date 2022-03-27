@@ -1,4 +1,4 @@
-<!-- searchbar -->
+<!-- Searchbar -->
 <div class="row justify-content-center m-5">
 	<div class="col-auto"></div>
 
@@ -12,15 +12,16 @@
 	<div class="col-auto"></div>
 </div>
 
-
-<!-- featured ads, lägg till olika -->
+<!-- All Ads-->
 {{#if errors.length}}
-<p>Oh no, something went wrong:</p>
-<ul>
-	{{#each errors}}
-	<li>{{this}}</li>
-	{{/each}}
-</ul>
+<div class="col-12 text-center">
+	<p>Oh no, something went wrong:</p>
+	<ul>
+		{{#each errors}}
+		<li>{{this}}</li>
+		{{/each}}
+	</ul>
+</div>
 
 {{else}}
 {{#if Ad.length}}
