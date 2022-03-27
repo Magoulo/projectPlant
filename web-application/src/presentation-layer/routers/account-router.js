@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs')
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-
 /*	router.get("/sign-up", function (request, response) { // Don't think this is used
 		response.render("accounts-sign-up.hbs", { csrfToken: request.csrfToken() })
 	})*/
@@ -113,43 +112,6 @@ module.exports = function ({ accountManager, userManager }) {
 			}
 		})
 
-
-		// ------------------------------ Create Account Test ---------------------------------------------------
-
-		/*accountManager.getAllAccounts(function(error,userAccount){
-			if(error.length !== 0){
-				console.log("error in getAllAccounts")
-			} else {
-				console.log(userAccount)
-			}
-		})
-		*/
-
-		/*accountManager.createAccount(account, function (error, userAccountID) {
-			if(error){
-			console.log("error in createAccount")	
-			} else {
-				console.log("Account created with userAccountID: ", userAccountID)
-	
-				accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
-					if (error.length !== 0) {
-						console.log("Couldn't delete the account")
-						console.log("error: ", error)
-					} else {
-					console.log("Account deleted")
-					//Get all accounts to verify?
-					accountManager.getAllAccounts(function(error,userAccount){
-						if(error.length !== 0){
-							console.log("error in getAllAccounts")
-						} else {
-							console.log(userAccount)
-						}
-					})
-					}
-				})
-			}
-		})*/
-
 	})
 
 	/*router.get("/sign-in", csrfProtection, function (request, response) { // NOt used?
@@ -204,20 +166,6 @@ module.exports = function ({ accountManager, userManager }) {
 		request.session.destroy();
 		response.redirect('/')
 	})
-
-
-	// TEST---------------------------------------------------------------------------------------------------------------
-
-/*	router.get("/", function (request, response) {
-		accountManager.getAllAccounts(function (errors, UserAccounts) {
-			const model = {
-				errors: errors,
-				UserAccounts: UserAccounts,
-				csrfToken: request.csrfToken()
-			}
-			response.render("accounts-list-all.hbs", model)
-		})
-	})*/
 
 	return router
 }

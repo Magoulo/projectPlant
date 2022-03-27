@@ -52,17 +52,3 @@ module.exports = function () {
 
 	}
 }
-
-/*
-getAllAccounts: function (callback) {
-
-	models.UserAccount.findAll({
-		order: [
-			['username', 'ASC'],
-		],
-	}).then((userAccounts) => {
-		callback(userAccounts.dataValues)
-	}).catch((error) => {
-		callback(error)
-	})
-},*/

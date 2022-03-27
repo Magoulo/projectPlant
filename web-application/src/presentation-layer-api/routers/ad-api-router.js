@@ -8,11 +8,6 @@ const SECRET = 'lelelelelelelble'
 module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
 
-    /* router.get("/ad", function (request, response) {response.render("ad.hbs", model)})*/
-    /* router.get("/ads", function (request, response) {})*/
-    /* router.get("/adCreate", function (request, response) {response.render("adCreate.hbs", model)})*/
-
-
     router.get("/", function (request, response) {
 
         adManager.getAllAds(function (errors, Ad) {
@@ -43,7 +38,7 @@ module.exports = function ({ adManager, userManager }) {
                     if (errors.length !== 0) {
                         response.status(400).json(errors)
                     } else {
-                        allAds = Ad //???
+                        allAds = Ad
                     }
                 })
 
@@ -76,7 +71,7 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.put('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
+    router.put('/adUpdate/:adID/update', function (request, response) {
 
         const adID = request.params.adID
         const title = request.body.title
@@ -158,18 +153,6 @@ module.exports = function ({ adManager, userManager }) {
                 response.status(401).end()
 
             } else {
-            /*    for (var i = 0; i < images.length; i++) {
-
-                    const uploadPath = path.resolve(__dirname, '../public/images/', images[i].name)
-
-                    images[i].mv(uploadPath, function (error) {
-                        if (error) {
-                            errors.push("couldn't upload picture")
-                            response.status(418).json(errors)
-                        }
-                    })
-                }*/
-
                 adManager.createAd(ad, function (error, Ad) {
 
                     if (error.length !== 0) {

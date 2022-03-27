@@ -7,12 +7,6 @@ const SECRET = 'lelelelelelelble'
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-	/* 
-	router.get("/sign-up", function (request, response) {response.render("accounts-sign-up.hbs")})
-	router.get("/create", function (request, response) {response.render("accountCreate.hbs")})
-	router.get("/sign-in", function (request, response) {response.render("accounts-sign-in.hbs")})
-	*/
-
 	router.put("/create", function (request, response) {
 
 		const userName = request.body.username
@@ -104,7 +98,6 @@ module.exports = function ({ accountManager, userManager }) {
 
 						}
 					})
-					// create a dupplicate of jwt.sign
 				} else {
 					errors.push("Wrong Username or Password")
 					response.status(418).json(errors)
@@ -125,58 +118,3 @@ module.exports = function ({ accountManager, userManager }) {
 
 	return router
 }
-
-
-
-
-// TA BORT INNAN INLÄMMNING
-
-		// ------------------------------ Create Account Test ---------------------------------------------------
-
-/*accountManager.getAllAccounts(function(error,userAccount){
-	if(error.length !== 0){
-		console.log("error in getAllAccounts")
-	} else {
-		console.log(userAccount)
-	}
-})
-*/
-
-/*accountManager.createAccount(account, function (error, userAccountID) {
-	if(error){
-	console.log("error in createAccount")	
-	} else {
-		console.log("Account created with userAccountID: ", userAccountID)
-	
-		accountManager.deleteAccountByUserAccountID(userAccountID, function (error) {
-			if (error.length !== 0) {
-				console.log("Couldn't delete the account")
-				console.log("error: ", error)
-			} else {
-			console.log("Account deleted")
-			//Get all accounts to verify?
-			accountManager.getAllAccounts(function(error,userAccount){
-				if(error.length !== 0){
-					console.log("error in getAllAccounts")
-				} else {
-					console.log(userAccount)
-				}
-			})
-			}
-		})
-	}
-})*/
-
-/*
-// TEST---------------------------------------------------------------------------------------------------------------
-
-router.get("/", function (request, response) {
-accountManager.getAllAccounts(function (errors, UserAccounts) {
-const model = {
-	errors: errors,
-	UserAccounts: UserAccounts
-}
-response.render("accounts-list-all.hbs", model)
-})
-})
-*/

@@ -18,7 +18,6 @@ module.exports = function ({ }) {
 	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
 	redisClient.connect().catch(console.error)
 
-	//express-handlebars setup ------------------------------------------------------------
 	app.set('views', path.join(__dirname, 'views'))
 
 	app.engine('hbs', expressHandlebars({
@@ -28,8 +27,6 @@ module.exports = function ({ }) {
 		partialsDir: path.join(__dirname, 'partials')
 	}))
 
-
-	// Handle static files in the public folder.
 	app.use(express.static(path.join(__dirname, 'public')))
 
 	app.use(bodyParser.json())
@@ -37,8 +34,6 @@ module.exports = function ({ }) {
 		extended: false
 	}))
 	
-	// Add CORS, so client-side code on other websites are allowed
-	// to send HTTP requests to us.
 	app.use(function (request, response, next) {
 		response.setHeader("Access-Control-Allow-Origin", "*")
 		response.setHeader("Access-Control-Allow-Methods", "*")
@@ -60,9 +55,9 @@ module.exports = function ({ }) {
 
 	app.use(function (req, res, next) {
 		if (!req.session) {
-			return next(new Error("oh no")) // handle error
+			return next(new Error("oh no"))
 		}
-		next() // otherwise continue
+		next()
 	})
 
 

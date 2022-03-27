@@ -7,8 +7,6 @@ const session = require('express-session')
 const redis = require("redis")
 const awilix = require('awilix')
 const app = express()
-const csrf = require('csurf')
-const csrfProtection = csrf()
 
 module.exports = function ({}) {
 	const router = express.Router()
@@ -18,7 +16,6 @@ module.exports = function ({}) {
 	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
 	redisClient.connect().catch(console.error)
 
-	//express-handlebars setup ------------------------------------------------------------
 	app.set('views', path.join(__dirname, 'views'))
 
 	app.engine('hbs', expressHandlebars({
@@ -47,9 +44,9 @@ module.exports = function ({}) {
 
 	app.use(function (req, res, next) {
 		if (!req.session) {
-			return next(new Error("oh no")) // handle error
+			return next(new Error("oh no"))
 		}
-		next() // otherwise continue
+		next()
 	})
 
 
