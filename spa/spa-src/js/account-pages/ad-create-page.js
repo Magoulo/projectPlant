@@ -27,7 +27,7 @@ async function createAd() {
         const response = fetch("http://localhost:3000/ads/adCreate", {
             method: 'Put',
             headers: new Headers({
-                'Authorization': "bearer " + sessionStorage.token,
+                'Authorization': "Bearer " + sessionStorage.accessToken,
                 "Content-Type": "application/json"
             }),
             body: body

@@ -29,7 +29,7 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/myAds", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")      
-        const accessToken = authorizationHeader.substring('bearer '.length)
+        const accessToken = authorizationHeader.substring('Bearer '.length)
    
         var allAds = []
         var allBids = []
@@ -78,7 +78,6 @@ module.exports = function ({ adManager, userManager }) {
 
     router.put('/adUpdate/:adID/update', function (request, response) {//csrfProtection, function (request, response) {
 
-        console.log("inne PUT i adUpdate i backenden")
         const adID = request.params.adID
         const title = request.body.title
         const latinName = request.body.latinName
@@ -98,7 +97,7 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.get("/adUpdate/:adID", function (request, response) {
-        console.log("inne i GET update i backend")
+
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (error, Ad) {
@@ -125,7 +124,7 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.delete("/adDelete/:adID/delete", function (request, response) {
-        console.log("inne i delete adDelete")
+ 
         const adID = request.params.adID
       
         adManager.deleteAd(adID, function (errors) {
@@ -139,10 +138,10 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.put("/adCreate", function (request, response) {
-        console.log("inne i adCreate i backend")
+        console.log("inne i adCreate")
 
         const authorizationHeader = request.header("Authorization")      
-        const accessToken = authorizationHeader.substring('bearer '.length)
+        const accessToken = authorizationHeader.substring('Bearer '.length)
 
         const coverImageFile = "no-image.png"
         const firstImageFile = "no-image.png"
@@ -152,7 +151,7 @@ module.exports = function ({ adManager, userManager }) {
         const errors = []
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
-
+            
             const ad = { userID: payload.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
             if (error) {

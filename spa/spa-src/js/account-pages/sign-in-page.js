@@ -32,12 +32,3 @@ async function signIn() {
   })
 
 }
-/*
- const tokens = JSON.parse(request.responseText)
-    console.log("tokens: ", tokens)
-    sessionStorage.setItem("accesToken", tokens.accessToken)
-    sessionStorage.setItem("idToken", tokens.idToken)
-
-    console.log("sessionStorage accesToken: ", sessionStorage.accessToken)
-    console.log("sessionStorage idToken: ", sessionStorage.idToken) 
-*/

@@ -1,16 +1,11 @@
 async function loadMyAdsPage() {
 
-    console.log("sessionStorage token: ", sessionStorage.accessToken)
-
-   // console.log("sessionStorage accessToken: ", sessionStorage.accessToken)
-    //console.log("sessionStorage idToken: ", sessionStorage.idToken)
-
-  function timeOut(url){
+  /*function timeOut(url){
     hideCurrentPage()
     const spinner = document.getElementById("loader-spinner").classList.add('current-page')
     setTimeout(5000)
     showPage(url)
-  }
+  }*/
 
     const response = await fetch("http://localhost:3000/ads/myAds", {
         method: 'GET',

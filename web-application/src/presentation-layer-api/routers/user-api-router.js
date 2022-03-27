@@ -6,9 +6,9 @@ module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-        console.log("inne i personalData i backend")
+    
         const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring("bearer ".length)
+        const accessToken = authorizationHeader.substring("Bearer ".length)
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
             if (error) {

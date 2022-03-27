@@ -113,7 +113,6 @@ module.exports = function ({ adManager, bidManager }) {
                     })
 
                     bidManager.createBid(Ad, function (error) {
-                        console.log("kommer inte ens hit?")
                         console.log("Error: ", error)
 
                         if (error) {

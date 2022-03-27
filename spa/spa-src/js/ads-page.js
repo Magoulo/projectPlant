@@ -1,5 +1,4 @@
 async function loadAdsPage() {
-	console.log("token from global: ", sessionStorage.token)
 
 	const response = await fetch("http://localhost:3000/ads")
 

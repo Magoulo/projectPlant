@@ -4,7 +4,7 @@ async function loadPersonalData(id) {
     const response = await fetch("http://localhost:3000/user/personalData", {
         method: 'GET',
         headers: new Headers({
-            'Authorization': "bearer " + sessionStorage.token,
+            'Authorization': "Bearer " + sessionStorage.accessToken,
         }),
     })
     const user = await response.json()
@@ -49,7 +49,7 @@ async function loadPersonalData(id) {
         console.log("body: ", body)
 
         //Send the data for delete
-        const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", {
+        const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", { // dubbla slashes här?? user//personalData/
             method: 'Put',
             headers: new Headers({
                 "Content-Type": "application/json"

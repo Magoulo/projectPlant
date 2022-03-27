@@ -14,7 +14,6 @@ module.exports = function ({ accountManager, userManager }) {
 	*/
 
 	router.put("/create", function (request, response) {
-		console.log("inne i create account i backend")
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -32,8 +31,7 @@ module.exports = function ({ accountManager, userManager }) {
 			if (error.length !== 0) {
 				response.status(500).json(error)
 			} else {
-				console.log("Account created")
-				console.log("userAccountID: ", userAccount.id)
+				console.log("Account created with the ID: ", userAccount.id)
 
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
@@ -60,13 +58,10 @@ module.exports = function ({ accountManager, userManager }) {
 
 
 	router.post("/sign-in", function (request, response) {
-		console.log("inne i sign-in i backenden")
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
-
-		console.log("username, password: ", username, password)
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
@@ -88,26 +83,20 @@ module.exports = function ({ accountManager, userManager }) {
 					}
 
 					jwt.sign(payloadAccessToken, SECRET, function (error, accessToken) { // Access Token
-						console.log("the token in backend:", accessToken)
 
 						if (error) {
 							response.status(401)
 						} else {
-						/*	const idToken = "hej"
-							response.status(200).json(
-								{accessToken, idToken}
-							)*/
 
-								jwt.sign(payloadIdToken, SECRET, function (error, idToken) { // Id Token
-								console.log("the idToken in backend:", idToken)
+							jwt.sign(payloadIdToken, SECRET, function (error, idToken) { // Id Token
 
 								if (error) {
 									response.status(401)
 								} else {
 
 									response.status(200).json(
-										{accessToken, idToken}
-										
+										{ accessToken, idToken }
+
 									)
 								}
 							})
