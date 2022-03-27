@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		signOutBody.classList.add("hidden-sign-in-out")
 		showPage("/")
 		sessionStorage.setItem("token", "No token here")
-		console.log("sessionStorage token: ", sessionStorage.token)
+		console.log("sessionStorage token: ", sessionStorage.accessToken)
 	})
 
 	for (const anchor of anchors) {

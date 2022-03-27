@@ -73,21 +73,46 @@ module.exports = function ({ accountManager, userManager }) {
 
 				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
 
-					const payload = {
+					const payloadAccessToken = {
 						isLoggedIn: true,
 						userID: UserAccount.Users.id
 					}
 
-					jwt.sign(payload, SECRET, function (error, token) {
-						console.log("the token in backend:", token)
+					const payloadIdToken = {
+						Firstname: UserAccount.Users.firstName,
+						Lastname: UserAccount.Users.lastName,
+						Email: UserAccount.Users.email,
+						Phonenumber: UserAccount.Users.phoneNumber,
+						City: UserAccount.Users.city
+
+					}
+
+					jwt.sign(payloadAccessToken, SECRET, function (error, accessToken) { // Access Token
+						console.log("the token in backend:", accessToken)
 
 						if (error) {
 							response.status(401)
 						} else {
-
+						/*	const idToken = "hej"
 							response.status(200).json(
-								token
-							)
+								{accessToken, idToken}
+							)*/
+
+								jwt.sign(payloadIdToken, SECRET, function (error, idToken) { // Id Token
+								console.log("the idToken in backend:", idToken)
+
+								if (error) {
+									response.status(401)
+								} else {
+
+									response.status(200).json(
+										{accessToken, idToken}
+										
+									)
+								}
+							})
+
+
 						}
 					})
 					// create a dupplicate of jwt.sign

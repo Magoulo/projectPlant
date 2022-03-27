@@ -1,6 +1,6 @@
 async function loadMyAdsPage() {
 
-    console.log("sessionStorage token: ", sessionStorage.token)
+    console.log("sessionStorage token: ", sessionStorage.accessToken)
 
    // console.log("sessionStorage accessToken: ", sessionStorage.accessToken)
     //console.log("sessionStorage idToken: ", sessionStorage.idToken)
@@ -15,7 +15,7 @@ async function loadMyAdsPage() {
     const response = await fetch("http://localhost:3000/ads/myAds", {
         method: 'GET',
         headers: new Headers({
-            'Authorization': "bearer " + sessionStorage.token,
+            'Authorization': "Bearer " + sessionStorage.accessToken,
         }),
     })
 

@@ -24,9 +24,20 @@ async function signIn() {
   request.addEventListener('load', function (event) {
 
     const token = JSON.parse(request.responseText)
-    sessionStorage.setItem("token", token)
+    sessionStorage.setItem("accessToken", token.accessToken)
+    sessionStorage.setItem("idToken", token.idToken)
 
-    console.log("sessionStorage token: ", sessionStorage.token)
+    console.log("sessionStorage access token: ", sessionStorage.accessToken)
+    console.log("sessionStorage id Token: ", sessionStorage.idToken)
   })
 
 }
+/*
+ const tokens = JSON.parse(request.responseText)
+    console.log("tokens: ", tokens)
+    sessionStorage.setItem("accesToken", tokens.accessToken)
+    sessionStorage.setItem("idToken", tokens.idToken)
+
+    console.log("sessionStorage accesToken: ", sessionStorage.accessToken)
+    console.log("sessionStorage idToken: ", sessionStorage.idToken) 
+*/

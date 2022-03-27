@@ -60,7 +60,7 @@ async function sendUpdate(){
     const response = await fetch("http://localhost:3000/ads/adUpdate/" + updateFormAdId.value + "/update", {
         method: 'Put',
         headers: new Headers({
-            'Authorization': "bearer " + sessionStorage.token,
+            'Authorization': "Bearer " + sessionStorage.accessToken,
             "Content-Type": "application/json"
         }),
         body: body
