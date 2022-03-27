@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 module.exports = function ({ accountRepository, accountValidator}) {
 	return {
 
@@ -23,6 +25,7 @@ module.exports = function ({ accountRepository, accountValidator}) {
 			if (errorsExist) {
 				callback(errors, null)
 			} else {
+				newAccount.hashPassword = bcrypt.hashSync(newAccount.repeatedPassword, 13)
 				accountRepository.createAccount(newAccount, callback)
 			}
 		},

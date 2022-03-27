@@ -1,6 +1,7 @@
 const express = require('express')
 const csrf = require('csurf')
 const csrfProtection = csrf()
+const bcrypt = require('bcryptjs')
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
@@ -106,7 +107,7 @@ module.exports = function ({ accountManager, userManager }) {
 							}
 						})
 					} else {
-						response.redirect("/", { csrfToken: request.csrfToken() })
+						response.redirect("/")
 					}
 				})
 			}
@@ -165,7 +166,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
+				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {//bcrypt.compareSync(PW, User_accounts.Password))
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true

@@ -7,7 +7,7 @@ module.exports = function () {
 
 			models.UserAccount.create({
 				username: newAccount.username,
-				passwordHash: newAccount.repeatedPassword
+				passwordHash: newAccount.hashPassword
 
 			}).then((userAccount) => {
 				callback([], userAccount.dataValues)
