@@ -1,5 +1,10 @@
 async function loadMyAdsPage() {
 
+    console.log("sessionStorage token: ", sessionStorage.token)
+
+   // console.log("sessionStorage accessToken: ", sessionStorage.accessToken)
+    //console.log("sessionStorage idToken: ", sessionStorage.idToken)
+
   function timeOut(url){
     hideCurrentPage()
     const spinner = document.getElementById("loader-spinner").classList.add('current-page')

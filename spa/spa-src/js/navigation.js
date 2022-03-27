@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		setTimeout(function () {
 			signOutBody.classList.remove("hidden-sign-in-out")
 			menuLoadingSpinner.classList.add("hidden-sign-in-out")
-		}, 5000)
+		}, 2000)
 
 	})
 
@@ -149,7 +149,7 @@ function timeOut(url) {
 		document.getElementById("loader-spinner").classList.remove('current-page')
 		showPage(url)
 
-	}, 5000)
+	}, 2000)
 
 }
 
