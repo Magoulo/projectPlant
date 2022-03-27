@@ -60,7 +60,7 @@ module.exports = function ({ accountManager, userManager }) {
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync(PW, User_accounts.Password))
+				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync()
 
 					const payloadAccessToken = {
 						isLoggedIn: true,

@@ -83,7 +83,7 @@ module.exports = function ({ }) {
 	//presentation-layer
 	const accountRouter = require('/web-application/src/presentation-layer-api/routers/account-api-router')
 	const adRouter = require('/web-application/src/presentation-layer-api/routers/ad-api-router')
-	const bidRouter = require('/web-application/src/presentation-layer-api/routers/bid-api-router')
+	//const bidRouter = require('/web-application/src/presentation-layer-api/routers/bid-api-router')
 	const userRouter = require('/web-application/src/presentation-layer-api/routers/user-api-router')
 	const variousRouter = require('/web-application/src/presentation-layer-api/routers/various-api-router')
 
@@ -106,7 +106,7 @@ module.exports = function ({ }) {
 	//bid
 	container.register("bidRepository", awilix.asFunction(bidRepository))
 	container.register("bidManager", awilix.asFunction(bidManager))
-	container.register("bidRouter", awilix.asFunction(bidRouter))
+	//container.register("bidRouter", awilix.asFunction(bidRouter))
 	container.register("bidValidator", awilix.asFunction(bidValidator))
 
 	//user
@@ -122,14 +122,14 @@ module.exports = function ({ }) {
 	// routing--------------------------------------------------------------------------------------
 	const theAccountRouter = container.resolve("accountRouter")
 	const theAdRouter = container.resolve("adRouter")
-	const theBidRouter = container.resolve("bidRouter")
+	//const theBidRouter = container.resolve("bidRouter")
 	const theUserRouter = container.resolve("userRouter")
 	const theVariousRouter = container.resolve("variousRouter")
 
 	app.use('/', theVariousRouter)
 	app.use('/accounts', theAccountRouter)
 	app.use('/ads', theAdRouter)
-	app.use('/bids', theBidRouter)
+	//app.use('/bids', theBidRouter)
 	app.use('/user', theUserRouter)
 
 
