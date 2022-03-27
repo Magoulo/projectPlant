@@ -5,22 +5,16 @@ module.exports = function ({ adManager, userManager }) {
 	const router = express.Router()
 
 	router.get("/", function (request, response) {
-
 		adManager.getAllAds(function (errors, Ad) {
-// ------behöver en user hämtas?? ----------------------------------------------------------------------------------------------
 
-		//	userManager.getUserByAccountID(request.session.userID, function (errors, User) {
+			const model = {
+				errors: errors,
+				Ad: Ad,
+				session: request.session,
+				layout: 'start.hbs'
+			}
 
-				const model = {
-					errors: errors,
-				//	User: User,
-					Ad: Ad,
-					session: request.session,
-					layout: 'start.hbs'
-				}
-				
-				response.render("start.hbs", model)
-		//	})
+			response.render("start.hbs", model)
 		})
 	})
 
@@ -38,7 +32,7 @@ module.exports = function ({ adManager, userManager }) {
 	})
 
 	router.get("/contact", function (request, response) {
-		
+
 		userManager.getUserByAccountID(request.session.userID, function (errors, User) {
 			const model = {
 				errors: errors,
@@ -61,7 +55,7 @@ module.exports = function ({ adManager, userManager }) {
 	})
 
 	router.post("/mail", function (request, response) {
-		
+
 		const name = request.body.name
 		const subject = request.body.subject
 		const text = request.body.text

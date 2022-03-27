@@ -28,7 +28,6 @@ module.exports = function () {
 				}
 			}
 
-
 			if (!Ad.description.length) {
 				descriptionErrors.push(emptyFieldErrorMsg)
 			} else {
@@ -42,15 +41,12 @@ module.exports = function () {
 				}
 			}
 
-
 			if (!Ad.latinName.length) {
 				latinNameErrors.push(emptyFieldErrorMsg)
 			}
 
-
 			return [titleErrors, latinNameErrors, descriptionErrors]
 		}
-		
 
 	}
 }
