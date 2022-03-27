@@ -6,24 +6,22 @@ module.exports = function ({ userManager }) {
     const router = express.Router()
 
     router.get("/personalData", function (request, response) {
-        
+
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring("Bearer ".length)
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
             if (error) {
-                response.status(401).end()
-
+                response.status(401).json(error)
             } else {
                 userManager.getUserByUserID(payload.userID, function (errors, User) {
 
                     if (errors.length !== 0) {
-                        response.status(400).json(errors)
+                        response.status(500).json(errors)
                     } else {
                         response.status(200).json(User)
                     }
                 })
-
             }
         })
     })
@@ -41,13 +39,12 @@ module.exports = function ({ userManager }) {
 
         userManager.updateUserByUserID(User, function (error) {
 
-            if (error.length !==0) {
+            if (error.length !== 0) {
                 response.status(500).json(error)
             } else {
                 response.status(204).end()
             }
         })
-
     })
 
     return router

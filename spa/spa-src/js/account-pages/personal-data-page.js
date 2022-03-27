@@ -1,64 +1,83 @@
 async function loadPersonalData(id) {
 
-    //Fetch ad from REST api
     const response = await fetch("http://localhost:3000/user/personalData", {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,
         }),
     })
-    const user = await response.json()
-    console.log("fetched user: ", user)
 
-    //Get all elements in personal data form 
-    const personalDataFirstname = document.getElementById("personal-data-firstname")
-    const personalDataLastname = document.getElementById("personal-data-lastname")
-    const personalDataEmail = document.getElementById("personal-data-email")
-    const personalDataPhonenumber = document.getElementById("personal-data-phonenumber")
-    const personalDataCity = document.getElementById("personal-data-city")
-    const personalDataUpdateButton = document.getElementById("personal-data-update-button")
+    const statusCode = response.status
 
-    //Asign the element data from the fetched user
-    personalDataFirstname.value = user.firstName
-    personalDataLastname.value = user.lastName
-    personalDataEmail.value = user.email
-    personalDataPhonenumber.value = user.phoneNumber
-    personalDataCity.value = user.city
+    if (statusCode == 200) {
 
+        const user = await response.json()
 
+        //Get all elements in personal data form 
+        const personalDataFirstname = document.getElementById("personal-data-firstname")
+        const personalDataLastname = document.getElementById("personal-data-lastname")
+        const personalDataEmail = document.getElementById("personal-data-email")
+        const personalDataPhonenumber = document.getElementById("personal-data-phonenumber")
+        const personalDataCity = document.getElementById("personal-data-city")
+        const personalDataUpdateButton = document.getElementById("personal-data-update-button")
 
-    //Eventlistener for update button
-    personalDataUpdateButton.addEventListener('click', function (event) {
-        event.preventDefault()
+        //Asign the element data from the fetched user
+        personalDataFirstname.value = user.firstName
+        personalDataLastname.value = user.lastName
+        personalDataEmail.value = user.email
+        personalDataPhonenumber.value = user.phoneNumber
+        personalDataCity.value = user.city
 
-        //Read the values of the form elements
-        let firstname = personalDataFirstname.value
-        let lastname = personalDataLastname.value
-        let email = personalDataEmail.value
-        let phonenumber = personalDataPhonenumber.value
-        let city = personalDataCity.value
+        //Eventlistener for update button
+        personalDataUpdateButton.addEventListener('click', function (event) {
+            event.preventDefault()
 
-        //create body
-        const body = JSON.stringify({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            phonenumber: phonenumber,
-            city: city
+            //Read the values of the form elements
+            let firstname = personalDataFirstname.value
+            let lastname = personalDataLastname.value
+            let email = personalDataEmail.value
+            let phonenumber = personalDataPhonenumber.value
+            let city = personalDataCity.value
+
+            //create body
+            const body = JSON.stringify({
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                phonenumber: phonenumber,
+                city: city
+            })
+
+            //Send the data for update
+            const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", {
+                method: 'Put',
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: body
+            })
+
+            const url = "/accounts/personalData"
+            timeOut(url)
+            setPushState(url)
         })
-        console.log("body: ", body)
+    }
 
-        //Send the data for delete
-        const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", { // dubbla slashes här?? user//personalData/
-            method: 'Put',
-            headers: new Headers({
-                "Content-Type": "application/json"
-            }),
-            body: body
-        })
+    if (statusCode == 500) {
 
-        const url = "/accounts/personalData"
-        timeOut(url)
-        setPushState(url)
-    })
+        const pError = document.createElement('p')
+        pError.innerText = response.statusText
+
+        const personalDataContainer = document.getElementById('personal-data-container')
+        personalDataContainer.insertBefore(pError, personalDataContainer.firstChild)
+    }
+
+    if (statusCode == 401) {
+
+        const pError = document.createElement('p')
+        pError.innerText = response.statusText
+
+        const personalDataContainer = document.getElementById('personal-data-container')
+        personalDataContainer.insertBefore(pError, personalDataContainer.firstChild)
+    }
 }

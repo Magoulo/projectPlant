@@ -70,11 +70,9 @@ async function loadStartPage() {
 
 	if (statusCode == 500) {
 
-		const error = await response.json()
 		const pError = document.createElement('p')
-		pError.innerText = error
+		pError.innerText = response.statusText
 
 		allAdsUl.appendChild(pError)
 	}
-
 }

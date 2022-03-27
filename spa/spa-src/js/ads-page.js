@@ -66,10 +66,7 @@ async function loadAdsPage() {
 		}
 	} else if (statusCode == 500) {
 		const error = document.createElement('p')
-		error.innerText = "Internal Server Error"
-
-		const allAdsUl = document.querySelector("#start-page ")
-
+		error.innerText = response.statusText
+		allAdsUl.appendChild(error)
 	}
-
 }
