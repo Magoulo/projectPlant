@@ -7,6 +7,8 @@ const session = require('express-session')
 const redis = require("redis")
 const awilix = require('awilix')
 const app = express()
+const csrf = require('csurf')
+const csrfProtection = csrf()
 
 module.exports = function ({}) {
 	const router = express.Router()
