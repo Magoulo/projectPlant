@@ -2,6 +2,7 @@ async function loadStartPage() {
 
 	const response = await fetch("http://localhost:3000")
 	const statusCode = response.status
+	console.log(statusCode)
 
 	const allAdsUl = document.getElementById('all-plant-ads-start-page')
 	allAdsUl.innerText = ""

@@ -3,7 +3,7 @@ const express = require('express')
 module.exports = function ({ adManager }) {
 	const router = express.Router()
 
-	router.get("/", function (response) {
+	router.get("/", function (request, response) {
 		adManager.getAllAds(function (errors, Ad) {
 
 			if (errors.length) {
