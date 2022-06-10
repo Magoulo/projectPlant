@@ -1,4 +1,3 @@
-//const session = require('express-session')
 const awilix = require('awilix')
 const express = require('express')
 const app = express()

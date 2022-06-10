@@ -150,7 +150,7 @@ module.exports = function ({ accountManager, userManager }) {
 				}
 			} else {
 				console.log("Internal server error")
-				errors.push("Internal server error")
+				//errors.push("Internal server error")
 
 				const model = {
 					errors,

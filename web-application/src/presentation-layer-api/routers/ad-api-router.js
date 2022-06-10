@@ -115,7 +115,7 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.delete("/adDelete/:adID/delete", function (request, response) {
+    router.delete("/:adID", function (request, response) { // router.delete("/adDelete/:adID/delete", function (request, response) {
 
         const adID = request.params.adID
 

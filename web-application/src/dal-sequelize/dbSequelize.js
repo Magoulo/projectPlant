@@ -160,7 +160,7 @@ UserAccount.findOrCreate({
 
 // Find or Create Ad and ImageBundle -------------------------------------------------------------------------------------------------------------------------
 
-
+/*
 Ad.findOrCreate({
 	where: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 },
 	defaults: { title: "well maintained Monstera", latinName: "Monstera deliciosa", description: "well maintained speciement, 3 years old", isClosed: "0", userID: 1 }
@@ -273,7 +273,7 @@ Ad.findOrCreate({
 	console.log("ad: ", ad); // ad
 	console.log("imageBundle: ", ImageBundle); // imageBundle
 	console.log(created); // true
-});
+});*/
 
 
 // Find or Create Bid -------------------------------------------------------------------------------------------------------------------------

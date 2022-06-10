@@ -1,4 +1,5 @@
 const express = require('express')
+const bcrypt = require('bcryptjs')
 
 var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
@@ -59,7 +60,7 @@ module.exports = function ({ accountManager, userManager }) {
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && password == UserAccount.passwordHash) {//bcrypt.compareSync()
+				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {
 
 					const payloadAccessToken = {
 						isLoggedIn: true,
