@@ -50,7 +50,7 @@ module.exports = function ({ adManager, userManager }) {
 		})
 	})
 
-	router.get("/myFavoriteAds", csrfProtection, function (request, response) {
+	/*router.get("/myFavoriteAds", csrfProtection, function (request, response) {
 
 		const model = {
 			session: request.session,
@@ -59,7 +59,7 @@ module.exports = function ({ adManager, userManager }) {
 		}
 
 		response.render("myFavoriteAds.hbs", model)
-	})
+	})*/
 
 	router.post("/mail", csrfProtection, function (request, response) {
 		
