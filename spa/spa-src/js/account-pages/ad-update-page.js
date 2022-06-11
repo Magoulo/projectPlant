@@ -28,7 +28,7 @@ async function loadAdUpdatePage(id){
     updateButton.addEventListener('click', function (event) {
         event.preventDefault()
 
-        const url = "/ads/adUpdate/" + ad.id + "/update"  
+        const url = "/ads/adUpdate/" + ad.id 
         timeOut(url)
        
         setPushState(url)
@@ -57,7 +57,7 @@ async function sendUpdate(){
      })
 
     //Send the data for update 
-    const response = await fetch("http://localhost:3000/ads/adUpdate/" + updateFormAdId.value + "/update", {
+    const response = await fetch("http://localhost:3000/ads/" + updateFormAdId.value, {
         method: 'Put',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,

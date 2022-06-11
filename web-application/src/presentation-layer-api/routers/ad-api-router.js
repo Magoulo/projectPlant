@@ -68,7 +68,7 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.put('/adUpdate/:adID/update', function (request, response) { // router.put or router.patch('/:adID', function (request, response) { ?
+    router.put('/:adID', function (request, response) { // router.put or router.patch('/:adID', function (request, response) { ?
 
         const adID = request.params.adID
         const title = request.body.title
@@ -129,7 +129,7 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.put("/adCreate", function (request, response) { //router.post("/", function (request, response) { ?
+    router.post("/", function (request, response) { //router.post("/", function (request, response) { ?
         console.log("inne i adCreate")
 
         const authorizationHeader = request.header("Authorization")

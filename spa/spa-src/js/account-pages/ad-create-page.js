@@ -22,10 +22,15 @@ async function createAd() {
             description: description,
         })
         console.log("body: ", body)
+
+        //Empty inputfields in create form
+        document.getElementById("create-ad-title").value = ""
+        document.getElementById("create-ad-latinname").value = ""
+        document.getElementById("create-ad-description").value = ""
   
         //Send the data to create ad
-        const response = fetch("http://localhost:3000/ads/adCreate", {
-            method: 'Put',
+        const response = fetch("http://localhost:3000/ads/", {
+            method: 'Post',
             headers: new Headers({
                 'Authorization': "Bearer " + sessionStorage.accessToken,
                 "Content-Type": "application/json"

@@ -72,13 +72,13 @@ async function loadMyAdsPage() {
             const aUpdate = document.createElement('a')
             aUpdate.innerText = "Update"
             aUpdate.classList.add("btn","btn-primary","m-2")
-            aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id + "/update")
+            aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id)
 
             //delete button
             const aDelete = document.createElement('a')
             aDelete.innerText = "Delete"
             aDelete.classList.add("btn","btn-primary","m-2")
-            aDelete.setAttribute('href', "/ads/adDelete/" + ad.id + "/delete")
+            aDelete.setAttribute('href', "/ads/adDelete/" + ad.id)
 
             //Append Update and Delete buttons to Ul
             myAdsUl.appendChild(aUpdate)
