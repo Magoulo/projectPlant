@@ -182,6 +182,7 @@ module.exports = function ({ adManager, userManager }) {
             const ad = { userID: payload.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
             if (error) {
+                console.log("This should be an error!")
                 response.status(401).end()
 
             } else {

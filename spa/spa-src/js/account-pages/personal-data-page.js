@@ -61,6 +61,7 @@ async function loadPersonalData(id) {
             const url = "/accounts/personalData"
             timeOut(url)
             setPushState(url)
+
         })
     }
 

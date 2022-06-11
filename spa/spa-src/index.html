@@ -250,24 +250,26 @@
 								<h1 class="display-3">Create Ad</h1>
 								<div>
 									<form class="form-inline justify-content-center" encType="multipart/form-data">
-										<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="title" id="create-ad-title">
 											<label class="form-label">Title</label>
+											<p class="text-start text-danger" id="create-ad-form-title-error"></p>
 										</div>
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="latinname"
 												id="create-ad-latinname">
 											<label class="form-label">Latin name</label>
+											<p class="text-start text-danger" id="create-ad-form-latinname-error"></p>
 										</div>
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="description"
 												id="create-ad-description">
 											<label class="form-label">Description</label>
+											<p class="text-start text-danger" id="create-ad-form-description-error"></p>
 										</div>
 										<div class="mb-3">
-											<input class="btn btn-primary btn" onclick=createAd() type="submit"
-												value="Create" id="create-ad-button">
+											<button class="btn btn-primary btn" onclick=sendCreateUpdate() type="submit"
+												id="create-ad-button">Create</button>
 										</div>
 									</form>
 								</div>
@@ -287,7 +289,6 @@
 				<div id="update-ad-container" class="col-12 text-center">
 
 					<form class="form-inline justify-content-center" enctype='multipart/form-data' id="update-ad-form">
-						<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 
 						<div class="col-sm-4 offset-sm-4 text-center">
 							<input type="hidden" name="id" value="" id="update-ad-form-ad-id">
@@ -295,16 +296,19 @@
 								<input class="form-control" type="text" name="title" value="Title"
 									id="update-ad-form-title">
 								<label class="form-label">Title</label>
+								<p class="text-start text-danger" id="update-ad-form-title-error"></p>
 							</div>
 							<div class="form-floating mb-3">
 								<input class="form-control" type="text" name="latinname" value="Latin"
 									id="update-ad-form-latinname">
 								<label class="form-label">Latin name</label>
+								<p class="text-start text-danger" id="update-ad-form-latinname-error"></p>
 							</div>
 							<div class="form-floating mb-3">
 								<input class="form-control" type="text" name="description" value="Desc"
 									id="update-ad-form-description">
 								<label class="form-label">Description</label>
+								<p class="text-start text-danger" id="update-ad-form-description-error"></p>
 							</div>
 						</div>
 
@@ -353,7 +357,6 @@
 									<div class="row">
 										<div class="col-12">
 											<form>
-												<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
 												<input class="btn btn-primary" type="submit" value="Yes"
 													id="ad-delete-button-yes">
 												<input type="submit" class="btn btn-primary m-2" value="No"
@@ -381,19 +384,18 @@
 							<h1 class="display-3">Create Account</h1>
 							<div>
 								<form class="form-inline justify-content-center">
-									<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="username"
 											id="create-account-username">
 										<label class="form-label">Username</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="password"
+										<input class="form-control" type="password" name="password"
 											id="create-account-password">
 										<label class="form-label">Password</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input class="form-control" type="text" name="repeatpassword"
+										<input class="form-control" type="password" name="repeatpassword"
 											id="create-account-repeat-password">
 										<label class="form-label">Repeat Password</label>
 									</div>
@@ -444,29 +446,33 @@
 							<h1 class="display-3">Personal Data</h1>
 							<div>
 								<form class="form-inline justify-content-center" id="personal-data-form">
-									<!--<input type="hidden" name="_csrf" value="{{csrfToken}}"> -->
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="firstname"
 											id="personal-data-firstname">
 										<label class="form-label">Firstname</label>
+										<p class="text-start text-danger" id="personal-data-form-firstname-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="lastname"
 											id="personal-data-lastname">
 										<label class="form-label">Lastname</label>
+										<p class="text-start text-danger" id="personal-data-form-lastname-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="email" name="email" id="personal-data-email">
 										<label class="form-label">Email</label>
+										<p class="text-start text-danger" id="personal-data-form-email-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="phonenumber"
 											id="personal-data-phonenumber">
 										<label class="form-label">Phonenumber</label>
+										<p class="text-start text-danger" id="personal-data-form-phonenumber-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="city" id="personal-data-city">
 										<label class="form-label">City</label>
+										<p class="text-start text-danger" id="personal-data-form-city-error"></p>
 									</div>
 									<div class="mb-3">
 										<input class="btn btn-primary" type="submit" value="Update"
