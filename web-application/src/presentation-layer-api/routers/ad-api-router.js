@@ -68,7 +68,10 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.put('/:adID', function (request, response) { // router.put or router.patch('/:adID', function (request, response) { ?
+    router.put('/:adID', function (request, response) {
+
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring('Bearer '.length)
 
         const adID = request.params.adID
         const title = request.body.title
@@ -76,13 +79,18 @@ module.exports = function ({ adManager, userManager }) {
         const description = request.body.description
 
         const Ad = { id: adID, title: title, latinName: latinName, description: description }
-
-        adManager.updateAdByAdID(Ad, function (error) {
-            if (error.length !== 0) {
-                response.status(400).json(error)
-
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).json(error)
             } else {
-                response.status(204).end()
+                adManager.updateAdByAdID(Ad, function (error) {
+                    if (error.length !== 0) {
+                        response.status(400).json(error)
+
+                    } else {
+                        response.status(204).end()
+                    }
+                })
             }
         })
     })
@@ -90,46 +98,72 @@ module.exports = function ({ adManager, userManager }) {
 
     router.get("/adUpdate/:adID", function (request, response) {
 
-        const adID = request.params.adID
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring('Bearer '.length)
 
-        adManager.getAdByAdID(adID, function (error, Ad) {
-            if (error.length !== 0) {
-                response.status(400).json(error)
+        const adID = request.params.adID
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).json(error)
             } else {
-                response.status(200).json(Ad)
+                adManager.getAdByAdID(adID, function (error, Ad) {
+                    if (error.length !== 0) {
+                        response.status(400).json(error)
+                    } else {
+                        response.status(200).json(Ad)
+                    }
+                })
             }
         })
     })
 
 
     router.get("/adDelete/:adID", function (request, response) {
-        const adID = request.params.adID
 
-        adManager.getAdByAdID(adID, function (error, Ad) {
-            if (error.length !== 0) {
-                response.status(400).json(error)
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring('Bearer '.length)
+
+        const adID = request.params.adID
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).json(error)
             } else {
-                response.status(200).json(Ad)
+                adManager.getAdByAdID(adID, function (error, Ad) {
+                    if (error.length !== 0) {
+                        response.status(400).json(error)
+                    } else {
+                        response.status(200).json(Ad)
+                    }
+                })
             }
         })
     })
 
 
-    router.delete("/:adID", function (request, response) { // router.delete("/adDelete/:adID/delete", function (request, response) {
+    router.delete("/:adID", function (request, response) {
+
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring('Bearer '.length)
 
         const adID = request.params.adID
 
-        adManager.deleteAd(adID, function (errors) {
-            if (errors.length !== 0) {
-                response.status(400).json(errors)
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).json(error)
             } else {
-                response.status(204).end()
+                adManager.deleteAd(adID, function (errors) {
+                    if (errors.length !== 0) {
+                        response.status(400).json(errors)
+                    } else {
+                        response.status(204).end()
+                    }
+                })
             }
         })
     })
 
 
-    router.post("/", function (request, response) { //router.post("/", function (request, response) { ?
+    router.post("/", function (request, response) {
         console.log("inne i adCreate")
 
         const authorizationHeader = request.header("Authorization")

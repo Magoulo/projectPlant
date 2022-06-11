@@ -28,6 +28,9 @@ module.exports = function ({ userManager }) {
 
     router.put('/:userID', function (request, response) {
 
+        const authorizationHeader = request.header("Authorization")
+        const accessToken = authorizationHeader.substring("Bearer ".length)
+
         const userID = request.params.userID
         const firstName = request.body.firstname
         const lastName = request.body.lastname
@@ -37,14 +40,20 @@ module.exports = function ({ userManager }) {
 
         const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-        userManager.updateUserByUserID(User, function (error) {
-
-            if (error.length !== 0) {
-                response.status(500).json(error)
+        jwt.verify(accessToken, SECRET, function (error, payload) {
+            if (error) {
+                response.status(401).json(error)
             } else {
-                response.status(204).end()
+                userManager.updateUserByUserID(User, function (error) {
+
+                    if (error.length !== 0) {
+                        response.status(500).json(error)
+                    } else {
+                        response.status(204).end()
+                    }
+                })
             }
-        })
+        })    
     })
 
     return router

@@ -1,7 +1,12 @@
 async function loadAdDeletePage(id) {
 
     //Fetch ad from REST api
-    const response = await fetch("http://localhost:3000/ads/adDelete/" + id)
+    const response = await fetch("http://localhost:3000/ads/adDelete/" + id, {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': "Bearer " + sessionStorage.accessToken,
+        })
+    })
     const ad = await response.json()
     console.log("fetched ad: ", ad)
 
@@ -21,7 +26,8 @@ async function loadAdDeletePage(id) {
         const response = fetch("http://localhost:3000/ads/" + ad.id, {
             method: 'Delete',
             headers: new Headers({
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.accessToken,
             }),
         })
 

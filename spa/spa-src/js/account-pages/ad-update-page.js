@@ -1,7 +1,13 @@
 async function loadAdUpdatePage(id){
 
     //Fetch ad from REST api
-    const response = await fetch("http://localhost:3000/ads/adUpdate/"+ id)
+    
+    const response = await fetch("http://localhost:3000/ads/adUpdate/"+ id, {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': "Bearer " + sessionStorage.accessToken,
+        })
+    })
     const ad = await response.json()
     console.log("fetched ad: ", ad)
 

@@ -52,7 +52,8 @@ async function loadPersonalData(id) {
             const response = fetch("http://localhost:3000/user/" + user.id , {
                 method: 'Put',
                 headers: new Headers({
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'Authorization': "Bearer " + sessionStorage.accessToken,
                 }),
                 body: body
             })
