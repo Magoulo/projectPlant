@@ -446,6 +446,7 @@
 							<h1 class="display-3">Personal Data</h1>
 							<div>
 								<form class="form-inline justify-content-center" id="personal-data-form">
+									<input type="hidden" name="id" value="" id="personal-data-form-id">
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="firstname"
 											id="personal-data-firstname">
@@ -476,7 +477,7 @@
 									</div>
 									<div class="mb-3">
 										<input class="btn btn-primary" type="submit" value="Update"
-											id="personal-data-update-button">
+											id="personal-data-update-button" onclick=sendPersonalDataUpdate()>
 									</div>
 								</form>
 							</div>

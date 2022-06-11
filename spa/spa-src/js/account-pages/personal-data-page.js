@@ -1,6 +1,6 @@
 async function loadPersonalData(id) {
 
-    const response = await fetch("http://localhost:3000/user/", {
+    const response = await fetch("http://localhost:3000/user/personalData", {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,
@@ -49,11 +49,10 @@ async function loadPersonalData(id) {
             })
 
             //Send the data for update
-            const response = fetch("http://localhost:3000/user/" + user.id , {
+            const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", {
                 method: 'Put',
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    'Authorization': "Bearer " + sessionStorage.accessToken,
+                    "Content-Type": "application/json"
                 }),
                 body: body
             })
@@ -61,7 +60,6 @@ async function loadPersonalData(id) {
             const url = "/accounts/personalData"
             timeOut(url)
             setPushState(url)
-
         })
     }
 
