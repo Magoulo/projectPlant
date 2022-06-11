@@ -12,11 +12,11 @@ module.exports = function () {
 			} else {
 
 				if (Bid.message.length <= MIN_MESSAGE_LENGTH) {
-					msgErrors.push("Could not place bid because message field must be at least" + MIN_MESSAGE_LENGTH + "characters long")
+					msgErrors.push("Could not place bid because message field must be at least " + MIN_MESSAGE_LENGTH + " characters long")
 				}
 
 				else if (MAX_MESSAGE_LENGTH < Bid.message.length) {
-					msgErrors.push("Could not place bid because message field must be under" + MAX_MESSAGE_LENGTH + "characters long")
+					msgErrors.push("Could not place bid because message field must be under " + MAX_MESSAGE_LENGTH + " characters long")
 				}
 			}
 

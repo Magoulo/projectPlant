@@ -24,11 +24,11 @@ module.exports = function () {
 			} else {// See if username alrady exists? 
 
 				if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
-					usernameErrors.push("Username must be at least" + MIN_USERNAME_LENGTH + "characters")
+					usernameErrors.push("Username must be at least " + MIN_USERNAME_LENGTH + " characters")
 				}
 
 				else if (MAX_USERNAME_LENGTH < newAccount.username.length) {
-					usernameErrors.push("Username must be under" + MAX_USERNAME_LENGTH + "characters")
+					usernameErrors.push("Username must be under " + MAX_USERNAME_LENGTH + " characters")
 				}
 			}
 
@@ -42,11 +42,11 @@ module.exports = function () {
 				} else {
 
 					if (newAccount.password.length < MIN_PASSWORD_LENGTH) {
-						passwordErrors.push("Password must be at least" + MIN_PASSWORD_LENGTH + "characters")
+						passwordErrors.push("Password must be at least " + MIN_PASSWORD_LENGTH + " characters")
 					}
 
 					else if (MAX_PASSWORD_LENGTH < newAccount.password.length) {
-						passwordErrors.push("Password must be under" + MAX_PASSWORD_LENGTH + "characters")
+						passwordErrors.push("Password must be under " + MAX_PASSWORD_LENGTH + " characters")
 					}
 				}
 			}

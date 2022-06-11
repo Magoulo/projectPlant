@@ -252,7 +252,7 @@ module.exports = function ({ adManager, userManager }) {
                     firstImageFile = request.files.firstImageFile
                     secondImageFile = request.files.secondImageFile
                 } else {
-                    imageErrors.push("Muset choose all three files below")
+                    imageErrors.push("Must choose all three files below")
                 }
 
 
