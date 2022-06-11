@@ -5,7 +5,7 @@ const SECRET = 'lelelelelelelble'
 module.exports = function ({ userManager }) {
     const router = express.Router()
 
-    router.get("/personalData", function (request, response) {
+    router.get("/", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring("Bearer ".length)
@@ -26,7 +26,7 @@ module.exports = function ({ userManager }) {
         })
     })
 
-    router.put('/personalData/:userID/update', function (request, response) {
+    router.put('/:userID', function (request, response) {
 
         const userID = request.params.userID
         const firstName = request.body.firstname

@@ -21,8 +21,7 @@ async function createAd() {
             latinname: latinname,
             description: description,
         })
-        console.log("body: ", body)
-
+  
         //Empty inputfields in create form
         document.getElementById("create-ad-title").value = ""
         document.getElementById("create-ad-latinname").value = ""

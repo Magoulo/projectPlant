@@ -18,7 +18,7 @@ async function loadAdDeletePage(id) {
         event.preventDefault()
 
         //Send the data for delete
-        const response = fetch("http://localhost:3000/ads/" + ad.id, {// const response = fetch("http://localhost:3000/ads/adDelete/" + ad.id + "/delete", {
+        const response = fetch("http://localhost:3000/ads/" + ad.id, {
             method: 'Delete',
             headers: new Headers({
                 "Content-Type": "application/json"
