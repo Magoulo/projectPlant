@@ -13,7 +13,7 @@ const app = express()
 MySQL: data-access-layer
 PostgreSQL: dal-sequelize
 */
-const dataFile = 'data-access-layer'
+const dataFile = 'dal-sequelize'
 
 const dalPath = '/web-application/src/'+dataFile+'/'
 const bllPath = '/web-application/src/business-logic-layer/'
