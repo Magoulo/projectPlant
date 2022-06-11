@@ -44,8 +44,6 @@ module.exports = function ({ adManager, userManager }) {
                 csrfToken: request.csrfToken()
             }
 
-            console.log("--------------------------------" + Ad);
-
             response.render("ads.hbs", model)
         })
     })
@@ -335,16 +333,6 @@ module.exports = function ({ adManager, userManager }) {
 
             response.render("ad.hbs", model)
         })
-    })
-
-    router.get("/ad", csrfProtection, function (request, response) { // används denna??
-
-        const model = {
-            session: request.session,
-            csrfToken: request.csrfToken()
-        }
-
-        response.render("ad.hbs", model)
     })
 
     router.get("/ads", csrfProtection, function (request, response) {
