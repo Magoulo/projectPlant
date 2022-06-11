@@ -6,14 +6,11 @@ const webApp = require('/web-application/src/presentation-layer/app.js')
 const webApiApp = require('/web-application/src/presentation-layer-api/apiApp.js')
 
 const container = awilix.createContainer()
-
 container.register("webApp", awilix.asFunction(webApp))
 container.register("webApiApp", awilix.asFunction(webApiApp))
 
 const theWebAppRouter = container.resolve("webApp")
 const theWebApiAppRouter = container.resolve("webApiApp")
 
-
-// Attach all routers.
 app.use('/', theWebAppRouter)
 app.use('/api',theWebApiAppRouter)
