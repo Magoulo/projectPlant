@@ -38,8 +38,8 @@ async function createAccount() {
         })
 
         //Send the data to create account 
-        const response = fetch("http://localhost:3000/accounts/create", {
-            method: 'Put',
+        const response = fetch("http://localhost:3000/accounts/", {
+            method: 'Post',
             headers: new Headers({
                 "Content-Type": "application/json"
             }),

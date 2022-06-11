@@ -18,7 +18,7 @@ async function signIn() {
 
   //Send request
   var request = new XMLHttpRequest()
-  request.open("POST", "http://localhost:3000/accounts/sign-in")
+  request.open("POST", "http://localhost:3000/accounts/sign-in-sessions")
   request.setRequestHeader("Content-Type", "application/json")
   request.send(body)
   request.addEventListener('load', function (event) {

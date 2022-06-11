@@ -7,7 +7,7 @@ const SECRET = 'lelelelelelelble'
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-	router.put("/create", function (request, response) {
+	router.post("/", function (request, response) {
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -51,7 +51,7 @@ module.exports = function ({ accountManager, userManager }) {
 	})
 
 
-	router.post("/sign-in", function (request, response) {
+	router.post("/sign-in-sessions", function (request, response) {
 
 		const grant_type = request.body.grant_type
 		const username = request.body.username
