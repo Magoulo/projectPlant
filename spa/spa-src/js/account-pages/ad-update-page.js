@@ -1,7 +1,6 @@
 async function loadAdUpdatePage(id){
 
-    //Fetch ad from REST api
-    
+    //Fetch ad from REST api   
     const response = await fetch("http://localhost:3000/ads/adUpdate/"+ id, {
         method: 'GET',
         headers: new Headers({
@@ -71,5 +70,20 @@ async function sendUpdate(){
         }),
         body: body
     })
+    const statusCode = response.status
+
+    if (statusCode == 204) {
+        document.getElementById("update-ad-form-title-error").innerText = ""
+        document.getElementById("update-ad-form-latinname-error").innerText = ""
+        document.getElementById("update-ad-form-description-error").innerText = ""  
+       
+    } else if(statusCode == 400 || statusCode == 401) {
+        response.json().then(data => {
+            console.log(data);
+        document.getElementById("update-ad-form-title-error").innerText = data[0]
+        document.getElementById("update-ad-form-latinname-error").innerText = data[1]
+        document.getElementById("update-ad-form-description-error").innerText = data[2]
+      })
+    }
 
 }
