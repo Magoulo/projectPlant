@@ -219,12 +219,11 @@
 										<form action="/bids/updateBid/{{id}}/Declined" method="POST"
 											encType="multipart/form-data">
 
-											<input type="hidden" name="_csrf" value="{{csrfToken}}">
+											<input type="hidden" name="_csrf" value="{{../../csrfToken}}">
 											<div class="modal-body">
 
 												<input type="hidden" name="adID" value="{{../id}}">
 
-												<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 												<div class="col-12 mb-0">
 													<h5>Press confirm if you DECLINE following bid placed by
