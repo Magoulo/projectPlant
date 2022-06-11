@@ -77,7 +77,7 @@ module.exports = function ({ adManager, userManager }) {
                     Ad: Ad,
                     session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
+                   csrfToken: request.csrfToken()
                 }
             }
         })
@@ -113,6 +113,7 @@ module.exports = function ({ adManager, userManager }) {
                 }
 
                 model.adAccepted = adAccepted
+               
 
                 response.render("myAds.hbs", model)
             }
@@ -336,7 +337,7 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    router.get("/ad", csrfProtection, function (request, response) {
+    router.get("/ad", csrfProtection, function (request, response) { // används denna??
 
         const model = {
             session: request.session,
