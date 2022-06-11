@@ -8,6 +8,7 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/", function (request, response) {
 
         adManager.getAllAds(function (errors, Ad) {
+            console.log(Ad)
 
             if (errors.length !== 0) {
                 response.status(400)

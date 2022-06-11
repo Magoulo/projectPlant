@@ -1,17 +1,28 @@
-const path = require('path')
-const express = require('express')
-const expressHandlebars = require('express-handlebars')
-const bodyParser = require('body-parser')
-const fileUpload = require('express-fileupload')
-const session = require('express-session')
-const redis = require("redis")
 const awilix = require('awilix')
+const bodyParser = require('body-parser')
+const expressHandlebars = require('express-handlebars')
+const fileUpload = require('express-fileupload')
+const path = require('path')
+const redis = require("redis")
+const session = require('express-session')
+
+const express = require('express')
 const app = express()
+
+/*------- SWITCH DATA ACCESS LAYER-------
+MySQL: data-access-layer
+PostgreSQL: dal-sequelize
+*/
+const dataFile = 'data-access-layer'
+
+const dalPath = '/web-application/src/'+dataFile+'/'
+const bllPath = '/web-application/src/business-logic-layer/'
+const plRouterPath = '/web-application/src/presentation-layer/routers/'
 
 module.exports = function ({}) {
 	const router = express.Router()
 
-	// redis@v4 setup----------------------------------------------------------------------
+	// SESSIOSN SETUP----------------------------------------------------------------------
 	let RedisStore = require("connect-redis")(session)
 	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
 	redisClient.connect().catch(console.error)
@@ -53,30 +64,31 @@ module.exports = function ({}) {
 	//awilix setup---------------------------------------------------------------------------------
 
 	//data-access-layer
-	const accountRepository = require('/web-application/src/dal-sequelize/account-repository')
-	const adRepository = require('/web-application/src/dal-sequelize/ad-repository')
-	const bidRepository = require('/web-application/src/dal-sequelize/bid-repository')
-	const userRepository = require('/web-application/src/dal-sequelize/user-repository')
+	const accountRepository = require(dalPath+'account-repository')
+	const adRepository = require(dalPath+'ad-repository')
+	const bidRepository = require(dalPath+'bid-repository')
+	const userRepository = require(dalPath+'user-repository')
 
 	//business-logic-layer
-	const accountManager = require('/web-application/src/business-logic-layer/account-manager')
-	const adManager = require('/web-application/src/business-logic-layer/ad-manager')
-	const bidManager = require('/web-application/src/business-logic-layer/bid-manager')
-	const userManager = require('/web-application/src/business-logic-layer/user-manager')
+	const accountManager = require(bllPath+'account-manager')
+	const adManager = require(bllPath+'ad-manager')
+	const bidManager = require(bllPath+'bid-manager')
+	const userManager = require(bllPath+'user-manager')
 
-	const accountValidator = require('/web-application/src/business-logic-layer/account-validator')
-	const adValidator = require('/web-application/src/business-logic-layer/ad-validator')
-	const bidValidator = require('/web-application/src/business-logic-layer/bid-validator')
-	const userValidator = require('/web-application/src/business-logic-layer/user-validator')
+	const accountValidator = require(bllPath+'account-validator')
+	const adValidator = require(bllPath+'ad-validator')
+	const bidValidator = require(bllPath+'bid-validator')
+	const userValidator = require(bllPath+'user-validator')
 
 	//presintation-layer
-	const accountRouter = require('/web-application/src/presentation-layer/routers/account-router')
-	const adRouter = require('/web-application/src/presentation-layer/routers/ad-router')
-	const bidRouter = require('/web-application/src/presentation-layer/routers/bid-router')
-	const userRouter = require('/web-application/src/presentation-layer/routers/user-router')
-	const variousRouter = require('/web-application/src/presentation-layer/routers/various-router')
+	const accountRouter = require(plRouterPath+'account-router')
+	const adRouter = require(plRouterPath+'ad-router')
+	const bidRouter = require(plRouterPath+'bid-router')
+	const userRouter = require(plRouterPath+'user-router')
+	const variousRouter = require(plRouterPath+'various-router')
 
-	// Creating container and dependencies
+
+	// CONTAINER AND DEPENDENCIES---------------------------------------------------------------------
 	const container = awilix.createContainer()
 
 	//account
@@ -107,7 +119,7 @@ module.exports = function ({}) {
 	container.register("variousRouter", awilix.asFunction(variousRouter))
 
 
-	// routing--------------------------------------------------------------------------------------
+	// ROUTING--------------------------------------------------------------------------------------
 	const theAccountRouter = container.resolve("accountRouter")
 	const theAdRouter = container.resolve("adRouter")
 	const theBidRouter = container.resolve("bidRouter")
@@ -119,7 +131,6 @@ module.exports = function ({}) {
 	app.use('/ads', theAdRouter)
 	app.use('/bids', theBidRouter)
 	app.use('/user', theUserRouter)
-
 
 	app.listen(8080, function () {
 		console.log('Running on 8080!')

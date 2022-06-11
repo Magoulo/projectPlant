@@ -1,18 +1,19 @@
-const app = express()
 const awilix = require('awilix')
 const bodyParser = require('body-parser')
-const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const fileUpload = require('express-fileupload')
 const path = require('path')
 const redis = require("redis")
 const session = require('express-session')
 
-/*------- SWITCH DB-------
+const express = require('express')
+const app = express()
+
+/*------- SWITCH DATA ACCESS LAYER-------
 MySQL: data-access-layer
 PostgreSQL: dal-sequelize
 */
-const dataFile = 'dal-sequelize' 
+const dataFile = 'dal-sequelize'
 
 const dalPath = '/web-application/src/'+dataFile+'/'
 const bllPath = '/web-application/src/business-logic-layer/'
