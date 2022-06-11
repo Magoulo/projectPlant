@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const signOutButton = document.getElementById("sign-out-form-button")
 	const menuLoadingSpinner = document.getElementById("menu-loader-spinner")
 
-	//simulateing 5 sec loading when logging in
+	//simulateing 1 sec loading when logging in
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
 		signInBody.classList.add("hidden-sign-in-out")
@@ -16,15 +16,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		setTimeout(function () {
 			signOutBody.classList.remove("hidden-sign-in-out")
 			menuLoadingSpinner.classList.add("hidden-sign-in-out")
-		}, 2000)
+		}, 1000)
 
 	})
 
 	signOutButton.addEventListener('click', function (event) {
+		const url = "/"
+		hideCurrentPage()
+		showPage(url)
+		setPushState(url)
 		
 		signInBody.classList.remove("hidden-sign-in-out")
 		signOutBody.classList.add("hidden-sign-in-out")
-		showPage("/")
+		
 		sessionStorage.setItem("token", "No token here")
 		console.log("sessionStorage token: ", sessionStorage.accessToken)
 	})
@@ -139,7 +143,7 @@ function showPage(url) {
 
 }
 
-//Displays a loading indicator for 5 sec
+//Displays a loading indicator for 1 sec
 function timeOut(url) {
 
 	hideCurrentPage()
@@ -149,7 +153,7 @@ function timeOut(url) {
 		document.getElementById("loader-spinner").classList.remove('current-page')
 		showPage(url)
 
-	}, 2000)
+	}, 1000)
 
 }
 
