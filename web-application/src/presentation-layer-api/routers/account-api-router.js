@@ -95,8 +95,6 @@ module.exports = function ({ accountManager, userManager }) {
 									)
 								}
 							})
-
-
 						}
 					})
 				} else {
@@ -115,7 +113,6 @@ module.exports = function ({ accountManager, userManager }) {
 		request.session.destroy();
 		response.status(200)
 	})
-
 
 	return router
 }

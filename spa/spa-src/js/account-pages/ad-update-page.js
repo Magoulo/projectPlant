@@ -72,6 +72,7 @@ async function sendUpdate(){
     })
     const statusCode = response.status
 
+    //Checking status codes
     if (statusCode == 204) {
         document.getElementById("update-ad-form-title-error").innerText = ""
         document.getElementById("update-ad-form-latinname-error").innerText = ""

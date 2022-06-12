@@ -7,17 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	const signOutButton = document.getElementById("sign-out-form-button")
 	const menuLoadingSpinner = document.getElementById("menu-loader-spinner")
 
-	//simulateing 1 sec loading when logging in
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
-	//	signInBody.classList.add("hidden-sign-in-out")
-	//	menuLoadingSpinner.classList.remove("hidden-sign-in-out")
-		
-	//	setTimeout(function () {
-		//	signOutBody.classList.remove("hidden-sign-in-out")
-	//		menuLoadingSpinner.classList.add("hidden-sign-in-out")
-	//	}, 1000)
-
 	})
 
 	signOutButton.addEventListener('click', function (event) {
@@ -28,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		signInBody.classList.remove("hidden-sign-in-out")
 		signOutBody.classList.add("hidden-sign-in-out")
-		
+
 		sessionStorage.setItem("token", "No token here")
 		console.log("sessionStorage token: ", sessionStorage.accessToken)
 	})
@@ -145,16 +136,12 @@ function showPage(url) {
 
 //Displays a loading indicator for 1 sec
 function timeOut(url) {
-
 	hideCurrentPage()
 	document.getElementById("loader-spinner").classList.add('current-page')
 	setTimeout(function () {
-
 		document.getElementById("loader-spinner").classList.remove('current-page')
 		showPage(url)
-
 	}, 1000)
-
 }
 
 //setting history.pushState
