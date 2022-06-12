@@ -11,7 +11,7 @@ async function signIn() {
     username: username,
     password: password
   })
-  console.log("username, password: ", username, password)
+  console.log("Welcome: ", username)
 
 
   timeOut("/")

@@ -42,7 +42,7 @@ module.exports = function ({ accountManager, userManager }) {
 						})
 					} else {
 						console.log("account and user created succesfully")
-						response.status(201)
+						response.status(201).end()
 					}
 				})
 			}

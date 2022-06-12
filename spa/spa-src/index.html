@@ -388,43 +388,51 @@
 										<input class="form-control" type="text" name="username"
 											id="create-account-username">
 										<label class="form-label">Username</label>
+										<p class="text-start text-danger" id="create-account-form-username-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="password" name="password"
 											id="create-account-password">
 										<label class="form-label">Password</label>
+										<p class="text-start text-danger" id="create-account-form-password-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="password" name="repeatpassword"
 											id="create-account-repeat-password">
 										<label class="form-label">Repeat Password</label>
+										<p class="text-start text-danger" id="create-account-form-repeatpassword-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="firstname"
 											id="create-account-firstname">
 										<label class="form-label">Firstname</label>
+										<p class="text-start text-danger" id="create-account-form-firstname-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="lastname"
 											id="create-account-lastname">
 										<label class="form-label">Lastname</label>
+										<p class="text-start text-danger" id="create-account-form-lastname-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="email" name="email" id="create-account-email">
 										<label class="form-label">Email</label>
+										<p class="text-start text-danger" id="create-account-form-email-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="phonenumber"
 											id="create-account-phonenumber">
 										<label class="form-label">Phonenumber</label>
+										<p class="text-start text-danger" id="create-account-form-phonenumber-error"></p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="city" id="create-account-city">
 										<label class="form-label">City</label>
+										<p class="text-start text-danger" id="create-account-form-city-error"></p>
 									</div>
 									<div class="mb-3">
-										<input class="btn btn-primary" type="submit" onclick=createAccount()
-											value="Create" id="create-account-create-button">
+										<button class="btn btn-primary" type="submit" onclick=sendCreateAccount()
+											 id="create-account-create-button">Create</button>
 									</div>
 								</form>
 							</div>
