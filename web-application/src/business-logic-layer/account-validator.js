@@ -24,7 +24,7 @@ module.exports = function ({ accountRepository }) {
 			} else {
 
 				accountRepository.getAccountByUsername(newAccount.username, function (errors, UserAccount) {
-					if (!UserAccount) { 
+					if (!UserAccount) {
 
 						if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
 							usernameErrors.push("Username must be over " + MIN_USERNAME_LENGTH + " characters")
@@ -79,6 +79,7 @@ module.exports = function ({ accountRepository }) {
 			if (!newAccount.city.length) {
 				cityErrors.push(emptyFieldErrorMsg)
 			}
+
 
 			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
