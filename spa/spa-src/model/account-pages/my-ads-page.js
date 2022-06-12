@@ -7,9 +7,6 @@ async function loadMyAdsPage() {
         }),
     })
 
-    
-    // TODO: Check status code and act accordingly!
-
     const myAds = await response.json()
     console.log("My Ads: ", myAds)
 
@@ -20,7 +17,7 @@ async function loadMyAdsPage() {
     //Create button
     const aCreate = document.createElement("a")
     aCreate.innerText = "Create Ad"
-    aCreate.classList.add("btn","btn-primary","m-3")
+    aCreate.classList.add("btn", "btn-primary", "m-3")
     aCreate.setAttribute('href', "/ads/adCreate")
 
     //Eventlistener for create button
@@ -64,13 +61,13 @@ async function loadMyAdsPage() {
             //update button
             const aUpdate = document.createElement('a')
             aUpdate.innerText = "Update"
-            aUpdate.classList.add("btn","btn-primary","m-2")
+            aUpdate.classList.add("btn", "btn-primary", "m-2")
             aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id)
 
             //delete button
             const aDelete = document.createElement('a')
             aDelete.innerText = "Delete"
-            aDelete.classList.add("btn","btn-primary","m-2")
+            aDelete.classList.add("btn", "btn-primary", "m-2")
             aDelete.setAttribute('href', "/ads/adDelete/" + ad.id)
 
             //Append Update and Delete buttons to Ul
@@ -80,7 +77,7 @@ async function loadMyAdsPage() {
             //Append Ul to Div
             myAdsDiv.appendChild(myAdsUl)
 
-            //EventListeners for update and delete buttons
+            //EventListener for update buttons
             aUpdate.addEventListener('click', function (event) {
                 event.preventDefault()
 
@@ -89,6 +86,8 @@ async function loadMyAdsPage() {
                 showPage(url)
                 setPushState(url)
             })
+
+            //EventListener for delete button
             aDelete.addEventListener('click', function (event) {
                 event.preventDefault()
 
@@ -99,5 +98,4 @@ async function loadMyAdsPage() {
             })
         }
     }
-
 }

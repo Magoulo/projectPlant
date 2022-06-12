@@ -1,7 +1,5 @@
 const db = require('./db')
 
-
-
 module.exports = function () {
 	return {
 
@@ -40,10 +38,8 @@ module.exports = function () {
 
 			db.query(query, values, function (error, userAccountID) {
 				if (error) {
-					// TODO: Look for usernameUnique violation.
 					callback(['databaseError'], null)
 				} else {
-					console.log("this.lastID", userAccountID.insertId)
 					callback(error, userAccountID.insertId)
 				}
 			})
@@ -56,11 +52,8 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					console.log("inne i error")
-					// TODO: Look for usernameUnique violation.
 					callback(['databaseError when try to delte user'], null)
 				} else {
-					console.log("inne i else")
 					callback([])
 				}
 			})

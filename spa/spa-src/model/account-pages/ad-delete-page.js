@@ -7,8 +7,8 @@ async function loadAdDeletePage(id) {
             'Authorization': "Bearer " + sessionStorage.accessToken,
         })
     })
+
     const ad = await response.json()
-    console.log("fetched ad: ", ad)
 
     //Get all elements in delete form
     const deleteAdTitle = document.getElementById("ad-delete-title")
@@ -35,6 +35,7 @@ async function loadAdDeletePage(id) {
         timeOut(url)
         setPushState(url)
     })
+
     //Clicklistener for no-button
     noButton.addEventListener('click', function (event) {
         event.preventDefault()

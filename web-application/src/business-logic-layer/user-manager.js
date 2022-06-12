@@ -10,15 +10,15 @@ module.exports = function ({ userRepository, userValidator }) {
 		},
 
 		updateUserByUserID: function (User, callback) {
-			
+
 			const errors = userValidator.getUpdateUserPersonalDataErrors(User)
 			var errorsExist = false
 
 			for (let i = 0; i < errors.length; i++) {
-				if(0 < errors[i].length){
+				if (0 < errors[i].length) {
 					errorsExist = true
 				}
-			  }
+			}
 
 			if (errorsExist) {
 				callback(errors, null)

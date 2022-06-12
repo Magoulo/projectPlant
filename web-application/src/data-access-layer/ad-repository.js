@@ -1,7 +1,5 @@
 const db = require('./db')
 
-
-
 module.exports = function ({ }) {
 	return {
 
@@ -83,10 +81,8 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, ibID) {
 				if (error) {
-					console.log("DB error: ", error)
 					callback(['databaseError'], null)
 				} else {
-					console.log("this.lastID", ibID.insertId)
 					callback(error, ibID.insertId)
 				}
 			})
@@ -96,22 +92,17 @@ module.exports = function ({ }) {
 
 			const query = "INSERT INTO Ad (userID, title, latinName, description, isClosed) VALUES (?,?,?,?,?)"
 			const values = [ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed]
-			console.log("ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed: ", ad.userID, ad.title, ad.latinName, ad.description, ad.isClosed)
 
 			db.query(query, values, function (error, adID) {
 				if (error) {
-					console.log("DB error: ", error)
 					callback(['databaseError'], null)
 				} else {
-					console.log("this.lastID", adID.insertId)
 					callback(error, adID.insertId)
 				}
 			})
 		},
 
 		updateAdByAdID: function (Ad, callback) {
-
-			console.log(Ad.title);
 
 			const query = "UPDATE Ad SET title = ?, latinName = ?, description = ? WHERE adID = ?"
 			const values = [Ad.title, Ad.latinName, Ad.description, Ad.adID]
@@ -122,13 +113,12 @@ module.exports = function ({ }) {
 		},
 
 		deleteAd: function (adID, callback) {
-			
+
 			const query = "DELETE FROM Ad WHERE adID = ?"
 			const values = [adID]
 
 			db.query(query, values, function (error) {
 				if (error) {
-					console.log("error: ", error)
 					callback(["Database error"], null)
 				} else {
 					callback([])
@@ -162,7 +152,7 @@ module.exports = function ({ }) {
 		},
 
 		getAllBidsAndUserByAdID: function (adID, callback) {
-			
+
 			const query = "SELECT * FROM Bid JOIN User ON Bid.userID = User.userID WHERE Bid.adID = ?"
 			const values = [adID]
 

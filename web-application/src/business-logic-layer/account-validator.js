@@ -21,7 +21,7 @@ module.exports = function () {
 
 			if (!newAccount.username.length) {
 				usernameErrors.push(emptyFieldErrorMsg)
-			} else {// See if username alrady exists? 
+			} else {
 
 				if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
 					usernameErrors.push("Username must be over " + MIN_USERNAME_LENGTH + " characters")

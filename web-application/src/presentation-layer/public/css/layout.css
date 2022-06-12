@@ -19,7 +19,6 @@ body {
   margin: auto;
 }
 
-
 .header {
   position: fixed;
   top: 0;
@@ -28,7 +27,6 @@ body {
   padding: 0;
   z-index: 10000;
 }
-
 
 main {
   max-width: 2000px;
@@ -136,7 +134,3 @@ a {
 #here-link{
   text-decoration:underline
 }
-
-
-
-

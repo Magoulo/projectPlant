@@ -1,6 +1,5 @@
 const db = require('./db')
 
-
 module.exports = function () {
 	return {
 
@@ -49,7 +48,6 @@ module.exports = function () {
 
 			db.query(query, values, function (error, results) {
 				if (error) {
-					// TODO: Look for usernameUnique violation.
 					callback(['databaseError in createUser'], null)
 				} else {
 					callback([], results.insertId)

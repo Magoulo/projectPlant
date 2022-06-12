@@ -53,7 +53,7 @@ module.exports = function ({ userManager }) {
                     }
                 })
             }
-        })    
+        })
     })
 
     return router

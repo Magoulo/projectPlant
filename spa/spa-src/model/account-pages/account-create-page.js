@@ -5,10 +5,10 @@ async function createAccount() {
     createFormCreateButton.addEventListener('click', function (event) {
         event.preventDefault()
     })
-
 }
 
 async function sendCreateAccount() {
+
     //Get all elements in create form
     const createFormUsername = document.getElementById("create-account-username")
     const createFormPassword = document.getElementById("create-account-password")
@@ -80,7 +80,7 @@ async function sendCreateAccount() {
 
     } else if (statusCode == 500 || statusCode == 418) {
         response.json().then(data => {
-            console.log(data);
+
             document.getElementById("create-account-form-username-error").innerText = data[0]
             document.getElementById("create-account-form-password-error").innerText = data[1]
             document.getElementById("create-account-form-repeatpassword-error").innerText = data[1]

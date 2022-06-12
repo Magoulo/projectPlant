@@ -1,6 +1,5 @@
 const { models } = require('./dbSequelize')
 
-
 module.exports = function () {
 	return {
 

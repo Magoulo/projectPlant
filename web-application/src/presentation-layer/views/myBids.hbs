@@ -106,8 +106,6 @@
 			{{/if}}
 		</div>
 
-
-
 		<!-- accepted bids -->
 		<div class="tab-pane fade" id="nav-accepted-bids" role="tabpanel" aria-labelledby="nav-accepted-bids-tab">
 
@@ -177,7 +175,6 @@
 			{{/if}}
 		</div>
 
-
 		<!-- declined bids -->
 		<div class="tab-pane fade" id="nav-declined-bids" role="tabpanel" aria-labelledby="nav-declined-bids-tab">
 
@@ -218,7 +215,6 @@
 				</div>
 			</div>
 
-
 			<div class="collapse" id="bid{{id}}Info">
 				<div class="card card-body">
 
@@ -237,7 +233,7 @@
 
 					<div class="col-12 text-center">
 						<form action="/bids/{{id}}/delete" method="POST">
-						 	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+							<input type="hidden" name="_csrf" value="{{csrfToken}}">
 							<input type="hidden" name="bidID" value="{{id}}">
 							<button type="submit" class="btn btn-outline-danger">
 								Delete
@@ -256,8 +252,5 @@
 
 			{{/if}}
 		</div>
-
 	</div>
-
-
 </div>

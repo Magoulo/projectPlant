@@ -8,7 +8,6 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/", function (request, response) {
 
         adManager.getAllAds(function (errors, Ad) {
-            console.log(Ad)
 
             if (errors.length !== 0) {
                 response.status(400)
@@ -17,7 +16,6 @@ module.exports = function ({ adManager, userManager }) {
             }
         })
     })
-
 
     router.get("/myAds", function (request, response) {
 
@@ -68,7 +66,6 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
     router.put('/:adID', function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
@@ -96,7 +93,6 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
     router.get("/adUpdate/:adID", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
@@ -118,7 +114,6 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
     router.get("/adDelete/:adID", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
@@ -139,7 +134,6 @@ module.exports = function ({ adManager, userManager }) {
             }
         })
     })
-
 
     router.delete("/:adID", function (request, response) {
 
@@ -163,7 +157,6 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
     router.post("/", function (request, response) {
         console.log("inne i adCreate")
 
@@ -173,8 +166,6 @@ module.exports = function ({ adManager, userManager }) {
         const coverImageFile = "no-image.png"
         const firstImageFile = "no-image.png"
         const secondImageFile = "no-image.png"
-
-        const images = [coverImageFile, firstImageFile, secondImageFile]
         const errors = []
 
         jwt.verify(accessToken, SECRET, function (error, payload) {
@@ -195,10 +186,11 @@ module.exports = function ({ adManager, userManager }) {
 
                         adManager.createImageBundle(imageBundle, function (error, ImageBundle) {
                             if (error.length !== 0) {
+
                                 errors.push("error in create Imagebundle")
                                 response.status(400).json(error)
                             } else {
-                                console.log("new imageBundle created with the iD: ", ImageBundle.id)
+
                                 response.status(201).json({
                                     ad,
                                     imageBundle
