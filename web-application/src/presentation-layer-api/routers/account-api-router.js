@@ -56,6 +56,7 @@ module.exports = function ({ accountManager, userManager }) {
 		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
+		var validationErrors = []
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
@@ -79,13 +80,13 @@ module.exports = function ({ accountManager, userManager }) {
 					jwt.sign(payloadAccessToken, SECRET, function (error, accessToken) { // Access Token
 
 						if (error) {
-							response.status(401)
+							response.status(401).json(error)
 						} else {
 
 							jwt.sign(payloadIdToken, SECRET, function (error, idToken) { // Id Token
 
 								if (error) {
-									response.status(401)
+									response.status(401).json(error)
 								} else {
 
 									response.status(200).json(
@@ -99,12 +100,12 @@ module.exports = function ({ accountManager, userManager }) {
 						}
 					})
 				} else {
-					errors.push("Wrong Username or Password")
-					response.status(418).json(errors)
+					validationErrors.push("Wrong Username or Password")
+					response.status(401).json(validationErrors)
 				}
 			} else {
-				errors.push("Internal server error")
-				response.status(500).json(errors)
+				validationErrors.push("Internal server error")
+				response.status(500).json(validationErrors)
 			}
 		})
 	})

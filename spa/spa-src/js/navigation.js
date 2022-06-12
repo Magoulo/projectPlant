@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	//simulateing 1 sec loading when logging in
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
-		signInBody.classList.add("hidden-sign-in-out")
-		menuLoadingSpinner.classList.remove("hidden-sign-in-out")
+	//	signInBody.classList.add("hidden-sign-in-out")
+	//	menuLoadingSpinner.classList.remove("hidden-sign-in-out")
 		
-		setTimeout(function () {
-			signOutBody.classList.remove("hidden-sign-in-out")
-			menuLoadingSpinner.classList.add("hidden-sign-in-out")
-		}, 1000)
+	//	setTimeout(function () {
+		//	signOutBody.classList.remove("hidden-sign-in-out")
+	//		menuLoadingSpinner.classList.add("hidden-sign-in-out")
+	//	}, 1000)
 
 	})
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		hideCurrentPage()
 		showPage(url)
 		setPushState(url)
-		
+
 		signInBody.classList.remove("hidden-sign-in-out")
 		signOutBody.classList.add("hidden-sign-in-out")
 		

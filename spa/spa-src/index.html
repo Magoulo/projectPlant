@@ -95,7 +95,7 @@
 
 					<div class="row">
 						<div class="col-6 text-start align-self-end">
-							<h5>Hello friend</h5>
+							<h5 id="Signed-in-account"></h5>
 						</div>
 
 						<div class="col-6 text-end">
@@ -141,6 +141,7 @@
 										<label class="form-label"></label>
 										<input class="form-control" type="password" name="password"
 											placeholder="password*" id="sign-in-form-password" value="">
+											<p class="text-start text-danger" id="sign-in-form-error"></p>
 									</div>
 
 									<div class="d-grid gap-2 mt-3 mb-5">
@@ -400,7 +401,8 @@
 										<input class="form-control" type="password" name="repeatpassword"
 											id="create-account-repeat-password">
 										<label class="form-label">Repeat Password</label>
-										<p class="text-start text-danger" id="create-account-form-repeatpassword-error"></p>
+										<p class="text-start text-danger" id="create-account-form-repeatpassword-error">
+										</p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="firstname"
@@ -423,7 +425,8 @@
 										<input class="form-control" type="text" name="phonenumber"
 											id="create-account-phonenumber">
 										<label class="form-label">Phonenumber</label>
-										<p class="text-start text-danger" id="create-account-form-phonenumber-error"></p>
+										<p class="text-start text-danger" id="create-account-form-phonenumber-error">
+										</p>
 									</div>
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="city" id="create-account-city">
@@ -432,7 +435,7 @@
 									</div>
 									<div class="mb-3">
 										<button class="btn btn-primary" type="submit" onclick=sendCreateAccount()
-											 id="create-account-create-button">Create</button>
+											id="create-account-create-button">Create</button>
 									</div>
 								</form>
 							</div>

@@ -49,6 +49,7 @@ async function sendCreateAccount() {
         }),
         body: body
     })
+
     const statusCode = response.status
 
     if (statusCode == 201) {
