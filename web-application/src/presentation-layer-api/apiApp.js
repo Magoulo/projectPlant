@@ -9,6 +9,8 @@ const session = require('express-session')
 const express = require('express')
 const app = express()
 
+const port = 3000
+
 //------- SWITCH DATA ACCESS LAYER-------
 const MySQL = 'data-access-layer'
 const PostgreSQL = 'dal-sequelize'
@@ -139,8 +141,8 @@ module.exports = function ({ }) {
 	app.use('/ads', theAdRouter)
 	app.use('/user', theUserRouter)
 
-	app.listen(3000, function () {
-		console.log('Running on 3000!')
+	app.listen(port, function () {
+		console.log(`Runing on ${port}!`)
 	})
 
 	return router

@@ -9,11 +9,14 @@ const session = require('express-session')
 const express = require('express')
 const app = express()
 
-/*------- SWITCH DATA ACCESS LAYER-------
-MySQL: data-access-layer
-PostgreSQL: dal-sequelize
-*/
-const dataFile = 'dal-sequelize'
+const port = 8080
+
+//------- SWITCH DATA ACCESS LAYER-------
+const MySQL = 'data-access-layer'
+const PostgreSQL = 'dal-sequelize'
+
+const dataFile = PostgreSQL
+//---------------------------------------
 
 const dalPath = '/web-application/src/'+dataFile+'/'
 const bllPath = '/web-application/src/business-logic-layer/'
@@ -132,8 +135,8 @@ module.exports = function ({}) {
 	app.use('/bids', theBidRouter)
 	app.use('/user', theUserRouter)
 
-	app.listen(8080, function () {
-		console.log('Running on 8080!')
+	app.listen(port, function () {
+		console.log(`Runing on ${port}!`)
 	})
 
 	return router
