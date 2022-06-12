@@ -9,11 +9,12 @@ const session = require('express-session')
 const express = require('express')
 const app = express()
 
-/*------- SWITCH DATA ACCESS LAYER-------
-MySQL: data-access-layer
-PostgreSQL: dal-sequelize
-*/
-const dataFile = 'dal-sequelize'
+//------- SWITCH DATA ACCESS LAYER-------
+const MySQL = 'data-access-layer'
+const PostgreSQL = 'dal-sequelize'
+
+const dataFile = PostgreSQL
+//---------------------------------------
 
 const dalPath = '/web-application/src/'+dataFile+'/'
 const bllPath = '/web-application/src/business-logic-layer/'
