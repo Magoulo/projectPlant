@@ -13,4 +13,4 @@ const theWebAppRouter = container.resolve("webApp")
 const theWebApiAppRouter = container.resolve("webApiApp")
 
 app.use('/', theWebAppRouter)
-app.use('/api',theWebApiAppRouter)
+app.use('/api', theWebApiAppRouter)

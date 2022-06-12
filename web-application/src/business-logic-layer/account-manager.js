@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
+const salt = 13
 
-module.exports = function ({ accountRepository, accountValidator}) {
+module.exports = function ({ accountRepository, accountValidator }) {
 	return {
 
 		getAllAccounts: function (callback) {
@@ -12,20 +13,20 @@ module.exports = function ({ accountRepository, accountValidator}) {
 		},
 
 		createAccount: function (newAccount, callback) {
-			
+
 			const errors = accountValidator.getCreateNewAccountErrors(newAccount)
 			var errorsExist = false
 
 			for (let i = 0; i < errors.length; i++) {
-				if(0 < errors[i].length){
+				if (0 < errors[i].length) {
 					errorsExist = true
 				}
-			  }
+			}
 
 			if (errorsExist) {
 				callback(errors, null)
 			} else {
-				newAccount.hashPassword = bcrypt.hashSync(newAccount.repeatedPassword, 13)
+				newAccount.hashPassword = bcrypt.hashSync(newAccount.repeatedPassword, salt)
 				accountRepository.createAccount(newAccount, callback)
 			}
 		},

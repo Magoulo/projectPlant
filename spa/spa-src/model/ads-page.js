@@ -64,6 +64,7 @@ async function loadAdsPage() {
 				setPushState(url)
 			})
 		}
+
 	} else if (statusCode == 500) {
 		const error = document.createElement('p')
 		error.innerText = response.statusText

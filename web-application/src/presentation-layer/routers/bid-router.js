@@ -51,7 +51,7 @@ module.exports = function ({ adManager, bidManager }) {
         if (request.params.status == "Accepted") {
             bidManager.setAllBidsToDeclined(adID, function (error) {
 
-                if (error.length !==0) {
+                if (error.length !== 0) {
                     const model = {
                         error: error,
                         session: request.session,
@@ -61,11 +61,10 @@ module.exports = function ({ adManager, bidManager }) {
 
                     response.render("myAds.hbs", model)
                 } else {
-                    console.log("All bids set to declined")
 
                     adManager.closeAd(adID, function (error) {
-                        if (error.length !==0) {
-                            console.log("error 2")
+                        if (error.length !== 0) {
+
                             const model = {
                                 error: error,
                                 session: request.session,
@@ -82,7 +81,7 @@ module.exports = function ({ adManager, bidManager }) {
         }
 
         bidManager.updateBidByBidID(bid, function (error) {
-            if (error.length !==0) {
+            if (error.length !== 0) {
 
                 const model = {
                     error: error,
@@ -148,7 +147,7 @@ module.exports = function ({ adManager, bidManager }) {
                 if (error) {
                     response.render('adCreate.hbs', msgError = "Couldn't upload picture")
                 } else {
-                    console.log("file uploaded successfully")
+
                     bidManager.createBid(Bid, function (error) {
 
                         if (error.length) {
@@ -190,10 +189,8 @@ module.exports = function ({ adManager, bidManager }) {
 
         bidManager.deleteBid(bidID, function (error) {
             if (error) {
-                console.log("??????????????????????????????????????????????")
                 response.redirect("/bids/myBids")
             } else {
-                console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 response.redirect("/bids/myBids")
             }
         })

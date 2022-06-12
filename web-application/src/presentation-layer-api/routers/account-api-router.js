@@ -1,6 +1,5 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
-
 var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
 
@@ -19,20 +18,18 @@ module.exports = function ({ accountManager, userManager }) {
 		const city = request.body.city
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
-		
+
 		accountManager.createAccount(account, function (error, userAccount) {
 
 			if (error.length !== 0) {
 				response.status(500).json(error)
 			} else {
-				console.log("Account created with the ID: ", userAccount.id)
-
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
 				userManager.createUser(user, function (error, results) {
 
 					if (error.length !== 0) {
-						console.log("error in creating user")
+
 						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
 							if (error) {
 								response.status(500).json(error)
@@ -41,7 +38,6 @@ module.exports = function ({ accountManager, userManager }) {
 							}
 						})
 					} else {
-						console.log("account and user created succesfully")
 						response.status(201).end()
 					}
 				})
@@ -53,7 +49,6 @@ module.exports = function ({ accountManager, userManager }) {
 
 	router.post("/sign-in-sessions", function (request, response) {
 
-		const grant_type = request.body.grant_type
 		const username = request.body.username
 		const password = request.body.password
 		var validationErrors = []
@@ -107,7 +102,6 @@ module.exports = function ({ accountManager, userManager }) {
 			}
 		})
 	})
-
 
 	router.post('/sign-out', function (request, response) {
 		request.session.destroy();

@@ -26,7 +26,7 @@
                         </div>
 
                         <form action="/mail" method="POST">
-                         <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}">
                             <div class="modal-body">
 
                                 <div class="mb-3">
@@ -39,7 +39,8 @@
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea placeholder="message" class="form-control" rows="3" name="text"></textarea>
+                                    <textarea placeholder="message" class="form-control" rows="3"
+                                        name="text"></textarea>
                                 </div>
                             </div>
 
@@ -62,7 +63,8 @@
         <div class="col-2 text-center">
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <button type="button" class="btn btn btn-outline-dark" data-bs-toggle="modal"
+                data-bs-target="#contactModal">
                 contact form
             </button>
 

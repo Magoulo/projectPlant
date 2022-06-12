@@ -10,7 +10,7 @@ module.exports = function ({ adManager, userManager }) {
 
         adManager.getAllAds(function (error, Ad) {
 
-            if (error.length !==0) {
+            if (error.length !== 0) {
                 const model = {
                     errors: error,
                     csrfToken: request.csrfToken()
@@ -26,8 +26,6 @@ module.exports = function ({ adManager, userManager }) {
 
                 response.render("ads.hbs", model)
             }
-
-
         })
     })
 
@@ -75,7 +73,7 @@ module.exports = function ({ adManager, userManager }) {
                     Ad: Ad,
                     session: request.session,
                     layout: 'account.hbs',
-                   csrfToken: request.csrfToken()
+                    csrfToken: request.csrfToken()
                 }
             }
         })
@@ -111,7 +109,6 @@ module.exports = function ({ adManager, userManager }) {
                 }
 
                 model.adAccepted = adAccepted
-               
 
                 response.render("myAds.hbs", model)
             }
@@ -197,7 +194,6 @@ module.exports = function ({ adManager, userManager }) {
 
                 response.render("myAds.hbs", model)
             } else {
-                console.log("Ad was delete succesfully")
                 response.redirect("/ads/myAds")
             }
         })
@@ -254,7 +250,6 @@ module.exports = function ({ adManager, userManager }) {
                 } else {
                     imageErrors.push("Must choose all three files below")
                 }
-
 
                 if (imageErrors.length > 0) {
 

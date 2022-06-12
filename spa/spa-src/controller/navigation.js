@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	const signInBody = document.getElementById("sign-in-body")
 	const signOutBody = document.getElementById("sign-out-body")
 	const signOutButton = document.getElementById("sign-out-form-button")
-	const menuLoadingSpinner = document.getElementById("menu-loader-spinner")
 
 	signInButton.addEventListener('click', function (event) {
 		event.preventDefault()
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		signOutBody.classList.add("hidden-sign-in-out")
 
 		sessionStorage.setItem("token", "No token here")
-		console.log("sessionStorage token: ", sessionStorage.accessToken)
 	})
 
 	for (const anchor of anchors) {
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			const url = anchor.getAttribute('href')
 
 			setPushState(url)
-
 			hideCurrentPage()
 			showPage(url)
 
@@ -101,6 +98,7 @@ function showPage(url) {
 		case '/accounts/sign-in':
 			nextPageId = 'start-page'
 			break
+
 		default:
 			if (url.startsWith("/ads/adUpdate/")) {
 
@@ -119,9 +117,8 @@ function showPage(url) {
 
 			if (url.startsWith("/ads/")) {
 
-
 				const [empty, ads, id] = url.split("/")
-				console.log(id);
+			
 				nextPageId = 'ad-page'
 				loadAdPage(id)
 			} else {
@@ -131,17 +128,19 @@ function showPage(url) {
 	}
 
 	document.getElementById(nextPageId).classList.add('current-page')
-
 }
 
 //Displays a loading indicator for 1 sec
 function timeOut(url) {
+	const loadingTime = 1000
+
 	hideCurrentPage()
 	document.getElementById("loader-spinner").classList.add('current-page')
+
 	setTimeout(function () {
 		document.getElementById("loader-spinner").classList.remove('current-page')
 		showPage(url)
-	}, 1000)
+	}, loadingTime)
 }
 
 //setting history.pushState

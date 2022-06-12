@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 module.exports = function ({ }) {
 	return {
 
-		//CREATE---------------------------------------------------------------------------------------------------------------------
+		//CREATE
 		createAd: function (Ad, callback) {
 
 			models.Ad.create({
@@ -36,13 +36,13 @@ module.exports = function ({ }) {
 			})
 		},
 
-		//READ-----------------------------------------------------------------------------------------------------------------------
+		//READ
 		getAllAds: function (callback) {
 
 			models.Ad.findAll({
 				raw: true,
 				nest: true,
-				where: { isClosed: false},
+				where: { isClosed: false },
 				include: [{
 					required: true,
 					model: models.ImageBundle,
@@ -58,7 +58,7 @@ module.exports = function ({ }) {
 
 			models.Ad.findOne({
 				raw: true,
-				nest: true,					
+				nest: true,
 				where: { id: adID },
 				include: [{
 					required: true,
@@ -161,10 +161,12 @@ module.exports = function ({ }) {
 			models.Ad.findAll({
 				raw: true,
 				nest: true,
-				where: { [Op.or]: [{
-					title: { [Op.iLike]: '%' + searchInput + '%' } },
+				where: {
+					[Op.or]: [{
+						title: { [Op.iLike]: '%' + searchInput + '%' }
+					},
 					{
-						latinName:  { [Op.iLike]: '%' + searchInput + '%' }
+						latinName: { [Op.iLike]: '%' + searchInput + '%' }
 					}]
 				},
 				include: [{
@@ -178,7 +180,7 @@ module.exports = function ({ }) {
 			})
 		},
 
-		//UPDATE-----------------------------------------------------------------------------------------------------------------------
+		//UPDATE
 		updateAdByAdID: function (Ad, callback) {
 
 			models.Ad.update({
@@ -211,7 +213,7 @@ module.exports = function ({ }) {
 				})
 		},
 
-		//DELETE-----------------------------------------------------------------------------------------------------------------------
+		//DELETE
 		deleteAd: function (adID, callback) {
 
 			models.Ad.destroy({

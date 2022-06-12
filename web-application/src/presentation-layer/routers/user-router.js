@@ -31,7 +31,6 @@ module.exports = function ({ userManager }) {
 
         const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-
         userManager.updateUserByUserID(User, function (error) {
 
             if (error.length !== 0) {
@@ -41,8 +40,6 @@ module.exports = function ({ userManager }) {
                 const emailErrors = error[2]
                 const phoneNumberErrors = error[3]
                 const cityErrors = error[4]
-
-                console.log("------------------------------------"+emailErrors);
 
                 model = {
                     User,

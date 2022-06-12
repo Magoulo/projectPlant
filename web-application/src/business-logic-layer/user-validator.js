@@ -32,7 +32,7 @@ module.exports = function () {
 				cityErrors.push(emptyFieldErrorMsg)
 			}
 
-			
+
 			return [firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 

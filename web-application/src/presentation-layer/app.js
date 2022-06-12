@@ -18,14 +18,14 @@ const PostgreSQL = 'dal-sequelize'
 const dataFile = PostgreSQL
 //---------------------------------------
 
-const dalPath = '/web-application/src/'+dataFile+'/'
+const dalPath = '/web-application/src/' + dataFile + '/'
 const bllPath = '/web-application/src/business-logic-layer/'
 const plRouterPath = '/web-application/src/presentation-layer/routers/'
 
-module.exports = function ({}) {
+module.exports = function ({ }) {
 	const router = express.Router()
 
-	// SESSIOSN SETUP----------------------------------------------------------------------
+	// SESSIONS SETUP----------------------------------------------------------------------
 	let RedisStore = require("connect-redis")(session)
 	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
 	redisClient.connect().catch(console.error)
@@ -67,28 +67,28 @@ module.exports = function ({}) {
 	//awilix setup---------------------------------------------------------------------------------
 
 	//data-access-layer
-	const accountRepository = require(dalPath+'account-repository')
-	const adRepository = require(dalPath+'ad-repository')
-	const bidRepository = require(dalPath+'bid-repository')
-	const userRepository = require(dalPath+'user-repository')
+	const accountRepository = require(dalPath + 'account-repository')
+	const adRepository = require(dalPath + 'ad-repository')
+	const bidRepository = require(dalPath + 'bid-repository')
+	const userRepository = require(dalPath + 'user-repository')
 
 	//business-logic-layer
-	const accountManager = require(bllPath+'account-manager')
-	const adManager = require(bllPath+'ad-manager')
-	const bidManager = require(bllPath+'bid-manager')
-	const userManager = require(bllPath+'user-manager')
+	const accountManager = require(bllPath + 'account-manager')
+	const adManager = require(bllPath + 'ad-manager')
+	const bidManager = require(bllPath + 'bid-manager')
+	const userManager = require(bllPath + 'user-manager')
 
-	const accountValidator = require(bllPath+'account-validator')
-	const adValidator = require(bllPath+'ad-validator')
-	const bidValidator = require(bllPath+'bid-validator')
-	const userValidator = require(bllPath+'user-validator')
+	const accountValidator = require(bllPath + 'account-validator')
+	const adValidator = require(bllPath + 'ad-validator')
+	const bidValidator = require(bllPath + 'bid-validator')
+	const userValidator = require(bllPath + 'user-validator')
 
 	//presintation-layer
-	const accountRouter = require(plRouterPath+'account-router')
-	const adRouter = require(plRouterPath+'ad-router')
-	const bidRouter = require(plRouterPath+'bid-router')
-	const userRouter = require(plRouterPath+'user-router')
-	const variousRouter = require(plRouterPath+'various-router')
+	const accountRouter = require(plRouterPath + 'account-router')
+	const adRouter = require(plRouterPath + 'ad-router')
+	const bidRouter = require(plRouterPath + 'bid-router')
+	const userRouter = require(plRouterPath + 'user-router')
+	const variousRouter = require(plRouterPath + 'various-router')
 
 
 	// CONTAINER AND DEPENDENCIES---------------------------------------------------------------------

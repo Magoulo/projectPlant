@@ -22,16 +22,16 @@ services:
   "redis":
     build: "./redis"
     ports:
-     - "6379:6379"
+      - "6379:6379"
   "postgres":
     build: "./postgres"
     ports:
-    - "5432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=abc123
   "spa":
     build: "./spa"
     ports:
-    - "6001:6001"
+      - "6001:6001"
     volumes:
       - "./spa/spa-src:/spa/spa-src"

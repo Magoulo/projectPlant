@@ -2,7 +2,6 @@ async function loadStartPage() {
 
 	const response = await fetch("http://localhost:3000")
 	const statusCode = response.status
-	console.log(statusCode)
 
 	const allAdsUl = document.getElementById('all-plant-ads-start-page')
 	allAdsUl.innerText = ""
@@ -58,10 +57,10 @@ async function loadStartPage() {
 				showPage(url)
 				setPushState(url)
 			})
-			aImage.addEventListener('click', function (event) { //vf funkar inte denna nu då?
+			aImage.addEventListener('click', function (event) {
 				event.preventDefault()
 
-				const url = aImage.getAttribute("href") // null
+				const url = aImage.getAttribute("href")
 				hideCurrentPage()
 				showPage(url)
 				setPushState(url)

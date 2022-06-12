@@ -1,7 +1,5 @@
 const db = require('./db')
 
-
-
 module.exports = function () {
 	return {
 
@@ -54,8 +52,6 @@ module.exports = function () {
 			const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,?);`
 			const values = [Bid.userID, Bid.adID, date, Bid.imagePath, Bid.message, status]
 
-			console.log(date);
-
 			db.query(query, values, function (error) {
 				if (error) {
 					callback(['databaseError'], null)
@@ -88,7 +84,6 @@ module.exports = function () {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					console.log("sucessfully update")
 					callback(error)
 				}
 			})
@@ -104,7 +99,6 @@ module.exports = function () {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					console.log("sucessfully updated all other ads to declined")
 					callback(error)
 				}
 			})

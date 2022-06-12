@@ -6,10 +6,6 @@ const bcrypt = require('bcryptjs')
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-/*	router.get("/sign-up", function (request, response) { // Don't think this is used
-		response.render("accounts-sign-up.hbs", { csrfToken: request.csrfToken() })
-	})*/
-
 	router.get("/create", csrfProtection, function (request, response) {
 		response.render("accountCreate.hbs", { csrfToken: request.csrfToken() })
 	})
@@ -114,30 +110,23 @@ module.exports = function ({ accountManager, userManager }) {
 
 	})
 
-	/*router.get("/sign-in", csrfProtection, function (request, response) { // NOt used?
-		response.render("accounts-sign-in.hbs", { csrfToken: request.csrfToken() })
-	})*/
-
 	router.post("/sign-in", csrfProtection, function (request, response) {
 
 		const username = request.body.username
 		const password = request.body.password
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
-			console.log("fetched userAccounts and user: ", UserAccount)
 
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {//bcrypt.compareSync(PW, User_accounts.Password))
+				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true
 					request.session.userID = UserAccount.Users.id
-					console.log("sessionUserID: ", request.session.userID)
 
 					response.redirect('/')
 				} else {
-					console.log("Wrong Username or Password")
 					errors.push("Wrong Username or Password")
 
 					const model = {
@@ -149,8 +138,6 @@ module.exports = function ({ accountManager, userManager }) {
 					response.render('start.hbs', model)
 				}
 			} else {
-				console.log("Internal server error")
-				//errors.push("Internal server error")
 
 				const model = {
 					errors,

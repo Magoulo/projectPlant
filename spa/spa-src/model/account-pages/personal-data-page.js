@@ -33,35 +33,6 @@ async function loadPersonalData(id) {
         //Eventlistener for update button
         personalDataUpdateButton.addEventListener('click', function (event) {
             event.preventDefault()
-
-        /*    //Read the values of the form elements
-            let firstname = personalDataFirstname.value
-            let lastname = personalDataLastname.value
-            let email = personalDataEmail.value
-            let phonenumber = personalDataPhonenumber.value
-            let city = personalDataCity.value
-
-            //create body
-            const body = JSON.stringify({
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                phonenumber: phonenumber,
-                city: city
-            })
-
-            //Send the data for update
-            const response = fetch("http://localhost:3000/user//personalData/" + user.id + "/update", {
-                method: 'Put',
-                headers: new Headers({
-                    "Content-Type": "application/json"
-                }),
-                body: body
-            })
-
-            const url = "/accounts/personalData"
-            timeOut(url)
-            setPushState(url)*/
         })
     }
 
@@ -86,7 +57,7 @@ async function loadPersonalData(id) {
 
 
 async function sendPersonalDataUpdate() {
- 
+
     //Get all elements in personal data form
     const personalDataId = document.getElementById("personal-data-form-id")
     const personalDataFirstname = document.getElementById("personal-data-firstname")
@@ -94,15 +65,14 @@ async function sendPersonalDataUpdate() {
     const personalDataEmail = document.getElementById("personal-data-email")
     const personalDataPhonenumber = document.getElementById("personal-data-phonenumber")
     const personalDataCity = document.getElementById("personal-data-city")
- 
- 
+
     //Read the values of the form elements
     let firstname = personalDataFirstname.value
     let lastname = personalDataLastname.value
     let email = personalDataEmail.value
     let phonenumber = personalDataPhonenumber.value
     let city = personalDataCity.value
- 
+
     //create body
     const body = JSON.stringify({
         firstname: firstname,
@@ -111,7 +81,7 @@ async function sendPersonalDataUpdate() {
         phonenumber: phonenumber,
         city: city
     })
- 
+
     //Send the data for update
     const response = await fetch("http://localhost:3000/user/" + personalDataId.value, {
         method: 'Put',
@@ -121,31 +91,29 @@ async function sendPersonalDataUpdate() {
         }),
         body: body
     })
- 
+
     const statusCode = response.status
- 
+
     if (statusCode == 204) {
         document.getElementById("personal-data-form-firstname-error").innerText = ""
         document.getElementById("personal-data-form-lastname-error").innerText = ""
         document.getElementById("personal-data-form-email-error").innerText = ""
         document.getElementById("personal-data-form-phonenumber-error").innerText = ""
         document.getElementById("personal-data-form-city-error").innerText = ""
-       
+
         const url = "/accounts/personalData"
         timeOut(url)
         setPushState(url)
- 
+
     } else if (statusCode == 401 || statusCode == 500) {
         response.json().then(data => {
-            console.log(data);
-     
-        document.getElementById("personal-data-form-firstname-error").innerText = data[0]
-        document.getElementById("personal-data-form-lastname-error").innerText = data[1]
-        document.getElementById("personal-data-form-email-error").innerText = data[2]
-        document.getElementById("personal-data-form-phonenumber-error").innerText = data[3]
-        document.getElementById("personal-data-form-city-error").innerText = data[4]
-       
+
+            document.getElementById("personal-data-form-firstname-error").innerText = data[0]
+            document.getElementById("personal-data-form-lastname-error").innerText = data[1]
+            document.getElementById("personal-data-form-email-error").innerText = data[2]
+            document.getElementById("personal-data-form-phonenumber-error").innerText = data[3]
+            document.getElementById("personal-data-form-city-error").innerText = data[4]
+
         })
     }
- 
 }
