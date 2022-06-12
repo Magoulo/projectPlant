@@ -3,7 +3,7 @@ const MAX_USERNAME_LENGTH = 21
 const MIN_PASSWORD_LENGTH = 3
 const MAX_PASSWORD_LENGTH = 21
 
-module.exports = function () {
+module.exports = function ({ accountRepository }) {
 	return {
 
 		getCreateNewAccountErrors: function (newAccount) {
@@ -21,15 +21,23 @@ module.exports = function () {
 
 			if (!newAccount.username.length) {
 				usernameErrors.push(emptyFieldErrorMsg)
-			} else {// See if username alrady exists? 
+			} else {
 
-				if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
-					usernameErrors.push("Username must be over " + MIN_USERNAME_LENGTH + " characters")
-				}
+				accountRepository.getAccountByUsername(newAccount.username, function (errors, UserAccount) {
+					if (!UserAccount) {
 
-				else if (MAX_USERNAME_LENGTH < newAccount.username.length) {
-					usernameErrors.push("Username must be under " + MAX_USERNAME_LENGTH + " characters")
-				}
+						if (newAccount.username.length <= MIN_USERNAME_LENGTH) {
+							usernameErrors.push("Username must be over " + MIN_USERNAME_LENGTH + " characters")
+						}
+
+						else if (MAX_USERNAME_LENGTH < newAccount.username.length) {
+							usernameErrors.push("Username must be under " + MAX_USERNAME_LENGTH + " characters")
+						}
+
+					} else {
+						usernameErrors.push("Username already taken")
+					}
+				})
 			}
 
 
@@ -72,7 +80,7 @@ module.exports = function () {
 				cityErrors.push(emptyFieldErrorMsg)
 			}
 
-			
+
 			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		}
 
