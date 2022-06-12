@@ -12,6 +12,7 @@ module.exports = function () {
 			}).then((userAccount) => {
 				callback([], userAccount.dataValues)
 			}).catch((error) => {
+				console.log("-------------------------------------------------------------------------------------------",error.message)
 				callback(error, [])
 			})
 		},
