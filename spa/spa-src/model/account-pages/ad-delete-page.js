@@ -9,40 +9,65 @@ async function loadAdDeletePage(id) {
     })
 
     const ad = await response.json()
+    const statusCode = response.status
 
-    //Get all elements in delete form
-    const deleteAdTitle = document.getElementById("ad-delete-title")
-    const yesButton = document.getElementById("ad-delete-button-yes")
-    const noButton = document.getElementById("ad-delete-button-no")
+    if (statusCode == 200) {
 
-    //Assign the element data from the fetched ad
-    deleteAdTitle.innerText = ad.title
+        //Get all elements in delete form
+        const deleteAdId = document.getElementById("delete-ad-form-ad-id")
+        const deleteAdTitle = document.getElementById("ad-delete-title")
+        const yesButton = document.getElementById("ad-delete-button-yes")
+        const noButton = document.getElementById("ad-delete-button-no")
 
-    //Clicklistener for yes-button
-    yesButton.addEventListener('click', function (event) {
-        event.preventDefault()
+        //Assign the element data from the fetched ad
+        deleteAdId.value = id
+        deleteAdTitle.innerText = ad.title
 
-        //Send the data for delete
-        const response = fetch("http://localhost:3000/ads/" + ad.id, {
-            method: 'Delete',
-            headers: new Headers({
-                "Content-Type": "application/json",
-                'Authorization': "Bearer " + sessionStorage.accessToken,
-            }),
+        //Clicklistener for yes-button
+        yesButton.addEventListener('click', function (event) {
+            event.preventDefault()
         })
 
+        //Clicklistener for no-button
+        noButton.addEventListener('click', function (event) {
+            event.preventDefault()
+
+            const url = "/accounts/myAds"
+            hideCurrentPage()
+            showPage(url)
+            setPushState(url)
+        })
+
+    } else if (statusCode == 400 || statusCode == 401) {
+        response.json().then(data => {
+            document.getElementById("delete-ad-error").innerText = data[0]
+        })
+    }
+}
+
+async function sendAdDelete() {
+
+    const deleteAdId = document.getElementById("delete-ad-form-ad-id")
+
+    //Send the data for delete
+    const response = await fetch("http://localhost:3000/ads/" + deleteAdId.value, {
+        method: 'Delete',
+        headers: new Headers({
+            "Content-Type": "application/json",
+            'Authorization': "Bearer " + sessionStorage.accessToken,
+        }),
+    })
+
+    const statusCode = response.status
+
+    if (statusCode == 204) {
         const url = "/accounts/myAds"
         timeOut(url)
         setPushState(url)
-    })
 
-    //Clicklistener for no-button
-    noButton.addEventListener('click', function (event) {
-        event.preventDefault()
-
-        const url = "/accounts/myAds"
-        hideCurrentPage()
-        showPage(url)
-        setPushState(url)
-    })
+    } else if (statusCode == 400 || statusCode == 401) {
+        response.json().then(data => {
+            document.getElementById("delete-ad-error").innerText = data[0]
+        })
+    }
 }

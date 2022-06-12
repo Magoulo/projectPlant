@@ -227,8 +227,8 @@
 
 				<h1 class="text-center">My Ads</h1>
 				<div id="my-ads-container" class="col-12 text-center">
-
 				</div>
+				<p class="text-center text-danger" id="my-ads-error"></p>
 
 			</div>
 
@@ -350,11 +350,13 @@
 									<div class="row">
 										<div class="col-12">
 											<form>
+												<input type="hidden" name="id" value="" id="delete-ad-form-ad-id">
 												<input class="btn btn-primary" type="submit" value="Yes"
-													id="ad-delete-button-yes">
+													id="ad-delete-button-yes" onclick=sendAdDelete()>
 												<input type="submit" class="btn btn-primary m-2" value="No"
 													id="ad-delete-button-no">
 											</form>
+											<p class="text-start text-danger" id="delete-ad-error"></p>
 
 										</div>
 									</div>
