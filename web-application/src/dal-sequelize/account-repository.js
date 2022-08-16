@@ -11,9 +11,9 @@ module.exports = function () {
 
 			}).then((userAccount) => {
 				callback([], userAccount.dataValues)
-			}).catch((error) => {
-				console.log("-------------------------------------------------------------------------------------------",error.message)
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -29,8 +29,9 @@ module.exports = function () {
 				}]
 			}).then((userAccount) => {
 				callback([], userAccount)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -41,13 +42,13 @@ module.exports = function () {
 
 			}).then(function (rowDeleted) {
 				if (rowDeleted === 1) {
-					console.log('Deleted successfully');
 					callback([])
 				} else {
-					callback(error = "Internal server error")
+					callback(errors = ["Internal server error"])
 				}
-			}).catch((error) => {
-				callback(error)
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors)
 			})
 		},
 

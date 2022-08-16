@@ -16,8 +16,9 @@ module.exports = function ({ }) {
 
 			}).then((Ad) => {
 				callback([], Ad.dataValues)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -31,8 +32,9 @@ module.exports = function ({ }) {
 
 			}).then((imageBundle) => {
 				callback([], imageBundle.dataValues)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -49,8 +51,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Ad) => {
 				callback([], Ad)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -66,8 +69,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Ad) => {
 				callback([], Ad)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -83,8 +87,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Ad) => {
 				callback([], Ad)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -96,8 +101,9 @@ module.exports = function ({ }) {
 			}).then((Ad) => {
 				callback([], Ad.dataValues)
 
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -121,8 +127,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Ad) => {
 				callback([], Ad)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -139,8 +146,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Bid) => {
 				callback([], Bid)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -151,8 +159,9 @@ module.exports = function ({ }) {
 
 			}).then((ImageBundle) => {
 				callback([], ImageBundle.dataValues)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -175,8 +184,9 @@ module.exports = function ({ }) {
 				}],
 			}).then((Ad) => {
 				callback([], Ad)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -193,8 +203,9 @@ module.exports = function ({ }) {
 
 				}).then((Ad) => {
 					callback([], Ad.dataValues)
-				}).catch((error) => {
-					callback(error, [])
+				}).catch((errors) => {
+					errors = ["Internal server error"]
+					callback(errors, [])
 				})
 		},
 
@@ -208,8 +219,9 @@ module.exports = function ({ }) {
 
 				}).then((Ad) => {
 					callback([], Ad.dataValues)
-				}).catch((error) => {
-					callback(error, [])
+				}).catch((errors) => {
+					errors = ["Internal server error"]
+					callback(errors, [])
 				})
 		},
 
@@ -223,8 +235,9 @@ module.exports = function ({ }) {
 				if (rowDeleted === 1) {
 					callback([])
 				}
-			}).catch((error) => {
-				callback(error)
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors)
 			})
 		},
 

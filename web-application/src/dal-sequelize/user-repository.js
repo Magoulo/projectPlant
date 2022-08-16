@@ -12,8 +12,9 @@ module.exports = function () {
 
 			}).then((User) => {
 				callback([], User)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -25,8 +26,9 @@ module.exports = function () {
 				where: { id: userID }
 			}).then((User) => {
 				callback([], User)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -43,8 +45,9 @@ module.exports = function () {
 					where: { id: User.id }
 				}).then((User) => {
 					callback([], User.dataValues)
-				}).catch((error) => {
-					callback(error, [])
+				}).catch((errors) => {
+					errors = ["Internal server error"]
+					callback(errors, [])
 				})
 		},
 
@@ -60,8 +63,9 @@ module.exports = function () {
 
 			}).then((User) => {
 				callback([], User.dataValues)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		}
 

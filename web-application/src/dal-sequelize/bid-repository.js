@@ -12,8 +12,9 @@ module.exports = function () {
 
 			}).then((Bid) => {
 				callback([], Bid)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -26,8 +27,9 @@ module.exports = function () {
 
 			}).then((Bid) => {
 				callback([], Bid)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -47,8 +49,9 @@ module.exports = function () {
 				}],
 			}).then((Bid) => {
 				callback([], Bid)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -67,8 +70,9 @@ module.exports = function () {
 
 			}).then((Bid) => {
 				callback([], Bid)
-			}).catch((error) => {
-				callback(error, [])
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
 			})
 		},
 
@@ -81,10 +85,11 @@ module.exports = function () {
 				if (rowDeleted === 1) {
 					callback([])
 				} else {
-					callback(error = "Internal Server Error")
+					callback(errors = ["Internal server error"])
 				}
-			}).catch((error) => {
-				callback(error)
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors)
 			})
 		},
 
@@ -98,8 +103,9 @@ module.exports = function () {
 
 				}).then((Bid) => {
 					callback([], Bid.dataValues)
-				}).catch((error) => {
-					callback(error, [])
+				}).catch((errors) => {
+					errors = ["Internal server error"]
+					callback(errors, [])
 				})
 		},
 
@@ -115,8 +121,9 @@ module.exports = function () {
 
 				}).then((Bid) => {
 					callback([], Bid.dataValues)
-				}).catch((error) => {
-					callback(error, [])
+				}).catch((errors) => {
+					errors = ["Internal server error"]
+					callback(errors, [])
 				})
 		}
 
