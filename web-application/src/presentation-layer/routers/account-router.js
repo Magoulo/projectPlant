@@ -23,16 +23,16 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-		accountManager.createAccount(account, function (error, userAccount) {
-			if (error.length !== 0) {
+		accountManager.createAccount(account, function (errors, userAccount) {
+			if (errors.length !== 0) {
 
-				const usernameErrors = error[0]
-				const passwordErrors = error[1]
-				const firstNameErrors = error[2]
-				const lastNameErrors = error[3]
-				const emailErrors = error[4]
-				const phoneNumberErrors = error[5]
-				const cityErrors = error[6]
+				const usernameErrors = errors[0]
+				const passwordErrors = errors[1]
+				const firstNameErrors = errors[2]
+				const lastNameErrors = errors[3]
+				const emailErrors = errors[4]
+				const phoneNumberErrors = errors[5]
+				const cityErrors = errors[6]
 
 				model = {
 					usernameErrors,
@@ -115,11 +115,13 @@ module.exports = function ({ accountManager, userManager }) {
 		const username = request.body.username
 		const password = request.body.password
 
+		const UsernamePasswordInput = {username: username, password: password}
+
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {
+				if(accountManager.isCorrectPassword(UsernamePasswordInput, UserAccount)){
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true

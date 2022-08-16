@@ -17,8 +17,6 @@ module.exports = function ({ accountRepository, accountValidator, helperFunction
 			const errors = accountValidator.getCreateNewAccountErrors(newAccount)
 			var errorsExist = helperFunctions.hasErrors(errors)
 
-			console.log("does error exist? ", errorsExist)
-
 			if (errorsExist) {
 				callback(errors, null)
 			} else {
@@ -29,6 +27,11 @@ module.exports = function ({ accountRepository, accountValidator, helperFunction
 
 		deleteAccountByUserAccountID: function (userAccountID, callback) {
 			accountRepository.deleteAccountByUserAccountID(userAccountID, callback)
+		},
+
+		isCorrectPassword: function(UsernamePasswordInput,UserAccount){
+			var isCorrectPassword = accountValidator.isCorrectPassword(UsernamePasswordInput,UserAccount)
+			return isCorrectPassword
 		}
 
 	}

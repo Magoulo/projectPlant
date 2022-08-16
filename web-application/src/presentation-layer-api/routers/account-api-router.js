@@ -51,12 +51,14 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const username = request.body.username
 		const password = request.body.password
+		const UsernamePasswordInput = {username: username, password: password}
+
 		var validationErrors = []
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 			if (errors.length == 0) {
 
-				if (username == UserAccount.username && bcrypt.compareSync(password, UserAccount.passwordHash)) {
+					if(accountManager.isCorrectPassword(UsernamePasswordInput, UserAccount)){
 
 					const payloadAccessToken = {
 						isLoggedIn: true,

@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 const MIN_USERNAME_LENGTH = 3
 const MAX_USERNAME_LENGTH = 21
 const MIN_PASSWORD_LENGTH = 3
@@ -82,7 +84,14 @@ module.exports = function ({ accountRepository }) {
 
 
 			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
-		}
+		},
 
+		isCorrectPassword: function(UsernamePasswordInput,UserAccount){
+			if (UsernamePasswordInput.username == UserAccount.username && bcrypt.compareSync(UsernamePasswordInput.password, UserAccount.passwordHash)) {
+				return true
+			} else {
+				return false
+			}
+		}
 	}
 }
