@@ -8,11 +8,11 @@ module.exports = function () {
 			const query = "SELECT * FROM Bid WHERE adID = ?"
 			const values = [adID]
 
-			db.query(query, values, function (error, Bid) {
+			db.query(query, values, function (error, Bids) {
 				if (error) {
 					callback(['databaseError in Bid table'], null)
 				} else {
-					callback([], Bid)
+					callback([], Bids)
 				}
 			})
 		},
@@ -22,11 +22,11 @@ module.exports = function () {
 			const query = "SELECT * FROM Bid WHERE adID = ? LIMIT 1"
 			const values = [adID]
 
-			db.query(query, values, function (error, Bid) {
+			db.query(query, values, function (error, Bids) {
 				if (error) {
 					callback(['databaseError in Bid table'], null)
 				} else {
-					callback([], Bid[0])
+					callback([], Bids[0])
 				}
 			})
 		},
@@ -36,11 +36,11 @@ module.exports = function () {
 			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImagePath FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
 			const values = [userID]
 
-			db.query(query, values, function (error, Bid) {
+			db.query(query, values, function (error, Bids) {
 				if (error) {
 					callback(['databaseError in Bid table'], null)
 				} else {
-					callback([], Bid)
+					callback([], Bids)
 				}
 			})
 		},

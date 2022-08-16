@@ -9,11 +9,11 @@ module.exports = function ({ }) {
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE isClosed = ? ORDER BY Ad.adID`
 			const values = [isClosed]
 
-			db.query(query, values, function (error, Ad) {
+			db.query(query, values, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in getAllAds'], null)
 				} else {
-					callback([], Ad)
+					callback([], Ads)
 				}
 			})
 		},
@@ -23,11 +23,11 @@ module.exports = function ({ }) {
 			const query = "SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.adID = ? LIMIT 1"
 			const values = [adID]
 
-			db.query(query, values, function (error, Ad) {
+			db.query(query, values, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in Ads table'], null)
 				} else {
-					callback([], Ad[0])
+					callback([], Ads[0])
 				}
 			})
 		},
@@ -37,11 +37,11 @@ module.exports = function ({ }) {
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Ad.userID = ? ORDER BY Ad.adID`
 			const values = [userID]
 
-			db.query(query, values, function (error, Ad) {
+			db.query(query, values, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in getAllAdsByUserID'], null)
 				} else {
-					callback([], Ad)
+					callback([], Ads)
 				}
 			})
 		},
@@ -51,11 +51,11 @@ module.exports = function ({ }) {
 			const query = "SELECT * FROM Ad WHERE userID = ? LIMIT 1"
 			const values = [userID]
 
-			db.query(query, values, function (error, Ad) {
+			db.query(query, values, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in Ads table'], null)
 				} else {
-					callback([], Ad[0])
+					callback([], Ads[0])
 				}
 			})
 		},
@@ -65,11 +65,11 @@ module.exports = function ({ }) {
 			const query = "SELECT * FROM ImageBundle WHERE adID = ? LIMIT 1"
 			const values = [adID]
 
-			db.query(query, values, function (error, ImageBundle) {
+			db.query(query, values, function (error, ImageBundles) {
 				if (error) {
 					callback(['databaseError in Bid table'], null)
 				} else {
-					callback([], ImageBundle[0])
+					callback([], ImageBundles[0])
 				}
 			})
 		},
@@ -142,11 +142,11 @@ module.exports = function ({ }) {
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID JOIN Bid ON Ad.adID = Bid.adID JOIN User ON Bid.userID = User.userID WHERE Ad.userID = ? ORDER BY Ad.userID`
 			const values = [userID]
 
-			db.query(query, values, function (error, Ad) {
+			db.query(query, values, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in getAllAdsByUserID'], null)
 				} else {
-					callback([], Ad)
+					callback([], Ads)
 				}
 			})
 		},
@@ -169,11 +169,11 @@ module.exports = function ({ }) {
 
 			const query = `SELECT * FROM Ad JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE title LIKE '%${searchInput}%' OR latinName LIKE '%${searchInput}%'`
 
-			db.query(query, function (error, Ad) {
+			db.query(query, function (error, Ads) {
 				if (error) {
 					callback(['databaseError in getAllAdsByTitle'], null)
 				} else {
-					callback([], Ad)
+					callback([], Ads)
 				}
 			})
 		}

@@ -22,11 +22,11 @@ module.exports = function () {
 			const query = `SELECT * FROM UserAccount WHERE username = ? LIMIT 1`
 			const values = [username]
 
-			db.query(query, values, function (error, UserAccount) {
+			db.query(query, values, function (error, UserAccounts) {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					callback([], UserAccount[0])
+					callback([], UserAccounts[0])
 				}
 			})
 		},
