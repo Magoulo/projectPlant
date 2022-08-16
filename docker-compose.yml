@@ -28,6 +28,8 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_DB=plantSwapDB
+      - POSTGRES_USER=plantSwap
       - POSTGRES_PASSWORD=abc123
   "spa":
     build: "./spa"
