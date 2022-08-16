@@ -1,4 +1,4 @@
-module.exports = function ({ adRepository, adValidator }) {
+module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 	return {
 
 		getAllAds: function (callback) {
@@ -28,13 +28,7 @@ module.exports = function ({ adRepository, adValidator }) {
 		createAd: function (Ad, callback) {
 
 			const errors = adValidator.getAdErrors(Ad)
-			var errorsExist = false
-
-			for (let i = 0; i < errors.length; i++) {
-				if (0 < errors[i].length) {
-					errorsExist = true
-				}
-			}
+			var errorsExist = helperFunctions.hasErrors(errors)
 
 			if (errorsExist) {
 				callback(errors, null)
@@ -50,13 +44,7 @@ module.exports = function ({ adRepository, adValidator }) {
 		updateAdByAdID: function (Ad, callback) {
 
 			const errors = adValidator.getAdErrors(Ad)
-			var errorsExist = false
-
-			for (let i = 0; i < errors.length; i++) {
-				if (0 < errors[i].length) {
-					errorsExist = true
-				}
-			}
+			var errorsExist = helperFunctions.hasErrors(errors)
 
 			if (errorsExist) {
 				callback(errors, null)

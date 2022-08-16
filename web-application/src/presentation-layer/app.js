@@ -77,11 +77,13 @@ module.exports = function ({ }) {
 	const adManager = require(bllPath + 'ad-manager')
 	const bidManager = require(bllPath + 'bid-manager')
 	const userManager = require(bllPath + 'user-manager')
-
+	
 	const accountValidator = require(bllPath + 'account-validator')
 	const adValidator = require(bllPath + 'ad-validator')
 	const bidValidator = require(bllPath + 'bid-validator')
 	const userValidator = require(bllPath + 'user-validator')
+
+	const helperFunctions = require(bllPath + 'helper-functions')
 
 	//presintation-layer
 	const accountRouter = require(plRouterPath + 'account-router')
@@ -120,6 +122,7 @@ module.exports = function ({ }) {
 
 	//various
 	container.register("variousRouter", awilix.asFunction(variousRouter))
+	container.register("helperFunctions", awilix.asFunction(helperFunctions))
 
 
 	// ROUTING--------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-module.exports = function ({ bidRepository, bidValidator }) {
+module.exports = function ({ bidRepository, bidValidator, helperFunctions }) {
 	return {
 
 		getAllBidsByAdID: function (adID, callback) {

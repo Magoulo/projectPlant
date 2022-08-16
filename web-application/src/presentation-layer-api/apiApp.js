@@ -93,6 +93,8 @@ module.exports = function ({ }) {
 	const bidValidator = require(bllPath + 'bid-validator')
 	const userValidator = require(bllPath + 'user-validator')
 
+	const helperFunctions = require(bllPath + 'helper-functions')
+
 	//presentation-layer
 	const accountRouter = require(plRouterPath + 'account-api-router')
 	const adRouter = require(plRouterPath + 'ad-api-router')
@@ -128,6 +130,7 @@ module.exports = function ({ }) {
 
 	//various
 	container.register("variousRouter", awilix.asFunction(variousRouter))
+	container.register("helperFunctions", awilix.asFunction(helperFunctions))
 
 
 	// ROUTING--------------------------------------------------------------------------------------
