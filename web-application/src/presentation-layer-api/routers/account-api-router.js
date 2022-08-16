@@ -1,5 +1,4 @@
 const express = require('express')
-const bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
 
@@ -47,7 +46,7 @@ module.exports = function ({ accountManager, userManager }) {
 	})
 
 
-	router.post("/sign-in-sessions", function (request, response) {
+	router.post("/tokens", function (request, response) {
 
 		const username = request.body.username
 		const password = request.body.password
@@ -106,7 +105,6 @@ module.exports = function ({ accountManager, userManager }) {
 	})
 
 	router.post('/sign-out', function (request, response) {
-		request.session.destroy();
 		response.status(200)
 	})
 

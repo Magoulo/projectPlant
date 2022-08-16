@@ -1,7 +1,6 @@
 const express = require('express')
 const csrf = require('csurf')
 const csrfProtection = csrf()
-const bcrypt = require('bcryptjs')
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()

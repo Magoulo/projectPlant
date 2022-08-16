@@ -19,7 +19,7 @@ async function signIn() {
   timeOut("/")
 
   //Send sign-in request
-  const response = await fetch("http://localhost:3000/accounts/sign-in-sessions", {
+  const response = await fetch("http://localhost:3000/accounts/tokens", {
     method: 'Post',
     headers: new Headers({
       "Content-Type": "application/json"
