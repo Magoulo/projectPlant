@@ -11,7 +11,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in getAllAds'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads)
 				}
@@ -25,7 +25,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in Ads table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads[0])
 				}
@@ -39,7 +39,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in getAllAdsByUserID'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads)
 				}
@@ -53,7 +53,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in Ads table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads[0])
 				}
@@ -67,7 +67,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, ImageBundles) {
 				if (error) {
-					callback(['databaseError in Bid table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], ImageBundles[0])
 				}
@@ -83,7 +83,7 @@ module.exports = function ({ }) {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					callback(error, ibID.insertId)
+					callback([], ibID.insertId)
 				}
 			})
 		},
@@ -97,7 +97,7 @@ module.exports = function ({ }) {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					callback(error, adID.insertId)
+					callback([], adID.insertId)
 				}
 			})
 		},
@@ -108,7 +108,11 @@ module.exports = function ({ }) {
 			const values = [Ad.title, Ad.latinName, Ad.description, Ad.adID]
 
 			db.query(query, values, function (error) {
-				callback(error)
+				if (error) {
+					callback(['databaseError'])
+				} else {
+					callback([])
+				}
 			})
 		},
 
@@ -119,7 +123,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(["Database error"], null)
+					callback(["Database error"])
 				} else {
 					callback([])
 				}
@@ -133,7 +137,11 @@ module.exports = function ({ }) {
 			const values = [isClosed, adID]
 
 			db.query(query, values, function (error) {
-				callback(error)
+				if (error) {
+					callback(['databaseError'])
+				} else {
+					callback([])
+				}
 			})
 		},
 
@@ -144,7 +152,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in getAllAdsByUserID'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads)
 				}
@@ -158,7 +166,7 @@ module.exports = function ({ }) {
 
 			db.query(query, values, function (error, adOffers) {
 				if (error) {
-					callback(['databaseError in getAllAdsByUserID'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], adOffers)
 				}
@@ -171,7 +179,7 @@ module.exports = function ({ }) {
 
 			db.query(query, function (error, Ads) {
 				if (error) {
-					callback(['databaseError in getAllAdsByTitle'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Ads)
 				}

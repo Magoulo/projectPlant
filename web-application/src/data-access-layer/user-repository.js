@@ -10,7 +10,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, Users) {
 				if (error) {
-					callback(['databaseError in user table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Users[0])
 				}
@@ -24,7 +24,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, Users) {
 				if (error) {
-					callback(['databaseError in User table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Users[0])
 				}
@@ -37,7 +37,11 @@ module.exports = function () {
 			const values = [firstName, lastName, email, phoneNumber, city, userID]
 
 			db.query(query, values, function (error) {
-				callback(error)
+				if (error) {
+					callback(['databaseError'])
+				} else {
+					callback([])
+				}
 			})
 		},
 
@@ -48,7 +52,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, results) {
 				if (error) {
-					callback(['databaseError in createUser'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], results.insertId)
 				}

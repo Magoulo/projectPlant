@@ -10,7 +10,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, Bids) {
 				if (error) {
-					callback(['databaseError in Bid table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Bids)
 				}
@@ -24,7 +24,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, Bids) {
 				if (error) {
-					callback(['databaseError in Bid table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Bids[0])
 				}
@@ -38,7 +38,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error, Bids) {
 				if (error) {
-					callback(['databaseError in Bid table'], null)
+					callback(['databaseError'], null)
 				} else {
 					callback([], Bids)
 				}
@@ -54,9 +54,9 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(['databaseError'], null)
+					callback(['databaseError'])
 				} else {
-					callback(error)
+					callback([])
 				}
 			})
 		},
@@ -68,9 +68,9 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(['databaseError'], null)
+					callback(['databaseError'])
 				} else {
-					callback(error)
+					callback([])
 				}
 			})
 		},
@@ -82,9 +82,9 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(['databaseError'], null)
+					callback(['databaseError'])
 				} else {
-					callback(error)
+					callback([])
 				}
 			})
 		},
@@ -97,9 +97,9 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(['databaseError'], null)
+					callback(['databaseError'])
 				} else {
-					callback(error)
+					callback([])
 				}
 			})
 		}

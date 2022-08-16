@@ -40,7 +40,7 @@ module.exports = function () {
 				if (error) {
 					callback(['databaseError'], null)
 				} else {
-					callback(error, userAccountID.insertId)
+					callback([], userAccountID.insertId)
 				}
 			})
 
@@ -52,7 +52,7 @@ module.exports = function () {
 
 			db.query(query, values, function (error) {
 				if (error) {
-					callback(['databaseError when try to delte user'], null)
+					callback(['databaseError'])
 				} else {
 					callback([])
 				}
