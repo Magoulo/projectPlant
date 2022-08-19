@@ -9,7 +9,12 @@ module.exports = function ({}) {
                 }
             }
             return false
-        }
+        },
 
+        userIsAuthenticated: function (request) {
+            if(!request.session.isLoggedIn) {
+                return false
+            } else return true
+        }
     }
 }
