@@ -138,15 +138,18 @@ module.exports = function ({ adManager, userManager }) {
                                 csrfToken: request.csrfToken()
                             }
 
-                            response.render("myAds.hbs", model)
+                            response.render("notAuthorized.hbs", model)
                         } else {
-                            response.redirect("/ads/myAds")
+                            response.redirect("/my-account/ads")
                         }
                     })
                
                 } else {
-                     //Ändra till not authenticated sidan???--------------------------------------------------------------------------------
-                    response.render("myAds.hbs")
+                    const model = {
+                        layout: 'account.hbs',
+                        csrfToken: request.csrfToken()
+                    }
+                    response.render("notAuthorized.hbs", model)
                 }
             }
         })
