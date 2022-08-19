@@ -18,20 +18,20 @@ module.exports = function ({ accountManager, userManager }) {
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-		accountManager.createAccount(account, function (error, userAccount) {
+		accountManager.createAccount(account, function (errors, userAccount) {
 
-			if (error.length !== 0) {
-				response.status(500).json(error)
+			if (errors.length !== 0) {
+				response.status(500).json(errors)
 			} else {
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-				userManager.createUser(user, function (error, results) {
+				userManager.createUser(user, function (errors, results) {
 
-					if (error.length !== 0) {
+					if (errors.length !== 0) {
 
-						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-							if (error) {
-								response.status(500).json(error)
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (errors) {
+							if (errors) {
+								response.status(500).json(errors)
 							} else {
 								response.status(418).end()
 							}
@@ -74,16 +74,16 @@ module.exports = function ({ accountManager, userManager }) {
 
 					}
 
-					jwt.sign(payloadAccessToken, SECRET, function (error, accessToken) { // Access Token
+					jwt.sign(payloadAccessToken, SECRET, function (errors, accessToken) { // Access Token
 
-						if (error) {
-							response.status(401).json(error)
+						if (errors) {
+							response.status(401).json(errors)
 						} else {
 
-							jwt.sign(payloadIdToken, SECRET, function (error, idToken) { // Id Token
+							jwt.sign(payloadIdToken, SECRET, function (errors, idToken) { // Id Token
 
-								if (error) {
-									response.status(401).json(error)
+								if (errors) {
+									response.status(401).json(errors)
 								} else {
 
 									response.status(200).json(
