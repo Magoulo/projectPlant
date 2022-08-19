@@ -180,10 +180,11 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
+
     router.post("/adDelete/:adID/delete", csrfProtection, function (request, response) {
         const adID = request.params.adID
 
-        adManager.deleteAd(adID, function (errors) {
+        adManager.getAdByAdID(adID, function (errors, Ad) {
             if (errors.length !== 0) {
                 const model = {
                     errors: errors,
@@ -191,10 +192,31 @@ module.exports = function ({ adManager, userManager }) {
                     layout: 'account.hbs',
                     csrfToken: request.csrfToken()
                 }
-
                 response.render("myAds.hbs", model)
             } else {
-                response.redirect("/ads/myAds")
+
+                var ids = {adUserID: Ad.userID, sessionUserID: request.session.userID}
+                if (adManager.isUserAuthenticated(ids)) {
+
+                    adManager.deleteAd(adID, function (errors) {
+                        if (errors.length !== 0) {
+                            const model = {
+                                errors: errors,
+                                session: request.session,
+                                layout: 'account.hbs',
+                                csrfToken: request.csrfToken()
+                            }
+
+                            response.render("myAds.hbs", model)
+                        } else {
+                            response.redirect("/ads/myAds")
+                        }
+                    })
+               
+                } else {
+                     //Ändra till not authenticated sidan???--------------------------------------------------------------------------------
+                    response.render("myAds.hbs")
+                }
             }
         })
     })
