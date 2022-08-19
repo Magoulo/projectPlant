@@ -67,6 +67,10 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 
 		closeAd: function (adID, callback) {
 			adRepository.closeAd(adID, callback)
+		},
+
+		isCorrectToken: function(accessToken,callback){
+			helperFunctions.isCorrectToken(accessToken,callback)		
 		}
 
 	}
