@@ -20,9 +20,6 @@ module.exports = function ({ adManager, userManager }) {
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)
 
-        var allAds = []
-        var allBids = []
-
         var tokenContent
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
@@ -31,36 +28,12 @@ module.exports = function ({ adManager, userManager }) {
         if (tokenContent.errors) {
             response.status(401).end()
         } else {
-            adManager.getAllAdsByUserID(tokenContent.payload.userID, function (errors, Ad) {
+            adManager.getAllAdsByUserID(tokenContent.payload.userID, function (errors, Ads) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
-                    allAds = Ad
-                }
-            })
 
-            adManager.getAllAdsBidsUsersByUserID(tokenContent.payload.userID, function (errors, adOffers) {
-                if (errors.length !== 0) {
-                    response.status(400).json(errors)
-                } else {
-                    allBids = adOffers
-                    var adAccepted = []
-
-                    for (const ad of allAds) {
-                        ad.bids = []
-
-                        for (const bid of allBids) {
-
-                            if (bid.Bids.adID == ad.id && bid.Bids.status == "Pending" && ad.isClosed == false) {
-                                ad.bids.push(bid.Bids)
-                            }
-
-                            if (bid.Bids.status == "Accepted" && ad.isClosed == true) {
-                                adAccepted.push(bid)
-                            }
-                        }
-                    }
-                    response.status(200).json([allAds, adAccepted])
+                    response.status(200).json([Ads])
                 }
             })
         }
