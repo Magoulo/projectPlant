@@ -136,7 +136,7 @@ module.exports = function ({ }) {
 	app.use('/accounts', theAccountRouter)
 	app.use('/ads', theAdRouter)
 	app.use('/bids', theBidRouter)
-	app.use('/user', theUserRouter)
+	app.use('/my-account', theUserRouter)
 
 	app.listen(port, function () {
 		console.log(`Runing on ${port}!`)

@@ -2,10 +2,124 @@ const express = require('express')
 const csrf = require('csurf')
 const csrfProtection = csrf()
 
-module.exports = function ({ userManager }) {
+module.exports = function ({ userManager, adManager, bidManager }) {
     const router = express.Router()
 
-    router.get("/personalData", csrfProtection, function (request, response) {
+    router.get("/ads", csrfProtection, function (request, response) {
+
+        const userID = request.session.userID
+        const isLoggedIn = request.session.isLoggedIn
+        var model = {}
+        var allAds = []
+        var allBids = []
+
+        if(!request.session.isLoggedIn){
+            console.log("auth error")
+
+            response.render("notAuthorized.hbs")
+       
+        } else {        
+            console.log("AUUTH:   ", isLoggedIn)
+            adManager.getAllAdsByUserID(userID, function (errors, Ad) {
+
+            if (errors.length !== 0) {
+                const model = {
+                    errors: errors,
+                    Ad: Ad,
+                    session: request.session,
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
+                }
+
+                response.render("myAds.hbs", model)
+            } else {
+
+                allAds = Ad
+
+                model = {
+                    Ad: Ad,
+                    session: request.session,
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
+                }
+            }
+        })
+
+        adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
+            if (errors.length !== 0) {
+
+                const model = {
+                    errors: errors,
+                    adOffers: adOffers,
+                    session: request.session,
+                    layout: 'account.hbs',
+                    csrfToken: request.csrfToken()
+                }
+
+                response.render("myAds.hbs", model)
+            } else {
+                allBids = adOffers
+                var adAccepted = []
+
+                for (const ad of allAds) {
+                    ad.bids = []
+
+                    for (const bid of allBids) {
+
+                        if (bid.Bids.adID == ad.id && bid.Bids.status == "Pending" && ad.isClosed == false) {
+                            ad.bids.push(bid.Bids)
+                        }
+                        if (bid.Bids.status == "Accepted" && ad.isClosed == true) {
+                            adAccepted.push(bid)
+                        }
+                    }
+                }
+
+                model.adAccepted = adAccepted
+
+                response.render("myAds.hbs", model)
+            }
+        })}
+    })
+
+    router.get("/bids", csrfProtection, function (request, response) {
+
+        var bidAccepted = []
+        var bidPending = []
+        var bidDeclined = []
+
+        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
+
+            for (index in Bid) {
+
+                if (Bid[index].status == "Accepted") {
+                    bidAccepted.push(Bid[index])
+                }
+
+                if (Bid[index].status == "Pending") {
+                    bidPending.push(Bid[index])
+                }
+
+                if (Bid[index].status == "Declined") {
+                    bidDeclined.push(Bid[index])
+                }
+            }
+
+            const model = {
+                errors: errors,
+                session: request.session,
+                bidAccepted: bidAccepted,
+                bidPending: bidPending,
+                bidDeclined: bidDeclined,
+                layout: 'account.hbs',
+                csrfToken: request.csrfToken()
+            }
+
+            response.render("myBids.hbs", model)
+        })
+    })
+
+    router.get("/personal-data", csrfProtection, function (request, response) {
         userManager.getUserByUserID(request.session.userID, function (errors, User) {
 
             const model = {
@@ -20,7 +134,7 @@ module.exports = function ({ userManager }) {
         })
     })
 
-    router.post('/personalData/:userID/update', csrfProtection, function (request, response) {
+    router.post('/personal-data/:userID/update', csrfProtection, function (request, response) {
 
         const userID = request.params.userID
         const firstName = request.body.firstName
