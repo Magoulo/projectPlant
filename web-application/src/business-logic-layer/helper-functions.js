@@ -14,6 +14,12 @@ module.exports = function ({ }) {
             return false
         },
 
+        userIsLoggedIn: function (session) {
+            if(!session.isLoggedIn) {
+                return true
+            } else return false
+        },
+
         isCorrectToken: function (accessToken,callback) {
             jwt.verify(accessToken, SECRET, function (errors, payload) {
                 var verificationResult = {errors: errors, payload: payload}
