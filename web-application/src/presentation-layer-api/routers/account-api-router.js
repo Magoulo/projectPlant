@@ -55,21 +55,22 @@ module.exports = function ({ accountManager, userManager }) {
 		var validationErrors = []
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
+
 			if (errors.length == 0) {
 
 					if(accountManager.isCorrectPassword(UsernamePasswordInput, UserAccount)){
 
 					const payloadAccessToken = {
 						isLoggedIn: true,
-						userID: UserAccount.Users.id
+						userID: UserAccount.User.id
 					}
 
 					const payloadIdToken = {
-						Firstname: UserAccount.Users.firstName,
-						Lastname: UserAccount.Users.lastName,
-						Email: UserAccount.Users.email,
-						Phonenumber: UserAccount.Users.phoneNumber,
-						City: UserAccount.Users.city
+						Firstname: UserAccount.User.firstName,
+						Lastname: UserAccount.User.lastName,
+						Email: UserAccount.User.email,
+						Phonenumber: UserAccount.User.phoneNumber,
+						City: UserAccount.User.city
 
 					}
 

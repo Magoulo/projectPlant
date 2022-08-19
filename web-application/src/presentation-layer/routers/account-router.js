@@ -124,7 +124,7 @@ module.exports = function ({ accountManager, userManager }) {
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true
-					request.session.userID = UserAccount.Users.id
+					request.session.userID = UserAccount.User.id
 
 					response.redirect('/')
 				} else {

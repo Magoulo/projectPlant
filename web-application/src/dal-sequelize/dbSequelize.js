@@ -52,7 +52,7 @@ const ImageBundle = sequelize.define("ImageBundle", {
 })
 
 
-UserAccount.hasMany(User, {
+UserAccount.hasOne(User, {
 	foreignKey: 'userAccountID',
 	onDelete: 'CASCADE'
 });
