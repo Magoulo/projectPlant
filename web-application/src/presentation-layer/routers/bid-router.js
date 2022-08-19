@@ -6,43 +6,6 @@ const csrfProtection = csrf()
 module.exports = function ({ adManager, bidManager }) {
     const router = express.Router()
 
-    router.get("/myBids", csrfProtection, function (request, response) {
-
-        var bidAccepted = []
-        var bidPending = []
-        var bidDeclined = []
-
-        bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
-
-            for (index in Bid) {
-
-                if (Bid[index].status == "Accepted") {
-                    bidAccepted.push(Bid[index])
-                }
-
-                if (Bid[index].status == "Pending") {
-                    bidPending.push(Bid[index])
-                }
-
-                if (Bid[index].status == "Declined") {
-                    bidDeclined.push(Bid[index])
-                }
-            }
-
-            const model = {
-                errors: errors,
-                session: request.session,
-                bidAccepted: bidAccepted,
-                bidPending: bidPending,
-                bidDeclined: bidDeclined,
-                layout: 'account.hbs',
-                csrfToken: request.csrfToken()
-            }
-
-            response.render("myBids.hbs", model)
-        })
-    })
-
     router.post("/updateBid/:bidID/:status", csrfProtection, function (request, response) {
 
         const adID = request.body.adID
