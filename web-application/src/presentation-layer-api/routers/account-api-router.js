@@ -2,7 +2,7 @@ const express = require('express')
 var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
 
-module.exports = function ({ accountManager, userManager }) {
+module.exports = function ({ accountManager, userManager}) {
 	const router = express.Router()
 
 	router.post("/", function (request, response) {

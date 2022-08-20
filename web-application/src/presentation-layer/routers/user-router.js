@@ -1,11 +1,9 @@
 const express = require('express')
-const csrf = require('csurf')
-const csrfProtection = csrf()
 
 module.exports = function ({ userManager, adManager, bidManager, helperFunctions }) {
     const router = express.Router()
 
-    router.get("/ads", csrfProtection, function (request, response) {
+    router.get("/ads", function (request, response) {
 
         const userID = request.session.userID
         const session = request.session
@@ -23,9 +21,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                     const model = {
                         errors: errors,
                         Ad: Ad,
-                        session: request.session,
                         layout: 'account.hbs',
-                        csrfToken: request.csrfToken()
                     }
 
                     response.render("myAds.hbs", model)
@@ -35,9 +31,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
 
                     model = {
                         Ad: Ad,
-                        session: request.session,
                         layout: 'account.hbs',
-                        csrfToken: request.csrfToken()
                     }
                 }
             })
@@ -48,9 +42,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                     const model = {
                         errors: errors,
                         adOffers: adOffers,
-                        session: request.session,
                         layout: 'account.hbs',
-                        csrfToken: request.csrfToken()
                     }
 
                     response.render("myAds.hbs", model)
@@ -80,7 +72,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         }
     })
 
-    router.get("/bids", csrfProtection, function (request, response) {
+    router.get("/bids", function (request, response) {
 
         const session = request.session
 
@@ -111,12 +103,10 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
 
                 const model = {
                     errors: errors,
-                    session: request.session,
                     bidAccepted: bidAccepted,
                     bidPending: bidPending,
                     bidDeclined: bidDeclined,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render("myBids.hbs", model)
@@ -124,7 +114,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         }
     })
 
-    router.get("/personal-data", csrfProtection, function (request, response) {
+    router.get("/personal-data", function (request, response) {
         const session = request.session
 
         if (helperFunctions.userIsLoggedIn(session)) {
@@ -136,9 +126,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                 const model = {
                     errors: errors,
                     User: User,
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render("personalData.hbs", model)
@@ -146,7 +134,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         }
     })
 
-    router.post('/personal-data/:userID/update', csrfProtection, function (request, response) {
+    router.post('/personal-data/:userID/update', function (request, response) {
 
         const userID = request.params.userID
         const firstName = request.body.firstName
@@ -175,9 +163,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                     emailErrors,
                     phoneNumberErrors,
                     cityErrors,
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render('personalData.hbs', model)
@@ -186,9 +172,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                 model = {
                     User,
                     msg: "The update of personal data has been carried out successfully",
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render('personalData.hbs', model)

@@ -73,8 +73,8 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 			helperFunctions.isCorrectToken(accessToken,callback)		
 		},
 
-		isUserAuthenticated: function(ids){
-			var isAuthenticated = helperFunctions.isUserAuthenticated(ids)
+		userHasAccess: function(ids){
+			var isAuthenticated = helperFunctions.userHasAccess(ids)
 			return isAuthenticated
 		}
 

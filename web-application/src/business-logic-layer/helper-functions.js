@@ -28,8 +28,8 @@ module.exports = function ({ }) {
             })  
         },
 
-        isUserAuthenticated: function(ids){
-            if(ids.adUserID == ids.sessionUserID){
+        userHasAccess: function(ids){
+            if(ids.adUserID == ids.savedUserID){
                 return true
             } else {
                 return false
