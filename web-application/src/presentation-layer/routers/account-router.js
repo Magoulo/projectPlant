@@ -1,15 +1,13 @@
 const express = require('express')
-const csrf = require('csurf')
-const csrfProtection = csrf()
 
 module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
-	router.get("/create", csrfProtection, function (request, response) {
-		response.render("accountCreate.hbs", { csrfToken: request.csrfToken() })
+	router.get("/create", function (request, response) {
+		response.render("accountCreate.hbs")
 	})
 
-	router.post("/create", csrfProtection, function (request, response) {
+	router.post("/create", function (request, response) {
 
 		const userName = request.body.username
 		const password = request.body.password
@@ -49,7 +47,6 @@ module.exports = function ({ accountManager, userManager }) {
 					email,
 					phoneNumber,
 					city,
-					csrfToken: request.csrfToken()
 				}
 
 				response.render('accountCreate.hbs', model)
@@ -76,7 +73,6 @@ module.exports = function ({ accountManager, userManager }) {
 									email,
 									phoneNumber,
 									city,
-									csrfToken: request.csrfToken()
 								}
 
 								response.render('accountCreate.hbs', model)
@@ -94,7 +90,6 @@ module.exports = function ({ accountManager, userManager }) {
 									phoneNumber,
 									city,
 									results,
-									csrfToken: request.csrfToken()
 								}
 
 								response.render('accountCreate.hbs', model)
@@ -109,7 +104,7 @@ module.exports = function ({ accountManager, userManager }) {
 
 	})
 
-	router.post("/sign-in", csrfProtection, function (request, response) {
+	router.post("/sign-in", function (request, response) {
 
 		const username = request.body.username
 		const password = request.body.password
@@ -133,7 +128,6 @@ module.exports = function ({ accountManager, userManager }) {
 					const model = {
 						errors,
 						UserAccount,
-						csrfToken: request.csrfToken()
 					}
 
 					response.render('start.hbs', model)
@@ -142,7 +136,6 @@ module.exports = function ({ accountManager, userManager }) {
 
 				const model = {
 					errors,
-					csrfToken: request.csrfToken()
 				}
 
 				response.render('start.hbs', model)

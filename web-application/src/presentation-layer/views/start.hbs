@@ -6,6 +6,7 @@
 		<form class="w-100" action="/ads/search" method="POST">
 			<input style="background-image: ;" type="text" class="form-control" placeholder="search ads"
 				aria-describedby="basic-addon1" name="searchInput">
+			<input type="hidden" name="_csrf" value="{{csrfToken}}">
 		</form>
 	</div>
 

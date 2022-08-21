@@ -1,27 +1,22 @@
 const express = require('express')
 const path = require('path')
-const csrf = require('csurf')
-const csrfProtection = csrf()
 
 module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
 
-    router.get("/", csrfProtection, function (request, response) {
+    router.get("/", function (request, response) {
 
         adManager.getAllAds(function (error, Ad) {
 
             if (error.length !== 0) {
                 const model = {
                     errors: error,
-                    csrfToken: request.csrfToken()
                 }
                 response.render("ads.hbs", model)
             } else {
                 const model = {
                     errors: error,
                     Ad: Ad,
-                    session: request.session,
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render("ads.hbs", model)
@@ -29,7 +24,7 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    router.post("/search", csrfProtection, function (request, response) {
+    router.post("/search", function (request, response) {
         const searchInput = request.body.searchInput
 
         adManager.getAllAdsByTitleOrLatinName(searchInput, function (errors, Ad) {
@@ -38,15 +33,13 @@ module.exports = function ({ adManager, userManager }) {
                 errors: errors,
                 searchInput: searchInput,
                 Ad: Ad,
-                session: request.session,
-                csrfToken: request.csrfToken()
             }
 
             response.render("ads.hbs", model)
         })
     })
 
-    router.post('/adUpdate/:adID/update', csrfProtection, function (request, response) {
+    router.post('/adUpdate/:adID/update', function (request, response) {
 
         const adID = request.params.adID
         const title = request.body.title
@@ -68,9 +61,7 @@ module.exports = function ({ adManager, userManager }) {
                     titleErrors,
                     latinNameErrors,
                     descriptionErrors,
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render('adUpdate.hbs', model)
@@ -80,70 +71,85 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    router.get("/adUpdate/:adID", csrfProtection, function (request, response) {
+    router.get("/adUpdate/:adID", function (request, response) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
             const model = {
                 errors: errors,
                 Ad: Ad,
-                session: request.session,
                 layout: 'account.hbs',
-                csrfToken: request.csrfToken()
             }
 
             response.render("adUpdate.hbs", model)
         })
     })
 
-    router.get("/adDelete/:adID", csrfProtection, function (request, response) {
+    router.get("/adDelete/:adID", function (request, response) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
             const model = {
                 errors: errors,
                 Ad: Ad,
-                session: request.session,
                 layout: 'account.hbs',
-                csrfToken: request.csrfToken()
             }
             response.render("adDelete.hbs", model)
         })
     })
 
-    router.post("/adDelete/:adID/delete", csrfProtection, function (request, response) {
+
+    router.post("/adDelete/:adID/delete",function (request, response) {
         const adID = request.params.adID
 
-        adManager.deleteAd(adID, function (errors) {
+        adManager.getAdByAdID(adID, function (errors, Ad) {
             if (errors.length !== 0) {
                 const model = {
                     errors: errors,
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render("personalAds.hbs", model)
+
             } else {
-                response.redirect("/my-account/ads")
+                var ids = {adUserID: Ad.userID, savedUserID: request.session.userID}
+                if (adManager.userHasAccess(ids)) {
+
+                    adManager.deleteAd(adID, function (errors) {
+                        if (errors.length !== 0) {
+                            const model = {
+                                errors: errors,
+                                layout: 'account.hbs',
+                            }
+
+                            response.render("notAuthorized.hbs", model)
+                        } else {
+                            response.redirect("/my-account/ads")
+                        }
+                    })
+               
+                } else {
+                    const model = {
+                        layout: 'account.hbs',
+                    }
+                    response.render("notAuthorized.hbs", model)
+                }
             }
         })
     })
 
 
-    router.get("/adCreate", csrfProtection, function (request, response) {
+    router.get("/adCreate",function (request, response) {
 
         const model = {
-            session: request.session,
             layout: 'account.hbs',
-            csrfToken: request.csrfToken()
         }
 
         response.render("adCreate.hbs", model)
     })
 
 
-    router.post("/adCreate", csrfProtection, function (request, response) {
+    router.post("/adCreate", function (request, response) {
 
         const newAd = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
@@ -160,9 +166,7 @@ module.exports = function ({ adManager, userManager }) {
                     latinNameErrors,
                     descriptionErrors,
                     Ad: newAd,
-                    session: request.session,
                     layout: 'account.hbs',
-                    csrfToken: request.csrfToken()
                 }
 
                 response.render("adCreate.hbs", model)
@@ -187,9 +191,7 @@ module.exports = function ({ adManager, userManager }) {
                     model = {
                         imageErrors,
                         Ad: newAd,
-                        session: request.session,
                         layout: 'account.hbs',
-                        csrfToken: request.csrfToken()
                     }
 
                     response.render("adCreate.hbs", model)
@@ -208,7 +210,6 @@ module.exports = function ({ adManager, userManager }) {
 
                                 const model = {
                                     msgError: imageUploadError,
-                                    csrfToken: request.csrfToken()
                                 }
 
                                 response.render('adCreate.hbs', model)
@@ -229,9 +230,7 @@ module.exports = function ({ adManager, userManager }) {
                             model = {
                                 msgError: imageUploadError,
                                 Ad: newAd,
-                                session: request.session,
                                 layout: 'account.hbs',
-                                csrfToken: request.csrfToken()
                             }
 
                             response.render("adCreate.hbs", model)
@@ -245,7 +244,7 @@ module.exports = function ({ adManager, userManager }) {
     })
 
 
-    router.get('/:adID', csrfProtection, function (request, response) {
+    router.get('/:adID', function (request, response) {
         const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
@@ -253,16 +252,14 @@ module.exports = function ({ adManager, userManager }) {
             const model = {
                 errors: errors,
                 Ad: Ad,
-                session: request.session,
-                csrfToken: request.csrfToken()
             }
 
             response.render("ad.hbs", model)
         })
     })
 
-    router.get("/ads", csrfProtection, function (request, response) {
-        response.render("ads.hbs", { csrfToken: request.csrfToken() })
+    router.get("/ads", function (request, response) {
+        response.render("ads.hbs")
     })
 
     return router

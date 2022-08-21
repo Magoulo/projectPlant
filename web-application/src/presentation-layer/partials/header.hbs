@@ -71,6 +71,7 @@
                 <div class="col-6 text-end">
                     <form action="/accounts/sign-out" method="POST">
                         <input class="btn btn-outline-dark" type="submit" value="sign out">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     </form>
                 </div>
             </div>

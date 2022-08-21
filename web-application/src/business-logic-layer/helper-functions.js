@@ -1,4 +1,5 @@
 const SECRET = 'lelelelelelelble'
+const { request } = require('http');
 var jwt = require('jsonwebtoken');
 
 module.exports = function ({ }) {
@@ -25,6 +26,15 @@ module.exports = function ({ }) {
 
                 callback(verificationResult)
             })  
+        },
+
+        userHasAccess: function(ids){
+            if(ids.adUserID == ids.savedUserID){
+                return true
+            } else {
+                return false
+            }
         }
+
     }
 }

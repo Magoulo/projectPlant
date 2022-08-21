@@ -5,8 +5,11 @@ const fileUpload = require('express-fileupload')
 const path = require('path')
 const redis = require("redis")
 const session = require('express-session')
+const csrf = require('csurf')
 
 const express = require('express')
+const { request } = require('http')
+const { response } = require('express')
 const app = express()
 
 const port = 8080
@@ -41,6 +44,7 @@ module.exports = function ({ }) {
 
 	app.use(express.static(path.join(__dirname, 'public')))
 
+
 	app.use(bodyParser.urlencoded({
 		extended: false
 	}))
@@ -62,7 +66,14 @@ module.exports = function ({ }) {
 		}
 		next()
 	})
+	
+	app.use(csrf())
+	app.use((request, response, next)=>{
+		response.locals.csrfToken = request.csrfToken()
+		response.locals.session = request.session
 
+		next()
+	})
 
 	//awilix setup---------------------------------------------------------------------------------
 

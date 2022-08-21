@@ -7,6 +7,7 @@ const redis = require("redis")
 const session = require('express-session')
 
 const express = require('express')
+const { response } = require('express')
 const app = express()
 
 const port = 3000
@@ -22,8 +23,7 @@ const dalPath = '/web-application/src/' + dataFile + '/'
 const bllPath = '/web-application/src/business-logic-layer/'
 const plRouterPath = '/web-application/src/presentation-layer-api/routers/'
 
-
-module.exports = function ({ }) {
+module.exports = function ({}) {
 	const router = express.Router()
 
 	// SESSIOSN SETUP----------------------------------------------------------------------
@@ -52,6 +52,10 @@ module.exports = function ({ }) {
 		response.setHeader("Access-Control-Allow-Methods", "*")
 		response.setHeader("Access-Control-Allow-Headers", "*")
 		response.setHeader("Access-Control-Expose-Headers", "*")
+
+	/*	if(request.method === "OPTIONS"){
+			return response.status(200).end()
+		}*/
 		next()
 	})
 
@@ -138,6 +142,29 @@ module.exports = function ({ }) {
 	const theAdRouter = container.resolve("adRouter")
 	const theUserRouter = container.resolve("userRouter")
 	const theVariousRouter = container.resolve("variousRouter")
+
+	/*
+	// AccessToken verification function
+	const authenticateAccessToken = (request,response, next) => {
+		const authorizationHeader = request.header("Authorization")
+	
+		if(authorizationHeader == undefined){
+			console.log("error??")
+			return response.status(400).json({errors: ["invalid request"]})
+		} else {
+			const accessToken = authorizationHeader.substring('Bearer '.length)
+	
+			var tokenContent
+			adManager.isCorrectToken(accessToken, function (verificationResult) {
+				tokenContent = verificationResult
+			})
+			if (tokenContent.errors) {
+				response.status(401).json(tokenContent.errors)
+			} else {
+				request.tokenUserId = tokenContent.payload.userID
+			}
+		}
+	}*/
 
 	app.use('/', theVariousRouter)
 	app.use('/accounts', theAccountRouter)
