@@ -1,21 +1,20 @@
 const express = require('express')
 const path = require('path')
 
-module.exports = function ({ adManager, userManager }) {
+module.exports = function ({ adManager}) {
     const router = express.Router()
 
     router.get("/", function (request, response) {
+        adManager.getAllAds(function (errors, Ad) {
 
-        adManager.getAllAds(function (error, Ad) {
-
-            if (error.length !== 0) {
+            if (errors.length !== 0) {
                 const model = {
-                    errors: error,
+                    errors: errors,
                 }
                 response.render("ads.hbs", model)
             } else {
                 const model = {
-                    errors: error,
+                    errors: errors,
                     Ad: Ad,
                 }
 
@@ -39,7 +38,36 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    router.post('/adUpdate/:adID/update', function (request, response) {
+    router.get('/:adID', function (request, response) {
+        const adID = request.params.adID
+
+        adManager.getAdByAdID(adID, function (errors, Ad) {
+
+            const model = {
+                errors: errors,
+                Ad: Ad,
+            }
+
+            response.render("ad.hbs", model)
+        })
+    })
+
+//UPDATE AD------------------------------------------------------------------------------------
+    router.get("/ad-details/:adID", function (request, response) {
+        const adID = request.params.adID
+
+        adManager.getAdByAdID(adID, function (errors, Ad) {
+            const model = {
+                errors: errors,
+                Ad: Ad,
+                layout: 'account.hbs',
+            }
+
+            response.render("adUpdateForm.hbs", model)
+        })
+    })
+
+    router.post('/ad-details/:adID/update', function (request, response) {
 
         const adID = request.params.adID
         const title = request.body.title
@@ -64,28 +92,15 @@ module.exports = function ({ adManager, userManager }) {
                     layout: 'account.hbs',
                 }
 
-                response.render('adUpdate.hbs', model)
+                response.render('adUpdateForm.hbs', model)
             } else {
                 response.redirect('/my-account/ads',)
             }
         })
     })
 
-    router.get("/adUpdate/:adID", function (request, response) {
-        const adID = request.params.adID
-
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-            const model = {
-                errors: errors,
-                Ad: Ad,
-                layout: 'account.hbs',
-            }
-
-            response.render("adUpdate.hbs", model)
-        })
-    })
-
-    router.get("/adDelete/:adID", function (request, response) {
+//DELETE AD------------------------------------------------------------------------------------
+    router.get("/confirm-delete/:adID", function (request, response) {
         const adID = request.params.adID
 
 
@@ -97,12 +112,12 @@ module.exports = function ({ adManager, userManager }) {
                 Ad: Ad,
                 layout: 'account.hbs',
             }
-            response.render("adDelete.hbs", model)
+            response.render("adDeleteForm.hbs", model)
         })
     })
 
 
-    router.post("/adDelete/:adID/delete",function (request, response) {
+    router.post("/confirm-delete/:adID/delete",function (request, response) {
 
         const adID = request.params.adID
         const sessionID = request.session.userID
@@ -121,18 +136,18 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-
-    router.get("/adCreate",function (request, response) {
+//CREATE AD------------------------------------------------------------------------------------
+    router.get("/ad-create",function (request, response) {
 
         const model = {
             layout: 'account.hbs',
         }
 
-        response.render("adCreate.hbs", model)
+        response.render("adCreateForm.hbs", model)
     })
 
 
-    router.post("/adCreate", function (request, response) {
+    router.post("/ad-create", function (request, response) {
 
         const newAd = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
@@ -152,7 +167,7 @@ module.exports = function ({ adManager, userManager }) {
                     layout: 'account.hbs',
                 }
 
-                response.render("adCreate.hbs", model)
+                response.render("adCreateForm.hbs", model)
 
             } else {
 
@@ -177,7 +192,7 @@ module.exports = function ({ adManager, userManager }) {
                         layout: 'account.hbs',
                     }
 
-                    response.render("adCreate.hbs", model)
+                    response.render("adCreateForm.hbs", model)
 
                 } else {
                     const images = [coverImageFile, firstImageFile, secondImageFile]
@@ -195,7 +210,7 @@ module.exports = function ({ adManager, userManager }) {
                                     msgError: imageUploadError,
                                 }
 
-                                response.render('adCreate.hbs', model)
+                                response.render('adCreateForm.hbs', model)
                             } else {
                                 console.log("file uploaded successfully")
                             }
@@ -216,7 +231,7 @@ module.exports = function ({ adManager, userManager }) {
                                 layout: 'account.hbs',
                             }
 
-                            response.render("adCreate.hbs", model)
+                            response.render("adCreateForm.hbs", model)
                         } else {
                             response.redirect("/my-account/ads")
                         }
@@ -224,25 +239,6 @@ module.exports = function ({ adManager, userManager }) {
                 }
             }
         })
-    })
-
-
-    router.get('/:adID', function (request, response) {
-        const adID = request.params.adID
-
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-
-            const model = {
-                errors: errors,
-                Ad: Ad,
-            }
-
-            response.render("ad.hbs", model)
-        })
-    })
-
-    router.get("/ads", function (request, response) {
-        response.render("ads.hbs")
     })
 
     return router
