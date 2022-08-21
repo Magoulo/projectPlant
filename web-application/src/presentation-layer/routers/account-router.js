@@ -53,15 +53,13 @@ module.exports = function ({ accountManager, userManager }) {
 			} else {
 
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
-				const errors = []
-
-				userManager.createUser(user, function (error, results) {
-					if (error.length !== 0) {
+				userManager.createUser(user, function (errors, results) {
+					if (errors.length !== 0) {
 
 						errors.push("Internal server error")
 
-						accountManager.deleteAccountByUserAccountID(userAccount.id, function (error) {
-							if (error.length !== 0) {
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (errors) {
+							if (errors.length !== 0) {
 
 								errors.push(": couldn't resolve the problem")
 
