@@ -133,12 +133,29 @@ module.exports = function ({ adManager, bidManager }) {
 
     router.post("/:bidID/delete", function (request, response) {
         const bidID = request.params.bidID
+        const sessionID = request.session.userID
 
-        bidManager.deleteBid(bidID, function (error) {
-            if (error) {
-                response.redirect("/my-account/bids")
+        bidManager.userHasBidAccess(bidID, sessionID, function (errors, userHasAcces) {
+            if (errors.length !== 0) {
+                model = {
+                    Ad: Ad,
+                    errors,
+                    layout: 'account.hbs',
+                }
+                response.render('adUpdate.hbs', model)
             } else {
-                response.redirect("/my-account/bids")
+                if (!userHasAcces) {
+                    response.render("notAuthorized.hbs")
+                } else {
+
+                    bidManager.deleteBid(bidID, function (errors) {
+                        if (errors) {
+                            response.redirect("/my-account/bids")
+                        } else {
+                            response.redirect("/my-account/bids")
+                        }
+                    })
+                }
             }
         })
     })

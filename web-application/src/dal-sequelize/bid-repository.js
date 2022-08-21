@@ -10,8 +10,8 @@ module.exports = function () {
 				nest: true,
 				where: { adID: adID }
 
-			}).then((Bid) => {
-				callback([], Bid)
+			}).then((Bids) => {
+				callback([], Bids)
 			}).catch((errors) => {
 				errors = ["Internal server error"]
 				callback(errors, [])
@@ -24,6 +24,21 @@ module.exports = function () {
 				raw: true,
 				nest: true,
 				where: { adID: adID }
+
+			}).then((Bid) => {
+				callback([], Bid)
+			}).catch((errors) => {
+				errors = ["Internal server error"]
+				callback(errors, [])
+			})
+		},
+
+		getBidByBidID: function (bidID, callback) {
+
+			models.Bid.findOne({
+				raw: true,
+				nest: true,
+				where: { id: bidID },
 
 			}).then((Bid) => {
 				callback([], Bid)
@@ -47,8 +62,8 @@ module.exports = function () {
 						model: models.ImageBundle,
 					}],
 				}],
-			}).then((Bid) => {
-				callback([], Bid)
+			}).then((Bids) => {
+				callback([], Bids)
 			}).catch((errors) => {
 				errors = ["Internal server error"]
 				callback(errors, [])
