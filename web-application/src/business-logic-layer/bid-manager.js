@@ -36,7 +36,7 @@ module.exports = function ({ bidRepository, bidValidator, helperFunctions }) {
 			bidRepository.setAllBidsToDeclined(adID, callback)
 		},
 
-		userHasBidAccess: function(bidID, savedID, callback){
+		userHasAccess: function(bidID, savedID, callback){
 
 			bidRepository.getBidByBidID(bidID, function (errors, Bid) {
 				if (errors.length !== 0) {
