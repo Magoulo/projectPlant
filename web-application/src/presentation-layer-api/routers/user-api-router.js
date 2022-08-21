@@ -49,14 +49,22 @@ module.exports = function ({ userManager }) {
         if (tokenContent.errors) {
             response.status(401).json(tokenContent.errors)
         } else {
-            userManager.updateUserByUserID(User, function (errors) {
-
-                if (errors.length !== 0) {
-                    response.status(500).json(errors)
+            
+            userManager.userHasAccess(userID, tokenContent.payload.userID, function (userHasAccess) {
+                if (!userHasAccess) {
+                    response.status(401).json(["Not authorized"])
                 } else {
-                    response.status(204).end()
+                    userManager.updateUserByUserID(User, function (errors) {
+
+                        if (errors.length !== 0) {
+                            response.status(500).json(errors)
+                        } else {
+                            response.status(204).end()
+                        }
+                    })
                 }
             })
+
         }
     })
 
