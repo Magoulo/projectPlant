@@ -1,8 +1,10 @@
 <div class="row">
     <div class="col-sm-4 offset-sm-4 text-center">
         <h1 class="display-3">Not Authorized</h1>
-        <p>Must be signed in in order to see your personal pages.</p>
-        <div>
+        
+        {{#unless session.isLoggedIn}} 
+            <p>Must be signed in in order to see your personal pages.</p>
+            
             <form action="/accounts/sign-in" method="POST">
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
@@ -19,8 +21,8 @@
                 <div class="d-grid gap-2 mt-3 mb-5">
                     <button class="btn btn-outline-dark" type="submit" value="Sign in" class="btn btn-light">Sign in</button>
                 </div>
-
             </form>
-        </div>
+        {{/unless}}
+
     </div>
 </div>
