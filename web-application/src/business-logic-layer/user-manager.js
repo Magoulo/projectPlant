@@ -29,8 +29,8 @@ module.exports = function ({ userRepository, userValidator, helperFunctions }) {
 			helperFunctions.isCorrectToken(accessToken, callback)
 		},
 
-		userHasAccess: function (userID, savedID, callback) {
-			var isAuthenticated = helperFunctions.userHasAccess(userID, savedID)
+		userHasAccess: function (userID, storedID, callback) {
+			var isAuthenticated = helperFunctions.userHasAccess(userID, storedID)
 			callback(isAuthenticated)
 		}
 

@@ -73,12 +73,12 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 			helperFunctions.isCorrectToken(accessToken,callback)		
 		},
 
-		userHasAccess: function(adID, savedID, callback){
+		userHasAccess: function(adID, storedID, callback){
 			adRepository.getAdByAdID(adID, function (errors, Ad) {
 				if (errors.length !== 0) {
 					callback(errors, [])
 				} else {
-					var isAuthenticated = helperFunctions.userHasAccess(Ad.userID, savedID)
+					var isAuthenticated = helperFunctions.userHasAccess(Ad.userID, storedID)
 					callback([], isAuthenticated)
 				}
 			})		

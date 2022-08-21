@@ -29,8 +29,8 @@ module.exports = function ({ accountRepository, accountValidator, helperFunction
 			accountRepository.deleteAccountByUserAccountID(userAccountID, callback)
 		},
 
-		isCorrectPassword: function(UsernamePasswordInput,UserAccount){
-			var isCorrectPassword = accountValidator.isCorrectPassword(UsernamePasswordInput,UserAccount)
+		isCorrectPassword: function (UsernamePasswordInput, UserAccount) {
+			var isCorrectPassword = accountValidator.isCorrectPassword(UsernamePasswordInput, UserAccount)
 			return isCorrectPassword
 		}
 
