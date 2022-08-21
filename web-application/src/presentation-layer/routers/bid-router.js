@@ -4,6 +4,7 @@ const path = require('path')
 module.exports = function ({ adManager, bidManager }) {
     const router = express.Router()
 
+
 //CREATE BID------------------------------------------------------------------------------------
     router.post("/bid-create", function (request, response) {
 
@@ -158,7 +159,7 @@ module.exports = function ({ adManager, bidManager }) {
         const bidID = request.params.bidID
         const sessionID = request.session.userID
 
-        bidManager.userHasBidAccess(bidID, sessionID, function (errors, userHasAcces) {
+        bidManager.userHasAccess(bidID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,
@@ -167,7 +168,7 @@ module.exports = function ({ adManager, bidManager }) {
                 }
                 response.render('adUpdate.hbs', model)
             } else {
-                if (!userHasAcces) {
+                if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
 

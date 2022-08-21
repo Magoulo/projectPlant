@@ -142,43 +142,49 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         const email = request.body.email
         const phoneNumber = request.body.phoneNumber
         const city = request.body.city
+        const sessionID = request.session.userID
 
         const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-        userManager.updateUserByUserID(User, function (error) {
-
-            if (error.length !== 0) {
-
-                const firstNameErrors = error[0]
-                const lastNameErrors = error[1]
-                const emailErrors = error[2]
-                const phoneNumberErrors = error[3]
-                const cityErrors = error[4]
-
-                model = {
-                    User,
-                    error,
-                    firstNameErrors,
-                    lastNameErrors,
-                    emailErrors,
-                    phoneNumberErrors,
-                    cityErrors,
-                    layout: 'account.hbs',
-                }
-
-                response.render('personalData.hbs', model)
+        userManager.userHasAccess(userID, sessionID, function (userHasAccess) {
+            if (!userHasAccess) {
+                response.render("notAuthorized.hbs")
             } else {
+                userManager.updateUserByUserID(User, function (errors) {
 
-                model = {
-                    User,
-                    msg: "The update of personal data has been carried out successfully",
-                    layout: 'account.hbs',
-                }
+                    if (errors.length !== 0) {
 
-                response.render('personalData.hbs', model)
+                        const firstNameErrors = errors[0]
+                        const lastNameErrors = errors[1]
+                        const emailErrors = errors[2]
+                        const phoneNumberErrors = errors[3]
+                        const cityErrors = errors[4]
+
+                        model = {
+                            User,
+                            error,
+                            firstNameErrors,
+                            lastNameErrors,
+                            emailErrors,
+                            phoneNumberErrors,
+                            cityErrors,
+                            layout: 'account.hbs',
+                        }
+
+                        response.render('personalData.hbs', model)
+                    } else {
+
+                        model = {
+                            User,
+                            msg: "The update of personal data has been carried out successfully",
+                            layout: 'account.hbs',
+                        }
+
+                        response.render('personalData.hbs', model)
+                    }
+                })
             }
         })
-
     })
 
     return router

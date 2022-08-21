@@ -59,7 +59,7 @@ module.exports = function ({ adManager, userManager }) {
             response.status(401).json(tokenContent.errors)
         } else {
 
-            adManager.userHasAdAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
+            adManager.userHasAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
@@ -147,7 +147,7 @@ module.exports = function ({ adManager, userManager }) {
             response.status(401).json(tokenContent.errors)
         } else {
 
-            adManager.userHasAdAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
+            adManager.userHasAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
