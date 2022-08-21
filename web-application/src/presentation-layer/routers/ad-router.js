@@ -64,7 +64,7 @@ module.exports = function ({ adManager, userManager }) {
                     adManager.updateAdByAdID(adUpdateInput, function (errors) {
 
                         if (errors.length !== 0) {
-
+                            // make a dict of the errors?
                             const titleErrors = errors[0]
                             const latinNameErrors = errors[1]
                             const descriptionErrors = errors[2]

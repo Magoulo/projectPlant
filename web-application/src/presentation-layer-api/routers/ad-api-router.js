@@ -58,14 +58,26 @@ module.exports = function ({ adManager, userManager }) {
         if (tokenContent.errors) {
             response.status(401).json(tokenContent.errors)
         } else {
-            adManager.updateAdByAdID(Ad, function (errors) {
+
+            adManager.userHasAdAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
-
                 } else {
-                    response.status(204).end()
+                    if (!userHasAcces) {
+                        response.status(401).json(["Not authorized"])
+                    } else {
+                        adManager.updateAdByAdID(Ad, function (errors) {
+                            if (errors.length !== 0) {
+                                response.status(400).json(errors)
+
+                            } else {
+                                response.status(204).end()
+                            }
+                        })
+                    }
                 }
             })
+
         }
     })
 
@@ -126,7 +138,7 @@ module.exports = function ({ adManager, userManager }) {
 
         const adID = request.params.adID
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
@@ -134,13 +146,25 @@ module.exports = function ({ adManager, userManager }) {
         if (tokenContent.errors) {
             response.status(401).json(tokenContent.errors)
         } else {
-            adManager.deleteAd(adID, tokenContent.payload.userID, function (errors) {
+
+            adManager.userHasAdAccess(adID, tokenContent.payload.userID, function (errors, userHasAcces) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
-                    response.status(204).end()
+                    if (!userHasAcces) {
+                        response.status(401).json(["Not authorized"])
+                    } else {
+                        adManager.deleteAd(adID, function (errors) {
+                            if (errors.length !== 0) {
+                                response.status(400).json(errors)
+                            } else {
+                                response.status(204).end()
+                            }
+                        })
+                    }
                 }
             })
+
         }
     })
 
