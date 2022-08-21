@@ -107,7 +107,7 @@ module.exports = function ({ adManager, userManager }) {
         adManager.deleteAd(adID,savedUserID, function (errors) {
             if (errors.length !== 0) {
                 const model = {
-                    errors: errors,
+                    msgError: errors,
                     layout: 'account.hbs',
                 }
 

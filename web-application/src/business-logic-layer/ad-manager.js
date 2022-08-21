@@ -62,7 +62,7 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 					if (helperFunctions.userHasAccess(Ad.userID,savedUserID)) {
 						adRepository.deleteAd(adID, callback)				
 					} else {
-						errors = ["Not Authorized"]
+						errors = ["Not authorized. User does not own the resource."]
 						callback(errors, [])
 					}
 				}
