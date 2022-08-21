@@ -88,6 +88,9 @@ module.exports = function ({ adManager, userManager }) {
     router.get("/adDelete/:adID", function (request, response) {
         const adID = request.params.adID
 
+
+        // if(loggedIn)?
+
         adManager.getAdByAdID(adID, function (errors, Ad) {
             const model = {
                 errors: errors,
@@ -102,12 +105,12 @@ module.exports = function ({ adManager, userManager }) {
     router.post("/adDelete/:adID/delete",function (request, response) {
 
         const adID = request.params.adID
-        const savedUserID = request.session.userID
+        const sessionID = request.session.userID
 
-        adManager.deleteAd(adID,savedUserID, function (errors) {
+        adManager.deleteAd(adID,sessionID, function (errors) {
             if (errors.length !== 0) {
                 const model = {
-                    msgError: errors,
+                    errors: errors,
                     layout: 'account.hbs',
                 }
 
@@ -116,44 +119,6 @@ module.exports = function ({ adManager, userManager }) {
                 response.redirect("/my-account/ads")
             }
         })
-
-    /*    const adID = request.params.adID
-
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-            if (errors.length !== 0) {
-                const model = {
-                    errors: errors,
-                    layout: 'account.hbs',
-                }
-
-                response.render("personalAds.hbs", model)
-
-            } else {
-                var ids = {adUserID: Ad.userID, savedUserID: request.session.userID}
-                if (adManager.userHasAccess(ids)) {
-
-                    adManager.deleteAd(adID, function (errors) {
-                        if (errors.length !== 0) {
-                            const model = {
-                                errors: errors,
-                                layout: 'account.hbs',
-                            }
-
-                            response.render("notAuthorized.hbs", model)
-                        } else {
-                            response.redirect("/my-account/ads")
-                        }
-                    })
-               
-                } else {
-                    const model = {
-                        layout: 'account.hbs',
-                    }
-                    response.render("notAuthorized.hbs", model)
-                }
-            }
-        })*/
-
     })
 
 
