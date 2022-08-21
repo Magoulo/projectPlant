@@ -73,28 +73,44 @@ module.exports = function ({ adManager}) {
         const title = request.body.title
         const latinName = request.body.latinname
         const description = request.body.description
+        const adUpdateInput = { id: adID, title: title, latinName: latinName, description: description }
+        const sessionID = request.session.userID
 
-        const Ad = { id: adID, title: title, latinName: latinName, description: description }
-
-        adManager.updateAdByAdID(Ad, function (errors) {
-
+        adManager.userHasAdAccess(adID, sessionID, function (errors, userHasAcces) {
             if (errors.length !== 0) {
-
-                const titleErrors = errors[0]
-                const latinNameErrors = errors[1]
-                const descriptionErrors = errors[2]
-
                 model = {
                     Ad: Ad,
-                    titleErrors,
-                    latinNameErrors,
-                    descriptionErrors,
+                    errors,
                     layout: 'account.hbs',
                 }
 
                 response.render('adUpdateForm.hbs', model)
             } else {
-                response.redirect('/my-account/ads',)
+                if (!userHasAcces) {
+                    response.render("notAuthorized.hbs")
+                } else {
+                    adManager.updateAdByAdID(adUpdateInput, function (errors) {
+
+                        if (errors.length !== 0) {
+                            // make a dict of the errors?
+                            const titleErrors = errors[0]
+                            const latinNameErrors = errors[1]
+                            const descriptionErrors = errors[2]
+
+                            model = {
+                                Ad: Ad,
+                                titleErrors,
+                                latinNameErrors,
+                                descriptionErrors,
+                                layout: 'account.hbs',
+                            }
+
+                            response.render('adUpdate.hbs', model)
+                        } else {
+                            response.redirect('/my-account/ads',)
+                        }
+                    })
+                }
             }
         })
     })
@@ -116,29 +132,42 @@ module.exports = function ({ adManager}) {
         })
     })
 
-
     router.post("/confirm-delete/:adID/delete",function (request, response) {
-
         const adID = request.params.adID
         const sessionID = request.session.userID
 
-        adManager.deleteAd(adID,sessionID, function (errors) {
+        adManager.userHasAdAccess(adID, sessionID, function (errors, userHasAcces) {
             if (errors.length !== 0) {
-                const model = {
-                    errors: errors,
+                model = {
+                    Ad: Ad,
+                    errors,
                     layout: 'account.hbs',
                 }
 
-                response.render("notAuthorized.hbs", model)
+                response.render('adUpdate.hbs', model)
             } else {
-                response.redirect("/my-account/ads")
+                if (!userHasAcces) {
+                    response.render("notAuthorized.hbs")
+                } else {
+                    adManager.deleteAd(adID, function (errors) {
+                        if (errors.length !== 0) {
+                            const model = {
+                                errors: errors,
+                                layout: 'account.hbs',
+                            }
+
+                            response.render("notAuthorized.hbs", model)
+                        } else {
+                            response.redirect("/my-account/ads")
+                        }
+                    })
+                }
             }
         })
     })
 
 //CREATE AD------------------------------------------------------------------------------------
     router.get("/ad-create",function (request, response) {
-
         const model = {
             layout: 'account.hbs',
         }
