@@ -53,20 +53,8 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 			}
 		},
 
-		deleteAd: function (adID,savedUserID, callback) {
-
-			adRepository.getAdByAdID(adID, function (errors, Ad) {
-				if (errors.length !== 0) {
-					callback(errors, [])
-				} else {
-					if (helperFunctions.userHasAccess(Ad.userID,savedUserID)) {
-						adRepository.deleteAd(adID, callback)				
-					} else {
-						errors = ["Not authorized. User does not own the resource."]
-						callback(errors, [])
-					}
-				}
-			})	
+		deleteAd: function (adID, callback) {
+			adRepository.deleteAd(adID, callback)
 		},
 
 		getAllAdsBidsUsersByUserID: function (userID, callback) {
@@ -85,9 +73,17 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 			helperFunctions.isCorrectToken(accessToken,callback)		
 		},
 
-		userHasAccess: function(ids){
-			var isAuthenticated = helperFunctions.userHasAccess(ids)
-			return isAuthenticated
+		userHasAdAccess: function(adID, savedID, callback){
+
+			adRepository.getAdByAdID(adID, function (errors, Ad) {
+				if (errors.length !== 0) {
+					callback(errors, [])
+				} else {
+					var isAuthenticated = helperFunctions.userHasAccess(Ad.userID, savedID)
+					callback([], isAuthenticated)
+				}
+			})
+			
 		}
 
 	}
