@@ -38,19 +38,7 @@ module.exports = function ({ adManager}) {
         })
     })
 
-    router.get('/:adID', function (request, response) {
-        const adID = request.params.adID
-
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-
-            const model = {
-                errors: errors,
-                Ad: Ad,
-            }
-
-            response.render("ad.hbs", model)
-        })
-    })
+   
 
 //UPDATE AD------------------------------------------------------------------------------------
     router.get("/ad-details/:adID", function (request, response) {
@@ -266,6 +254,20 @@ module.exports = function ({ adManager}) {
                     })
                 }
             }
+        })
+    })
+
+    router.get('/:adID', function (request, response) {
+        const adID = request.params.adID
+
+        adManager.getAdByAdID(adID, function (errors, Ad) {
+
+            const model = {
+                errors: errors,
+                Ad: Ad,
+            }
+
+            response.render("ad.hbs", model)
         })
     })
 
