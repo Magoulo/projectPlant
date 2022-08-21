@@ -55,14 +55,15 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 
 		deleteAd: function (adID,savedUserID, callback) {
 
-			adManager.getAdByAdID(adID, function (errors, Ad) {
+			adRepository.getAdByAdID(adID, function (errors, Ad) {
 				if (errors.length !== 0) {
 					callback(errors, [])
 				} else {
 					var ids = {adUserID: Ad.userID, savedUserID: savedUserID}
-					if (adManager.userHasAccess(ids)) {
+					if (helperFunctions.userHasAccess(ids)) {
 						adRepository.deleteAd(adID, callback)				
 					} else {
+						errors = ["Not Authorized"]
 						callback(errors, [])
 					}
 				}
