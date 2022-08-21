@@ -20,7 +20,7 @@ module.exports = function ({ adManager, userManager }) {
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
@@ -50,7 +50,7 @@ module.exports = function ({ adManager, userManager }) {
         const description = request.body.description
         const Ad = { id: adID, title: title, latinName: latinName, description: description }
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
@@ -88,7 +88,7 @@ module.exports = function ({ adManager, userManager }) {
 
         const adID = request.params.adID
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
@@ -113,7 +113,7 @@ module.exports = function ({ adManager, userManager }) {
 
         const adID = request.params.adID
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
@@ -177,7 +177,7 @@ module.exports = function ({ adManager, userManager }) {
         const firstImageFile = "no-image.png"
         const secondImageFile = "no-image.png"
 
-        var tokenContent
+        var tokenContent = {}
         adManager.isCorrectToken(accessToken, function (verificationResult) {
             tokenContent = verificationResult
         })
