@@ -32,7 +32,7 @@ async function loadAdDeletePage(id) {
         noButton.addEventListener('click', function (event) {
             event.preventDefault()
 
-            const url = "/accounts/myAds"
+            const url = "/my-account/ads"
             hideCurrentPage()
             showPage(url)
             setPushState(url)
@@ -61,7 +61,7 @@ async function sendAdDelete() {
     const statusCode = response.status
 
     if (statusCode == 204) {
-        const url = "/accounts/myAds"
+        const url = "/my-account/ads"
         timeOut(url)
         setPushState(url)
 

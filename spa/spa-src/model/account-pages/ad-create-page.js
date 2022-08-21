@@ -49,7 +49,7 @@ async function sendCreateUpdate() {
         document.getElementById("create-ad-form-latinname-error").innerText = ""
         document.getElementById("create-ad-form-description-error").innerText = ""
 
-        const url = "/accounts/myAds"
+        const url = "/my-account/ads"
         timeOut(url)
         setPushState(url)
 

@@ -1,6 +1,6 @@
 async function loadMyAdsPage() {
 
-    const response = await fetch("http://localhost:3000/ads/myAds", {
+    const response = await fetch("http://localhost:3000/my-account/ads", {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,

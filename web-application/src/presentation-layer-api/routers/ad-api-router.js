@@ -15,30 +15,6 @@ module.exports = function ({ adManager, userManager }) {
         })
     })
 
-    router.get("/myAds", function (request, response) {
-
-        const authorizationHeader = request.header("Authorization")
-        const accessToken = authorizationHeader.substring('Bearer '.length)
-
-        var tokenContent = {}
-        adManager.isCorrectToken(accessToken, function (verificationResult) {
-            tokenContent = verificationResult
-        })
-
-        if (tokenContent.errors) {
-            response.status(401).end()
-        } else {
-            adManager.getAllAdsByUserID(tokenContent.payload.userID, function (errors, Ads) {
-                if (errors.length !== 0) {
-                    response.status(400).json(errors)
-                } else {
-
-                    response.status(200).json([Ads])
-                }
-            })
-        }
-    })
-
     router.put('/:adID', function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
