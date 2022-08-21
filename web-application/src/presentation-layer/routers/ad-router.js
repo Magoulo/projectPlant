@@ -75,7 +75,7 @@ module.exports = function ({ adManager, userManager }) {
 
                 response.render('adUpdate.hbs', model)
             } else {
-                response.redirect('/ads/myAds',)
+                response.redirect('/my-account/ads',)
             }
         })
     })
@@ -123,9 +123,9 @@ module.exports = function ({ adManager, userManager }) {
                     csrfToken: request.csrfToken()
                 }
 
-                response.render("myAds.hbs", model)
+                response.render("personalAds.hbs", model)
             } else {
-                response.redirect("/ads/myAds")
+                response.redirect("/my-account/ads")
             }
         })
     })
@@ -236,7 +236,7 @@ module.exports = function ({ adManager, userManager }) {
 
                             response.render("adCreate.hbs", model)
                         } else {
-                            response.redirect("/ads/myAds")
+                            response.redirect("/my-account/ads")
                         }
                     })
                 }

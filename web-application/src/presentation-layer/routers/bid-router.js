@@ -22,7 +22,7 @@ module.exports = function ({ adManager, bidManager }) {
                         csrfToken: request.csrfToken()
                     }
 
-                    response.render("myAds.hbs", model)
+                    response.render("personalAds.hbs", model)
                 } else {
 
                     adManager.closeAd(adID, function (error) {
@@ -34,7 +34,7 @@ module.exports = function ({ adManager, bidManager }) {
                                 csrfToken: request.csrfToken()
                             }
 
-                            response.render("myAds.hbs", model)
+                            response.render("personalAds.hbs", model)
                         } else {
                             console.log("Ad closed successfully")
                         }
@@ -53,9 +53,9 @@ module.exports = function ({ adManager, bidManager }) {
                     csrfToken: request.csrfToken()
                 }
 
-                response.render("myAds.hbs", model)
+                response.render("personalAds.hbs", model)
             } else {
-                response.redirect("/ads/myAds")
+                response.redirect("/my-account/ads")
             }
         })
     })
@@ -152,9 +152,9 @@ module.exports = function ({ adManager, bidManager }) {
 
         bidManager.deleteBid(bidID, function (error) {
             if (error) {
-                response.redirect("/bids/myBids")
+                response.redirect("/my-account/bids")
             } else {
-                response.redirect("/bids/myBids")
+                response.redirect("/my-account/bids")
             }
         })
     })
