@@ -24,7 +24,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                         layout: 'account.hbs',
                     }
 
-                    response.render("myAds.hbs", model)
+                    response.render("personalAds.hbs", model)
                 } else {
 
                     allAds = Ad
@@ -45,7 +45,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                         layout: 'account.hbs',
                     }
 
-                    response.render("myAds.hbs", model)
+                    response.render("personalAds.hbs", model)
                 } else {
                     allBids = adOffers
                     var adAccepted = []
@@ -66,7 +66,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
 
                     model.adAccepted = adAccepted
 
-                    response.render("myAds.hbs", model)
+                    response.render("personalAds.hbs", model)
                 }
             })
         }
@@ -109,7 +109,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                     layout: 'account.hbs',
                 }
 
-                response.render("myBids.hbs", model)
+                response.render("personalBids.hbs", model)
             })
         }
     })

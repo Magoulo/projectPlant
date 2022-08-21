@@ -66,7 +66,7 @@ module.exports = function ({ adManager, userManager }) {
 
                 response.render('adUpdate.hbs', model)
             } else {
-                response.redirect('/ads/myAds',)
+                response.redirect('/my-account/ads',)
             }
         })
     })
@@ -125,9 +125,10 @@ module.exports = function ({ adManager, userManager }) {
                     errors: errors,
                     layout: 'account.hbs',
                 }
-                response.render("myAds.hbs", model)
-            } else {
 
+                response.render("personalAds.hbs", model)
+
+            } else {
                 var ids = {adUserID: Ad.userID, savedUserID: request.session.userID}
                 if (adManager.userHasAccess(ids)) {
 
@@ -252,7 +253,7 @@ module.exports = function ({ adManager, userManager }) {
 
                             response.render("adCreate.hbs", model)
                         } else {
-                            response.redirect("/ads/myAds")
+                            response.redirect("/my-account/ads")
                         }
                     })
                 }
