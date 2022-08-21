@@ -74,7 +74,6 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 		},
 
 		userHasAccess: function(adID, savedID, callback){
-
 			adRepository.getAdByAdID(adID, function (errors, Ad) {
 				if (errors.length !== 0) {
 					callback(errors, [])
@@ -82,8 +81,7 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 					var isAuthenticated = helperFunctions.userHasAccess(Ad.userID, savedID)
 					callback([], isAuthenticated)
 				}
-			})
-			
+			})		
 		}
 
 	}

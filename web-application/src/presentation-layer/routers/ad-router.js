@@ -165,7 +165,7 @@ module.exports = function ({ adManager}) {
         const adUpdateInput = { id: adID, title: title, latinName: latinName, description: description }
         const sessionID = request.session.userID
 
-        adManager.userHasAccess(adID, sessionID, function (errors, userHasAcces) {
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,
@@ -175,7 +175,7 @@ module.exports = function ({ adManager}) {
 
                 response.render('adUpdateForm.hbs', model)
             } else {
-                if (!userHasAcces) {
+                if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
                     adManager.updateAdByAdID(adUpdateInput, function (errors) {
@@ -225,7 +225,7 @@ module.exports = function ({ adManager}) {
         const adID = request.params.adID
         const sessionID = request.session.userID
 
-        adManager.userHasAccess(adID, sessionID, function (errors, userHasAcces) {
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,
@@ -235,7 +235,7 @@ module.exports = function ({ adManager}) {
 
                 response.render('adUpdate.hbs', model)
             } else {
-                if (!userHasAcces) {
+                if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
                     adManager.deleteAd(adID, function (errors) {

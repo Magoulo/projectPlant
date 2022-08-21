@@ -25,8 +25,13 @@ module.exports = function ({ userRepository, userValidator, helperFunctions }) {
 			userRepository.createUser(user, callback)
 		},
 
-		isCorrectToken: function(accessToken,callback){
-			helperFunctions.isCorrectToken(accessToken,callback)		
+		isCorrectToken: function (accessToken, callback) {
+			helperFunctions.isCorrectToken(accessToken, callback)
+		},
+
+		userHasAccess: function (userID, savedID, callback) {
+			var isAuthenticated = helperFunctions.userHasAccess(userID, savedID)
+			callback(isAuthenticated)
 		}
 
 	}

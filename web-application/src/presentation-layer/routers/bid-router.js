@@ -9,7 +9,7 @@ module.exports = function ({ adManager, bidManager }) {
         const adID = request.body.adID
         const sessionID = request.session.userID
 
-        adManager.userHasAccess(adID, sessionID, function (errors, userHasAcces) {
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,
@@ -20,7 +20,7 @@ module.exports = function ({ adManager, bidManager }) {
                 response.render('adUpdateForm.hbs', model)
             } else {
 
-                if (!userHasAcces) {
+                if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
 
@@ -155,7 +155,7 @@ module.exports = function ({ adManager, bidManager }) {
         const bidID = request.params.bidID
         const sessionID = request.session.userID
 
-        bidManager.userHasAccess(bidID, sessionID, function (errors, userHasAcces) {
+        bidManager.userHasAccess(bidID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,
@@ -164,7 +164,7 @@ module.exports = function ({ adManager, bidManager }) {
                 }
                 response.render('adUpdate.hbs', model)
             } else {
-                if (!userHasAcces) {
+                if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
 
