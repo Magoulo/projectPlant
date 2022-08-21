@@ -100,7 +100,24 @@ module.exports = function ({ adManager, userManager }) {
 
 
     router.post("/adDelete/:adID/delete",function (request, response) {
+
         const adID = request.params.adID
+        const savedUserID = request.session.userID
+
+        adManager.deleteAd(adID,savedUserID, function (errors) {
+            if (errors.length !== 0) {
+                const model = {
+                    errors: errors,
+                    layout: 'account.hbs',
+                }
+
+                response.render("notAuthorized.hbs", model)
+            } else {
+                response.redirect("/my-account/ads")
+            }
+        })
+
+    /*    const adID = request.params.adID
 
         adManager.getAdByAdID(adID, function (errors, Ad) {
             if (errors.length !== 0) {
@@ -134,7 +151,8 @@ module.exports = function ({ adManager, userManager }) {
                     response.render("notAuthorized.hbs", model)
                 }
             }
-        })
+        })*/
+
     })
 
 
