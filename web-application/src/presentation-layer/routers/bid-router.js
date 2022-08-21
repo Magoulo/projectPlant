@@ -72,7 +72,7 @@ module.exports = function ({ adManager, bidManager }) {
         })
     })
 
-    router.post("/placeBid", function (request, response) {
+    router.post("/bid-create", function (request, response) {
 
         const adID = request.body.adID
         const bidMessage = request.body.message
