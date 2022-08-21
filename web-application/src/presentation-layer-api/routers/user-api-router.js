@@ -1,6 +1,6 @@
 const express = require('express')
 
-module.exports = function ({ userManager }) {
+module.exports = function ({ adManager ,userManager }) {
     const router = express.Router()
 
     router.get("/", function (request, response) {
@@ -44,7 +44,6 @@ module.exports = function ({ userManager }) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
-
                     response.status(200).json([Ads])
                 }
             })
