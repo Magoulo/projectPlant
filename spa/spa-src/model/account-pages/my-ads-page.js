@@ -11,8 +11,7 @@ async function loadMyAdsPage() {
     if (statusCode == 200) {
 
         const myAds = await response.json()
-        console.log("My Ads: ", myAds)
-
+     
         //My Ads Div
         const myAdsDiv = document.getElementById('my-ads-container')
         myAdsDiv.innerText = ""

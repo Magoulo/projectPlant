@@ -80,7 +80,6 @@ async function sendCreateAccount() {
 
     } else if (statusCode == 500 || statusCode == 418) {
         response.json().then(data => {
-            console.log(data)
             document.getElementById("create-account-form-username-error").innerText = data[0]
             document.getElementById("create-account-form-password-error").innerText = data[1]
             document.getElementById("create-account-form-repeatpassword-error").innerText = data[1]

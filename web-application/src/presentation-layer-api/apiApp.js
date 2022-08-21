@@ -149,7 +149,6 @@ module.exports = function ({}) {
 		const authorizationHeader = request.header("Authorization")
 	
 		if(authorizationHeader == undefined){
-			console.log("error??")
 			return response.status(400).json({errors: ["invalid request"]})
 		} else {
 			const accessToken = authorizationHeader.substring('Bearer '.length)
