@@ -7,47 +7,67 @@ module.exports = function ({ adManager, bidManager }) {
     router.post("/updateBid/:bidID/:status", function (request, response) {
 
         const adID = request.body.adID
-        const bid = { status: request.params.status, bidID: request.params.bidID }
+        const sessionID = request.session.userID
 
-        if (request.params.status == "Accepted") {
-            bidManager.setAllBidsToDeclined(adID, function (error) {
+        adManager.userHasAdAccess(adID, sessionID, function (errors, userHasAcces) {
+            if (errors.length !== 0) {
+                model = {
+                    Ad: Ad,
+                    errors,
+                    layout: 'account.hbs',
+                }
 
-                if (error.length !== 0) {
-                    const model = {
-                        error: error,
-                        layout: 'account.hbs',
-                    }
-
-                    response.render("personalAds.hbs", model)
+                response.render('adUpdateForm.hbs', model)
+            } else {
+                
+                if (!userHasAcces) {
+                    response.render("notAuthorized.hbs")
                 } else {
 
-                    adManager.closeAd(adID, function (error) {
+                    const bid = { status: request.params.status, bidID: request.params.bidID }
+
+                    if (request.params.status == "Accepted") {
+                        bidManager.setAllBidsToDeclined(adID, function (error) {
+
+                            if (error.length !== 0) {
+                                const model = {
+                                    error: error,
+                                    layout: 'account.hbs',
+                                }
+
+                                response.render("personalAds.hbs", model)
+                            } else {
+
+                                adManager.closeAd(adID, function (error) {
+                                    if (error.length !== 0) {
+
+                                        const model = {
+                                            error: error,
+                                        }
+
+                                        response.render("personalAds.hbs", model)
+                                    } else {
+                                        console.log("Ad closed successfully")
+                                    }
+                                })
+                            }
+                        })
+                    }
+
+                    bidManager.updateBidByBidID(bid, function (error) {
                         if (error.length !== 0) {
 
                             const model = {
                                 error: error,
+                                layout: 'account.hbs',
                             }
 
                             response.render("personalAds.hbs", model)
                         } else {
-                            console.log("Ad closed successfully")
+                            response.redirect("/my-account/ads")
                         }
                     })
                 }
-            })
-        }
-
-        bidManager.updateBidByBidID(bid, function (error) {
-            if (error.length !== 0) {
-
-                const model = {
-                    error: error,
-                    layout: 'account.hbs',
-                }
-
-                response.render("personalAds.hbs", model)
-            } else {
-                response.redirect("/my-account/ads")
             }
         })
     })
