@@ -1,6 +1,6 @@
-async function loadPersonalData(id) {
+async function loadPersonalData() {
 
-    const response = await fetch("http://localhost:3000/user", {
+    const response = await fetch("http://localhost:3000/my-account", {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,
@@ -8,7 +8,7 @@ async function loadPersonalData(id) {
     })
 
     const statusCode = response.status
-
+ 
     if (statusCode == 200) {
 
         const user = await response.json()
@@ -83,7 +83,7 @@ async function sendPersonalDataUpdate() {
     })
 
     //Send the data for update
-    const response = await fetch("http://localhost:3000/user/" + personalDataId.value, {
+    const response = await fetch("http://localhost:3000/my-account/" + personalDataId.value, {
         method: 'Put',
         headers: new Headers({
             "Content-Type": "application/json",
@@ -101,7 +101,7 @@ async function sendPersonalDataUpdate() {
         document.getElementById("personal-data-form-phonenumber-error").innerText = ""
         document.getElementById("personal-data-form-city-error").innerText = ""
 
-        const url = "/accounts/personalData"
+        const url = "/my-account/personal-data"
         timeOut(url)
         setPushState(url)
 

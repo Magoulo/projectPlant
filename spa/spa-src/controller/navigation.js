@@ -86,9 +86,9 @@ function showPage(url) {
 			createAccount()
 			break
 
-		case '/accounts/personalData':
+		case '/my-account/personal-data':
 			nextPageId = 'personal-data-page'
-			loadPersonalData(1)
+			loadPersonalData()
 			break
 
 		case '/accounts/sign-in':
