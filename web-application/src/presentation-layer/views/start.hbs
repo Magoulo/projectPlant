@@ -4,7 +4,7 @@
 
 	<div class="col-7 mb-3">
 		<form class="w-100" action="/ads/search" method="POST">
-			<input style="background-image: ;" type="text" class="form-control" placeholder="search ads"
+			<input style="background-image: ;" type="text" class="form-control" placeholder="Search for plants"
 				aria-describedby="basic-addon1" name="searchInput">
 			<input type="hidden" name="_csrf" value="{{csrfToken}}">
 		</form>
@@ -12,42 +12,3 @@
 
 	<div class="col-auto"></div>
 </div>
-
-<!-- All Ads-->
-{{#if errors.length}}
-<div class="col-12 text-center">
-	<p>Oh no, something went wrong:</p>
-	<ul>
-		{{#each errors}}
-		<li>{{this}}</li>
-		{{/each}}
-	</ul>
-</div>
-
-{{else}}
-{{#if Ad.length}}
-
-<div class="row align-items-center">
-	{{#each Ad}}
-
-	<div id="ad-clickable" class="col-3 text-center my-4">
-		<p></p>
-
-		<h3><a class="link-dark" href="/ads/{{id}}">{{title}}</a></h3>
-
-		<a href="/ads/{{id}}">
-			<img class="img-thumbnail" src="/images/{{ImageBundle.coverImagePath}}">
-		</a>
-
-		<p></p>
-	</div>
-
-	{{/each}}
-</div>
-
-{{else}}
-<div class="col-12 text-center">
-	<p>No, that account doesn't exist.</p>
-</div>
-{{/if}}
-{{/if}}
