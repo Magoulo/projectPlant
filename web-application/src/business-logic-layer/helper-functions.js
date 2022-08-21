@@ -28,8 +28,8 @@ module.exports = function ({ }) {
             })  
         },
 
-        userHasAccess: function(ids){
-            if(ids.adUserID == ids.savedUserID){
+        userHasAccess: function(adUserID,savedUserID){
+            if(adUserID == savedUserID){
                 return true
             } else {
                 return false

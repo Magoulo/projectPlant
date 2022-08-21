@@ -134,29 +134,11 @@ module.exports = function ({ adManager, userManager }) {
         if (tokenContent.errors) {
             response.status(401).json(tokenContent.errors)
         } else {
-            adManager.getAdByAdID(adID, function (errors, Ad) {
+            adManager.deleteAd(adID, tokenContent.payload.userID, function (errors) {
                 if (errors.length !== 0) {
-                    const model = {
-                        errors: errors,
-                        layout: 'account.hbs',
-                    }
-                    response.status(500).end()
+                    response.status(400).json(errors)
                 } else {
-
-                    var ids = { adUserID: Ad.userID, savedUserID: tokenContent.payload.userID }
-                    if (adManager.userHasAccess(ids)) {
-
-                        adManager.deleteAd(adID, function (errors) {
-                            if (errors.length !== 0) {
-                                response.status(400).json(errors)
-                            } else {
-                                response.status(204).end()
-                            }
-                        })
-                    } else {
-                        response.status(401).json(errors = ["Unauthorized"])
-                    }
-
+                    response.status(204).end()
                 }
             })
         }
