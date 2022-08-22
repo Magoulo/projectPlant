@@ -5,87 +5,92 @@ module.exports = function ({ adManager, bidManager }) {
     const router = express.Router()
 
 
-//CREATE BID------------------------------------------------------------------------------------
+    //CREATE BID------------------------------------------------------------------------------------
     router.post("/bid-create", function (request, response) {
 
         const adID = request.body.adID
         const bidMessage = request.body.message
+        const session = request.session
 
-        if (request.files == null) {
-
-            const imagePath = "no-image.png"
-            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
-
-            bidManager.createBid(Bid, function (error) {
-                if (error.length) {
-
-                    adManager.getAdByAdID(adID, function (errors, Ad) {
-
-                        const model = {
-                            msgError: error,
-                            errors: errors,
-                            Ad: Ad,
-                        }
-                        response.render("ad.hbs", model)
-                    })
-                } else {
-
-                    adManager.getAdByAdID(adID, function (errors, Ad) {
-
-                        const model = {
-                            msg: "Bid has been placed successfully",
-                            errors: errors,
-                            Ad: Ad,
-                        }
-                        response.render("ad.hbs", model)
-                    })
-                }
-            })
+        if (!bidManager.userIsLoggedIn(session)) {
+            response.render("notAuthorized.hbs")
         } else {
-            const imagePath = request.files.bidImagePath
-            const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
+            if (request.files == null) {
 
-            const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: bidMessage }
+                const imagePath = "no-image.png"
+                const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath, message: bidMessage }
 
-            imagePath.mv(uploadPath, function (error) {
+                bidManager.createBid(Bid, function (createBidErrors) {
+                    if (createBidErrors.length) {
 
-                if (error) {
-                    response.render('adCreateForm.hbs', msgError = "Couldn't upload picture")
-                } else {
+                        adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                    bidManager.createBid(Bid, function (error) {
+                            const model = {
+                                msgError: createBidErrors,
+                                errors: errors,
+                                Ad: Ad,
+                            }
+                            response.render("ad.hbs", model)
+                        })
+                    } else {
 
-                        if (error.length) {
+                        adManager.getAdByAdID(adID, function (errors, Ad) {
 
-                            adManager.getAdByAdID(adID, function (errors, Ad) {
+                            const model = {
+                                msg: "Bid has been placed successfully",
+                                errors: errors,
+                                Ad: Ad,
+                            }
+                            response.render("ad.hbs", model)
+                        })
+                    }
+                })
+            } else {
+                const imagePath = request.files.bidImagePath
+                const uploadPath = path.resolve(__dirname, '../public/images/', imagePath.name)
 
-                                const model = {
-                                    msgError: error,
-                                    errors: errors,
-                                    Ad: Ad,
-                                }
-                                response.render("ad.hbs", model)
-                            })
+                const Bid = { userID: request.session.userID, adID: adID, imagePath: imagePath.name, message: bidMessage }
 
-                        } else {
+                imagePath.mv(uploadPath, function (errors) {
 
-                            adManager.getAdByAdID(adID, function (errors, Ad) {
+                    if (errors) {
+                        response.render('adCreateForm.hbs', msgError = "Couldn't upload picture")
+                    } else {
 
-                                const model = {
-                                    msg: "Bid has been placed successfully",
-                                    errors: errors,
-                                    Ad: Ad,
-                                }
-                                response.render("ad.hbs", model)
-                            })
-                        }
-                    })
-                }
-            })
+                        bidManager.createBid(Bid, function (createBidErrors) {
+
+                            if (createBidErrors.length) {
+
+                                adManager.getAdByAdID(adID, function (adErrors, Ad) {
+
+                                    const model = {
+                                        msgError: createBidErrors,
+                                        errors: adErrors,
+                                        Ad: Ad,
+                                    }
+                                    response.render("ad.hbs", model)
+                                })
+
+                            } else {
+
+                                adManager.getAdByAdID(adID, function (adErrors, Ad) {
+
+                                    const model = {
+                                        msg: "Bid has been placed successfully",
+                                        errors: adErrors,
+                                        Ad: Ad,
+                                    }
+                                    response.render("ad.hbs", model)
+                                })
+                            }
+                        })
+                    }
+                })
+            }
         }
     })
 
-//UPDATE BID------------------------------------------------------------------------------------
+    //UPDATE BID------------------------------------------------------------------------------------
     router.post("/:bidID/status/:status/update", function (request, response) {
 
         const adID = request.body.adID
@@ -101,7 +106,7 @@ module.exports = function ({ adManager, bidManager }) {
 
                 response.render('adUpdateForm.hbs', model)
             } else {
-                
+
                 if (!userHasAcces) {
                     response.render("notAuthorized.hbs")
                 } else {
@@ -109,22 +114,22 @@ module.exports = function ({ adManager, bidManager }) {
                     const bid = { status: request.params.status, bidID: request.params.bidID }
 
                     if (request.params.status == "Accepted") {
-                        bidManager.setAllBidsToDeclined(adID, function (error) {
+                        bidManager.setAllBidsToDeclined(adID, function (errors) {
 
-                            if (error.length !== 0) {
+                            if (errors.length !== 0) {
                                 const model = {
-                                    error: error,
+                                    error: errors,
                                     layout: 'account.hbs',
                                 }
 
                                 response.render("personalAds.hbs", model)
                             } else {
 
-                                adManager.closeAd(adID, function (error) {
-                                    if (error.length !== 0) {
+                                adManager.closeAd(adID, function (adErrors) {
+                                    if (adErrors.length !== 0) {
 
                                         const model = {
-                                            error: error,
+                                            error: adErrors,
                                         }
 
                                         response.render("personalAds.hbs", model)
@@ -136,11 +141,11 @@ module.exports = function ({ adManager, bidManager }) {
                         })
                     }
 
-                    bidManager.updateBidByBidID(bid, function (error) {
-                        if (error.length !== 0) {
+                    bidManager.updateBidByBidID(bid, function (errors) {
+                        if (errors.length !== 0) {
 
                             const model = {
-                                error: error,
+                                error: errors,
                                 layout: 'account.hbs',
                             }
 
@@ -154,7 +159,7 @@ module.exports = function ({ adManager, bidManager }) {
         })
     })
 
-//DELETE BID------------------------------------------------------------------------------------
+    //DELETE BID------------------------------------------------------------------------------------
     router.post("/:bidID/delete", function (request, response) {
         const bidID = request.params.bidID
         const sessionID = request.session.userID

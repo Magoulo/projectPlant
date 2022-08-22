@@ -5,17 +5,17 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
 
     router.get("/ads", function (request, response) {
 
-        const userID = request.session.userID
         const session = request.session
-        var model = {}
-        var allAds = []
-        var allBids = []
 
         if (!helperFunctions.userIsLoggedIn(session)) {
             response.render("notAuthorized.hbs")
 
         } else {
-            adManager.getAllAdsByUserID(userID, function (errors, Ad) {
+            var model = {}
+            var allAds = []
+            var allBids = []
+
+            adManager.getAllAdsByUserID(session.userID, function (errors, Ad) {
 
                 if (errors.length !== 0) {
                     const model = {
@@ -36,7 +36,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
                 }
             })
 
-            adManager.getAllAdsBidsUsersByUserID(userID, function (errors, adOffers) {
+            adManager.getAllAdsBidsUsersByUserID(session.userID, function (errors, adOffers) {
                 if (errors.length !== 0) {
 
                     const model = {
@@ -84,7 +84,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
             response.render("notAuthorized.hbs")
 
         } else {
-            bidManager.getAllBidsByUserID(request.session.userID, function (errors, Bid) {
+            bidManager.getAllBidsByUserID(session.userID, function (errors, Bid) {
 
                 for (index in Bid) {
 
@@ -121,7 +121,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
             response.render("notAuthorized.hbs")
 
         } else {
-            userManager.getUserByUserID(request.session.userID, function (errors, User) {
+            userManager.getUserByUserID(session.userID, function (errors, User) {
 
                 const model = {
                     errors: errors,
@@ -142,11 +142,11 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         const email = request.body.email
         const phoneNumber = request.body.phoneNumber
         const city = request.body.city
-        const sessionID = request.session.userID
+        const session = request.session
 
         const User = { id: userID, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-        userManager.userHasAccess(userID, sessionID, function (userHasAccess) {
+        userManager.userHasAccess(userID, session.userID, function (userHasAccess) {
             if (!userHasAccess) {
                 response.render("notAuthorized.hbs")
             } else {

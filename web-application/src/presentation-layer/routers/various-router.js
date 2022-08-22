@@ -1,44 +1,18 @@
 const express = require('express')
 
-module.exports = function ({ adManager, userManager }) {
+module.exports = function ({}) {
 	const router = express.Router()
 
 	router.get("/", function (request, response) {
-
-		adManager.getAllAds(function (errors, Ad) {
-
-			const model = {
-				errors: errors,
-				Ad: Ad,
-				layout: 'start.hbs',
-			}
-
-			response.render("start.hbs", model)
-		})
+			response.render("start.hbs", { layout: 'start.hbs' })
 	})
 
 	router.get("/about", function (request, response) {
-
-		userManager.getUserByAccountID(request.session.userID, function (errors, User) {
-			const model = {
-				errors: errors,
-				User: User,
-			}
-
-			response.render("about.hbs", model,)
-		})
+			response.render("about.hbs")
 	})
 
 	router.get("/contact", function (request, response) {
-
-		userManager.getUserByAccountID(request.session.userID, function (errors, User) {
-			const model = {
-				errors: errors,
-				User: User,
-			}
-
-			response.render("contact.hbs", model)
-		})
+			response.render("contact.hbs")
 	})
 
 	return router
