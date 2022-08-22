@@ -25,6 +25,7 @@ module.exports = function ({ accountRepository, accountValidator, helperFunction
 			}
 		},
 
+		// Delete account only called if there has been an error with the creation of a new user to a new account.
 		deleteAccountByUserAccountID: function (userAccountID, callback) {
 			accountRepository.deleteAccountByUserAccountID(userAccountID, callback)
 		},

@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 
 	signOutButton.addEventListener('click', function (event) {
+		sessionStorage.clear()
+	
 		const url = "/"
 		hideCurrentPage()
 		showPage(url)
@@ -18,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		signInBody.classList.remove("hidden-sign-in-out")
 		signOutBody.classList.add("hidden-sign-in-out")
-
-		sessionStorage.setItem("token", "No token here")
 	})
 
 	for (const anchor of anchors) {
@@ -105,7 +105,7 @@ function showPage(url) {
 			if (url.startsWith("/ads/")) {
 
 				const [empty, ads, id] = url.split("/")
-			
+
 				nextPageId = 'ad-page'
 				loadAdPage(id)
 			} else {
