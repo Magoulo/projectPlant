@@ -160,7 +160,7 @@ module.exports = function ({ adManager, userManager }) {
 
         const ad = { userID: tokenContent.payload.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
-        if (tokenContent.errors) {
+        if (tokenContent.errors || !adManager.userIsLoggedIn(tokenContent.payload)) {
             response.status(401).end()
 
         } else {
