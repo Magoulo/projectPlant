@@ -18,20 +18,20 @@ module.exports = function ({ accountManager, userManager}) {
 
 		const account = { username: userName, password: password, repeatedPassword: repeatedPassword, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-		accountManager.createAccount(account, function (errors, userAccount) {
+		accountManager.createAccount(account, function (accountErrors, userAccount) {
 
-			if (errors.length !== 0) {
-				response.status(500).json(errors)
+			if (accountErrors.length !== 0) {
+				response.status(500).json(accountErrors)
 			} else {
 				const user = { userAccountID: userAccount.id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, city: city }
 
-				userManager.createUser(user, function (errors, results) {
+				userManager.createUser(user, function (userErrors, results) {
 
-					if (errors.length !== 0) {
+					if (userErrors.length !== 0) {
 
-						accountManager.deleteAccountByUserAccountID(userAccount.id, function (errors) {
-							if (errors) {
-								response.status(500).json(errors)
+						accountManager.deleteAccountByUserAccountID(userAccount.id, function (deleteAccountErrors) {
+							if (deleteAccountErrors) {
+								response.status(500).json(deleteAccountErrors)
 							} else {
 								response.status(418).end()
 							}
@@ -73,16 +73,16 @@ module.exports = function ({ accountManager, userManager}) {
 
 					}
 
-					jwt.sign(payloadAccessToken, SECRET, function (errors, accessToken) { // Access Token
+					jwt.sign(payloadAccessToken, SECRET, function (jwtATSignErrors, accessToken) { // Access Token
 
-						if (errors) {
-							response.status(401).json(errors)
+						if (jwtATSignErrors) {
+							response.status(401).json(jwtATSignErrors)
 						} else {
 
-							jwt.sign(payloadIdToken, SECRET, function (errors, idToken) { // Id Token
+							jwt.sign(payloadIdToken, SECRET, function (jwtITSignErrors, idToken) { // Id Token
 
-								if (errors) {
-									response.status(401).json(errors)
+								if (jwtITSignErrors) {
+									response.status(401).json(jwtITSignErrors)
 								} else {
 
 									response.status(200).json(
