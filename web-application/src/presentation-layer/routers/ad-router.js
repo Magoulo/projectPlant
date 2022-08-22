@@ -155,12 +155,11 @@ module.exports = function ({ adManager }) {
         adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
-                    Ad: Ad,
                     errors,
                     layout: 'account.hbs',
                 }
 
-                response.render('adUpdate.hbs', model)
+                response.render('adUpdateForm.hbs', model)
             } else {
                 if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
@@ -177,8 +176,6 @@ module.exports = function ({ adManager }) {
                 }
             }
         })
-
-
     })
 
     router.post('/ad-details/:adID/update', function (request, response) {
@@ -187,13 +184,12 @@ module.exports = function ({ adManager }) {
         const title = request.body.title
         const latinName = request.body.latinname
         const description = request.body.description
-        const adUpdateInput = { id: adID, title: title, latinName: latinName, description: description }
+        const Ad = { id: adID, title: title, latinName: latinName, description: description }
         const sessionID = request.session.userID
 
         adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
             if (errors.length !== 0) {
                 model = {
-                    Ad: Ad,
                     errors,
                     layout: 'account.hbs',
                 }
@@ -203,7 +199,7 @@ module.exports = function ({ adManager }) {
                 if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
                 } else {
-                    adManager.updateAdByAdID(adUpdateInput, function (errors) {
+                    adManager.updateAdByAdID(Ad, function (errors) {
 
                         if (errors.length !== 0) {
                             const titleErrors = errors[0]
@@ -211,14 +207,14 @@ module.exports = function ({ adManager }) {
                             const descriptionErrors = errors[2]
 
                             model = {
-                                Ad: Ad,
+                                Ad,
                                 titleErrors,
                                 latinNameErrors,
                                 descriptionErrors,
                                 layout: 'account.hbs',
                             }
-
-                            response.render('adUpdate.hbs', model)
+                            console.log("Inne i errors")
+                            response.render('adUpdateForm.hbs', model)
                         } else {
                             response.redirect('/my-account/ads',)
                         }
