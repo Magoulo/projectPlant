@@ -150,16 +150,35 @@ module.exports = function ({ adManager }) {
     //UPDATE AD------------------------------------------------------------------------------------
     router.get("/ad-details/:adID", function (request, response) {
         const adID = request.params.adID
+        const sessionID = request.session.userID
 
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-            const model = {
-                errors: errors,
-                Ad: Ad,
-                layout: 'account.hbs',
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
+            if (errors.length !== 0) {
+                model = {
+                    Ad: Ad,
+                    errors,
+                    layout: 'account.hbs',
+                }
+
+                response.render('adUpdate.hbs', model)
+            } else {
+                if (!userHasAccess) {
+                    response.render("notAuthorized.hbs")
+                } else {
+                    adManager.getAdByAdID(adID, function (errors, Ad) {
+                        const model = {
+                            errors: errors,
+                            Ad: Ad,
+                            layout: 'account.hbs',
+                        }
+
+                        response.render("adUpdateForm.hbs", model)
+                    })
+                }
             }
-
-            response.render("adUpdateForm.hbs", model)
         })
+
+
     })
 
     router.post('/ad-details/:adID/update', function (request, response) {
@@ -212,17 +231,31 @@ module.exports = function ({ adManager }) {
     //DELETE AD------------------------------------------------------------------------------------
     router.get("/confirm-delete/:adID", function (request, response) {
         const adID = request.params.adID
+        const sessionID = request.session.userID
 
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAccess) {
+            if (errors.length !== 0) {
+                model = {
+                    Ad: Ad,
+                    errors,
+                    layout: 'account.hbs',
+                }
 
-        // if(loggedIn)?
-
-        adManager.getAdByAdID(adID, function (errors, Ad) {
-            const model = {
-                errors: errors,
-                Ad: Ad,
-                layout: 'account.hbs',
+                response.render('adUpdate.hbs', model)
+            } else {
+                if (!userHasAccess) {
+                    response.render("notAuthorized.hbs")
+                } else {
+                    adManager.getAdByAdID(adID, function (errors, Ad) {
+                        const model = {
+                            errors: errors,
+                            Ad: Ad,
+                            layout: 'account.hbs',
+                        }
+                        response.render("adDeleteForm.hbs", model)
+                    })
+                }
             }
-            response.render("adDeleteForm.hbs", model)
         })
     })
 
