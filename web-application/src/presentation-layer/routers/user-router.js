@@ -11,7 +11,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         var allAds = []
         var allBids = []
 
-        if (helperFunctions.userIsLoggedIn(session)) {
+        if (!helperFunctions.userIsLoggedIn(session)) {
             response.render("notAuthorized.hbs")
 
         } else {
@@ -80,7 +80,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
         var bidPending = []
         var bidDeclined = []
 
-        if (helperFunctions.userIsLoggedIn(session)) {
+        if (!helperFunctions.userIsLoggedIn(session)) {
             response.render("notAuthorized.hbs")
 
         } else {
@@ -117,7 +117,7 @@ module.exports = function ({ userManager, adManager, bidManager, helperFunctions
     router.get("/personal-data", function (request, response) {
         const session = request.session
 
-        if (helperFunctions.userIsLoggedIn(session)) {
+        if (!helperFunctions.userIsLoggedIn(session)) {
             response.render("notAuthorized.hbs")
 
         } else {

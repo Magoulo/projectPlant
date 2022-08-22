@@ -15,7 +15,7 @@ module.exports = function ({ }) {
         },
 
         userIsLoggedIn: function (session) {
-            if(!session.isLoggedIn) {
+            if(session.isLoggedIn) {
                 return true
             } else return false
         },

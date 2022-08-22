@@ -48,8 +48,15 @@ module.exports = function ({ adManager}) {
     })
 
     router.post("/ad-create", function (request, response) {
+        const session = request.session
 
-        const newAd = { userID: request.session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
+    
+       
+        
+        if(!adManager.userIsLoggedIn(session)){
+            response.render("notAuthorized.hbs")
+        } else {
+            const newAd = { userID: session.userID, title: request.body.title, latinName: request.body.latinname, description: request.body.description, isClosed: 0 }
 
         adManager.createAd(newAd, function (errors, Ad) {
 
@@ -139,6 +146,8 @@ module.exports = function ({ adManager}) {
                 }
             }
         })
+        }
+
     })
 
 //UPDATE AD------------------------------------------------------------------------------------

@@ -82,6 +82,11 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 					callback([], isAuthenticated)
 				}
 			})		
+		},
+
+		userIsLoggedIn: function(session){
+			var userIsLoggedIn = helperFunctions.userIsLoggedIn(session)
+			return userIsLoggedIn
 		}
 
 	}
