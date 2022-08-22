@@ -213,7 +213,7 @@ module.exports = function ({ adManager }) {
                                 descriptionErrors,
                                 layout: 'account.hbs',
                             }
-                            console.log("Inne i errors")
+
                             response.render('adUpdateForm.hbs', model)
                         } else {
                             response.redirect('/my-account/ads',)
@@ -237,7 +237,7 @@ module.exports = function ({ adManager }) {
                     layout: 'account.hbs',
                 }
 
-                response.render('adUpdate.hbs', model)
+                response.render('adUpdateForm.hbs', model)
             } else {
                 if (!userHasAccess) {
                     response.render("notAuthorized.hbs")
@@ -267,7 +267,7 @@ module.exports = function ({ adManager }) {
                     layout: 'account.hbs',
                 }
 
-                response.render('adUpdate.hbs', model)
+                response.render('adUpdateForm.hbs', model)
             } else {
                 if (!userHasAccess) {
                     response.render("notAuthorized.hbs")

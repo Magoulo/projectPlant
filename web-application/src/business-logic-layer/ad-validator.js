@@ -14,6 +14,8 @@ module.exports = function () {
 
 			const emptyFieldErrorMsg = "this field is mandatory"
 
+			console.log("CHECKING AD ERRORS")
+
 
 			if (!Ad.title.length) {
 				titleErrors.push(emptyFieldErrorMsg)
