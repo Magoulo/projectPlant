@@ -45,7 +45,6 @@ module.exports = function ({ accountManager, userManager}) {
 
 	})
 
-
 	router.post("/tokens", function (request, response) {
 
 		const username = request.body.username
