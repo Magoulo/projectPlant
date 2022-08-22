@@ -62,11 +62,6 @@ function showPage(url) {
 			loadStartPage()
 			break
 
-		case '/ads':
-			nextPageId = 'ads-page'
-			loadAdsPage()
-			break
-
 		case '/ads/adCreate':
 			nextPageId = 'create-ad-page'
 			createAd()
