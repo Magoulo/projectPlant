@@ -57,7 +57,7 @@ module.exports = function ({ adManager, userManager }) {
         }
     })
 
-    router.get("/adUpdate/:adID", function (request, response) {
+    router.get("/ad-details/:adID", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)
@@ -82,7 +82,7 @@ module.exports = function ({ adManager, userManager }) {
         }
     })
 
-    router.get("/adDelete/:adID", function (request, response) {
+    router.get("/confirm-delete/:adID", function (request, response) {
 
         const authorizationHeader = request.header("Authorization")
         const accessToken = authorizationHeader.substring('Bearer '.length)

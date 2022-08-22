@@ -1,7 +1,7 @@
 async function loadAdUpdatePage(id) {
 
     //Fetch ad from REST api   
-    const response = await fetch("http://localhost:3000/ads/adUpdate/" + id, {
+    const response = await fetch("http://localhost:3000/ads/ad-details/" + id, {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,
@@ -33,7 +33,7 @@ async function loadAdUpdatePage(id) {
     updateButton.addEventListener('click', function (event) {
         event.preventDefault()
 
-        const url = "/ads/adUpdate/" + ad.id
+        const url = "/ads/ad-details/" + ad.id
         timeOut(url)
         setPushState(url)
     })

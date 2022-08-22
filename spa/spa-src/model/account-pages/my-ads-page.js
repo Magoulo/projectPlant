@@ -20,7 +20,7 @@ async function loadMyAdsPage() {
         const aCreate = document.createElement("a")
         aCreate.innerText = "Create Ad"
         aCreate.classList.add("btn", "btn-primary", "m-3")
-        aCreate.setAttribute('href', "/ads/adCreate")
+        aCreate.setAttribute('href', "/ads/ad-create")
 
         //Eventlistener for create button
         aCreate.addEventListener('click', function (event) {
@@ -64,13 +64,13 @@ async function loadMyAdsPage() {
                 const aUpdate = document.createElement('a')
                 aUpdate.innerText = "Update"
                 aUpdate.classList.add("btn", "btn-primary", "m-2")
-                aUpdate.setAttribute('href', "/ads/adUpdate/" + ad.id)
+                aUpdate.setAttribute('href', "/ads/ad-details/" + ad.id)
 
                 //delete button
                 const aDelete = document.createElement('a')
                 aDelete.innerText = "Delete"
                 aDelete.classList.add("btn", "btn-primary", "m-2")
-                aDelete.setAttribute('href', "/ads/adDelete/" + ad.id)
+                aDelete.setAttribute('href', "/ads/confirm-delete/" + ad.id)
 
                 //Append Update and Delete buttons to Ul
                 myAdsUl.appendChild(aUpdate)
