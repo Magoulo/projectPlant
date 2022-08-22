@@ -13,7 +13,7 @@ async function loadMyAdsPage() {
         const myAds = await response.json()
      
         //My Ads Div
-        const myAdsDiv = document.getElementById('my-ads-container')
+        const myAdsDiv = document.getElementById('personal-ads-container')
         myAdsDiv.innerText = ""
 
         //Create button
@@ -104,7 +104,7 @@ async function loadMyAdsPage() {
     else if (statusCode == 400 || statusCode == 401) {
         response.json().then(data => {
 
-            document.getElementById("my-ads-error").innerText = data[0]
+            document.getElementById("personal-ads-error").innerText = data[0]
 
         })
 

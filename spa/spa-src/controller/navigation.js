@@ -68,7 +68,7 @@ function showPage(url) {
 			break
 
 		case '/my-account/ads':
-			nextPageId = 'my-ads-page'
+			nextPageId = 'personal-ads-page'
 			loadMyAdsPage()
 			break
 
