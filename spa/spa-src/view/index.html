@@ -39,10 +39,8 @@
 		<div class="col-12">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light ">
 				<div class="container-fluid">
-
-					<div class="ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft"
-						aria-controls="offcanvasLeft">
-						<i class="bi bi-list"></i>
+					<div class="ms-2">
+						<a class="nav-link" href="/"><i class="bi bi-house"></i></a>
 					</div>
 
 					<img class="logo" src="/images/logo.png">
@@ -51,36 +49,15 @@
 						aria-controls="offcanvasRight">
 						<i class="bi bi-person"></i>
 					</div>
-
 				</div>
 			</nav>
 		</div>
 
-		<!-- Menu Left -->
-		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
-
-			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasLeftLabel">Menu</h5>
-				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-					aria-label="Close"></button>
-			</div>
-
-			<div class="offcanvas-body">
-				<div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a class="nav-link" href="/">Start</a></li>
-					</ul>
-				</div>
-			</div>
-
-		</div>
-
-		<!-- Menu Right -->
+		<!-- Menu right -->
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
 			<!-- when logged in  -->
 			<div class="hidden-sign-in-out" id="sign-out-body">
-
 				<div class="offcanvas-header">
 					<h5 id="offcanvasRightLabel">Account Menu</h5>
 					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -88,7 +65,6 @@
 				</div>
 
 				<div class="offcanvas-body text-start">
-
 					<div class="row">
 						<div class="col-6 text-start align-self-end">
 							<h5 id="Signed-in-account"></h5>
@@ -103,10 +79,10 @@
 
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a class="nav-link" href="/my-account/ads">My Ads</a></li>
-						<li class="list-group-item"><a class="nav-link" href="/my-account/personal-data">Personal Data</a>
+						<li class="list-group-item"><a class="nav-link" href="/my-account/personal-data">Personal
+								Data</a>
 						</li>
 					</ul>
-
 				</div>
 			</div>
 
@@ -120,7 +96,6 @@
 
 				<div class="offcanvas-body text-start">
 					<ul class="list-group list-group-flush">
-
 						<li class="list-group-item">
 							<div class="col">
 
@@ -156,7 +131,6 @@
 								<p>I'd like to be a plant ye</p>
 							</div>
 						</li>
-
 					</ul>
 				</div>
 			</div>
@@ -186,11 +160,10 @@
 			</div>
 
 		</div>
-
 	</div>
 
 	<main>
-		<div class="container p-0 m-0" style="max-width: 100%;">
+		<div class="container p-0 m-0 py-4" style="max-width: 100%;">
 
 			<!-- Start page-->
 			<div class="page" id="start-page">
@@ -209,23 +182,20 @@
 
 			<!-- Personal ads page-->
 			<div class="page" id="personal-ads-page">
-
 				<h1 class="text-center">My Ads</h1>
 				<div id="personal-ads-container" class="col-12 text-center">
 				</div>
 				<p class="text-center text-danger" id="personal-ads-error"></p>
-
 			</div>
 
-			<!-- Create Ad page -->
+			<!-- Ad create form page -->
 			<div class="page" id="create-ad-page">
-
 				<div id="create-ad-container" class="col-12 text-center">
-
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 offset-sm-3 text-center">
 								<h1 class="display-3">Create Ad</h1>
+
 								<div>
 									<form class="form-inline justify-content-center" encType="multipart/form-data">
 										<div class="form-floating mb-3">
@@ -251,37 +221,35 @@
 										</div>
 									</form>
 								</div>
-
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 
-			<!-- Update Ad page -->
+			<!-- Ad update form page -->
 			<div class="page" id="update-ad-page">
 				<h1 class="text-center">Update Ad</h1>
 
 				<div id="update-ad-container" class="col-12 text-center">
-
 					<form class="form-inline justify-content-center" enctype='multipart/form-data' id="update-ad-form">
-
 						<div class="col-sm-4 offset-sm-4 text-center">
 							<input type="hidden" name="id" value="" id="update-ad-form-ad-id">
+
 							<div class="form-floating mb-3">
 								<input class="form-control" type="text" name="title" value="Title"
 									id="update-ad-form-title">
 								<label class="form-label">Title</label>
 								<p class="text-start text-danger" id="update-ad-form-title-error"></p>
 							</div>
+
 							<div class="form-floating mb-3">
 								<input class="form-control" type="text" name="latinname" value="Latin"
 									id="update-ad-form-latinname">
 								<label class="form-label">Latin name</label>
 								<p class="text-start text-danger" id="update-ad-form-latinname-error"></p>
 							</div>
+
 							<div class="form-floating mb-3">
 								<input class="form-control" type="text" name="description" value="Desc"
 									id="update-ad-form-description">
@@ -296,11 +264,13 @@
 									class="flowerImage" style="width: 300px; height: 300px"
 									id="update-ad-form-coverimage">
 							</div>
+
 							<div class="col-3">
 								<img class="img-thumbnail" src="" alt="firstImage" name="firstimagepath"
 									class="flowerImage" style="width: 300px; height: 300px"
 									id="update-ad-form-firstimage">
 							</div>
+
 							<div class="col-3">
 								<img class="img-thumbnail" src="" alt="secondImage" name="secondimagepath"
 									class="flowerImage" style="width: 300px; height: 300px"
@@ -312,24 +282,22 @@
 							<button type="submit" class="btn btn-primary" onclick=sendUpdate()
 								id="update-ad-update-Button">Update</button>
 						</div>
-
 					</form>
-
 				</div>
 
 			</div>
 
-			<!-- Delete Ad page-->
+			<!-- Ad delete form page-->
 			<div class="page" id="delete-ad-page">
-
 				<div id="delete-ad-container" class="col-12 text-center">
-
 					<div class="row">
 						<div class="col-sm-4 offset-sm-4 text-center">
 							<h1 class="display-3">Delete ad</h1>
+
 							<div>
 								<p>Are you sure you want to delete the ad <b id="ad-delete-title"></b>? </p>
 							</div>
+
 							<div>
 								<div class="mb-3 col-12">
 									<div class="row">
@@ -349,9 +317,7 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 
 			<!-- Create account page-->
@@ -428,61 +394,63 @@
 
 			<!-- Personal data page-->
 			<div class="page" id="personal-data-page">
-
 				<div id="personal-data-container" class="col-12 text-center">
-
 					<div class="row">
 						<div class="col-sm-4 offset-sm-4 text-center">
 							<h1 class="display-3">Personal Data</h1>
+
 							<div>
 								<form class="form-inline justify-content-center" id="personal-data-form">
 									<input type="hidden" name="id" value="" id="personal-data-form-id">
+
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="firstname"
 											id="personal-data-firstname">
 										<label class="form-label">Firstname</label>
 										<p class="text-start text-danger" id="personal-data-form-firstname-error"></p>
 									</div>
+
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="lastname"
 											id="personal-data-lastname">
 										<label class="form-label">Lastname</label>
 										<p class="text-start text-danger" id="personal-data-form-lastname-error"></p>
 									</div>
+
 									<div class="form-floating mb-3">
 										<input class="form-control" type="email" name="email" id="personal-data-email">
 										<label class="form-label">Email</label>
 										<p class="text-start text-danger" id="personal-data-form-email-error"></p>
 									</div>
+
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="phonenumber"
 											id="personal-data-phonenumber">
 										<label class="form-label">Phonenumber</label>
 										<p class="text-start text-danger" id="personal-data-form-phonenumber-error"></p>
 									</div>
+
 									<div class="form-floating mb-3">
 										<input class="form-control" type="text" name="city" id="personal-data-city">
 										<label class="form-label">City</label>
 										<p class="text-start text-danger" id="personal-data-form-city-error"></p>
 									</div>
+
 									<div class="mb-3">
 										<input class="btn btn-primary" type="submit" value="Update"
 											id="personal-data-update-button" onclick=sendPersonalDataUpdate()>
 									</div>
 								</form>
 							</div>
-
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 
 			<!-- Not found page-->
-			<div class="page" id="not-found-page">
-				<h1>Not Found Page</h1>
-				<p>This is the not found page.</p>
+			<div class="page text-center" id="not-found-page">
+				<h1>404</h1>
+				<p>Page not found.</p>
 			</div>
 
 			<!-- loader page -->
@@ -491,7 +459,6 @@
 					<span class="sr-only"></span>
 				</div>
 			</div>
-
 	</main>
 
 	<footer>
