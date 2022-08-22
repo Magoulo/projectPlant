@@ -124,7 +124,7 @@ module.exports = function ({ accountManager, userManager }) {
 					errors.push("Wrong Username or Password")
 
 					const model = {
-						errors,
+						msgError: errors,
 						UserAccount,
 					}
 
