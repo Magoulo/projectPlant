@@ -1,3 +1,13 @@
+{{#if errors.length}}
+{{#each errors}}
+<div class="row justify-content-center m-5 text-danger">
+	<div class="col-3 mb-7">
+		<h3>{{this}}</h3>
+	</div>
+</div>
+{{/each}}
+{{/if}}
+
 <!-- Searchbar -->
 <div class="row justify-content-center m-5">
 	<div class="col-auto"></div>
