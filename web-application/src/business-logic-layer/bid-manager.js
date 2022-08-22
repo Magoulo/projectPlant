@@ -37,7 +37,6 @@ module.exports = function ({ bidRepository, bidValidator, helperFunctions }) {
 		},
 
 		userHasAccess: function(bidID, storedID, callback){
-
 			bidRepository.getBidByBidID(bidID, function (errors, Bid) {
 				if (errors.length !== 0) {
 					callback(errors, [])
@@ -45,8 +44,12 @@ module.exports = function ({ bidRepository, bidValidator, helperFunctions }) {
 					var isAuthenticated = helperFunctions.userHasAccess(Bid.userID, storedID)
 					callback([], isAuthenticated)
 				}
-			})
-			
+			})			
+		},
+
+		userIsLoggedIn: function(session){
+			var userIsLoggedIn = helperFunctions.userIsLoggedIn(session)
+			return userIsLoggedIn
 		}
 
 	}

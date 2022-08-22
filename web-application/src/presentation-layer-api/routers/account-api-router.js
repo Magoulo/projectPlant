@@ -50,7 +50,7 @@ module.exports = function ({ accountManager, userManager}) {
 
 		const username = request.body.username
 		const password = request.body.password
-		const UsernamePasswordInput = {username: username, password: password}
+		const signInInput = {username: username, password: password}
 
 		var validationErrors = []
 
@@ -58,7 +58,7 @@ module.exports = function ({ accountManager, userManager}) {
 
 			if (errors.length == 0) {
 
-					if(accountManager.isCorrectPassword(UsernamePasswordInput, UserAccount)){
+					if(accountManager.isCorrectPassword(signInInput, UserAccount)){
 
 					const payloadAccessToken = {
 						isLoggedIn: true,
