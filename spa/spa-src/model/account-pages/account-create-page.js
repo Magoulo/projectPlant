@@ -1,7 +1,5 @@
 async function createAccount() {
-
     const createFormCreateButton = document.getElementById("create-account-create-button")
-
     createFormCreateButton.addEventListener('click', function (event) {
         event.preventDefault()
     })

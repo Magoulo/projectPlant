@@ -1,7 +1,7 @@
 async function loadAdDeletePage(id) {
 
     //Fetch ad from REST api
-    const response = await fetch("http://localhost:3000/ads/adDelete/" + id, {
+    const response = await fetch("http://localhost:3000/ads/confirm-delete/" + id, {
         method: 'GET',
         headers: new Headers({
             'Authorization': "Bearer " + sessionStorage.accessToken,

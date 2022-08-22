@@ -62,23 +62,14 @@ function showPage(url) {
 			loadStartPage()
 			break
 
-		case '/ads':
-			nextPageId = 'ads-page'
-			loadAdsPage()
-			break
-
-		case '/ads/adCreate':
+		case '/ads/ad-create':
 			nextPageId = 'create-ad-page'
 			createAd()
 			break
 
 		case '/my-account/ads':
-			nextPageId = 'my-ads-page'
+			nextPageId = 'personal-ads-page'
 			loadMyAdsPage()
-			break
-
-		case '/accounts/myBids':
-			nextPageId = 'my-bids-page'
 			break
 
 		case '/accounts/create':
@@ -96,14 +87,14 @@ function showPage(url) {
 			break
 
 		default:
-			if (url.startsWith("/ads/adUpdate/")) {
+			if (url.startsWith("/ads/ad-details/")) {
 
 				const [empty, ads, adUpdate, id] = url.split("/")
 				nextPageId = 'update-ad-page'
 				loadAdUpdatePage(id)
 				break
 			}
-			if (url.startsWith("/ads/adDelete/")) {
+			if (url.startsWith("/ads/confirm-delete/")) {
 
 				const [empty, ads, aDelete, id] = url.split("/")
 				nextPageId = 'delete-ad-page'
@@ -118,7 +109,6 @@ function showPage(url) {
 				nextPageId = 'ad-page'
 				loadAdPage(id)
 			} else {
-
 				nextPageId = 'not-found-page'
 			}
 	}
