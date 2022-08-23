@@ -33,7 +33,7 @@ module.exports = function () {
 
 		getAllBidsByUserID: function (userID, callback) {
 
-			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImagePath FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
+			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImageName FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
 			const values = [userID]
 
 			db.query(query, values, function (error, Bids) {

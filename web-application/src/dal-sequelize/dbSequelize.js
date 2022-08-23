@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const Op = Sequelize.Op
 
-const dbname = "plantSwapDB"
+const dbname = "plantSwapDB1"
 const hostname = "postgres"
 const dialect = "postgres"
 const ports = 5432
@@ -46,9 +46,9 @@ const Ad = sequelize.define("Ad", {
 })
 
 const ImageBundle = sequelize.define("ImageBundle", {
-	coverImagePath: DataTypes.TEXT,
-	firstImagePath: DataTypes.TEXT,
-	secondImagePath: DataTypes.TEXT
+	coverImageName: DataTypes.TEXT,
+	firstImageName: DataTypes.TEXT,
+	secondImageName: DataTypes.TEXT
 })
 
 

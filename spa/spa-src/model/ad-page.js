@@ -27,13 +27,13 @@ async function loadAdPage(id) {
         h5LatinName.innerText = ad.Ad.latinName
         pDescription.innerText = ad.Ad.description
 
-        imgImageCoverImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.coverImagePath)
+        imgImageCoverImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.coverImageName)
         imgImageCoverImage.classList.add("img-thumbnail")
 
-        imgImageFirstImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.firstImagePath)
+        imgImageFirstImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.firstImageName)
         imgImageFirstImage.classList.add("img-thumbnail")
 
-        imgImageSecondImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.secondImagePath)
+        imgImageSecondImage.setAttribute('src', "/images/" + ad.Ad.ImageBundle.secondImageName)
         imgImageSecondImage.classList.add("img-thumbnail")
 
         //adding class to li

@@ -22,9 +22,9 @@ async function loadAdUpdatePage(id) {
 
     //Asign the element data from the fetched ad
     updateFormAdId.value = id
-    coverImage.src = "/images/" + ad.ImageBundle.coverImagePath
-    firstImage.src = "/images/" + ad.ImageBundle.firstImagePath
-    secondImage.src = "/images/" + ad.ImageBundle.secondImagePath
+    coverImage.src = "/images/" + ad.ImageBundle.coverImageName
+    firstImage.src = "/images/" + ad.ImageBundle.firstImageName
+    secondImage.src = "/images/" + ad.ImageBundle.secondImageName
     updateFormTitle.value = ad.title
     updateFormLatinName.value = ad.latinName
     updateFormDescription.value = ad.description

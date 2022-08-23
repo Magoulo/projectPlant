@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Ad (
 CREATE TABLE IF NOT EXISTS ImageBundle (
   imageBundleID INT NOT NULL AUTO_INCREMENT,
   adID INT NULL,
-  coverImagePath TEXT NULL,
-  firstImagePath TEXT NULL,
-  secondImagePath TEXT NULL,
+  coverImageName TEXT NULL,
+  firstImageName TEXT NULL,
+  secondImageName TEXT NULL,
   PRIMARY KEY (imageBundleID),
     FOREIGN KEY (adID)
     REFERENCES Ad (adID)

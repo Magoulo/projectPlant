@@ -121,7 +121,7 @@ module.exports = function ({ adManager }) {
                             })
                         }
 
-                        const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile.name, firstImagePath: firstImageFile.name, secondImagePath: secondImageFile.name }
+                        const imageBundle = { adID: Ad.id, coverImageName: coverImageFile.name, firstImageName: firstImageFile.name, secondImageName: secondImageFile.name }
 
                         adManager.createImageBundle(imageBundle, function (errors, ImageBundle) {
 

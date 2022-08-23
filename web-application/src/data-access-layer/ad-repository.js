@@ -76,8 +76,8 @@ module.exports = function ({ }) {
 
 		createImageBundle: function (imageBundle, callback) {
 
-			const query = "INSERT INTO ImageBundle (adID, coverImagePath, firstImagePath, secondImagePath) VALUES (?,?,?,?)"
-			const values = [imageBundle.adID, imageBundle.coverImagePath, imageBundle.firstImagePath, imageBundle.secondImagePath]
+			const query = "INSERT INTO ImageBundle (adID, coverImageName, firstImageName, secondImageName) VALUES (?,?,?,?)"
+			const values = [imageBundle.adID, imageBundle.coverImageName, imageBundle.firstImageName, imageBundle.secondImageName]
 
 			db.query(query, values, function (error, ibID) {
 				if (error) {

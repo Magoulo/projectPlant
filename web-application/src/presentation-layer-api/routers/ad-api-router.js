@@ -169,7 +169,7 @@ module.exports = function ({ adManager, userManager }) {
                 if (errors.length !== 0) {
                     response.status(400).json(errors)
                 } else {
-                    const imageBundle = { adID: Ad.id, coverImagePath: coverImageFile, firstImagePath: firstImageFile, secondImagePath: secondImageFile }
+                    const imageBundle = { adID: Ad.id, coverImageName: coverImageFile, firstImageName: firstImageFile, secondImageName: secondImageFile }
 
                     adManager.createImageBundle(imageBundle, function (errors, ImageBundle) {
                         if (errors.length !== 0) {

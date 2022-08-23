@@ -25,7 +25,7 @@ async function loadStartPage() {
 			aImage.setAttribute('href', "/ads/" + ad.id)
 
 			const imgImage = document.createElement('img')
-			imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImagePath)
+			imgImage.setAttribute('src', "/images/" + ad.ImageBundle.coverImageName)
 			imgImage.classList.add("img-thumbnail")
 
 			aImage.append(imgImage)

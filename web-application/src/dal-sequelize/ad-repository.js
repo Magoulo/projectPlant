@@ -25,9 +25,9 @@ module.exports = function ({ }) {
 		createImageBundle: function (imageBundle, callback) {
 
 			models.ImageBundle.create({
-				coverImagePath: imageBundle.coverImagePath,
-				firstImagePath: imageBundle.firstImagePath,
-				secondImagePath: imageBundle.secondImagePath,
+				coverImageName: imageBundle.coverImageName,
+				firstImageName: imageBundle.firstImageName,
+				secondImageName: imageBundle.secondImageName,
 				adID: imageBundle.adID
 
 			}).then((imageBundle) => {
