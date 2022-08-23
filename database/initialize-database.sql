@@ -1,18 +1,18 @@
 CREATE TABLE IF NOT EXISTS UserAccount (
   userAccountID INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(45) NOT NULL QNIQUE,
-  passwordHash VARCHAR(60) NOT NULL,
+  username TEXT NOT NULL QNIQUE,
+  passwordHash TEXT NOT NULL,
   PRIMARY KEY (userAccountID));
   
 
 CREATE TABLE IF NOT EXISTS User (
   userID INT NOT NULL AUTO_INCREMENT,
   userAccountID INT NOT NULL,
-  firstName VARCHAR(45) NULL,
-  lastName VARCHAR(45) NULL,
-  email VARCHAR(45) NULL,
-  phoneNumber VARCHAR(45) NULL,
-  city VARCHAR(45) NULL,
+  firstName TEXT NULL,
+  lastName TEXT NULL,
+  email TEXT NULL,
+  phoneNumber TEXT NULL,
+  city TEXT NULL,
    PRIMARY KEY (userID),
   FOREIGN KEY (userAccountID)
     REFERENCES UserAccount (userAccountID)
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS User (
 CREATE TABLE IF NOT EXISTS Ad (
   adID INT NOT NULL AUTO_INCREMENT,
   userID INT NOT NULL,
-  title VARCHAR(45) NULL,
-  latinName VARCHAR(45) NULL,
+  title TEXT NULL,
+  latinName TEXT NULL,
   description Text NULL,
   isClosed TINYINT(0) NOT NULL,
   PRIMARY KEY (adID),
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS Bid (
   userID INT NOT NULL,
   adID INT NOT NULL,
   datePosted DATETIME,
-  imagePath VARCHAR(45),
+  imagePath TEXT,
   message TEXT,
-  status VARCHAR(15),
+  status TEXT,
   PRIMARY KEY (bidID),
   FOREIGN KEY (userID)
     REFERENCES User (userID)
