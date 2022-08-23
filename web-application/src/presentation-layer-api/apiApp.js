@@ -80,18 +80,15 @@ module.exports = function ({}) {
 	//data-access-layer
 	const accountRepository = require(dalPath + 'account-repository')
 	const adRepository = require(dalPath + 'ad-repository')
-	const bidRepository = require(dalPath + 'bid-repository')
 	const userRepository = require(dalPath + 'user-repository')
 
 	//business-logic-layer
 	const accountManager = require(bllPath + 'account-manager')
 	const adManager = require(bllPath + 'ad-manager')
-	const bidManager = require(bllPath + 'bid-manager')
 	const userManager = require(bllPath + 'user-manager')
 
 	const accountValidator = require(bllPath + 'account-validator')
 	const adValidator = require(bllPath + 'ad-validator')
-	const bidValidator = require(bllPath + 'bid-validator')
 	const userValidator = require(bllPath + 'user-validator')
 
 	const helperFunctions = require(bllPath + 'helper-functions')
@@ -117,11 +114,6 @@ module.exports = function ({}) {
 	container.register("adManager", awilix.asFunction(adManager))
 	container.register("adRouter", awilix.asFunction(adRouter))
 	container.register("adValidator", awilix.asFunction(adValidator))
-
-	//bid
-	container.register("bidRepository", awilix.asFunction(bidRepository))
-	container.register("bidManager", awilix.asFunction(bidManager))
-	container.register("bidValidator", awilix.asFunction(bidValidator))
 
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))
