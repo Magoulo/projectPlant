@@ -3,8 +3,6 @@ const bodyParser = require('body-parser')
 const expressHandlebars = require('express-handlebars')
 const fileUpload = require('express-fileupload')
 const path = require('path')
-const redis = require("redis")
-const session = require('express-session')
 
 const express = require('express')
 const { response } = require('express')
@@ -25,11 +23,6 @@ const plRouterPath = '/web-application/src/presentation-layer-api/routers/'
 
 module.exports = function ({}) {
 	const router = express.Router()
-
-	// SESSIOSN SETUP----------------------------------------------------------------------
-	let RedisStore = require("connect-redis")(session)
-	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
-	redisClient.connect().catch(console.error)
 
 	app.set('views', path.join(__dirname, 'views'))
 
@@ -57,23 +50,6 @@ module.exports = function ({}) {
 	})
 
 	app.use(fileUpload())
-
-	app.use(
-		session({
-			store: new RedisStore({ client: redisClient }),
-			saveUninitialized: false,
-			secret: "keyboard cat",
-			resave: false,
-		})
-	)
-
-	app.use(function (req, res, next) {
-		if (!req.session) {
-			return next(new Error("oh no"))
-		}
-		next()
-	})
-
 
 	//awilix setup---------------------------------------------------------------------------------
 

@@ -14,3 +14,10 @@ const theWebApiAppRouter = container.resolve("webApiApp")
 
 app.use('/', theWebAppRouter)
 app.use('/api', theWebApiAppRouter)
+
+/*
+module.exports = function ({}) {
+	const router = express.Router()
+
+    return router
+}*/
