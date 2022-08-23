@@ -76,7 +76,7 @@ module.exports = function () {
 			const status = "Pending"
 
 			models.Bid.create({
-				date: date,
+				datePosted: date,
 				imagePath: Bid.imagePath,
 				message: Bid.message,
 				status: status,

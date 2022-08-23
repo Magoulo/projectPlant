@@ -96,7 +96,7 @@ module.exports = function ({ }) {
 
 	const helperFunctions = require(bllPath + 'helper-functions')
 
-	//presintation-layer
+	//presentation-layer
 	const accountRouter = require(plRouterPath + 'account-router')
 	const adRouter = require(plRouterPath + 'ad-router')
 	const bidRouter = require(plRouterPath + 'bid-router')

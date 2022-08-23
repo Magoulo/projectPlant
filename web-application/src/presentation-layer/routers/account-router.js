@@ -133,7 +133,7 @@ module.exports = function ({ accountManager, userManager }) {
 			} else {
 
 				const model = {
-					errors,
+					msgError: errors,
 				}
 
 				response.render('start.hbs', model)

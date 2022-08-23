@@ -32,7 +32,7 @@ const UserAccount = sequelize.define("UserAccount", {
 })
 
 const Bid = sequelize.define("Bid", {
-	date: DataTypes.DATE,
+	datePosted: DataTypes.DATE,
 	imagePath: DataTypes.TEXT,
 	message: DataTypes.TEXT,
 	status: DataTypes.TEXT

@@ -3,8 +3,6 @@ const bodyParser = require('body-parser')
 const expressHandlebars = require('express-handlebars')
 const fileUpload = require('express-fileupload')
 const path = require('path')
-const redis = require("redis")
-const session = require('express-session')
 
 const express = require('express')
 const { response } = require('express')
@@ -25,11 +23,6 @@ const plRouterPath = '/web-application/src/presentation-layer-api/routers/'
 
 module.exports = function ({}) {
 	const router = express.Router()
-
-	// SESSIOSN SETUP----------------------------------------------------------------------
-	let RedisStore = require("connect-redis")(session)
-	let redisClient = redis.createClient({ legacyMode: true, url: 'redis://redis:6379' })
-	redisClient.connect().catch(console.error)
 
 	app.set('views', path.join(__dirname, 'views'))
 
@@ -53,48 +46,25 @@ module.exports = function ({}) {
 		response.setHeader("Access-Control-Allow-Headers", "*")
 		response.setHeader("Access-Control-Expose-Headers", "*")
 
-	/*	if(request.method === "OPTIONS"){
-			return response.status(200).end()
-		}*/
 		next()
 	})
 
 	app.use(fileUpload())
-
-	app.use(
-		session({
-			store: new RedisStore({ client: redisClient }),
-			saveUninitialized: false,
-			secret: "keyboard cat",
-			resave: false,
-		})
-	)
-
-	app.use(function (req, res, next) {
-		if (!req.session) {
-			return next(new Error("oh no"))
-		}
-		next()
-	})
-
 
 	//awilix setup---------------------------------------------------------------------------------
 
 	//data-access-layer
 	const accountRepository = require(dalPath + 'account-repository')
 	const adRepository = require(dalPath + 'ad-repository')
-	const bidRepository = require(dalPath + 'bid-repository')
 	const userRepository = require(dalPath + 'user-repository')
 
 	//business-logic-layer
 	const accountManager = require(bllPath + 'account-manager')
 	const adManager = require(bllPath + 'ad-manager')
-	const bidManager = require(bllPath + 'bid-manager')
 	const userManager = require(bllPath + 'user-manager')
 
 	const accountValidator = require(bllPath + 'account-validator')
 	const adValidator = require(bllPath + 'ad-validator')
-	const bidValidator = require(bllPath + 'bid-validator')
 	const userValidator = require(bllPath + 'user-validator')
 
 	const helperFunctions = require(bllPath + 'helper-functions')
@@ -121,11 +91,6 @@ module.exports = function ({}) {
 	container.register("adRouter", awilix.asFunction(adRouter))
 	container.register("adValidator", awilix.asFunction(adValidator))
 
-	//bid
-	container.register("bidRepository", awilix.asFunction(bidRepository))
-	container.register("bidManager", awilix.asFunction(bidManager))
-	container.register("bidValidator", awilix.asFunction(bidValidator))
-
 	//user
 	container.register("userRepository", awilix.asFunction(userRepository))
 	container.register("userManager", awilix.asFunction(userManager))
@@ -142,28 +107,6 @@ module.exports = function ({}) {
 	const theAdRouter = container.resolve("adRouter")
 	const theUserRouter = container.resolve("userRouter")
 	const theVariousRouter = container.resolve("variousRouter")
-
-	/*
-	// AccessToken verification function
-	const authenticateAccessToken = (request,response, next) => {
-		const authorizationHeader = request.header("Authorization")
-	
-		if(authorizationHeader == undefined){
-			return response.status(400).json({errors: ["invalid request"]})
-		} else {
-			const accessToken = authorizationHeader.substring('Bearer '.length)
-	
-			var tokenContent
-			adManager.isCorrectToken(accessToken, function (verificationResult) {
-				tokenContent = verificationResult
-			})
-			if (tokenContent.errors) {
-				response.status(401).json(tokenContent.errors)
-			} else {
-				request.tokenUserId = tokenContent.payload.userID
-			}
-		}
-	}*/
 
 	app.use('/', theVariousRouter)
 	app.use('/accounts', theAccountRouter)

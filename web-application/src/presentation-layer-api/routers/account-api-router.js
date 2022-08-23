@@ -33,7 +33,7 @@ module.exports = function ({ accountManager, userManager}) {
 							if (deleteAccountErrors) {
 								response.status(500).json(deleteAccountErrors)
 							} else {
-								response.status(418).end()
+								response.status(204).end()
 							}
 						})
 					} else {

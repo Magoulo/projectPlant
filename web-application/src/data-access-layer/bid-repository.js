@@ -33,7 +33,7 @@ module.exports = function () {
 
 		getAllBidsByUserID: function (userID, callback) {
 
-			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.date, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImageName FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
+			const query = "SELECT Bid.bidID, Bid.userID, Bid.adID, Bid.message, Bid.datePosted, Bid.imagePath, Bid.status, Ad.title, Ad.latinName, ImageBundle.coverImageName FROM Bid JOIN Ad ON Bid.adID = Ad.adID JOIN ImageBundle ON Ad.adID = ImageBundle.adID WHERE Bid.userID = ? ORDER BY Bid.bidID DESC"
 			const values = [userID]
 
 			db.query(query, values, function (error, Bids) {
@@ -49,7 +49,7 @@ module.exports = function () {
 
 			const status = "Pending"
 			const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
-			const query = `INSERT INTO Bid (userID, adID, date, imagePath, message, status) VALUES (?,?,?,?,?,?);`
+			const query = `INSERT INTO Bid (userID, adID, datePosted, imagePath, message, status) VALUES (?,?,?,?,?,?);`
 			const values = [Bid.userID, Bid.adID, date, Bid.imagePath, Bid.message, status]
 
 			db.query(query, values, function (error) {
