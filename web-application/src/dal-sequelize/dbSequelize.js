@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const Op = Sequelize.Op
 
-const dbname = "plantSwapDB"
+const dbname = "plantSwapDB1"
 const hostname = "postgres"
 const dialect = "postgres"
 const ports = 5432
@@ -32,7 +32,7 @@ const UserAccount = sequelize.define("UserAccount", {
 })
 
 const Bid = sequelize.define("Bid", {
-	date: DataTypes.DATE,
+	datePosted: DataTypes.DATE,
 	imagePath: DataTypes.TEXT,
 	message: DataTypes.TEXT,
 	status: DataTypes.TEXT
