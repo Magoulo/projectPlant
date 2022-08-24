@@ -21,7 +21,7 @@ const dalPath = '/web-application/src/' + dataFile + '/'
 const bllPath = '/web-application/src/business-logic-layer/'
 const plRouterPath = '/web-application/src/presentation-layer-api/routers/'
 
-module.exports = function ({}) {
+module.exports = function ({ }) {
 	const router = express.Router()
 
 	app.set('views', path.join(__dirname, 'views'))

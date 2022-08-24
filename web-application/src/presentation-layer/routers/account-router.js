@@ -107,13 +107,13 @@ module.exports = function ({ accountManager, userManager }) {
 		const username = request.body.username
 		const password = request.body.password
 
-		const signInInput = {username: username, password: password}
+		const signInInput = { username: username, password: password }
 
 		accountManager.getAccountByUsername(username, function (errors, UserAccount) {
 
 			if (errors.length == 0) {
 
-				if(accountManager.isCorrectPassword(signInInput, UserAccount)){
+				if (accountManager.isCorrectPassword(signInInput, UserAccount)) {
 					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true

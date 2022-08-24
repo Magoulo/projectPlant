@@ -1,6 +1,6 @@
 const express = require('express')
 
-module.exports = function ({ adManager ,userManager }) {
+module.exports = function ({ adManager, userManager }) {
     const router = express.Router()
 
     router.get("/", function (request, response) {
@@ -72,7 +72,7 @@ module.exports = function ({ adManager ,userManager }) {
         if (tokenContent.errors) {
             response.status(401).json(tokenContent.errors)
         } else {
-            
+
             userManager.userHasAccess(userID, tokenContent.payload.userID, function (userHasAccess) {
                 if (!userHasAccess) {
                     response.status(401).json(["Not authorized"])

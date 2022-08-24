@@ -86,7 +86,7 @@ module.exports = function ({ accountRepository }) {
 			return [usernameErrors, passwordErrors, firstNameErrors, lastNameErrors, emailErrors, phoneNumberErrors, cityErrors]
 		},
 
-		isCorrectPassword: function(signInInput,UserAccount){
+		isCorrectPassword: function (signInInput, UserAccount) {
 			if (signInInput.username == UserAccount.username && bcrypt.compareSync(signInInput.password, UserAccount.passwordHash)) {
 				return true
 			} else {

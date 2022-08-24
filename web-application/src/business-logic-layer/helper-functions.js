@@ -15,21 +15,21 @@ module.exports = function ({ }) {
         },
 
         userIsLoggedIn: function (session) {
-            if(session.isLoggedIn) {
+            if (session.isLoggedIn) {
                 return true
             } else return false
         },
 
-        isCorrectToken: function (accessToken,callback) {
+        isCorrectToken: function (accessToken, callback) {
             jwt.verify(accessToken, SECRET, function (errors, payload) {
-                var verificationResult = {errors: errors, payload: payload}
+                var verificationResult = { errors: errors, payload: payload }
 
                 callback(verificationResult)
-            })  
+            })
         },
 
-        userHasAccess: function(adUserID,storedID){
-            if(adUserID == storedID){
+        userHasAccess: function (adUserID, storedID) {
+            if (adUserID == storedID) {
                 return true
             } else {
                 return false

@@ -66,9 +66,9 @@ module.exports = function ({ }) {
 		}
 		next()
 	})
-	
+
 	app.use(csrf())
-	app.use((request, response, next)=>{
+	app.use((request, response, next) => {
 		response.locals.csrfToken = request.csrfToken()
 		response.locals.session = request.session
 
@@ -88,7 +88,7 @@ module.exports = function ({ }) {
 	const adManager = require(bllPath + 'ad-manager')
 	const bidManager = require(bllPath + 'bid-manager')
 	const userManager = require(bllPath + 'user-manager')
-	
+
 	const accountValidator = require(bllPath + 'account-validator')
 	const adValidator = require(bllPath + 'ad-validator')
 	const bidValidator = require(bllPath + 'bid-validator')

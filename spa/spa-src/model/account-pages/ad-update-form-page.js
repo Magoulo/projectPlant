@@ -80,7 +80,7 @@ async function sendUpdate() {
 
     } else if (statusCode == 400 || statusCode == 401) {
         response.json().then(data => {
-            
+
             document.getElementById("update-ad-form-title-error").innerText = data[0]
             document.getElementById("update-ad-form-latinname-error").innerText = data[1]
             document.getElementById("update-ad-form-description-error").innerText = data[2]

@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const Op = Sequelize.Op
 
-const dbname = "plantSwapDB2"
+const dbname = "plantSwapDB"
 const hostname = "postgres"
 const dialect = "postgres"
 const ports = 5432

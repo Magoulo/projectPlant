@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	signOutButton.addEventListener('click', function (event) {
 		sessionStorage.clear()
-	
+
 		const url = "/"
 		hideCurrentPage()
 		showPage(url)

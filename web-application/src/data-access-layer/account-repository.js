@@ -32,7 +32,6 @@ module.exports = function () {
 		},
 
 		createAccount: function (account, callback) {
-			console.log("account", account)
 
 			const query = `INSERT INTO UserAccount (username, passwordHash) VALUES (?, ?)`
 			const values = [account.username, account.passwordHash]

@@ -2,7 +2,7 @@ const express = require('express')
 var jwt = require('jsonwebtoken');
 const SECRET = 'lelelelelelelble'
 
-module.exports = function ({ accountManager, userManager}) {
+module.exports = function ({ accountManager, userManager }) {
 	const router = express.Router()
 
 	router.post("/", function (request, response) {
@@ -49,7 +49,7 @@ module.exports = function ({ accountManager, userManager}) {
 
 		const username = request.body.username
 		const password = request.body.password
-		const signInInput = {username: username, password: password}
+		const signInInput = { username: username, password: password }
 
 		var validationErrors = []
 
@@ -57,7 +57,7 @@ module.exports = function ({ accountManager, userManager}) {
 
 			if (errors.length == 0) {
 
-					if(accountManager.isCorrectPassword(signInInput, UserAccount)){
+				if (accountManager.isCorrectPassword(signInInput, UserAccount)) {
 
 					const payloadAccessToken = {
 						isLoggedIn: true,

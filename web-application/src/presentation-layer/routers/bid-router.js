@@ -96,7 +96,7 @@ module.exports = function ({ adManager, bidManager }) {
         const adID = request.body.adID
         const sessionID = request.session.userID
 
-        adManager.userHasAdAccess(adID, sessionID, function (errors, userHasAcces) {
+        adManager.userHasAccess(adID, sessionID, function (errors, userHasAcces) {
             if (errors.length !== 0) {
                 model = {
                     Ad: Ad,

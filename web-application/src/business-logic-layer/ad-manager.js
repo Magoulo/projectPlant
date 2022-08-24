@@ -69,11 +69,11 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 			adRepository.closeAd(adID, callback)
 		},
 
-		isCorrectToken: function(accessToken,callback){
-			helperFunctions.isCorrectToken(accessToken,callback)		
+		isCorrectToken: function (accessToken, callback) {
+			helperFunctions.isCorrectToken(accessToken, callback)
 		},
 
-		userHasAccess: function(adID, storedID, callback){
+		userHasAccess: function (adID, storedID, callback) {
 			adRepository.getAdByAdID(adID, function (errors, Ad) {
 				if (errors.length !== 0) {
 					callback(errors, [])
@@ -81,10 +81,10 @@ module.exports = function ({ adRepository, adValidator, helperFunctions }) {
 					var isAuthenticated = helperFunctions.userHasAccess(Ad.userID, storedID)
 					callback([], isAuthenticated)
 				}
-			})		
+			})
 		},
 
-		userIsLoggedIn: function(session){
+		userIsLoggedIn: function (session) {
 			var userIsLoggedIn = helperFunctions.userIsLoggedIn(session)
 			return userIsLoggedIn
 		}

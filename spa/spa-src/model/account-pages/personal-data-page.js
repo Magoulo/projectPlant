@@ -8,7 +8,7 @@ async function loadPersonalData() {
     })
 
     const statusCode = response.status
- 
+
     if (statusCode == 200) {
 
         const user = await response.json()

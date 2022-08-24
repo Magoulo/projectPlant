@@ -1,27 +1,28 @@
 <div class="row">
     <div class="col-sm-4 offset-sm-4 text-center">
         <h1 class="display-3">Not Authorized</h1>
-        
-        {{#unless session.isLoggedIn}} 
-            <p>Must be signed in in order to see your personal pages.</p>
-            
-            <form action="/accounts/sign-in" method="POST">
-                <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-                <div class="mb-0">
-                    <label class="form-label"></label>
-                    <input class="form-control" type="text" name="username" placeholder="username*">
-                </div>
+        {{#unless session.isLoggedIn}}
+        <p>Must be signed in in order to see your personal pages.</p>
 
-                <div class="mb-0">
-                    <label class="form-label"></label>
-                    <input class="form-control" type="password" name="password" placeholder="password*">
-                </div>
+        <form action="/accounts/sign-in" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-                <div class="d-grid gap-2 mt-3 mb-5">
-                    <button class="btn btn-outline-dark" type="submit" value="Sign in" class="btn btn-light">Sign in</button>
-                </div>
-            </form>
+            <div class="mb-0">
+                <label class="form-label"></label>
+                <input class="form-control" type="text" name="username" placeholder="username*">
+            </div>
+
+            <div class="mb-0">
+                <label class="form-label"></label>
+                <input class="form-control" type="password" name="password" placeholder="password*">
+            </div>
+
+            <div class="d-grid gap-2 mt-3 mb-5">
+                <button class="btn btn-outline-dark" type="submit" value="Sign in" class="btn btn-light">Sign
+                    in</button>
+            </div>
+        </form>
         {{/unless}}
 
     </div>
