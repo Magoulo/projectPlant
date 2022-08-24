@@ -114,7 +114,6 @@ module.exports = function ({ accountManager, userManager }) {
 			if (errors.length == 0) {
 
 				if (accountManager.isCorrectPassword(signInInput, UserAccount)) {
-					console.log("Username and Password are correct!")
 
 					request.session.isLoggedIn = true
 					request.session.userID = UserAccount.User.id

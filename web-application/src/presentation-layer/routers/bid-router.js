@@ -133,8 +133,6 @@ module.exports = function ({ adManager, bidManager }) {
                                         }
 
                                         response.render("personalAds.hbs", model)
-                                    } else {
-                                        console.log("Ad closed successfully")
                                     }
                                 })
                             }

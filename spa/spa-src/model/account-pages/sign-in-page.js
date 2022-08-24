@@ -38,8 +38,6 @@ async function signIn() {
       sessionStorage.setItem("idToken", data.idToken)
     })
 
-    console.log("Welcome: ", username)
-
     signInBody.classList.add("hidden-sign-in-out")
     menuLoadingSpinner.classList.remove("hidden-sign-in-out")
 
